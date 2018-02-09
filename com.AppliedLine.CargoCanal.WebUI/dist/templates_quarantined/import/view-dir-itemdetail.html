@@ -1,0 +1,69 @@
+<div class="form-group">
+    <label for="StuffModeID" data-i18n="_StuffMode_"></label>
+    <select name="StuffModeID" class="form-control" ng-model="formData.ImportExport.Items[0].ItemDetail.StuffModeID">
+        <option ng-repeat="stuffMode in valuesData.StuffModes" value="{{stuffMode.ID}}">
+            {{ stuffMode.Description }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="DestinationID" data-i18n="_Destination_"></label>
+    <select name="DestinationID" class="form-control" ng-model="formData.ImportExport.Items[0].ItemDetail.DestinationID">
+        <option ng-repeat="location in valuesData.Locations" value="{{location.ID}}">
+            {{ location.Location }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="StatusID" data-i18n="_Status_"></label>
+    <select name="StatusID" class="form-control" ng-model="formData.ImportExport.Items[0].ItemDetail.StatusID">
+        <option ng-repeat="status in valuesData.Statuses" value="{{status.ID}}">
+            {{ status.Description }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="ddlYear" data-i18n="_StatusDate_"></label>
+    <input type="text" class="form-control" value="{{formData.ImportExport.Items[0].ItemDetail.StatusDate | date:'yyyy-MM-dd'}}" />
+    <!--<div class="form-inline">
+        <select id="ddlYear" name="ddlYear" class="form-control" ng-model="stus.Year">
+            <option value="">Year</option>
+        </select>
+        <select id="ddlMonth" name="ddlMonth" class="form-control" ng-model="stus.Month">
+            <option value="">Month</option>
+        </select>
+        <select id="ddlDay" name="ddlDay" class="form-control" ng-model="stus.Day">
+            <option value="">Day</option>
+        </select>
+    </div>
+    <script>
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var year = new Date().getFullYear() - 1;
+
+    $('#ddlYear').empty();
+    $('#ddlMonth').empty();
+    $('#ddlDay').empty();
+
+    for (var i = 0; i < 11; i++) {
+        $('#ddlYear').append(new Option((year + i), (year + i)));
+    }
+
+    for (var i = 0; i < 12; i++) {
+        $('#ddlMonth').append(new Option(months[i], i + 1));
+    }
+
+    for (var i = 1; i <= 31; i++) {
+        $('#ddlDay').append(new Option(i, i));
+    }
+
+    </script>-->
+
+</div>
+<!--<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="dashboard.imports.add.cost" class="btn btn-block btn-lg">
+            Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>-->
+

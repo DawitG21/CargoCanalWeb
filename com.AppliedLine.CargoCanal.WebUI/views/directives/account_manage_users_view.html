@@ -1,0 +1,106 @@
+﻿<form name="formnewrole" ng-submit="account.roles.save()" class="margin-bottom-30" ng-show="account.roles.newRoleEnabled" novalidate>
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <input name="RoleName" type="text" class="form-control" ng-model="role.RoleName" placeholder="Role Name" required />
+        </div>
+        <div class="col-sm-4 form-group">
+            <input type="text" class="form-control" ng-model="role.RoleCode" placeholder="Role Code" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 form-group">
+            <textarea placeholder="Describe the role" class="form-control" ng-model="role.Description"></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 form-group">
+            <dir-role-permissions></dir-role-permissions>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 form-group">
+            <button type="submit" class="btn btn-default" ng-disabled="formnewrole.$invalid">Save</button>
+            <button type="button" class="btn btn-default" ng-click="account.roles.closeWindow()">Close</button>
+        </div>
+    </div>
+</form>
+
+<form name="formnewuser" ng-submit="account.users.save()" class="margin-bottom-30" ng-show="account.users.newUserEnabled" novalidate>
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <label>Role</label>
+            <select name="RoleID" class="form-control" ng-model="Login.RoleID" required>
+                <option ng-repeat="r in account.roles.data" value="{{r.ID}}">{{r.RoleName}} {{r.RoleCode}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <input name="FirstName" type="text" class="form-control" ng-model="Person.FirstName" placeholder="First name" required />
+        </div>
+        <div class="col-sm-4 form-group">
+            <input name="MiddleName" type="text" class="form-control" ng-model="Person.MiddleName" placeholder="Middle name" />
+        </div>
+        <div class="col-sm-4 form-group">
+            <input name="LastName" type="text" class="form-control" ng-model="Person.LastName" placeholder="Last name" required />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 form-group">
+            <input name="Email" type="text" class="form-control" ng-model="Person.Email" ng-pattern="regexEmail" placeholder="Email e.g. john.doe@domain.com" required />
+            <h6 class="text-danger" ng-show="formnewuser.Email.$touched && formnewuser.Email.$invalid"
+                ng-hide="formnewuser.Email.$untouched || formnewuser.Email.$valid">
+                Enter a valid email address.
+            </h6>
+        </div>
+        <div class="col-sm-4 form-group">
+            <input name="Password" type="password" class="form-control"  autocomplete="new-password"
+                   placeholder="Password" 
+                   ng-model="Login.Password"
+                   ng-change="validatePassword(Login.Password, formnewuser.Password)" required />
+            <h6 class="text-danger" ng-show="formnewuser.Password.$touched && formnewuser.Password.$invalid"
+                ng-hide="formnewuser.Password.$untouched || formnewuser.Password.$valid">
+                Requires 6-32 characters containing a number, lowercase, uppercase and special character such as !"#$%&'()*+,\-./:=?@^
+            </h6>
+        </div>
+        <div class="col-sm-4 form-group">
+            <input name="CPassword" type="password" class="form-control" ng-model="Login.CPassword" placeholder="Confirm Password" required />
+            <h6 class="text-danger" ng-show="(formnewuser.CPassword.$touched && formnewuser.CPassword.$invalid) || Login.Password !== Login.CPassword">
+                Password mismatch.
+            </h6>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 form-group">
+            <button type="submit" class="btn btn-default" ng-disabled="formnewuser.$invalid || formnewuser.Password.$invalid || Login.Password !== Login.CPassword">Save</button>
+            <button type="button" class="btn btn-default" ng-click="account.users.closeWindow()">Close</button>
+        </div>
+    </div>
+</form>
+
+<section>
+    <div class="table-responsive">
+        <table class="table table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="u in account.users.data" ng-class="u.IsActive? '': 'text-danger'">
+                    <td>{{$index + 1}}</td>
+                    <td class="text-nowrap pointer">
+                        <i ng-click="account.users.changeIsActiveState($index)" ng-hide="u.ID == User.Login.ID" ng-class="getIsActiveIcon(u.IsActive)"></i>{{u.Fullname}}
+                    </td>
+                    <td>{{u.Email}}</td>
+                    <td>{{u.Phone}}</td>
+                    <td>{{u.RoleName}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

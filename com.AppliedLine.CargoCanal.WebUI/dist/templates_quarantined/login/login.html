@@ -1,0 +1,68 @@
+<div class="row" ng-hide="Login.UserName.length > 0">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2 data-i18n="_Login_"></h2>
+
+                <p data-i18n="_EnterYourCredentials_"></p>
+
+            </div>
+            <br />
+            <div ng-hide="flgLoginFormReady">
+                <h4 data-i18n="_LoadingMessage_"></h4>
+            </div>
+            <div ng-hide="!flgLoginFormReady">
+                <form id="loginForm" name="loginForm" data-ng-submit="processForm()" novalidate>
+                    <div class="form-group"
+                         data-ng-class="{ 'has-error': loginForm.Email.$touched && loginForm.Email.$invalid }">
+                        <label for="Email" data-i18n="_Email_"></label>
+                        <input type="text" id="Email" name="Email" class="form-control" 
+                               placeholder="eg. john.doe@domain.com"
+                               ng-model="formData.Login.UserName"
+                               data-ng-pattern="regexEmail"
+                               required/>
+
+                        <div data-ng-messages="loginForm.Email.$error" class="help-block" 
+                             data-ng-show="loginForm.Email.$touched">
+                            <div ng-messages-include="templates/validation/messages.html"></div>
+                        </div>
+                    </div>
+                    <div class="form-group"
+                         data-ng-class="{ 'has-error': loginForm.Password.$touched && loginForm.Password.$invalid }">
+                        <label for="Password" data-i18n="_Password_"></label>
+                        <input type="password" class="form-control" id="Password" name="Password" 
+                               ng-model="formData.Login.Password"
+                               data-i18n-attr="_TypeYourPassword_|placeholder" 
+                               required/>
+
+                        <div data-ng-messages="loginForm.Password.$error" class="help-block"
+                             data-ng-show="loginForm.Password.$touched">
+                            <div ng-messages-include="templates/validation/messages.html"></div>
+                        </div>
+                    </div>
+                    <div ng-show="flgProcessing"><h4 data-i18n="_LoginMessage_"></h4></div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <button type="submit" data-i18n="_Login_"
+                                    class="btn btn-primary btn-lg"
+                                    ng-disabled="loginForm.Email.$invalid || loginForm.Password.$invalid || flgProcessing">
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" ng-show="showLogoutButton()">
+    <div class="col-xs-12 col-md-6">
+        <h3 data-i18n="_Logout_"></h3>
+        <p data-i18n="_LogoutMessage_"></p>
+        <button class="btn btn-primary btn-lg" ng-click="Logout()" data-i18n="_Logout_">
+        </button>
+    </div>
+</div>
+
+

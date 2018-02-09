@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-md-6" ui-view>
+        <div class="form-group">
+            <input name="ConsigneeTIN" id="ConsigneeTIN" type="text" class="form-control"
+                   placeholder="Consignee TIN"
+                   auto-complete source="values/querypreviousconsignee" extraparams="{{User.Login.Token}}"
+                   ng-model="newImport.Consignee.TIN" />
+            <p ng-hide="getIsTinValid()" class="text-danger">Invalid Consignee TIN.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <button type="button" ng-click="validateTin(newImport.Consignee.TIN, 'import.add.bill')" class="btn btn-lg pull-right nav-button">
+                        <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="ie-summary">
+            <dir-import-summary></dir-import-summary>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2><span data-i18n="_Exports_"></span> {{formData.ImportExport.ImportExportID}}</h2>
+                <h4>{{formData.ImportExport.Items[0].Description}}</h4>
+
+                <!--<div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref=".viewexport"><span>1</span> SIn</a>
+                    <a ui-sref-active="active" ui-sref=".carrier"><span>2</span> <label class="font-normal" data-i18n="_Carrier_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".item"><span>3</span> <label class="font-normal" data-i18n="_Item_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".itemdetail"><span>4</span> <label class="font-normal" data-i18n="_Detail_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".cost"><span>5</span> <label class="font-normal" data-i18n="_Cost_"></label></a>
+                </div>-->
+            </div>
+            <div id="signup-form">
+                <div data-ng-hide="Company.CompanyTypeID == '99' || formData.ImportExport.BillTerminated || formData.ImportExport.Completed">
+                    <button ui-sref="dashboard.exports.viewexport.completed" class="btn btn-primary button-square-auto font-9em" data-i18n="_MarkAsCompleted_"></button> 
+                    <button ui-sref="dashboard.exports.viewexport.terminate" class="btn btn-primary button-square-auto font-9em" data-i18n="_TerminateDocument_"></button>
+                </div>
+                <div ui-view>
+
+                    <div dir-export-bill></div>
+                    <div dir-export-bill1></div>
+                    <div dir-export-carrier></div>
+                    <div dir-export-item></div>
+                    <div dir-export-itemdetail></div>
+                    <div dir-export-cost></div>
+
+                    <!--<div class="form-group row">
+                        <div class="col-xs-6 col-xs-offset-3">
+                            <a ui-sref="dashboard.imports.add.bill" class="btn btn-block btn-lg">
+                                Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="row">
+    <div class="col-xs-12, col-md-12">
+        <div class="text-center">
+            <div ng-show="flgProcessing"><h4>Updating Changes.  Please wait..</h4></div>
+            <button type="submit" class="btn btn-primary btn-lg"
+                    ng-disabled="flgProcessing" ng-click="processForm()">
+                Update
+            </button>
+        </div>
+    </div>
+</div>-->

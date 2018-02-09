@@ -1,0 +1,43 @@
+<h3><span data-i18n="_Hi_"></span> {{formData.Login.UserName}}</h3>
+<p data-i18n="_YourAccountInfo_"></p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-i18n="_LoginNameAndPassword_"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div dir-login-credential></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title" data-i18n="_CustomerInformation_"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div dir-person-profile></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button type="submit" class="btn btn-primary btn-lg floating-button badge-shadow"
+        ng-disabled="flgProcessing" ng-click="processForm()">
+    <span class="glyphicon glyphicon-floppy-save font-1-5em"></span>
+</button>
+<!--<div class="row">
+    <div class="col-xs-12, col-md-12">
+        <div class="text-center">
+            <div ng-show="flgProcessing"><h4 data-i18n="_UpdatingChanges_"></h4></div>
+            <button type="submit" class="btn btn-primary btn-lg" data-i18n="_UpdateChanges_"
+                    ng-disabled="flgProcessing" ng-click="processForm()">
+            </button>
+        </div>
+    </div>
+</div>-->
+

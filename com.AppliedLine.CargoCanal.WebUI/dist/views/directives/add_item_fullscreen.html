@@ -1,0 +1,203 @@
+<div class="fullscreen" ng-show="showWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+
+                <section>
+                    <div class="row margin-0">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <button type="button" class="close" aria-label="Close" ng-click="closeWindow()">
+                                    <span class="h1" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form name="formItem" novalidate>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="Description" data-i18n="_Description_"></label>
+                                            <textarea class="form-control" name="Description" ng-model="newItem.Description" required />
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <section class="section-header">
+                                    <h5 class="section-header-text">Cargo Information</h5>
+                                    <hr class="section-header-line" />
+                                </section>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="CargoID" data-i18n="_Cargo_"></label>
+                                            <select name="CargoID" class="form-control" required
+                                                    ng-model="newItem.CargoID"
+                                                    ng-change="getSubCargos(newItem.CargoID, newItem)">
+                                                <option ng-repeat="c in cargos" value="{{c.ID}}">{{ c.CargoName }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="SubCargoID" data-i18n="_SubCargo_"></label>
+                                            <select name="SubCargoID" class="form-control" ng-model="newItem.SubCargoID" required>
+                                                <option ng-repeat="s in cargoSubCargos" value="{{s.ID}}">
+                                                    {{ s.Description }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-push-4"></div>
+                                </div>
+
+                                <section class="section-header">
+                                    <h5 class="section-header-text">Weight Information</h5>
+                                    <hr class="section-header-line" />
+                                </section>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="GrossWeight" data-i18n="_GrossWeight_"></label>
+                                            <input type="number" min="0" class="form-control" name="GrossWeight" ng-model="newItem.GrossWeight" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="NetWeight" data-i18n="_NetWeight_"></label>
+                                            <input type="number" min="0" class="form-control" name="NetWeight" ng-model="newItem.NetWeight" />
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="WeightUnitID" data-i18n="_WeightUnit_"></label>
+                                            <select name="WeightUnitID" class="form-control" ng-model="newItem.WeightUnitID" required>
+                                                <option ng-repeat="u in units| filter : u.IsVolume = false: true" value="{{u.ID}}">
+                                                    {{u.UnitName}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Volume" data-i18n="_Volume_"></label>
+                                            <input type="number" min="0" class="form-control" name="Volume" ng-model="newItem.Volume" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="VolumeUnitID" data-i18n="_VolumeUnit_"></label>
+                                            <select name="VolumeUnitID" class="form-control" ng-model="newItem.VolumeUnitID">
+                                                <option ng-repeat="u in units | filter : u.IsVolume = true: true" value="{{u.ID}}">
+                                                    {{ u.UnitName }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Quantity" data-i18n="_Quantity_"></label>
+                                            <input type="number" min="0" class="form-control" name="Quantity" ng-model="newItem.Quantity" required />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>
+                                            <input type="checkbox" name="Dangerous" ng-model="newItem.Dangerous" />
+                                            <span data-i18n="_Dangerous_"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+
+
+                            <section class="section-header">
+                                <h5 class="section-header-text">Cargo Details Information</h5>
+                                <hr class="section-header-line" />
+                            </section>
+                            <section>
+                                <div>
+                                    <a ng-click="initItemDetail()" class="pointer" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus-sign tiny-button"></span> Item Detail</a>
+                                    <a name="files" class="pointer"
+                                       ng-model="files"
+                                       ngf-select="uploadFiles($files, $invalidFiles)"
+                                       ngf-keep="true"
+                                       accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
+                                       ngf-max-size="2MB"
+                                       ngf-multiple="true"><span class="glyphicon glyphicon-paperclip tiny-button"></span>Attach (2MB/file)</a> 
+                                </div>
+                                
+                                <div style="overflow: auto; padding-top: 10px;">
+                                    <h6 ng-show="files.length > 0">* click attachments below to remove.</h6>
+                                    <div class="attachment" ng-repeat="f in files" ng-click="removeAttachment($index)" ng-bind="f.name" title="Remove"></div>
+                                </div>
+
+                                <section id="badges" class="margin-bottom-15">
+                                    <div class="badge-closeable" ng-repeat="detail in newItem.ItemDetails">
+                                        <i class="badge-close" ng-click="removeItemDetail($index)"></i>{{detail.ItemNumber}}
+                                    </div>
+                                </section>
+                                <form name="formItemDetail" ng-show="showItemDetailEntry" novalidate>
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="ItemNumber">Container/Chassis/Packing #</label>
+                                                <input type="text" class="form-control" name="ItemNumber" ng-model="newItemDetail.ItemNumber" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group">
+                                                <label for="StuffModeID" data-i18n="_StuffMode_"></label>
+                                                <select name="StuffModeID" class="form-control" ng-model="newItemDetail.StuffModeID" required>
+                                                    <option ng-repeat="s in stuffModes" value="{{s.ID}}">
+                                                        {{s.Description}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group" ng-hide="exportmode">
+                                                <!--<label for="DestinationID" data-i18n="_Destination_"></label>-->
+                                                <label for="DestinationID">Place of Delivery</label>
+                                                <select name="DestinationID" class="form-control" ng-model="newItemDetail.DestinationID">
+                                                    <option ng-repeat="l in locations" value="{{l.ID}}">
+                                                        {{l.LocationName}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button class="btn btn-primary" ng-click="addItemDetailToItem()" ng-disabled="formItemDetail.$invalid">Save</button>
+                                            <button class="btn btn-default" ng-click="hideItemDetailEntry()">Cancel</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </section>
+
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <button type="submit" ng-click="addNewItemToItems()" ng-disabled="formItem.$invalid" class="btn btn-default pull-right">Add Item</button>
+                                        <p ng-show="disableAddToItems" class="text-danger">{{itemDetailsMsg}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>

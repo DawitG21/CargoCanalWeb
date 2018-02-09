@@ -1,0 +1,101 @@
+﻿<div class="row text-center margin-bottom-30">
+    <div class="col-sm-12">
+        <h4 class="text-uppercase font-bold-600">shipment preview</h4>
+    </div>
+</div>
+<div class="row">
+    <section class="col-xs-6">
+        <p>Date Initiated: {{newImport.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+        <article>
+            <p>SHIP FROM</p>
+            <p ng-if="newImport.PortOfLoadingID">{{newImport.PortOfLoadingID | polName}}, {{newImport.colID | country}}</p>
+        </article>
+        <article>
+            <p>SHIP TO</p>
+            <p ng-if="newImport.PortOfDischargeID">{{newImport.PortOfDischargeID | podName}}, {{newImport.codID | country}}</p>
+        </article>
+    </section>
+    <section class="col-xs-6">
+        <p>Ref: {{newImport.ReferenceNo}}</p>
+        <article>
+            <P>BoL No.: {{newImport.Import.BillNumber}}</P>
+            <p>BoL Date: {{newImport.Import.BillDate | date: 'dd/MM/yyyy'}}</p>
+            <p>LC No.: {{newImport.LC.LCNumber}}</p>
+            <p>Reason for import: {{newImport.ImportExportReasonID | reason}}</p>
+        </article>
+
+    </section>
+</div>
+<div class="row">
+    <section class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <caption>Carrier Information</caption>
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">MoT</th>
+                        <th class="text-nowrap">Carrier</th>
+                        <th class="text-nowrap">Vessel</th>
+                        <th class="text-nowrap">Voyage/Flight No.</th>
+                        <th class="text-nowrap">ETA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{newImport.ModeOfTransportID | mot}}</td>
+                        <td>{{newImport.CarrierID | carrier}}</td>
+                        <!--<td>{{newImport.VesselID | vessel}}</td>-->
+                        <!-- auto-complete implementation for Vessel -->
+                        <td>{{newImport.Vessel}}</td>
+                        <td>{{newImport.VoyageNumber}}</td>
+                        <td>{{newImport.Import.ETA | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <section class="col-xs-12">
+        <p>Freight Charge Terms: {{newImport.IncoTermID | inco}}</p>
+    </section>
+</div>
+<div class="row">
+    <section class="col-xs-12">
+        <div class="table-responsive">
+            <table class="table table-condensed">
+                <caption>Order Information</caption>
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">QTY</th>
+                        <th class="text-nowrap">Content</th>
+                        <th class="text-nowrap">Gross W.</th>
+                        <th class="text-nowrap">Net W.</th>
+                        <th class="text-nowrap">Vol</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat="i in newImport.Items">
+                    <tr>
+                        <td>{{i.Quantity | number}}</td>
+                        <td>{{i.Description}}</td>
+                        <td>{{i.GrossWeight | number}} {{i.WeightUnitID | unit}}</td>
+                        <td>{{i.NetWeight | number}} {{i.WeightUnitID | unit}}</td>
+                        <td>{{i.Volume | number}} {{i.VolumeUnitID | unit}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">{{i.Dangerous | danger}}</td>
+                        <td colspan="3">{{i.CargoID | cargo}} <!--&bull; {{i.SubCargoID}}--></td>
+                    </tr>
+                    <tr ng-repeat="d in i.ItemDetails">
+                        <td colspan="1">{{d.ItemNumber}}</td>
+                        <td colspan="2">{{d.StuffModeID | stuffMode}}</td>
+                        <td colspan="2">{{d.DestinationID | location}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+<div class="row">
+    <section class="col-xs-12">
+        <p>REMARK: {{newImport.Remark}}</p>
+    </section>
+</div>

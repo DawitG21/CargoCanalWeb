@@ -1,0 +1,106 @@
+<div class="row" ui-view>
+    <a data-ng-hide="Company.CompanyTypeID == '99'" class="tiny-menu margin-right-15" ui-sref=".add">
+        <span class="glyphicon glyphicon-plus-sign"></span> <span data-i18n="_AddExport_"></span>
+    </a>
+    <a href="" data-ng-click="refresh('export')">
+        <span class="fa fa-refresh"></span> <span data-i18n="_Refresh_"></span>
+    </a>
+    <div class="form-inline ">
+        <a href="" class="line-height-2em">
+            <span data-i18n="_TotalExports_"></span>
+            <span class="badge">{{exports.length}}</span>
+        </a>
+        <a href="" class="line-height-2em">
+            <span data-i18n="_DemurrageExports_"></span>
+            <span class="badge">{{demurrageExport().length}}</span>
+        </a>
+        <div class="input-group pull-right">
+            <input type="search" data-ng-model="searchText" class="form-control pull-right" data-i18n-attr="_Search_|placeholder" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-primary" data-ng-click="getExportsBySin(searchText)">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+    <hr />
+    <div data-table="table-svr">
+        <table class="table table-hover table-responsive table-tbody">
+            <thead>
+                <tr>
+                    <th class="table-header">Doc #</th>
+                    <th class="table-header" title="">SIn #</th>
+                    <th class="table-header">SIn Date</th>
+                    <th class="table-header" title="Port of Loading">PoL</th>
+                    <th class="table-header" title="Port of Discharge">PoD</th>
+                    <th class="table-header" data-i18n="_Status_"></th>
+                </tr>
+            </thead>
+            <tbody data-ng-class="getColor(export.BillTerminated, export.Completed)"
+                   class="expandable"
+                   id="tbody{{$index}}" onclick="c(this.id)"
+                   data-ng-repeat="export in filtered = (exports | filter:searchText) | startFrom:(pager.export.currentPage-1)*pageLimit | limitTo:pageLimit">
+                <tr>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="" title="View" data-ng-click="viewImportExport(export.ImportExportID)">
+                                    {{export.ImportExportID}} <br />{{export.Items[0].Description}}
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>{{export.ShippingInstructionNo}}</td>
+                    <td>{{export.ShippingInstructionDate| date:"yyyy/MM/dd"}}</td>
+                    <td>{{export.PortOfLoadingID | polName}}</td>
+                    <td>{{export.PortOfDischargeID | podName}}</td>
+                    <td data-ng-hide="export.BillTerminated" data-i18n="{{export.Completed | completed}}"></td>
+                    <td data-ng-show="export.BillTerminated" data-i18n="_Terminated_"></td>
+                </tr>
+                <tr class="border-top-hidden display-none">
+                    <td colspan="6">
+                        <span class="fa fa-user"></span> {{export.ConsigneeName}}
+                        <span class="fa fa-phone margin-left-15"></span> {{export.Phone}}
+                        <span class="fa fa-laptop margin-left-15"></span> {{export.Email}}
+                        <span class="fa fa-group margin-left-15"></span> {{export.CompanyName}}
+                    </td>
+                </tr>
+                <tr class="border-top-hidden display-none">
+                    <td colspan="6">
+                        <button class="btn btn-primary" data-ng-click="addStatusUpdate(export)">
+                            <span class="fa fa-bookmark-o"></span> <span data-i18n="_Statuses_"></span> <span class="badge">{{export.ImportExportStatuses.length}}</span>
+                        </button>
+                        <ul>
+                            <li data-ng-repeat="s in export.ImportExportStatuses" class="font-85em">
+                                {{s.StatusID | statusName}} | {{s.StatusDate| date: "yyyy/MM/dd"}}
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr class="border-top-hidden display-none">
+                    <td colspan="6">
+                        <button class="btn btn-primary" data-ng-click="addProblemUpdate(export)">
+                            <span class="fa fa-bell-o"></span> <span data-i18n="_Problems_"></span> <span class="badge">{{export.ProblemUpdates.length}}</span>
+                        </button>
+                        <ul>
+                            <li data-ng-repeat="p in export.ProblemUpdates" class="font-85em">
+                                <a href="" data-ng-click="setCloseProblem(export, p.IsResolved, p.ID)">
+                                    {{p.ProblemID | problem}} |
+                                    <span data-i18n="_Created_"></span>: {{p.DateInserted | date:"yyyy/MM/dd HH:mm"}} |
+                                    <span data-i18n="_Occured_"></span>: {{p.ProblemDate | date:"yyyy/MM/dd"}}
+                                    <span data-ng-show="p.IsResolved==true"> | <span data-i18n="_Resolved_"></span>: {{p.ResolvedDate | date:"yyyy/MM/dd"}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="btn btn-lg btn-primary btn-block">
+        <span class="fa fa-chevron-circle-left pull-left" ng-click="pager.setPage('-', 'export')"></span>
+        PAGE {{pager.export.currentPage}}
+        <span class="fa fa-chevron-circle-right pull-right" ng-click="pager.setPage('+', 'export')"></span>
+    </div>
+
+</div>

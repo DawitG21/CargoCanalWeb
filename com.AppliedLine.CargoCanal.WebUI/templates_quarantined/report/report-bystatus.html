@@ -1,0 +1,37 @@
+﻿<h5 data-ng-class="messageClass">{{count}}&nbsp;<span data-i18n="{{message}}"></span></h5>
+<div>
+    <div class="form-group">
+        <!--button to show the column mapping edit area-->
+        <button type="button" class="btn btn-primary" ng-click="mapIsHidden = !mapIsHidden">
+            <span class="glyphicon glyphicon-cog"></span>
+        </button>
+    </div>
+
+    <div class="fullscreen" ng-hide="mapIsHidden">
+        <div class="bg-color-white padding-20 fullscreen-content">
+            <custom-reports-query-builder></custom-reports-query-builder>
+            <mapping-directive></mapping-directive>
+        </div>
+    </div>
+
+    <!-- actual report area including headers-->
+    <div data-table="table-svr">
+        <table class="table table-responsive" ng-show="customReport.length > 0">
+            <thead>
+                <tr>
+                    <th ng-repeat="h in customReportHeaders"
+                        ng-show="currentColumnMapping.ColumnMappings[$index]"
+                        ng-click="sortData(h)">
+                        <div class="inline-block">{{h}} <span ng-class="getSortClass(h)"></span></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in customReport | orderBy: sortColumn: reverseSort | filter : searchText" 
+                    ng-class="getCompanyReportColor(r.CompanyName)">
+                    <td ng-repeat="c in r track by $index" ng-show="currentColumnMapping.ColumnMappings[$index]">{{c}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

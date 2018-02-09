@@ -1,0 +1,81 @@
+﻿<div>
+    <h3 data-i18n="_CustomReports_"></h3>
+    <hr />
+    <div class="row col-md-12">
+        <button class="btn btn-primary button-square-auto" ng-click="getDBTables()">Load Tables</button>
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
+            <label for="Tables" class="control-label">Tables</label>
+            <select id="Tables" name="Tables" class="form-control" ng-change="getTableColumns(table)" ng-model="table" ng-disabled="dbTables==null">
+                <option ng-repeat="t in dbTables" value="{{t}}">{{t}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="Columns" class="control-label">Columns</label>
+            <select id="Columns" name="Columns" class="form-control" ng-model="column" ng-disabled="tableColumns==null">
+                <option ng-repeat="c in tableColumns" value="{{c}}">{{c}}</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="Operator" class="control-label">Operator</label>
+            <select id="Operator" name="Operator" class="form-control" ng-model="op" ng-disabled="column==undefined">
+                <option value="=">=</option>
+                <option value=">">&gt;</option>
+                <option value="<">&lt;</option>
+                <option value="<>">&lt;&gt;</option>
+                <option value="LIKE">LIKE</option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="Value" class="control-label">Value</label>
+            <div class="input-group">
+                <input type="text" id="Value" name="Value" class="form-control" ng-model="value" ng-disabled="op==undefined" />
+
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-success"
+                            ng-disabled="(reportQuery != null && lOp == undefined) || op == undefined"
+                            ng-click="rptQueryBuilder(lOp, table, column, op, value)">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row col-md-12" ng-hide="reportQuery==null">
+        <label><input type="radio" class="inline-block" name="lOperator" value="AND" ng-model="lOp" /> AND</label>
+        <label><input type="radio" class="inline-block" name="lOperator" value="OR" ng-model="lOp" /> OR</label>
+        <button class="btn btn-primary" ng-click="submitQuery()" ng-disabled="reportQuery == null">Submit</button>
+        <button class="btn btn-primary" ng-click="resetQuery()" ng-hide="reportQuery == null">Reset</button>
+    </div>
+
+    <div class="margin-top-15 row col-xs-12" id="queryoutput"></div>
+
+    <div class="row col-md-12">
+        <button type="button" class="btn btn-primary" ng-click="flgIsHidden = !flgIsHidden">Hide/Show Column Filters</button>
+        <!--<pre>{{template}}</pre>-->
+    </div>
+    <div class="margin-top-15 row" ng-show="flgIsHidden">
+        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="h in customReportHeaders" >
+            <label class="font-9em margin-right-15">
+                <input type="checkbox" class="default-checkbox" ng-model="template[$index]" /> {{h}}
+            </label>
+        </div>
+    </div>
+
+
+    <div data-table="table-svr">
+        <table class="table table-responsive table-tbody" data-ng-show="customReport.length > 0">
+            <thead>
+                <tr>
+                    <th ng-repeat="h in customReportHeaders" ng-show="template[$index]">{{h}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in customReport">
+                    <td ng-repeat="c in r" ng-show="template[$index]">{{c}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

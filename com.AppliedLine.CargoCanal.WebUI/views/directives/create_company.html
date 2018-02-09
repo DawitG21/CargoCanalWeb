@@ -1,0 +1,55 @@
+﻿<div class="login-logo">
+    <i class="common-sprite cargocanal_text_64"></i>
+</div>
+<form name="form" id="form" ng-submit="saveNewCompany()" novalidate>
+    <!--<h3 class="login-title">Register</h3>-->
+    <div class="form-group">
+        <label for="Country">Country</label>
+        <select name="Country" class="form-control textbox-editor"
+                ng-model="newCompany.Company.CountryID" required>
+            <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="CompanyName" class="sr-only">Company name</label>
+        <input name="CompanyName" type="text" class="form-control textbox-editor" placeholder="Company Name" ng-model="newCompany.Company.CompanyName" required />
+    </div>
+    <div class="form-group">
+        <label for="TIN" class="sr-only">TIN</label>
+        <input name="TIN" type="text" class="form-control textbox-editor" placeholder="TIN" ng-model="newCompany.Company.TIN" ng-minlength="10" ng-maxlength="10" required />
+    </div>
+    <div class="form-group">
+        <label for="FirstName" class="sr-only">First name</label>
+        <input name="FirstName" type="text" class="form-control textbox-editor" placeholder="First Name" ng-model="newCompany.Person.FirstName" ng-minlength="3" required />
+    </div>
+    <div class="form-group">
+        <label for="LastName" class="sr-only">Last name</label>
+        <input name="LastName" type="text" class="form-control textbox-editor" placeholder="Last Name" ng-model="newCompany.Person.LastName" ng-minlength="3" required />
+    </div>
+    <div class="form-group">
+        <label for="Email" class="sr-only">Email</label>
+        <input name="Email" type="text" class="form-control textbox-editor" placeholder="Email e.g. john.doe@domain.com" ng-model="newCompany.Person.Email" ng-pattern="regexEmail" required />
+        <h6 class="text-danger" ng-show="form.Email.$touched && form.Email.$invalid" 
+            ng-hide="form.Email.$untouched || form.Email.$valid">
+            Enter a valid email address.
+        </h6>
+    </div>
+    <div class="form-group">
+        <label for="Password" class="sr-only">Password</label>
+        <input name="Password" type="password" class="form-control textbox-editor" autocomplete="new-password"
+               placeholder="Password" 
+               ng-model="newCompany.Login.Password" 
+               ng-change="validatePassword(newCompany.Login.Password, form.Password)" required />
+        <h6 class="text-danger" ng-show="form.Password.$touched && form.Password.$invalid"
+            ng-hide="form.Password.$untouched || form.Password.$valid">
+            Requires 6-32 characters containing a number, lowercase, uppercase and special character such as !"#$%&'()*+,\-./:=?@^
+        </h6>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disableButton || form.$invalid || form.Password.$invalid">Register</button>
+    </div>
+
+    <div class="login-footer">
+        <small>By registering you agree to the <a ui-sref="termsofservice">Terms of Service.</a></small>
+    </div>
+</form>

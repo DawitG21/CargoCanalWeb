@@ -1,0 +1,67 @@
+﻿<div class="form-group">
+    <label for="ItemOrderNo" data-i18n="_ItemOrderNo_"></label>
+    <input type="text" class="form-control" name="ItemOrderNo" value="{{formData.ImportExport.Items[0].ItemOrderNo}}" />
+</div>
+<div class="form-group">
+    <label for="CargoID" data-i18n="_Cargo_"></label>
+    <select name="CargoID" class="form-control" ng-model="formData.ImportExport.Items[0].CargoID" ng-change="formData.ImportExport.loadCargo({{itemIndex}})">
+        <option ng-repeat="cargo in valuesData.Cargos" value="{{cargo.ID}}">
+            {{ cargo.Cargo }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="SubCargoID" data-i18n="_SubCargo_"></label>
+    <select name="SubCargoID" class="form-control" ng-model="formData.ImportExport.Items[0].SubCargoID">
+        <option ng-repeat="subCargo in valuesData.SubCargos" value="{{subCargo.ID}}">
+            {{ subCargo.Description }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="GrossWeight" data-i18n="_GrossWeight_"></label>
+    <input type="number" min="0" class="form-control" name="GrossWeight" value="{{formData.ImportExport.Items[0].GrossWeight}}" />
+</div>
+<div class="form-group">
+    <label for="NetWeight" data-i18n="_NetWeight_"></label>
+    <input type="number" min="0" class="form-control" name="NetWeight" value="{{formData.ImportExport.Items[0].NetWeight}}" />
+</div>
+<div class="form-group">
+    <label for="WeightUnitID" data-i18n="_WeightUnit_"></label>
+    <select name="WeightUnitID" class="form-control" ng-model="formData.ImportExport.Items[0].WeightUnitID">
+        <option ng-repeat="unit in valuesData.Units" value="{{unit.ID}}">
+            {{ unit.UnitName }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="Volume" data-i18n="_Volume_"></label>
+    <input type="number" min="0" class="form-control" name="Volume" value="{{formData.ImportExport.Items[0].Volume}}" />
+</div>
+<div class="form-group">
+    <label for="VolumeUnitID" data-i18n="_VolumeUnit_"></label>
+    <select name="VolumeUnitID" class="form-control" ng-model="formData.ImportExport.Items[0].VolumeUnitID">
+        <option ng-repeat="unit in valuesData.Units" value="{{unit.ID}}">
+            {{ unit.UnitName }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="Quantity" data-i18n="_Quantity_"></label>
+    <input type="number" min="0" class="form-control" name="Quantity" value="{{formData.ImportExport.Items[0].Quantity}}" />
+</div>
+<div class="form-group">
+    <label for="Dangerous" data-i18n="_Dangerous_"></label>
+    <input type="checkbox" class="form-control" name="Dangerous" value="{{formData.ImportExport.Items[0].Dangerous}}" />
+</div>
+<div class="form-group">
+    <label for="Description" data-i18n="_Description_"></label>
+    <input type="text" class="form-control" name="Description" value="{{formData.ImportExport.Items[0].Description}}" />
+</div>
+<!--<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="dashboard.imports.add.itemdetail" class="btn btn-block btn-lg">
+            Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>-->

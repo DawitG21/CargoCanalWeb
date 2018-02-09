@@ -1,0 +1,32 @@
+﻿<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2><span data-i18n="_Imports_"></span> {{formData.ImportExport.ImportExportID}}</h2>
+                <h4>{{formData.ImportExport.Items[0].Description}}</h4>
+
+                <!--<div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref=".viewimport"><span>1</span> Bill</a>
+                    <a ui-sref-active="active" ui-sref=".carrier"><span>2</span> <label class="font-normal" data-i18n="_Carrier_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".item"><span>3</span> <label class="font-normal" data-i18n="_Item_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".itemdetail"><span>4</span> <label class="font-normal" data-i18n="_Detail_"></label></a>
+                    <a ui-sref-active="active" ui-sref=".cost"><span>5</span> <label class="font-normal" data-i18n="_Cost_"></label></a>
+                </div>-->
+            </div>
+            <div id="signup-form">
+                <div data-ng-hide="Company.CompanyTypeID == '99' || formData.ImportExport.BillTerminated || formData.ImportExport.Completed">
+                    <button ui-sref="dashboard.imports.viewimport.completed" class="btn btn-primary button-square-auto font-9em" data-i18n="_MarkAsCompleted_"></button> 
+                    <button ui-sref="dashboard.imports.viewimport.terminate" class="btn btn-primary button-square-auto font-9em" data-i18n="_TerminateDocument_"></button>
+                </div>
+                <div ui-view>
+                    <div dir-customs-broker-for-import data-ng-hide="Company.CompanyTypeID == '99'"></div>
+                    <div dir-import-bill></div>
+                    <div dir-import-carrier></div>
+                    <div dir-import-item></div>
+                    <div dir-import-itemdetail></div>
+                    <div dir-import-cost></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

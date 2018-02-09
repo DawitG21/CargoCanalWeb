@@ -1,0 +1,74 @@
+﻿<div class="row font-85em">
+    <div class="form-group col-sm-6 col-md-3">
+        <label for="Report" class="control-label" data-i18n="_Reports_"></label>
+        <select class="form-control" id="Report" name="Report" ng-change="loadReport(reportName)" data-ng-model="reportName">
+            <option value="statusSummaryReport" data-i18n="_StatusSummaryReport_"></option>
+            <option value="problemsReport" data-i18n="_DocumentsWithProblemsReport_"></option>
+            <option value="pendingReport" data-i18n="_PendingDocumentsReport_"></option>
+            <option value="demurrageReport" data-i18n="_DemurrageReport_"></option>
+            <option value="cargoWeightReport" data-i18n="_CargoWeightReport_"></option>
+            <option value="cargoInTransitWeightReport" data-i18n="_CargoInTransitWeightReport_"></option>
+            <option value="transitTimeReport" data-i18n="_TransitTimeReport_"></option>
+            <option ng-repeat="s in valuesData.Statuses" value="{{s.ID}}" data-i18n="{{s.Description}}"></option>
+        </select>
+    </div>
+    <div class="form-group col-sm-6 col-md-3">
+        <label for="DocumentType" class="control-label" data-i18n="_DocumentType_"></label>
+        <select class="form-control" id="DocumentType" name="DocumentType" data-ng-model="formData.DocumentType">
+            <option value="all" data-i18n="_AllDocuments_"></option>
+            <option value="import" data-i18n="_Imports_"></option>
+            <option value="export" data-i18n="_Exports_"></option>
+        </select>
+    </div>
+    <div class="form-group col-sm-6 col-md-3">
+        <label for="FromDate" class="control-label" data-i18n="_From_"></label>
+        <!--<input type="date" class="form-control" id="FromDate" name="FromDate" data-ng-model="formData.FromDate" />-->
+        <!-- date starts-->
+        <div ng-controller="datepickerPopupController" class="form-group">
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="input-group">
+                            <input type="text" class="form-control" id="FromDate" name="FromDate" readonly
+                                   uib-datepicker-popup="{{format}}"
+                                   ng-init="formData.FromDate = formData.FromDate? setDate2(formData.FromDate) : dt"
+                                   ng-model="formData.FromDate"
+                                   is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1allowPast()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- date ends -->
+    </div>
+    <div class="form-group col-sm-6 col-md-3">
+        <label for="ToDate" class="control-label" data-i18n="_To_"></label>
+        <!--<input type="date" class="form-control filter-control" id="ToDate" name="ToDate" data-ng-model="formData.ToDate" />-->
+        <!-- date starts-->
+        <div ng-controller="datepickerPopupController" class="form-group">
+            <div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="input-group">
+                            <input type="text" class="form-control" id="ToDate" name="ToDate" readonly
+                                   uib-datepicker-popup="{{format}}"
+                                   ng-init="formData.ToDate = formData.ToDate? setDate2(formData.ToDate) : dt"
+                                   ng-model="formData.ToDate"
+                                   is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1allowPast()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- date ends -->
+    </div>
+</div>
+<button type="submit" class="btn btn-primary margin-bottom-15" data-i18n="_Go_"></button>

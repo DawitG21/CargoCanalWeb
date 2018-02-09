@@ -1,0 +1,76 @@
+<script>
+    if (sessionStorage.amETSetOnce) sessionStorage.removeItem('amETSetOnce');
+</script>
+<div id="status-buttons-mob" class="mob-only text-center">
+    <button class="button-left" ui-sref="dashboard.{{link}}.add.carrier" data-ng-click="retainDesc()"><span class="fa fa-chevron-circle-left"></span></button>
+    <button class="button-right" ui-sref="dashboard.{{link}}.add.itemdetail" data-ng-click="retainDesc()"><span class="fa fa-chevron-circle-right"></span></button>
+</div>
+<div ng-repeat="item in formData.ImportExport.Items" ng-init="itemIndex=$index">
+    <div class="form-group">
+        <label for="Description" data-i18n="_Description_"></label>
+        <input type="text" class="form-control" id="Description" onfocus="enableGeezm()" ng-model="item.Description" />
+    </div>
+    <div class="form-group">
+        <label for="ItemOrderNo" data-i18n="_ItemOrderNo_"></label>
+        <input type="text" class="form-control" id="ItemOrderNo" ng-model="item.ItemOrderNo" />
+    </div>
+    <div class="form-group">
+        <label for="CargoID" data-i18n="_Cargo_"></label>
+        <select id="CargoID" class="form-control" ng-model="item.CargoID" ng-change="formData.ImportExport.loadCargo({{itemIndex}})">
+            <option ng-repeat="cargo in valuesData.Cargos| filter: type: true" value="{{cargo.ID}}">
+                {{ cargo.Cargo }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="SubCargoID" data-i18n="_SubCargo_"></label>
+        <select id="SubCargoID" class="form-control" ng-model="item.SubCargoID">
+            <option ng-repeat="subCargo in valuesData.SubCargos| filter: cargo: true" value="{{subCargo.ID}}">
+                {{ subCargo.Description }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="GrossWeight" data-i18n="_GrossWeight_"></label>
+        <input type="number" min="0" class="form-control" id="GrossWeight" ng-model="item.GrossWeight" />
+    </div>
+    <div class="form-group">
+        <label for="NetWeight" data-i18n="_NetWeight_"></label>
+        <input type="number" min="0" class="form-control" id="NetWeight" ng-model="item.NetWeight" />
+    </div>
+    <div class="form-group">
+        <label for="WeightUnitID" data-i18n="_WeightUnit_"></label>
+        <select id="WeightUnitID" class="form-control" ng-model="item.WeightUnitID">
+            <option ng-repeat="unit in valuesData.Units | filter : unit.IsVolume = false: true" value="{{unit.ID}}">
+                {{ unit.UnitName }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Volume" data-i18n="_Volume_"></label>
+        <input type="number" min="0" class="form-control" id="Volume" ng-model="item.Volume" />
+    </div>
+    <div class="form-group">
+        <label for="VolumeUnitID" data-i18n="_VolumeUnit_"></label>
+        <select id="VolumeUnitID" class="form-control" ng-model="item.VolumeUnitID">
+            <option ng-repeat="unit in valuesData.Units | filter : unit.IsVolume = true: true" value="{{unit.ID}}">
+                {{ unit.UnitName }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Quantity" data-i18n="_Quantity_"></label>
+        <input type="number" min="0" class="form-control" id="Quantity" ng-model="item.Quantity" />
+    </div>
+    <div class="form-group">
+        <label for="Dangerous" data-i18n="_Dangerous_"></label>
+        <input type="checkbox" class="form-control" id="Dangerous" ng-model="item.Dangerous" />
+    </div>
+</div>
+<div class="form-group row desk-only">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="dashboard.{{link}}.add.itemdetail" data-ng-click="retainDesc()" class="btn btn-block btn-lg">
+            <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>

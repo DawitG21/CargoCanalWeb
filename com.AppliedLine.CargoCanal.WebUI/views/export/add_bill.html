@@ -1,0 +1,64 @@
+﻿<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="ReferenceNo" data-i18n="_ReferenceNo_"></label>
+            <input type="text" class="form-control" id="ReferenceNo" ng-model="newExport.ReferenceNo" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+            <dir-datepicker dt="newExport.DateInitiated" required></dir-datepicker>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="ExportPermission">Export Permission #</label>
+            <input type="text" class="form-control" id="ExportPermission" ng-model="newExport.LC.LCNumber" />
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="ImportExportReasonID">Reason for Export</label>
+    <select id="ImportExportReasonID" class="form-control" ng-model="newExport.ImportExportReasonID" required>
+        <option ng-repeat="r in importExportReasons" value="{{r.ID}}">
+            {{ r.Reason }}
+        </option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="ModeOfTransportID" data-i18n="_ModeOfTransport_"></label>
+    <select id="ModeOfTransportID" class="form-control" ng-model="newExport.ModeOfTransportID" required
+            ng-change="filterCarrier(newExport)">
+        <option ng-repeat="m in mots" value="{{m.ID}}">{{ m.Mode }}</option>
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="IncoTermID" data-i18n="_DeliveryTerm_"></label>
+    <select id="IncoTermID" class="form-control" ng-model="newExport.IncoTermID" required>
+        <option ng-repeat="i in incoTerms" value="{{i.ID}}">
+            {{ i.IncoName }}
+        </option>
+    </select>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button ui-sref="export.add" class="btn btn-lg nav-button">
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+            <button ui-sref="export.add.bill2" class="btn btn-lg pull-right nav-button" 
+                    ng-disabled="newExport.ModeOfTransportID == undefined || newExport.DateInitiated == undefined
+                    || newExport.ImportExportReasonID == undefined || newExport.IncoTermID == undefined">
+                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>

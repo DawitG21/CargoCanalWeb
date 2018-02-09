@@ -1,0 +1,97 @@
+﻿<div class="margin-bottom-15">
+    <p class="pull-left">Showing {{exports.length}} records</p>
+    <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getExports()">More Records &raquo;</button>
+    <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchExports()">More Records &raquo;</button>
+</div>
+
+<div ng-repeat="gExport in groupedExports">
+    <div class="list-group-item-heading">
+        <h3>{{gExport.key | date:'fullDate'}}</h3>
+    </div>
+
+    <div class="card slide-up" ng-repeat="d in gExport.value">
+        <section class="card-options">
+            <aside class="card-options-btn"></aside>
+            <article class="card-options-content">
+                <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $index)"></div>
+
+                <div class="card-option" ng-click="preview.export.show(d)">
+                    <span class="card-option icon">
+                        <span class="common-sprite container-32"></span>
+                        <i class="badge icon-data">{{d.Items.length}}</i>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="status.getStatuses(d)">
+                    <span class="card-option icon">
+                        <span class="common-sprite bell-32"></span>
+                        <i class="badge icon-data">i</i>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="problem.getProblems(d)">
+                    <span class="card-option icon">
+                        <span class="common-sprite fire-32"></span>
+                        <i ng-class="{'badge icon-data bg-color-red': d.ProblemsUnresolved, 'badge icon-data': !d.ProblemsUnresolved}">{{d.ProblemsUnresolved}}</i>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="consigneeInfo.show(d)">
+                    <span class="card-option icon">
+                        <span class="glyphicon glyphicon-user"></span>
+                        <p>Consignee</p>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="costInfo.show(d, $index)">
+                    <span class="card-option icon">
+                        <span class="glyphicon glyphicon-usd"></span>
+                        <p>Costs</p>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="markAsDone(d, $index)">
+                    <span class="card-option icon">
+                        <span class="glyphicon glyphicon-check"></span>
+                        <p>Done</p>
+                    </span>
+                </div>
+                <div class="card-option" ng-click="terminateImportExport(d, $index)">
+                    <span class="card-option icon">
+                        <span class="glyphicon glyphicon-trash"></span>
+                        <p>Recycle</p>
+                    </span>
+                </div>
+            </article>
+        </section>
+
+        <aside class="card-logo" ng-class="{iecompleted: d.Completed, ieterminated: d.Terminated}">
+            <div class="logo" ng-class="getMotIcon(d.MOT)"></div>
+        </aside>
+        <article class="card-content">
+            <div class="col-sm-6">
+                <h3 ng-bind="d.WayBill" class="font-bold-600"></h3>
+                <h5>{{d.DateInserted | date: 'MMMM dd, yyyy'}}</h5>
+            </div>
+            <div class="col-sm-6">
+                <h5 class="font-bold" ng-if="d.Carrier">{{d.Carrier}}, {{d.Vessel}}</h5>
+                <h5 class="font-bold" ng-if="!d.Carrier">TRUCK CARRIER</h5>
+                <h5 class="font-bold">{{d.PortOfLoading}} <span class="glyphicon glyphicon-arrow-right"></span> {{d.PortOfDischarge}}</h5>
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="margin-top-15" ng-hide="exports.length == 0">
+    <p class="pull-left">Showing {{exports.length}} records</p>
+    <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getExports()">More Records &raquo;</button>
+    <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchExports()">More Records &raquo;</button>
+</div>
+
+<!-- Options More view -->
+<dir-options-more-window></dir-options-more-window>
+<!-- Consignee info update view -->
+<dir-forwarder-update-consignee-view></dir-forwarder-update-consignee-view>
+<!-- Cost update view -->
+<dir-import-export-update-cost-view></dir-import-export-update-cost-view>
+<!-- Export bill view -->
+<dir-export-bill-preview></dir-export-bill-preview>
+<!-- Statues view -->
+<dir-status-update-view></dir-status-update-view>
+<!-- Problems view -->
+<dir-problem-update-view></dir-problem-update-view>

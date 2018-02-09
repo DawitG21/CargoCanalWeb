@@ -1,0 +1,1337 @@
+[
+  {
+    "key": "_NoDocument_",
+    "value": "No document right now",
+    "description": "No Document right now text"
+  },
+  {
+    "key": "_Success_",
+    "value": "Success",
+    "description": "Success text"
+  },
+  {
+    "key": "_SuccessUpdate_",
+    "value": "Record updated successfully.",
+    "description": "Record updated successfully. text"
+  },
+  {
+    "key": "_DischargedConfirmationText_",
+    "value": "Are you sure you want to discharge this shipment with Bill of Lading",
+    "description": "Are you sure you want to discharge this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_ClearanceConfirmationText_",
+    "value": "Are you sure you want to clear this shipment with Bill of Lading",
+    "description": "Are you sure you want to clear this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_InspectedConfirmationText_",
+    "value": "Are you sure customs inspection completed for this shipment with Bill of Lading",
+    "description": "Are you sure customs inspection completed for this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_DispatchedConfirmationText_",
+    "value": "Are you sure you want to dispatch this shipment with Bill of Lading",
+    "description": "Are you sure you want to dispatch this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_CustomsClearing_",
+    "value": "Customs Clearing",
+    "description": "Customs Clearing text"
+  },
+  {
+    "key": "_ShipmentsOnVoyage_",
+    "value": "Shipments On Voyage",
+    "description": "Shipments On Voyage text"
+  },
+  {
+    "key": "_ShipmentsOnVoyageSub2_",
+    "value": "All shipments due to arrive",
+    "description": "All shipments due to arrive text"
+  },
+  {
+    "key": "_AwaitingCustomsClearance_",
+    "value": "Awaiting Customs Clearance",
+    "description": "Awaiting Customs Clearance text"
+  },
+  {
+    "key": "_AwaitingCustomsClearanceSub1_",
+    "value": "Shipments Arrived",
+    "description": "Shipments Arrived text"
+  },
+  {
+    "key": "_AwaitingCustomsClearanceSub2_",
+    "value": "All shipments discharged at destination port",
+    "description": "All shipments discharged at destination port text"
+  },
+  {
+    "key": "_AwaitingDispatch_",
+    "value": "Awaiting Dispatch",
+    "description": "Awaiting Dispatch text"
+  },
+  {
+    "key": "_AwaitingDispatchSub1_",
+    "value": "Shipments Ready For Dispatch",
+    "description": "Shipments Ready For Dispatch text"
+  },
+  {
+    "key": "_AwaitingDispatchSub2_",
+    "value": "All shipments ready to be dispatched",
+    "description": "All shipments ready to be dispatched text"
+  },
+  {
+    "key": "_AwaitingCustomsInspection_",
+    "value": "Awaiting Customs Inspection",
+    "description": "Awaiting Customs Inspection text"
+  },
+  {
+    "key": "_AwaitingCustomsInspectionSub1_",
+    "value": "Shipments Ready for Inspection",
+    "description": "Shipments Ready for Inspection text"
+  },
+  {
+    "key": "_AwaitingCustomsInspectionSub2_",
+    "value": "All shipments dispached and ready for inspection",
+    "description": "All shipments dispached and ready for inspection text"
+  },
+  {
+    "key": "_AccountType_",
+    "value": "Account Type",
+    "description": "Account Type text"
+  },
+  {
+    "key": "_DefaultCustomsClearingBrokerEmail_",
+    "value": "Default Customs Clearing Broker Email",
+    "description": "Default Customs Clearing Broker Email text"
+  },
+  {
+    "key": "Importer",
+    "value": "Importer",
+    "description": "Importer text"
+  },
+  {
+    "key": "Exporter",
+    "value": "Exporter",
+    "description": "Exporter text"
+  },
+  {
+    "key": "Importer and Exporter",
+    "value": "Importer and Exporter",
+    "description": "Importer and Exporter text"
+  },
+  {
+    "key": "Customs Clearing",
+    "value": "Customs Clearing",
+    "description": "Customs Clearing text"
+  },
+  {
+    "key": "Freight Forwarder",
+    "value": "Freight Forwarder",
+    "description": "Freight Forwarder text"
+  },
+  {
+    "key": "Others",
+    "value": "Others",
+    "description": "Others text"
+  },
+  {
+    "key": "Government",
+    "value": "Government",
+    "description": "Government text"
+  },
+  {
+    "key": "_StatusSummaryReport_",
+    "value": "Status Summary Report",
+    "description": "Status Summary Report text"
+  },
+  {
+    "key": "Reports By Status",
+    "value": "Reports By Status",
+    "description": "Reports By Status text"
+  },
+  {
+    "key": "At Dry Port",
+    "value": "At Dry Port",
+    "description": "At Dry Port text"
+  },
+  {
+    "key": "Cargo Delivered (CD 2) ***",
+    "value": "Cargo Delivered (CD 2) ***",
+    "description": "Cargo Delivered (CD 2) *** text"
+  },
+  {
+    "key": "Cargo Dispatched (CD 1) ***",
+    "value": "Cargo Dispatched (CD 1) ***",
+    "description": "Cargo Dispatched (CD 1) *** text"
+  },
+  {
+    "key": "Cargo Ready for Loading (CRL) ***",
+    "value": "Cargo Ready for Loading (CRL) ***",
+    "description": "Cargo Ready for Loading (CRL) *** text"
+  },
+  {
+    "key": "On Voyage ***",
+    "value": "On Voyage ***",
+    "description": "On Voyage *** text"
+  },
+  {
+    "key": "Under Custom Inspection (UC 1)",
+    "value": "Under Custom Inspection (UC 1)",
+    "description": "Under Custom Inspection (UC 1) text"
+  },
+  {
+    "key": "Under Port Clearance (UPC) ***",
+    "value": "Under Port Clearance (UPC) ***",
+    "description": "Under Port Clearance (UPC) *** text"
+  },
+  {
+    "key": "Arrived at Sea Port ***",
+    "value": "Arrived at Sea Port ***",
+    "description": "Arrived at Sea Port *** text"
+  },
+  {
+    "key": "Awaiting Empty Container (AEC)",
+    "value": "Awaiting Empty Container (AEC)",
+    "description": "Awaiting Empty Container (AEC) text"
+  },
+  {
+    "key": "Awaiting Vessel (AV)",
+    "value": "Awaiting Vessel (AV)",
+    "description": "Awaiting Vessel (AV) text"
+  },
+  {
+    "key": "Container Terminal (CT)",
+    "value": "Container Terminal (CT)",
+    "description": "Container Terminal (CT) text"
+  },
+  {
+    "key": "Submited DCT Port Terminal",
+    "value": "Submited DCT Port Terminal",
+    "description": "Submited DCT Port Terminal text"
+  },
+  {
+    "key": "Transport to Port ***",
+    "value": "Transport to Port ***",
+    "description": "Transport to Port *** text"
+  },
+  {
+    "key": "Under Stuffing (UC)",
+    "value": "Under Stuffing (UC)",
+    "description": "Under Stuffing (UC) text"
+  },
+  {
+    "key": "Cargo Discharged",
+    "value": "Cargo Discharged",
+    "description": "Cargo Discharged text"
+  },
+  {
+    "key": "Cargo Loaded ***",
+    "value": "Cargo Loaded ***",
+    "description": "Cargo Loaded *** text"
+  },
+  {
+    "key": "Under Custom Clearance (UCC) ***",
+    "value": "Under Custom Clearance (UCC) ***",
+    "description": "Under Custom Clearance (UCC) *** text"
+  },
+  {
+    "key": "_GrandAverage_",
+    "value": "Grand Average",
+    "description": "Grand Average text"
+  },
+  {
+    "key": "_GrandTotal_",
+    "value": "Grand Total",
+    "description": "Grand Total text"
+  },
+  {
+    "key": "_CargoWeightReport_",
+    "value": "Cargo Weight Report",
+    "description": "Cargo Weight Report text"
+  },
+  {
+    "key": "_CargoInTransitWeightReport_",
+    "value": "Cargo In Transit Weight Report",
+    "description": "Cargo In Transit Weight Report text"
+  },
+  {
+    "key": "_TransitTimeReport_",
+    "value": "Transit Time Report",
+    "description": "Transit Time Report text"
+  },
+  {
+    "key": "_ValRequired_",
+    "value": "This field is required.",
+    "description": "This field is required text"
+  },
+  {
+    "key": "_ValInvalidEntry_",
+    "value": "Entry is invalid.",
+    "description": "Entry is invalid text"
+  },
+  {
+    "key": "_ValTooShort_",
+    "value": "Entry is too short.",
+    "description": "Entry is too short text"
+  },
+  {
+    "key": "_ValTooLong_",
+    "value": "Entry is too long.",
+    "description": "Entry is too long text"
+  },
+  {
+    "key": "_ValPasswordMismatch_",
+    "value": "Password does not match.",
+    "description": "Password does not match text"
+  },
+  {
+    "key": "_GetStarted_",
+    "value": "Get started or",
+    "description": "Get started text"
+  },
+  {
+    "key": "_IfAlreadyAMember_",
+    "value": "if you are already a member",
+    "description": "if you are already a member text"
+  },
+  {
+    "key": "_HomeNotes1_",
+    "value": "Manage your imports and status updates for your imports",
+    "description": "Home page notes text"
+  },
+  {
+    "key": "_HomeNotes2_",
+    "value": "Manage your exports and status updates for your exports",
+    "description": "Home page notes text"
+  },
+  {
+    "key": "_HomeNotes3_",
+    "value": "Report problem on your shipment",
+    "description": "Home page notes text"
+  },
+  {
+    "key": "_HomeNotes4_",
+    "value": "Generate pending and demurrage reports",
+    "description": "Home page notes text"
+  },
+  {
+    "key": "_HomeNotes5_",
+    "value": "And more features ...",
+    "description": "Home page notes text"
+  },
+  {
+    "key": "_Home_",
+    "value": "Home",
+    "description": "Home text"
+  },
+  {
+    "key": "_Register_",
+    "value": "Register",
+    "description": "Register text"
+  },
+  {
+    "key": "_Dashboard_",
+    "value": "Dashboard",
+    "description": "Dashboard text"
+  },
+  {
+    "key": "_CreateUser_",
+    "value": "Create User",
+    "description": "Create User Account text"
+  },
+  {
+    "key": "_AdminAccount_",
+    "value": "Admin Account",
+    "description": "Admin Account text"
+  },
+  {
+    "key": "_CustomsClearingAccount_",
+    "value": "Customs Clearing Account",
+    "description": "Customs Clearing Account text"
+  },
+  {
+    "key": "_Next_",
+    "value": "Next",
+    "description": "Next text"
+  },
+  {
+    "key": "_Submit_",
+    "value": "Submit",
+    "description": "Submit text"
+  },
+  {
+    "key": "_SignUp_",
+    "value": "Sign Up",
+    "description": "Sign Up text"
+  },
+  {
+    "key": "_Login_",
+    "value": "Login",
+    "description": "Login text"
+  },
+  {
+    "key": "_Logout_",
+    "value": "Logout",
+    "description": "Logout text"
+  },
+  {
+    "key": "_TrackShipment_",
+    "value": "Track Shipment",
+    "description": "Track Shipment text"
+  },
+  {
+    "key": "_Track_",
+    "value": "Track »",
+    "description": "Track text"
+  },
+  {
+    "key": "_EnterTrackingNumber_",
+    "value": "Enter tracking number",
+    "description": "Enter tracking number text"
+  },
+  {
+    "key": "_EnterYourCredentials_",
+    "value": "Enter your credentials",
+    "description": "Enter your credentials text"
+  },
+  {
+    "key": "_Email_",
+    "value": "Email",
+    "description": "Email text"
+  },
+  {
+    "key": "_CustomerEmail_",
+    "value": "Customer's Email",
+    "description": "Customer's Email text"
+  },
+  {
+    "key": "_CustomsBrokerEmail_",
+    "value": "Customs Broker's Email",
+    "description": "Customs Broker's Email text"
+  },
+  {
+    "key": "_Password_",
+    "value": "Password",
+    "description": "Password text"
+  },
+  {
+    "key": "_ConfirmPassword_",
+    "value": "Confirm Password",
+    "description": "Confirm Password text"
+  },
+  {
+    "key": "_Credential_",
+    "value": "Credential",
+    "description": "Credential text"
+  },
+  {
+    "key": "_Profile_",
+    "value": "Profile",
+    "description": "Profile text"
+  },
+  {
+    "key": "_Company_",
+    "value": "Company",
+    "description": "Company text"
+  },
+  {
+    "key": "_FirstName_",
+    "value": "First Name",
+    "description": "First Name text"
+  },
+  {
+    "key": "_MiddleName_",
+    "value": "Middle Name",
+    "description": "Middle Name text"
+  },
+  {
+    "key": "_LastName_",
+    "value": "Last Name",
+    "description": "Last Name text"
+  },
+  {
+    "key": "_Phone_",
+    "value": "Phone",
+    "description": "Phone text"
+  },
+  {
+    "key": "_CompanyName_",
+    "value": "Company Name",
+    "description": "Company Name text"
+  },
+  {
+    "key": "_CompanyType_",
+    "value": "Company Type",
+    "description": "Company Type text"
+  },
+  {
+    "key": "_Address_",
+    "value": "Address",
+    "description": "Address text"
+  },
+  {
+    "key": "_TownCity_",
+    "value": "Town/City",
+    "description": "Town/City text"
+  },
+  {
+    "key": "_State_",
+    "value": "State",
+    "description": "State text"
+  },
+  {
+    "key": "_POBox_",
+    "value": "PO Box",
+    "description": "PO Box text"
+  },
+  {
+    "key": "_HouseNo_",
+    "value": "House No ",
+    "description": "House No text"
+  },
+  {
+    "key": "_Country_",
+    "value": "Country",
+    "description": "Country text"
+  },
+  {
+    "key": "_ContactName_",
+    "value": "Contact Name",
+    "description": "Contact Name text"
+  },
+  {
+    "key": "_ContactMobile_",
+    "value": "Contact Mobile",
+    "description": "Contact Mobile text"
+  },
+  {
+    "key": "_Website_",
+    "value": "Website",
+    "description": "Website text"
+  },
+  {
+    "key": "_LicenseNumber_",
+    "value": "License Number",
+    "description": "License Number text"
+  },
+  {
+    "key": "_LicenseUnder_",
+    "value": "License Under",
+    "description": "License Under text"
+  },
+  {
+    "key": "_LicenseIssuedDate_",
+    "value": "License Issued Date",
+    "description": "License Issued Date text"
+  },
+  {
+    "key": "_LastRenewedDate_",
+    "value": "Last Renewed Date",
+    "description": "Last Renewed Date text"
+  },
+  {
+    "key": "_LoadingMessage_",
+    "value": "Loading ... Please Wait",
+    "description": "Message while fetching resources from the server."
+  },
+  {
+    "key": "_LogoutMessage_",
+    "value": "To securely end your session, please click the Logout button.",
+    "description": "Message on logout page after logout menu is clicked."
+  },
+  {
+    "key": "_LoginMessage_",
+    "value": "Logging in ... Please Wait",
+    "description": "Message on login page after login button is clicked."
+  },
+  {
+    "key": "_TypeYourPassword_",
+    "value": "Type your password",
+    "description": "Type your password message."
+  },
+  {
+    "key": "_Hi_",
+    "value": "Hi",
+    "description": "Hi user@mail.com on user account page."
+  },
+  {
+    "key": "_YourAccountInfo_",
+    "value": "Your Account Information",
+    "description": "Label on user account page below Hi."
+  },
+  {
+    "key": "_LoginNameAndPassword_",
+    "value": "Login Name and Password",
+    "description": "Panel header on user account page."
+  },
+  {
+    "key": "_AgentInformation_",
+    "value": "Agent Information",
+    "description": "Panel header on user account page."
+  },
+  {
+    "key": "_CustomerInformation_",
+    "value": "Customer Information",
+    "description": "Panel header on customer account page."
+  },
+  {
+    "key": "_CompanyDetails_",
+    "value": "Company Details",
+    "description": "Panel header on user account page"
+  },
+  {
+    "key": "_AddMoreCompanyDetails_",
+    "value": "Add More Company Details (Optional)",
+    "description": "Button text to add more company details"
+  },
+  {
+    "key": "_HideCompanyDetails_",
+    "value": "Hide Company Additional Details",
+    "description": "Button text to hide company details"
+  },
+  {
+    "key": "_UpdateChanges_",
+    "value": "Update Changes",
+    "description": "Update Changes text"
+  },
+  {
+    "key": "_UpdatingChanges_",
+    "value": "Updating Changes. Please wait ...",
+    "description": "Updating Changes text"
+  },
+  {
+    "key": "_CompletingRegistration_",
+    "value": "Completing Registration. Please wait ...",
+    "description": "Completing Registration text"
+  },
+  {
+    "key": "_DashboardCompanyInfo_",
+    "value": "Access all your company transactions",
+    "description": "Text under the company name"
+  },
+  {
+    "key": "_Imports_",
+    "value": "Imports",
+    "description": "Imports text"
+  },
+  {
+    "key": "_Exports_",
+    "value": "Exports",
+    "description": "Exports text"
+  },
+  {
+    "key": "_Reports_",
+    "value": "Reports",
+    "description": "Reports text"
+  },
+  {
+    "key": "_CustomReports_",
+    "value": "Customized Reports",
+    "description": "Customized Reports text"
+  },
+  {
+    "key": "_PendingImports_",
+    "value": "Pending Imports",
+    "description": "Pending Imports text"
+  },
+  {
+    "key": "_PendingExports_",
+    "value": "Pending Exports",
+    "description": "Pending Exports text"
+  },
+  {
+    "key": "_ProblemsImports_",
+    "value": "Problems Imports",
+    "description": "Problems Imports text"
+  },
+  {
+    "key": "_ProblemsExports_",
+    "value": "Problems Exports",
+    "description": "Problems Exports text"
+  },
+  {
+    "key": "_TotalDemurrage_",
+    "value": "Total Demurrage",
+    "description": "Total Demurrage text"
+  },
+  {
+    "key": "_Refresh_",
+    "value": "Refresh",
+    "description": "Refresh text"
+  },
+  {
+    "key": "_AddImport_",
+    "value": "Add Import",
+    "description": "Add Import text"
+  },
+  {
+    "key": "_TotalImports_",
+    "value": "Total Imports",
+    "description": "Total Imports text"
+  },
+  {
+    "key": "_DemurrageImports_",
+    "value": "Demurrage Imports",
+    "description": "Demurrage Imports text"
+  },
+  {
+    "key": "_AddExport_",
+    "value": "Add Export",
+    "description": "Add Export text"
+  },
+  {
+    "key": "_TotalExports_",
+    "value": "Total Exports",
+    "description": "Total Exports text"
+  },
+  {
+    "key": "_DemurrageExports_",
+    "value": "Demurrage Exports",
+    "description": "Demurrage Exports text"
+  },
+  {
+    "key": "_Statuses_",
+    "value": "Statuses",
+    "description": "Statuses text"
+  },
+  {
+    "key": "_Problems_",
+    "value": "Problems",
+    "description": "Problems text"
+  },
+  {
+    "key": "_Problem_",
+    "value": "Problem",
+    "description": "Problem text"
+  },
+  {
+    "key": "_ProblemDate_",
+    "value": "Problem Date",
+    "description": "Problem Date text"
+  },
+  {
+    "key": "_Date_",
+    "value": "Date",
+    "description": "Date text"
+  },
+  {
+    "key": "_AddProblem_",
+    "value": "Add Problem",
+    "description": "Add Problem text"
+  },
+  {
+    "key": "_Created_",
+    "value": "Created",
+    "description": "Created text"
+  },
+  {
+    "key": "_Occured_",
+    "value": "Occured",
+    "description": "Occured text"
+  },
+  {
+    "key": "_Resolved_",
+    "value": "Resolved",
+    "description": "Resolved text"
+  },
+  {
+    "key": "_ReportProblemsTitle_",
+    "value": "Documents with Problems Report",
+    "description": "Documents w/ Problems Report title"
+  },
+  {
+    "key": "_ReportPendingDocumentsTitle_",
+    "value": "Pending Documents Report",
+    "description": "Pending Documents Report title"
+  },
+  {
+    "key": "_ReportDemurrageTitle_",
+    "value": "Demurrage Report",
+    "description": "Demurrage Report title"
+  },
+  {
+    "key": "_ReportFilterToggle_",
+    "value": " tap to hide/show filter",
+    "description": "Report filter toggle"
+  },
+  {
+    "key": "_Go_",
+    "value": "Go",
+    "description": "Report filter Go button"
+  },
+  {
+    "key": "_Close_",
+    "value": "Close",
+    "description": "Close button"
+  },
+  {
+    "key": "_Cancel_",
+    "value": "Cancel",
+    "description": "Cancel text"
+  },
+  {
+    "key": "_DocumentType_",
+    "value": "Document Type",
+    "description": "Report filter Document Type text"
+  },
+  {
+    "key": "_From_",
+    "value": "From",
+    "description": "Report filter From text"
+  },
+  {
+    "key": "_To_",
+    "value": "To",
+    "description": "Report filter To text"
+  },
+  {
+    "key": "_RecordsFetched_",
+    "value": "records fetched.",
+    "description": "Message displayed with reports pull"
+  },
+  {
+    "key": "_SearchInvalid_",
+    "value": "Yikes! Search criteria is invalid.",
+    "description": "Message displayed if reports returns 404"
+  },
+  {
+    "key": "_Search_",
+    "value": "Search",
+    "description": "Search text"
+  },
+  {
+    "key": "_ConnectionBroken_",
+    "value": "Your internet connection is broken.",
+    "description": "Message displayed if reports return -1"
+  },
+  {
+    "key": "_DaysAccumulated_",
+    "value": "days accumulated",
+    "description": "days accumulated text"
+  },
+  {
+    "key": "_CargoDischarged_",
+    "value": "Cargo Discharged",
+    "description": "Cargo Discharged text"
+  },
+  {
+    "key": "_Consignee_",
+    "value": "Consignee",
+    "description": "Consignee text"
+  },
+  {
+    "key": "_Carrier_",
+    "value": "Carrier",
+    "description": "Carrier text"
+  },
+  {
+    "key": "_Item_",
+    "value": "Item",
+    "description": "Item text"
+  },
+  {
+    "key": "_Detail_",
+    "value": "Detail",
+    "description": "Detail text"
+  },
+  {
+    "key": "_Cost_",
+    "value": "Cost",
+    "description": "Cost text"
+  },
+  {
+    "key": "_ReferenceNo_",
+    "value": "Reference No.",
+    "description": "Reference No. text"
+  },
+  {
+    "key": "_DateInitiated_",
+    "value": "Date Initiated",
+    "description": "Date Initiated text"
+  },
+  {
+    "key": "_TypeOfImport_",
+    "value": "Type Of Import",
+    "description": "Type Of Import text"
+  },
+  {
+    "key": "_TypeOfExport_",
+    "value": "Type Of Export",
+    "description": "Type Of Export text"
+  },
+  {
+    "key": "_ModeOfTransport_",
+    "value": "Mode Of Transport",
+    "description": "Mode Of Transport text"
+  },
+  {
+    "key": "_BillOfLading_",
+    "value": "Bill Of Lading",
+    "description": "Bill Of Lading text"
+  },
+  {
+    "key": "_LoadingDate_",
+    "value": "Bill Date",
+    "description": "Loading Date (date on BoL) text"
+  },
+  {
+    "key": "_DeliveryTerm_",
+    "value": "Delivery Term",
+    "description": "Delivery Term text"
+  },
+  {
+    "key": "_ShippingInstructionNo_",
+    "value": "Shipping Instruction No.",
+    "description": "Shipping Instruction No. text"
+  },
+  {
+    "key": "_ShippingInstructionDate_",
+    "value": "Shipping Instruction Date",
+    "description": "Shipping Instruction Date text"
+  },
+  {
+    "key": "_AirWayBill_",
+    "value": "Air Way Bill",
+    "description": "Way Bill text"
+  },
+  {
+    "key": "_TruckWayBill_",
+    "value": "Truck Way Bill",
+    "description": "Way Bill text"
+  },
+  {
+    "key": "_WayBillDate_",
+    "value": "Way Bill Date",
+    "description": "Way Bill Date text"
+  },
+  {
+    "key": "_DeclarationNo_",
+    "value": "Declaration No.",
+    "description": "Declaration No. text"
+  },
+  {
+    "key": "_DeclarationDate_",
+    "value": "Declaration Date",
+    "description": "Declaration Date text"
+  },
+  {
+    "key": "_ProductOrigin_",
+    "value": "Product Origin",
+    "description": "Product Origin text"
+  },
+  {
+    "key": "_StuffingLocation_",
+    "value": "Stuffing Location",
+    "description": "Stuffing Location text"
+  },
+  {
+    "key": "_ReceivedDate_",
+    "value": "Received Date",
+    "description": "Received Date text"
+  },
+  {
+    "key": "_OriginalDocumentDate_",
+    "value": "Original Document Date",
+    "description": "Original Document Date text"
+  },
+  {
+    "key": "_VesselAirline_",
+    "value": " Vessel/Airline",
+    "description": " Vessel/Airline text"
+  },
+  {
+    "key": "_VoyageFlightNo_",
+    "value": "Voyage/Flight No.",
+    "description": "Voyage/Flight No. text"
+  },
+  {
+    "key": "_CountryOfLoading_",
+    "value": "Country of Loading",
+    "description": "Country of Loading text"
+  },
+  {
+    "key": "_PortOfLoading_",
+    "value": "Port of Loading",
+    "description": "Port of Loading text"
+  },
+  {
+    "key": "_CountryOfDischarge_",
+    "value": "Country of Discharge",
+    "description": "Country of Discharge text"
+  },
+  {
+    "key": "_PortOfDischarge_",
+    "value": "Port of Discharge",
+    "description": "Port of Discharge text"
+  },
+  {
+    "key": "_CargoDischargeDate_",
+    "value": "Cargo Discharge Date",
+    "description": "Cargo Discharge Date text"
+  },
+  {
+    "key": "_Remark_",
+    "value": "Remark",
+    "description": "Remark text"
+  },
+  {
+    "key": "_ItemOrderNo_",
+    "value": "Item Order No.",
+    "description": "Item Order No. text"
+  },
+  {
+    "key": "_CargoStatus_",
+    "value": "Cargo Status",
+    "description": "Cargo Status text"
+  },
+  {
+    "key": "_Cargo_",
+    "value": "Cargo",
+    "description": "Cargo text"
+  },
+  {
+    "key": "_SubCargo_",
+    "value": "Sub Cargo",
+    "description": "Sub Cargo text"
+  },
+  {
+    "key": "_GrossWeight_",
+    "value": "Gross Weight",
+    "description": "Gross Weight text"
+  },
+  {
+    "key": "_NetWeight_",
+    "value": "Net Weight",
+    "description": "Net Weight text"
+  },
+  {
+    "key": "_WeightUnit_",
+    "value": "Weight Unit",
+    "description": "Weight Unit text"
+  },
+  {
+    "key": "_Volume_",
+    "value": "Volume",
+    "description": "Volume text"
+  },
+  {
+    "key": "_VolumeUnit_",
+    "value": "Volume Unit",
+    "description": "Volume Unit text"
+  },
+  {
+    "key": "_Quantity_",
+    "value": "Quantity",
+    "description": "Quantity text"
+  },
+  {
+    "key": "_Dangerous_",
+    "value": "Dangerous",
+    "description": "Dangerous text"
+  },
+  {
+    "key": "_Description_",
+    "value": "Description",
+    "description": "Description text"
+  },
+  {
+    "key": "_StuffMode_",
+    "value": "Stuff Mode",
+    "description": "Stuff Mode text"
+  },
+  {
+    "key": "_Destination_",
+    "value": "Destination",
+    "description": "Destination text"
+  },
+  {
+    "key": "_Completed_",
+    "value": "Completed",
+    "description": "Completed text"
+  },
+  {
+    "key": "_MarkAsCompleted_",
+    "value": "Mark as completed",
+    "description": "Mark as completed text"
+  },
+  {
+    "key": "_DocumentCompleted_",
+    "value": "Document Completed",
+    "description": "Document completed text"
+  },
+  {
+    "key": "_TerminateDocument_",
+    "value": "Terminate document",
+    "description": "Terminate document text"
+  },
+  {
+    "key": "_Terminated_",
+    "value": "Terminated",
+    "description": "Terminated text"
+  },
+  {
+    "key": "_Terminate_",
+    "value": "Terminate",
+    "description": "Terminate text"
+  },
+  {
+    "key": "_Status_",
+    "value": "Status",
+    "description": "Status text"
+  },
+  {
+    "key": "_AddStatus_",
+    "value": "Add Status",
+    "description": "Add Status text"
+  },
+  {
+    "key": "_StatusDate_",
+    "value": "Status Date",
+    "description": "Status Date text"
+  },
+  {
+    "key": "_Freight_",
+    "value": "Freight",
+    "description": "Freight text"
+  },
+  {
+    "key": "_Insurance_",
+    "value": "Insurance",
+    "description": "Insurance text"
+  },
+  {
+    "key": "_InlandTransport_",
+    "value": "Inland Transport",
+    "description": "Inland Transport text"
+  },
+  {
+    "key": "_PortStorageDemurrage_",
+    "value": "Port Storage Demurrage",
+    "description": "Port Storage Demurrage text"
+  },
+  {
+    "key": "_InlandStorage_",
+    "value": "Inland Storage",
+    "description": "Inland Storage text"
+  },
+  {
+    "key": "_PortHandling_",
+    "value": "Port Handling",
+    "description": "Port Handling text"
+  },
+  {
+    "key": "_TruckDetention_",
+    "value": "Truck Detention",
+    "description": "Truck Detention text"
+  },
+  {
+    "key": "_DryPortCharge_",
+    "value": "Dry Port Charge",
+    "description": "Dry Port Charge text"
+  },
+  {
+    "key": "_MaterialCost_",
+    "value": "Material Cost",
+    "description": "Material Cost text"
+  },
+  {
+    "key": "_OtherCharges_",
+    "value": "Other Charges",
+    "description": "Other Charges text"
+  },
+  {
+    "key": "_TrackingDetails_",
+    "value": "Tracking Details",
+    "description": "Tracking Details text"
+  },
+  {
+    "key": "_TrackingNumber_",
+    "value": "Tracking Number",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_TrackingAgentCustomerMessageL1_",
+    "value": "The generated tracking number is strictly applicable to this transaction and is used to view its progress.",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_TrackingAgentCustomerMessageL2_",
+    "value": "If you entered the customer's email while creating the document, they would also be able to track this document by signing in to the application with their email.",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_AcceptTerminationOf_",
+    "value": "Accept termination of document",
+    "description": "Accept termination text"
+  },
+  {
+    "key": "_BySelectingCheckboxMessage_",
+    "value": "by selecting the checkbox below.",
+    "description": "phrase from either complete document, terminate document or other pages"
+  },
+  {
+    "key": "_ProcessNotReversedMessage_",
+    "value": "Please note that this process cannot be reversed.",
+    "description": "phrase from either terminate document or other pages"
+  },
+  {
+    "key": "_AcceptCompletionOf_",
+    "value": "Accept completion of document",
+    "description": "Accept completion text"
+  },
+  {
+    "key": "_CompletedNotReversedMessage_",
+    "value": "Please note that documents marked as completed cannot be reversed. However, they will be available on reports.",
+    "description": "phrase from either complete document or other pages"
+  },
+  {
+    "key": "_NoteTheFollowing_",
+    "value": "Please note the following:",
+    "description": "Please note the following: text"
+  },
+  {
+    "key": "_ProblemsMustBeClosedMessage_",
+    "value": "All pending problems associated with this document must be closed.",
+    "description": "Message requesting the user to close problems text"
+  },
+  {
+    "key": "_StatusMandatoryMessage_",
+    "value": "The following statuses are mandatory without which the document cannot be marked as completed:",
+    "description": "Message requesting the user to fulfil mandatory statuses text"
+  },
+  {
+    "key": "_CloseProblem_",
+    "value": "Close Problem",
+    "description": "Close Problem text"
+  },
+  {
+    "key": "_AcceptClosingProblem_",
+    "value": "Accept closing problem",
+    "description": "Accept termination text"
+  },
+  {
+    "key": "_HoweverCreateProblemMessage_",
+    "value": "However, you could create a new problem associated with the current document.",
+    "description": "Message notifying the user could create a new problem after a previous problem is closed"
+  },
+  {
+    "key": "_RegistrationType_",
+    "value": "Registration Type",
+    "description": "Registration Type text"
+  },
+  {
+    "key": "_SelectRegistrationType_",
+    "value": "Select Registration Type",
+    "description": "Select Registration Type text"
+  },
+  {
+    "key": "_Customer_",
+    "value": "Customer",
+    "description": "Customer text"
+  },
+  {
+    "key": "_Agent_",
+    "value": "Agent",
+    "description": "Agent text"
+  },
+  {
+    "key": "_GoToHomePage_",
+    "value": "Go to home page",
+    "description": "Go to home page text"
+  },
+  {
+    "key": "_AllDocuments_",
+    "value": "All Documents",
+    "description": "All Documents text"
+  },
+  {
+    "key": "_WhyRegister_",
+    "value": "Why Register?",
+    "description": "Why Register? text"
+  },
+  {
+    "key": "_TrackAllYourShipmentMessage_",
+    "value": "Track all your shipments without having to enter a tracking number.",
+    "description": "Why Register answer text"
+  },
+  {
+    "key": "_TrackAllYourShipmentGimmick_",
+    "value": "With your email, who needs a tracking number anyway.",
+    "description": "Why Register answer gimmick text"
+  },
+  {
+    "key": "_HowDoesItWork_",
+    "value": "How Does It Work?",
+    "description": "How does it work? text"
+  },
+  {
+    "key": "_HowDoesItWorkAnswer1_",
+    "value": "First, you need to register online with your email and a password.",
+    "description": "How does it work? first answer text"
+  },
+  {
+    "key": "_HowDoesItWorkAnswer2_",
+    "value": "Second, inform your shipping agent to enter your email for all your shipments.",
+    "description": "How does it work? second answer text"
+  },
+  {
+    "key": "_YeahItsThatSimple_",
+    "value": "Yeah, it's that simple!",
+    "description": "Yeah, it's that simple! text"
+  },
+  {
+    "key": "_Note_",
+    "value": "NOTE",
+    "description": "NOTE text"
+  },
+  {
+    "key": "_PreviousShipmentNotLinked1_",
+    "value": "Previous shipments that were not linked to your email account will not reflect on your Tracking page until your agent updates them.",
+    "description": "Message notifying the customer previous shipments won't reflect except agent updates"
+  },
+  {
+    "key": "_PreviousShipmentNotLinked2_",
+    "value": "However, you can view shipments by entering the tracking number on the home page.",
+    "description": "Message notifying customer can track from home page"
+  },
+  {
+    "key": "_DocumentsWithProblemsReport_",
+    "value": "Documents with Problems Report",
+    "description": "Documents with Problems Report text"
+  },
+  {
+    "key": "_PendingDocumentsReport_",
+    "value": "Pending Documents Report",
+    "description": "Pending Documents Report text"
+  },
+  {
+    "key": "_DemurrageReport_",
+    "value": "Demurrage Report",
+    "description": "Demurrage Report text"
+  },
+  {
+    "key": "_Pending_",
+    "value": "Pending",
+    "description": "Pending text"
+  },
+  {
+    "key": "_Done_",
+    "value": "Done",
+    "description": "Done text"
+  },
+  {
+    "key": "_RegSuccess_",
+    "value": "Registration Successful",
+    "description": "Registration Successful text"
+  },
+  {
+    "key": "_RegSuccessMessage_",
+    "value": "Your registration completed successfully.",
+    "description": "Registration completed successfully text"
+  },
+  {
+    "key": "_ClickLoginButton_",
+    "value": "Click the login button to access your account.",
+    "description": "Click the login button to access your account text"
+  }
+]

@@ -1,0 +1,18 @@
+<div class="text-center">
+    <button class="btn btn-default pull-left" ui-sref="import.add.carrier">
+        <span class="glyphicon glyphicon-chevron-left"></span> Previous
+    </button>
+    <button class="btn btn-default" ng-click="addNewItem()">
+        <span class="glyphicon glyphicon-plus-sign"></span> Add Item
+    </button>
+    <button class="btn btn-default" ng-click="sendImport()" ng-disabled="newImport.Items.length == 0 || disableButton">
+        <span class="glyphicon glyphicon-send"></span> Submit
+    </button>
+</div>
+<hr />
+<h4 ng-repeat="i in newImport.Items">
+    <span class="glyphicon glyphicon-minus-sign text-danger pointer" 
+          ng-click="removeItem($index)"></span> {{i.ItemOrderNo}} {{i.Description | uppercase}} x {{i.GrossWeight}} {{i.WeightUnitID | unit}} x {{i.Quantity}}
+</h4>
+
+<dir-add-item></dir-add-item>

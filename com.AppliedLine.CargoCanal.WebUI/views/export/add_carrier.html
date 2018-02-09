@@ -1,0 +1,99 @@
+﻿<div class="form-group" ng-hide="hideCarrier">
+    <label for="CarrierID" data-i18n="_Carrier_"></label>
+    
+    <!-- auto-complete implementation for Vessel -->
+    <select name="CarrierID" class="form-control" ng-model="newExport.CarrierID" ng-required="!hideCarrier">
+        <option ng-repeat="c in carriers | filter: motFilter" value="{{c.ID}}">{{ c.CarrierName }}</option>
+    </select>
+</div>
+
+<div class="row" ng-hide="hideCarrier">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="VesselID" data-i18n="_VesselAirline_"></label>
+
+            <!-- auto-complete implementation for vessel -->
+            <input name="Vessel" id="Vessel" type="text" class="form-control"
+                   placeholder="Vessel"
+                   auto-complete source="values/queryvessels"
+                   ng-minlength="3"
+                   ng-model="newExport.Vessel" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="VoyageNumber" data-i18n="_VoyageFlightNo_"></label>
+            <input type="text" class="form-control" name="VoyageNumber" ng-model="newExport.VoyageNumber" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CountryLoading" data-i18n="_CountryOfLoading_"></label>
+            <select id="CountryLoading" name="CountryLoading" class="form-control margin-bottom-15"
+                    ng-model="newExport.colID"
+                    ng-change="getPols(newExport.colID, newExport)">
+                <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="PortOfLoadingID" data-i18n="_PortOfLoading_"></label>
+            <select id="PortOfLoadingID" class="form-control margin-bottom-15" ng-model="newExport.PortOfLoadingID" required>
+                <option ng-repeat="p in pols" value="{{p.ID}}">{{p.PortName}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CountryDischarge" data-i18n="_CountryOfDischarge_"></label>
+            <select id="CountryDischarge" name="CountryDischarge" class="form-control margin-bottom-15"
+                    ng-model="newExport.codID"
+                    ng-change="getPods(newExport.codID, newExport)">
+                <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+            </select>
+            <h6 class="text-danger" ng-show="newExport.codID && (newExport.codID === newExport.colID)">Country of loading and country of discharge must be different.</h6>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="PortOfDischargeID" data-i18n="_PortOfDischarge_"></label>
+            <select id="PortOfDischargeID" class="form-control margin-bottom-15" ng-model="newExport.PortOfDischargeID" required>
+                <option ng-repeat="p in pods" value="{{p.ID}}">{{p.PortName}}</option>
+            </select>
+            <h6 class="text-danger" ng-show="newExport.PortOfDischargeID && (newExport.PortOfLoadingID === newExport.PortOfDischargeID)">Port of loading and port of discharge must be different.</h6>
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="form-group">
+    <label for="ETA">ETA</label>
+    <dir-datepicker dt="newExport.Export.ETA" max-date="null"></dir-datepicker>
+</div>-->
+
+<div class="form-group">
+    <label for="Remark" data-i18n="_Remark_"></label>
+    <input type="text" class="form-control" name="Remark" ng-model="newExport.Remark" />
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button ui-sref="export.add.bill2" class="btn btn-lg nav-button">
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+            <button ui-sref="export.add.items" class="btn btn-lg pull-right nav-button"
+                    ng-disabled="(newExport.CarrierID == undefined && !hideCarrier)
+                    || newExport.PortOfLoadingID == undefined || newExport.PortOfDischargeID == undefined
+                    || newExport.codID == newExport.colID || newExport.PortOfLoadingID == newExport.PortOfDischargeID">
+                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>

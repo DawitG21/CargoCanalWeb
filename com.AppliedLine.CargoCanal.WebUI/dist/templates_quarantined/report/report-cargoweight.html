@@ -1,0 +1,70 @@
+<h5 data-ng-class="messageClass">{{reports.totals.count}}&nbsp;<span data-i18n="{{message}}"></span></h5>
+<h5 class="font-bold report-title">Cargo Weight Report</h5>
+<div class="form-group">
+    <div id="report-view" ui-view class="font-9em">
+        <div data-table="table-svr">
+            <table class="table table-responsive table-tbody" data-ng-show="reports.totals.count > 0">
+                <thead>
+                    <tr>
+                        <th class="table-header" rowspan="2">BoL</th>
+                        <th class="table-header" rowspan="2">BoL Date</th>
+                        <th class="table-header" rowspan="2">Origin</th>
+                        <th class="table-header" rowspan="2">QTY</th>
+                        <th class="table-header" rowspan="2">UNIT</th>
+                        <th class="table-header" colspan="2">GROSS WEIGHT</th>
+                    </tr>
+                    <tr>
+                        <th class="table-header">KG</th>
+                        <th class="table-header">TON</th>
+                    </tr>
+                </thead>
+                <tbody class="expandable" data-ng-repeat="company in reports.data | filter: searchText" id="tbody{{$index}}" onclick="c(this.id)">
+                    <tr ng-class="getReportColor($index)">
+                        <td colspan="7">
+                            {{company.name}}<br />
+                            <span class="font-9em">{{company.data[0].Agent}} {{company.data[0].Phone}}</span>
+                        </td>
+                    </tr>
+                    <tr data-ng-repeat="data in company.data" ng-class="getRowColor($index)">
+                        <td>{{data.BoL}}</td>
+                        <td>{{data["BoL Date"] | date : "yyyy MMM dd" | uppercase}}</td>
+                        <td>{{data["Origin"]}}</td>
+                        <td>{{data.QTY | number: 3 }}</td>
+                        <td>{{data["Weight Unit"]}}</td>
+                        <td>{{data.KG | number: 3}}</td>
+                        <td>{{data.TON | number: 3}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">{{company.data.length}} shipment(s) for {{company.name}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="5">Average for {{company.name}}</td>
+                        <td>{{getAverage(company.data, 'KG') | number: 3}}</td>
+                        <td>{{getAverage(company.data, 'TON')| number: 3}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="5">Total for {{company.name}}</td>
+                        <td>{{getTotal(company.data, 'KG') | number: 3}}</td>
+                        <td>{{getTotal(company.data, 'TON')| number: 3}}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr class="font-bold totals-line">
+                        <td colspan="2">Total Records: {{reports.totals.count}}</td>
+                        <td colspan="5">No. of Companies: {{reports.data.length}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="5">Grand Average</td>
+                        <td>{{(reports.totals.kg/reports.totals.count) | number: 3}}</td>
+                        <td>{{(reports.totals.ton/reports.totals.count)| number: 3}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="5">Grand Total</td>
+                        <td>{{reports.totals.kg | number: 3}}</td>
+                        <td>{{reports.totals.ton| number: 3}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

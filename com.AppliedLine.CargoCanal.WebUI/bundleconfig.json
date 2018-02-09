@@ -1,0 +1,99 @@
+[
+  {
+    "outputFileName": "Scripts/app/angular-custom.js",
+    "inputFiles": [
+      "Scripts/app/app.js",
+      "Scripts/app/services.js",
+      "Scripts/app/services.signalr.js",
+      "Scripts/app/controller.js",
+      "Scripts/app/controller.upload.js",
+      "Scripts/app/controller.datetime.js",
+      "Scripts/app/directive.js",
+      "Scripts/app/directive.datetime.js",
+      "Scripts/app/filters.js",
+      "Scripts/app_quarantined/directives.mapping.js",
+      "Scripts/app/chartjs-angular.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/i18n/localize.min.js",
+    "inputFiles": [
+      "Scripts/i18n/localize.js"
+    ]
+  },
+  {
+    "outputFileName": "scripts/bundles/angulars_and_chartjs.js",
+    "inputFiles": [
+      "Scripts/Chart.bundle.min.js",
+      "Scripts/angular.min.js",
+      "Scripts/angular-ui-router.min.js",
+      "Scripts/ng-file-upload-all.min.js",
+      "Scripts/ng-img-crop.min.js",
+      "Scripts/angular-animate.min.js",
+      "Scripts/angular-sanitize.min.js",
+      "Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+      "Scripts/ngStorage.min.js",
+      "Scripts/i18n/localize.min.js",
+      "Scripts/app/angular-custom.min.js"
+    ]
+  },
+  {
+    "outputFileName": "content/style-bundle.css",
+    "inputFiles": [
+      "Content/bootstrap.css",
+      "Content/font-awesome.css",
+      "Content/style.css",
+      "Content/common-sprite.sprite.css"
+    ]
+  },
+  {
+    "outputFileName": "content/style-bundle-defer.css",
+    "inputFiles": [
+      "Content/ng-img-crop.css",
+      "Content/themes/base/jquery-ui.css"
+    ]
+  },
+  {
+    "outputFileName": "scripts/bundles/jquery.utils.js",
+    "inputFiles": [
+      "Scripts/jquery-3.1.1.min.js",
+      "Scripts/jquery.signalR.min.js",
+      "Scripts/jquery-ui-1.12.1.min.js",
+      "Scripts/bootstrap.min.js",
+      "Scripts/app/script.js"
+    ]
+  },
+  {
+    "outputFileName": "content/datatables.css",
+    "inputFiles": [
+      "bower_components/datatables/media/css/jquery.dataTables.min.css",
+      "bower_components/datatables-buttons/css/buttons.dataTables.css"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/bundles/datatables.js",
+    "inputFiles": [
+      "bower_components/datatables/media/js/jquery.dataTables.min.js",
+      "bower_components/datatables-buttons/js/dataTables.buttons.js",
+      "bower_components/datatables-buttons/js/buttons.flash.js",
+      "scripts/datatables/jszip.min.js",
+      "scripts/datatables/pdfmake_git.min.js",
+      "scripts/datatables/vfs_fonts.js",
+      "bower_components/datatables-buttons/js/buttons.html5.js",
+      "bower_components/datatables-buttons/js/buttons.print.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/Geez/jgeez-jquery.js",
+    "inputFiles": [
+      "Scripts/Geez/jquery-1.7.2.min.js",
+      "Scripts/Geez/jgeez.min.js"
+    ]
+  },
+  {
+    "outputFileName": "Scripts/app/cards.min.js",
+    "inputFiles": [
+      "Scripts/app/cards.js"
+    ]
+  }
+]

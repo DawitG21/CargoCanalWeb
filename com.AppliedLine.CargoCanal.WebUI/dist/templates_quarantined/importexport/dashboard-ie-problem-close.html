@@ -1,0 +1,108 @@
+<div class="row fullscreen">
+    <div class="col-md-6 col-md-offset-3">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2 data-i18n="_CloseProblem_"></h2>
+            </div>
+            <form class="text-center bg-color-white" data-ng-submit="closeProblem(pID)">
+                <p class="margin-top-15">
+                    <br />
+                    <span data-i18n="_AcceptClosingProblem_"></span> 
+                    <span>{{pID}}</span> 
+                    <span data-i18n="_BySelectingCheckboxMessage_"></span>
+                </p>
+                <p class="font-85em">
+                    <strong>
+                        <span data-i18n="_ProcessNotReversedMessage_"></span>
+                        <br />
+                        <span data-i18n="_HoweverCreateProblemMessage_"></span>
+                    </strong>
+                </p>
+                <input type="checkbox" class="form-control margin-bottom-15" style="display: inline-block;" data-ng-model="accept" />
+
+                <div class="text-center margin-bottom-15">
+                    <a ui-sref="dashboard.{{link}}" data-i18n="_Cancel_"></a>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                            data-ng-disabled="accept!=true" data-i18n="_CloseProblem_">
+                    </button>
+                    <br />
+                    <br />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2>Add Problem</h2>
+
+                <div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref="."><span>1</span> Problem</a>
+                </div>
+            </div>
+            <form id="signup-form" ng-submit="saveProblemUpdate()">
+                <div id="form-views" ui-view>
+                    <p ng-class="messageClass">{{message}}</p>
+                    <h5> Doc #: {{selectedID}}</h5>
+
+                    <div class="form-group">
+                        <label for="ProblemID">Problem</label>
+                        <select name="ProblemID" class="form-control" ng-model="newProblem.ProblemID">
+                            <option ng-repeat="p in valuesData.Problems" value="{{p.ID}}">
+                                {{ p.Problem }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlYear">Problem Date</label>
+                        <div class="form-inline">
+                            <select id="ddlYear" name="ddlYear" class="form-control" ng-model="stus.Year">
+                                <option value="">Year</option>
+                            </select>
+                            <select id="ddlMonth" name="ddlMonth" class="form-control" ng-model="stus.Month">
+                                <option value="">Month</option>
+                            </select>
+                            <select id="ddlDay" name="ddlDay" class="form-control" ng-model="stus.Day">
+                                <option value="">Day</option>
+                            </select>
+                        </div>
+                        <script>
+                            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                            var year = new Date().getFullYear() - 1;
+
+                            $('#ddlYear').empty();
+                            $('#ddlMonth').empty();
+                            $('#ddlDay').empty();
+
+                            for (var i = 0; i < 11; i++) {
+                                $('#ddlYear').append(new Option((year + i), (year + i)));
+                            }
+
+                            for (var i = 0; i < 12; i++) {
+                                $('#ddlMonth').append(new Option(months[i], i + 1));
+                            }
+
+                            for (var i = 1; i <= 31; i++) {
+                                $('#ddlDay').append(new Option(i, i));
+                            }
+
+                        </script>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>-->
+
+
+

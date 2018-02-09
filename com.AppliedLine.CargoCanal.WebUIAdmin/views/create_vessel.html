@@ -1,0 +1,46 @@
+﻿<div class="toolbox">
+    <div class="form-inline">
+        <a ui-sref="manager"><span class="glyphicon glyphicon-arrow-left"></span> Back</a>
+    </div>
+</div>
+<section>
+    <section class="col-sm-6 login-side-info">
+        <h2 class="color-theme font-bold-600">
+            Vessels
+        </h2>
+        <h3 class="font-bold-600">Vessels are actual names for ships or airplanes e.g. Boeing 777 and Maersk Avon.</h3>
+    </section>
+    <section class="login-box">
+        <div class="login-logo">
+            <img src="Content/Images/cargocanal_text.png" alt="logo" class="logo">
+        </div>
+        <form name="form" id="form" ng-submit="saveVessel()">
+
+            <div class="form-group">
+                <label for="VesselName" class="sr-only">Vessel Name</label>
+                <input name="VesselName" type="text" class="form-control" placeholder="Vessel Name" ng-model="vessel.VesselName" />
+            </div>
+            <div class="form-group">
+                <label for="Carrier">Carrier</label>
+                <select name="Carrier" class="form-control"
+                        ng-model="vessel.CarrierID">
+                    <option ng-repeat="c in carriers" value="{{c.ID}}">{{c.CarrierName}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="MOT">Mode of Transport</label>
+                <select name="MOT" class="form-control"
+                        ng-model="vessel.ModeOfTransportID">
+                    <option ng-repeat="m in mots" value="{{m.ID}}">{{m.Mode}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Save</button>
+            </div>
+
+            <div class="login-footer">
+                <small>By registering you agree to the <a ui-sref="termsofservice">Terms of Service.</a></small>
+            </div>
+        </form>
+    </section>
+</section>

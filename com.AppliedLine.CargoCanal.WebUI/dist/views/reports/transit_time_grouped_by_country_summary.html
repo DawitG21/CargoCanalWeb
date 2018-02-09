@@ -1,0 +1,84 @@
+<section>
+    <div class="col-md-offset-4 col-md-8 text-info">
+        <div class="col-md-4">
+            <h6>B.VOY => Before Voyage</h6>
+            <h6>VOY => On Voyage</h6> 
+            <h6>DIC => Cargo Discharged</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>UCC => Under Custom Clearance</h6>
+            <h6>UPC => Under Port Clearance</h6>
+            <h6>RFL => Ready For Loading</h6>
+        </div>
+        <div class="col-md-4">
+            <h6>DIP => Cargo Dispatched</h6>
+            <h6>DRY => At Dry Port</h6>
+            <h6>UCI => Under Custom Inspection</h6>
+        </div>
+    </div>
+    <h6 class="text-danger">* asteriks report field values are in days.</h6>
+
+    <div class="table-responsive">
+        <table id="report_table" class="display table table-condensed table-bordered">
+            <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
+            <thead>
+                <tr>
+                    <th class="text-center">Country</th>
+                    <th class="text-center"># Imports</th>
+                    <th class="text-center">*Avg. B.VOY</th>
+                    <th class="text-center">*Avg. VOY</th>
+                    <th class="text-center">*Avg. DIC</th>
+                    <th class="text-center">*Avg. UCC</th>
+                    <th class="text-center">*Avg. UPC</th>
+                    <th class="text-center">*Avg. RFL</th>
+                    <th class="text-center">*Avg. DIP</th>
+                    <th class="text-center">*Avg. DRY</th>
+                    <th class="text-center">*Avg. UCI</th>
+                    <th class="text-center">*Avg Transit</th>
+                </tr>
+            </thead>
+            <tbody class="text-center">
+                <tr ng-repeat="d in report.data">
+                    <td>{{d.Country}}</td>
+                    <td>{{d.RecordCount}}</td>
+                    <td>{{d.AvgBeforeVoyage}}</td>
+                    <td>{{d.AvgOnVoyage}}</td>
+                    <td>{{d.AvgCargoDischarged}}</td>
+                    <td>{{d.AvgUnderCustomClearance}}</td>
+                    <td>{{d.AvgUnderPortClearance}}</td>
+                    <td>{{d.AvgReadyForLoading}}</td>
+                    <td>{{d.AvgCargoDispatched}}</td>
+                    <td>{{d.AvgAtDryPort}}</td>
+                    <td>{{d.AvgUnderCustomInspection}}</td>
+                    <td>{{(d.TotalBeforeVoyage + d.TotalOnVoyage + d.TotalCargoDischarged + d.TotalUnderCustomClearance + d.TotalUnderPortClearance + d.TotalReadyForLoading + d.TotalCargoDispatched + d.TotalAtDryPort + d.TotalUnderCustomInspection) / d.RecordCount | number: 0}}</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th class="text-center">Total Imports</th>
+                    <th class="text-center">{{report.getTotal(report.data, 'RecordCount')}}</th>
+                    <!--<th>{{d.TotalOnVoyage}}</th>
+                    <th>{{d.TotalCargoDischarged}}</th>
+                    <th>{{d.TotalUnderCustomClearance}}</th>
+                    <th>{{d.TotalUnderPortClearance}}</th>
+                    <th>{{d.TotalReadyForLoading}}</th>
+                    <th>{{d.TotalCargoDispatched}}</th>
+                    <th>{{d.TotalAtDryPort}}</th>
+                    <th>{{d.TotalUnderCustomInspection}}</th>-->
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+</section>
+
+<script>
+    setTimeout(function () {
+        $.extend($.fn.dataTable.defaults, {
+            dom: 'B<"clear">lfrtip',
+            buttons: ['excel', 'pdf', 'print']
+        });
+
+        $("#report_table").DataTable();
+    }, 0);
+</script>

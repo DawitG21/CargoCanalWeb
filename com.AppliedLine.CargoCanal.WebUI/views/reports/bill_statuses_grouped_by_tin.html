@@ -1,0 +1,38 @@
+﻿<div class="table-responsive">
+    <table id="report_table" class="display table table-condensed table-bordered">
+        <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
+        <thead>
+            <tr>
+                <th class="text-center">Company</th>
+                <th class="text-center">BoL/Waybill #</th>
+                <th class="text-center">Cargo Type</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Status Date</th>
+                <th class="text-center">Location</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr ng-repeat="d in report.data">
+                <td>{{d.CompanyName}}</td>
+                <td>{{d.Bill}}</td>
+                <td>{{d.ImportExportType}}</td>
+                <td>{{d.Status}}</td>
+                <td>{{d.StatusDate | date:'dd MMM yyyy'}}</td>
+                <td>{{d.Location}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    setTimeout(function () {
+        $.extend($.fn.dataTable.defaults, {
+            dom: 'B<"clear">lfrtip',
+            buttons: ['excel', 'pdf', 'print']
+        });
+
+        $("#report_table").DataTable();
+    }, 0);
+</script>
+
+<!--<canvas id="reportChart"></canvas>-->

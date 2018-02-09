@@ -1,0 +1,122 @@
+﻿<div class="fullscreen" ng-show="preview.import.openWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="preview.import.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="text-uppercase modal-heading text">shipment preview</h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <section class="col-xs-6">
+                                    <p>Date Initiated: {{preview.import.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+                                    <article>
+                                        <p>SHIP FROM</p>
+                                        <p>{{preview.import.data.PortOfLoading}}</p>
+                                    </article>
+                                    <article>
+                                        <p>SHIP TO</p>
+                                        <p>{{preview.import.data.PortOfDischarge}}</p>
+                                    </article>
+                                </section>
+                                <section class="col-xs-6">
+                                    <p>Ref: {{preview.import.data.ReferenceNo}}</p>
+                                    <article>
+                                        <P>BoL No.: {{preview.import.data.Bill}}</P>
+                                        <p>BoL Date: {{preview.import.data.BillDate | date: 'dd/MM/yyyy'}}</p>
+                                        <p>LC No.: {{preview.import.data.LC.LCNumber}}</p>
+                                        <p>Reason for import: {{preview.import.data.Reason}}</p>
+                                    </article>
+
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed">
+                                            <caption>Carrier Information</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-nowrap">MoT</th>
+                                                    <th class="text-nowrap">Carrier</th>
+                                                    <th class="text-nowrap">Vessel</th>
+                                                    <th class="text-nowrap">Voyage/Flight No.</th>
+                                                    <th class="text-nowrap">ETA</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>{{preview.import.data.MOT}}</td>
+                                                    <td>{{preview.import.data.Carrier}}</td>
+                                                    <td>{{preview.import.data.Vessel}}</td>
+                                                    <td>{{preview.import.data.VoyageNumber}}</td>
+                                                    <td>{{preview.import.data.ETA | date: 'dd/MM/yyyy'}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                                <section class="col-xs-12">
+                                    <p>Freight Charge Terms: {{preview.import.data.IncoTerm}}</p>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed">
+                                            <caption>Order Information</caption>
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-nowrap">QTY</th>
+                                                    <th class="text-nowrap">Content</th>
+                                                    <th class="text-nowrap">Gross W.</th>
+                                                    <th class="text-nowrap">Net W.</th>
+                                                    <th class="text-nowrap">Vol</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="i in preview.import.data.Items">
+                                                <tr>
+                                                    <td>{{i.Quantity | number}}</td>
+                                                    <td>{{i.Description}}</td>
+                                                    <td>{{i.GrossWeight}}</td>
+                                                    <td>{{i.NetWeight}}</td>
+                                                    <td>{{i.Volume}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">{{i.Dangerous | danger}}</td>
+                                                    <td colspan="3">{{i.Cargo}} &bull; {{i.SubCargo}}</td>
+                                                </tr>
+                                                <tr ng-repeat="d in i.ItemDetails">
+                                                    <td colspan="1">{{d.ItemNumber}}</td>
+                                                    <td colspan="2">{{d.StuffMode}}</td>
+                                                    <td colspan="2">{{d.Destination}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <section class="col-xs-12">
+                                    <p>REMARK: {{preview.import.data.Remark}}</p>
+                                </section>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div style="overflow: auto; padding-top: 10px;">
+                                        <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.import.data.Documents" ng-bind="f.DocumentName"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

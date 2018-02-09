@@ -1,0 +1,42 @@
+﻿<div class="table-responsive">
+    <table id="report_table" class="display table table-condensed table-bordered">
+        <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
+        <thead>
+            <tr>
+                <th class="text-center">Company</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">BoL/Waybill #</th>
+                <th class="text-center">Problem</th>
+                <th class="text-center"><span class="glyphicon glyphicon-bell text-danger"></span></th>
+                <th class="text-center" style="min-width:55px;">Occured</th>
+                <th class="text-center" style="min-width:55px;">Status</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr ng-repeat="d in report.data" ng-class="d.IsResolved? '': 'text-danger'">
+                <td>{{d.CompanyName}}</td>
+                <td>{{d.Telephone}}</td>
+                <td>{{d.BillNumber}}</td>
+                <td class="text-left">
+                    {{d.ProblemName}}
+                    <br />
+                    {{d.Message}}
+                </td>
+                <td>{{d.AlertLevel}}</td>
+                <td>{{d.ProblemDate | date : 'dd MMM yyyy'}}</td>
+                <td>{{d.IsResolved | resolvedtext}}<br />{{d.ResolvedDate | date : 'dd MMM yyyy'}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    setTimeout(function () {
+        $.extend($.fn.dataTable.defaults, {
+            dom: 'B<"clear">lfrtip',
+            buttons: ['excel', 'pdf', 'print']
+        });
+
+        $("#report_table").DataTable();
+    }, 0);
+</script>

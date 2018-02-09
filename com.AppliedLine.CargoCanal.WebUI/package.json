@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "name": "cargocanalui",
+  "private": true,
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-change": "^1.0.0",
+    "gulp-inject": "^4.3.0",
+    "gulp-image": "^4.1.0",
+    "gulp-replace": "^0.6.1"
+  }
+}

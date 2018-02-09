@@ -1,0 +1,20 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h4>National Bank of Ethiopia</h4>
+    </div>
+    <div class="col-md-12">
+        <div class="toolbox">
+            <div class="form-inline">
+                <form class="form-group" ng-submit="getImportExportByTinOrLc(true)">
+                    <div class="control-group">
+                        <input class="control-group-textbox" type="search" placeholder="Search by LC, TIN, Company Name" ng-model="searchText" />
+                        <i class="control-group-button" ng-click="getImportExportByTinOrLc(true)"><span class="glyphicon glyphicon-search"></span></i>
+                    </div>
+                </form>
+                <a href="" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dir-tin-or-lc-data></dir-tin-or-lc-data>

@@ -1,0 +1,21 @@
+<form id="form" ng-submit="report.generate()">
+    <div class="col-md-12">
+        <div class="form-inline">
+            <div class="form-group">
+                <input id="FromDate" type="text" class="form-control" placeholder="From Date"
+                       ng-model="report.filter.FromDate" datepicker-from>
+            </div>
+            <div class="form-group">
+                <input id="ToDate" type="text" class="form-control" placeholder="To Date"
+                       ng-model="report.filter.ToDate" datepicker-to>
+            </div>
+            <div class="form-group">
+                <input id="Bill" type="text" class="form-control" placeholder="BoL or SIn"
+                       ng-model="report.filter.Bill">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Generate</button>
+            </div>
+        </div>
+    </div>
+</form>

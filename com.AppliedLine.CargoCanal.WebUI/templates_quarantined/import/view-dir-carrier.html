@@ -1,0 +1,111 @@
+﻿<div class="form-group">
+    <label for="CarrierID" data-i18n="_Carrier_"></label>
+    <input type="text" class="form-control" name="CarrierID" value="{{formData.ImportExport.CarrierID | carrier}}" readonly/>
+    <!--<select name="CarrierID" class="form-control" ng-model="formData.ImportExport.CarrierID" ng-change="formData.ImportExport.loadVessel()">
+        <option ng-repeat="carrier in valuesData.Carriers| filter: mot: true" value="{{carrier.ID}}">
+            {{ carrier.Name }}
+        </option>
+    </select>-->
+</div>
+<div class="form-group">
+    <label for="VesselID" data-i18n="_VesselAirline_"></label>
+    <input type="text" class="form-control" name="VesselID" value="{{formData.ImportExport.VesselID | vessel}}" readonly />
+    <!--<select name="VesselID" class="form-control" ng-model="formData.ImportExport.VesselID">
+        <option ng-repeat="vessel in valuesData.Vessels| filter: carrier: true" value="{{vessel.ID}}">
+            {{ vessel.Name }}
+        </option>
+    </select>-->
+</div>
+<div class="form-group">
+    <label for="VoyageNumber" data-i18n="_VoyageFlightNo_"></label>
+    <input type="text" class="form-control" name="VoyageNumber" value="{{formData.ImportExport.VoyageNumber}}" readonly />
+</div>
+<div class="row">
+    <!--<div class="col-sm-6">
+        <label for="CountryLoading">Country of Loading</label>
+
+        <select id="CountryLoading" name="CountryLoading" class="form-control margin-bottom-15"
+                ng-model="formData.ImportExport.CountryLoading.CountryID"
+                ng-change="formData.ImportExport.loadPorts('true')">
+            <option ng-repeat="country in valuesData.Countries" value="{{country.ID}}">{{country.Name}}</option>
+        </select>
+    </div>-->
+    <div class="col-sm-6">
+        <label for="PortOfLoadingID" data-i18n="_PortOfLoading_"></label>
+        <input type="text" class="form-control margin-bottom-15" name="PortOfLoadingID" value="{{formData.ImportExport.PortOfLoadingID | polName}}" readonly />
+        <!--<select id="PortOfLoadingID" class="form-control margin-bottom-15" ng-model="formData.ImportExport.PortOfLoadingID">
+            <option ng-repeat="port in valuesData.Ports" value="{{port.ID}}">{{ port.PortName }}</option>
+        </select>-->
+    </div>
+    <div class="col-sm-6">
+        <label for="PortOfDischargeID" data-i18n="_PortOfDischarge_"></label>
+        <input type="text" class="form-control margin-bottom-15" name="PortOfDischargeID" value="{{formData.ImportExport.PortOfDischargeID | podName}}" readonly/>
+        <!--<select id="PortOfDischargeID" class="form-control margin-bottom-15" ng-model="formData.ImportExport.PortOfDischargeID">
+            <option ng-repeat="port in valuesData.Ports" value="{{port.ID}}">{{ port.PortName }}</option>
+        </select>-->
+    </div>
+</div>
+<!--<div class="row">
+    <div class="col-sm-6">
+        <label for="CountryLoading">Country of Discharge</label>
+
+        <select id="CountryDischarge" name="CountryDischarge" class="form-control margin-bottom-15"
+                ng-model="formData.ImportExport.CountryDischarge.CountryID"
+                ng-change="formData.ImportExport.loadPorts('false')">
+            <option ng-repeat="country in valuesData.Countries" value="{{country.ID}}">{{country.Name}}</option>
+        </select>
+    </div>
+    <div class="col-sm-6">
+        <label for="PortOfDischargeID">Port Of Discharge</label>
+        <select id="PortOfDischargeID" class="form-control margin-bottom-15" ng-model="formData.ImportExport.PortOfDischargeID">
+            <option value=""></option>
+        </select>
+    </div>
+</div>-->
+<div class="form-group">
+    <label for="ddlYear" data-i18n="_CargoDischargeDate_"></label>
+    <input type="text" class="form-control" name="DateDischarge" value="{{formData.ImportExport.DateDischarge | date :'yyyy-MM-dd'}}" readonly/>
+    <!--<div class="form-inline">
+        <select id="ddlYear" name="ddlYear" class="form-control" ng-model="cdis.Year">
+            <option value="">Year</option>
+        </select>
+        <select id="ddlMonth" name="ddlMonth" class="form-control" ng-model="cdis.Month">
+            <option value="">Month</option>
+        </select>
+        <select id="ddlDay" name="ddlDay" class="form-control" ng-model="cdis.Day">
+            <option value="">Day</option>
+        </select>
+    </div>-->
+    <!--<script>
+        var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        var year = new Date().getFullYear() - 1;
+
+        $('#ddlYear').empty();
+        $('#ddlMonth').empty();
+        $('#ddlDay').empty();
+
+        for (var i = 0; i < 11; i++) {
+            $('#ddlYear').append(new Option((year + i), (year + i)));
+        }
+
+        for (var i = 0; i < 12; i++) {
+            $('#ddlMonth').append(new Option(months[i], i + 1));
+        }
+
+        for (var i = 1; i <= 31; i++) {
+            $('#ddlDay').append(new Option(i, i));
+        }
+
+    </script>-->
+</div>
+<div class="form-group">
+    <label for="Remark" data-i18n="_Remark_"></label>
+    <input type="text" class="form-control" name="Remark" value="{{formData.ImportExport.Remark}}" readonly/>
+</div>
+<!--<div class="form-group row">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="dashboard.imports.add.item" class="btn btn-block btn-lg">
+            Next <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>-->

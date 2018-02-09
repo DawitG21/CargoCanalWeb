@@ -1,0 +1,120 @@
+﻿<div class="container">
+    <h2 class="font-bold" data-i18n="_TrackingDetails_"></h2>
+    <div class="form-inline" data-ng-hide="hideFilter">
+        <span class="glyphicon glyphicon-filter"></span>
+        <select id="DocType" data-ng-model="searchOption.DocType" class="form-control">
+            <option value="" selected data-i18n="_AllDocuments_"></option>
+            <option value="Import" data-i18n="_Imports_"></option>
+            <option value="Export" data-i18n="_Exports_"></option>
+        </select>
+    </div>
+    <a href="" ng-click="customerTrackings()" ng-show="hideFilter && Login != undefined">my trackings</a>
+    <hr />
+    <h5 data-ng-class="messageClass">{{message}}</h5>
+    <!--<input list="filter" />
+    <datalist id="filter">
+        <option value="First">First</option>
+        <option value="Second">Second</option>
+    </datalist>-->
+    <!--<div class="row font-9em" data-ng-repeat="t in trackings | filter: searchText" id="tbody{{$index}}" onclick="c(this.id)">-->
+    <section class="margin-bottom-30 font-9em col-sm-12" data-ng-repeat="t in trackings | filter: searchOption">
+        <h4>{{t.Description}}</h4>
+        <p>
+            <span class="badge badge-shadow">{{parseTimeSpan(t.LastUpdated)}}</span>
+            <span class="badge badge-shadow bg-color-green" data-ng-show="t.Completed == true" data-i18n="_Completed_"></span>
+        </p>
+
+        <article class="row col-sm-6 col-md-6">
+            <h5 class="font-bold">
+                <span class="glyphicon glyphicon-import icon-blue" ng-show="(t.DocType| lowercase) == 'import'"></span>
+                <span class="glyphicon glyphicon-export icon-blue" ng-show="(t.DocType| lowercase) == 'export'"></span>
+                <span data-i18n="_TrackingNumber_"></span> {{t.TrackingNumber}}
+            </h5>
+
+            <p>
+                {{t.Cargo}}, {{t.SubCargo}}
+                <span data-ng-show="(t.DocType| lowercase) == 'import'" class="font-bold inline-block">
+                    <mark>BoL # {{t.DocumentNo}}</mark>
+                </span>
+                <span data-ng-show="(t.DocType| lowercase) == 'export'" class="font-bold inline-block">
+                    <mark>SIn # {{t.DocumentNo}}</mark>
+                </span>
+            </p>
+            <p data-ng-show="(t.DocType| lowercase) == 'import'">
+                <span class="glyphicon glyphicon-globe icon-blue"></span> {{t.Destination}}
+                <span class="margin-left-15 glyphicon glyphicon-arrow-left icon-blue margin-right-15"></span>
+                <span class="glyphicon glyphicon-globe icon-blue"></span> {{t.Origin}}
+            </p>
+            <p data-ng-show="(t.DocType| lowercase) == 'export'">
+                <span class="glyphicon glyphicon-globe icon-blue"></span> {{t.Origin}}
+                <span class="margin-left-15 glyphicon glyphicon-arrow-right icon-blue margin-right-15"></span>
+                <span class="glyphicon glyphicon-globe icon-blue"></span> {{t.Destination}}
+            </p>
+            <aside>
+                <h5 class="margin-top-30 font-bold" data-i18n="_AgentInformation_"></h5>
+                <hr class="margin-top-0 margin-bottom-5" />
+                <p class="inline-block margin-right-15 letter-spacing-1">
+                    <span class="fa fa-user"></span> {{t.AgentName}}
+                </p>
+                <p class="inline-block margin-right-15 letter-spacing-1">
+                    <span class="fa fa-phone"></span> {{t.AgentPhone}}
+                </p>
+                <p class="inline-block margin-right-15 letter-spacing-1">
+                    <span class="fa fa-laptop"></span> {{t.AgentEmail}}
+                </p>
+                <p class="inline-block letter-spacing-1">
+                    <span class="fa fa-group"></span> {{t.AgentCompany}}
+                </p>
+            </aside>
+        </article>
+        <article class="row col-sm-6 col-md-6">
+            <h5 class="font-bold" data-i18n="_CargoStatus_"></h5>
+            <hr class="margin-top-0 margin-bottom-5" />
+            <div class="row margin-bottom-5" data-ng-repeat="s in t.Statuses">
+                <div class="col-xs-4 col-sm-5 col-md-4"><span class="glyphicon glyphicon-calendar icon-blue icon-shadow"></span> {{s.StatusDate | date: "dd MMM yyyy"}}</div>
+                <div class="col-xs-8 col-sm-7 col-md-8"><span class="glyphicon glyphicon-knight icon-blue icon-shadow"></span> {{s.Status}}</div>
+            </div>
+        </article>
+    </section>
+</div>
+<div class="fullscreen-hid" id="register-offer">
+    <div class="col-md-6 col-md-offset-3">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2 data-i18n="_Register_"></h2>
+            </div>
+            <div class="text-center bg-color-white">
+                <article class="text-justify col-xs-12 margin-bottom-15">
+                    <h3 data-i18n="_WhyRegister_"></h3>
+                    <p class="margin-top-15">
+                        <span data-i18n="_TrackAllYourShipmentMessage_"></span>
+                        <br />
+                        <span data-i18n="_TrackAllYourShipmentGimmick_"></span>
+                    </p>
+                    <h3 data-i18n="_HowDoesItWork_"></h3>
+                    <p class="margin-top-15">
+                        <span data-i18n="_HowDoesItWorkAnswer1_"></span>
+                        <br />
+                        <span data-i18n="_HowDoesItWorkAnswer2_"></span>
+                    </p>
+                    <h5 class="margin-top-15" data-i18n="_YeahItsThatSimple_"></h5>
+
+                    <small class="margin-top-30 text-danger">
+                        <span class="glyphicon glyphicon-info-sign"></span>
+                        <strong data-i18n="_Note_"></strong>
+                        <br />
+                        <span data-i18n="_PreviousShipmentNotLinked1_"></span>
+                        <br />
+                        <span data-i18n="_PreviousShipmentNotLinked2_"></span>
+                    </small>
+                </article>
+                <button type="button" class="btn btn-primary btn-lg" data-ng-click="registerCustomer()" data-i18n="_Register_">
+                </button>
+                <button type="button" class="btn btn-primary btn-lg" data-ng-click="cancelOffer()" data-i18n="_Cancel_">
+                </button>
+                <br />
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

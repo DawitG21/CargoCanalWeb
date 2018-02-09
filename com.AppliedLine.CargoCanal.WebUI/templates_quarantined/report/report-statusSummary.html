@@ -1,0 +1,11 @@
+﻿<h5 data-ng-class="messageClass"><span data-i18n="{{message}}"></span></h5>
+<h5 class="font-bold report-title">Status Summary Report</h5>
+
+<!-- ng-if fixed the directive error when report is blank -->
+<status-summary-report ng-if="reports.OnVoyage" configstatstime="configStatsTimes" statusreport="reports.OnVoyage"></status-summary-report>
+<status-summary-report ng-if="reports.Discharged" configstatstime="configStatsTimes" statusreport="reports.Discharged"></status-summary-report>
+<status-summary-report ng-if="reports.UCC" configstatstime="configStatsTimes" statusreport="reports.UCC"></status-summary-report>
+<status-summary-report ng-if="reports.CRL" configstatstime="configStatsTimes" statusreport="reports.CRL"></status-summary-report>
+<status-summary-report ng-if="reports.Dispatched" configstatstime="configStatsTimes" statusreport="reports.Dispatched"></status-summary-report>
+<status-summary-report ng-if="reports.UC1" configstatstime="configStatsTimes" statusreport="reports.UC1"></status-summary-report>
+<!--<status-summary-report ng-if="reports.Delivered" statusreport="reports.Delivered"></status-summary-report>-->

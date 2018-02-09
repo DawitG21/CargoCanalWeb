@@ -1,0 +1,15 @@
+﻿<div ui-view>
+    <h3>Agents' Email Listing</h3>
+    <hr />
+
+    <div class="row">
+        <div class="form-group panel btn text-left" ng-repeat="a in imports" ui-sref=".emails">
+            <div class="col-sm-6">
+                {{a.ConsigneeName}}
+            </div>
+            <div class="col-sm-6">
+                {{a.ConsigneeName.substring(0, a.ConsigneeName.indexOf(' ')) + a.ConsigneeName.substring(a.ConsigneeName.indexOf(' ') + 1)}}@CargoCanal.com
+            </div>
+        </div>
+    </div>
+</div>

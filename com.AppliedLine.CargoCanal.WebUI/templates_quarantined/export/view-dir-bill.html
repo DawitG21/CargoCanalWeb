@@ -1,0 +1,50 @@
+﻿<div class="form-group">
+    <label for="ReferenceNo" data-i18n="_ReferenceNo_"></label>
+    <input type="text" class="form-control" id="ReferenceNo" ng-model="formData.ImportExport.ReferenceNo" />
+</div>
+<div class="form-group">
+    <label for="ddlYear" data-i18n="_DateInitiated_"></label>
+    <input type="text" class="form-control" id="DateInitiated" ng-model="formData.ImportExport.DateInitiated | date:'yyyy-MM-dd'" />
+</div>
+<div class="form-group">
+    <label for="ImportExportReasonID" data-i18n="_TypeOfExport_"></label>
+    <select id="ImportExportReasonID" class="form-control" ng-model="formData.ImportExport.ImportExportReasonID">
+        <option ng-repeat="importReason in valuesData.ImportExportReasons" value="{{importReason.ID}}">
+            {{ importReason.Reason }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="ModeOfTransportID" data-i18n="_ModeOfTransport_"></label>
+    <select id="ModeOfTransportID" class="form-control" ng-model="formData.ImportExport.ModeOfTransportID" ng-change="formData.ImportExport.loadCarrier()">
+        <option ng-repeat="modeOfTransport in valuesData.ModeOfTransports" value="{{modeOfTransport.ID}}">
+            {{ modeOfTransport.Mode }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="ShippingInstructionNo" data-i18n="_ShippingInstructionNo_"></label>
+    <input type="text" class="form-control" id="ShippingInstructionNo" ng-model="formData.ImportExport.ShippingInstructionNo" />
+</div>
+<div class="form-group">
+    <label for="ddlYear2" data-i18n="_ShippingInstructionDate_"></label>
+    <input type="text" class="form-control" id="ShippingInstructionDate" ng-model="formData.ImportExport.ShippingInstructionDate | date:'yyyy-MM-dd'" />
+</div>
+<div class="form-group">
+    <label for="WayBill" data-i18n="_WayBill_"></label>
+    <input type="text" class="form-control" id="WayBill" ng-model="formData.ImportExport.WayBill" />
+</div>
+<div class="form-group">
+    <label for="WayBillDate" data-i18n="_WayBillDate_"></label>
+    <input type="text" class="form-control" id="WayBillDate" ng-model="formData.ImportExport.WayBillDate | date:'yyyy-MM-dd'" />
+</div>
+<div class="form-group">
+    <label for="IncoTermID" data-i18n="_DeliveryTerm_"></label>
+    <select id="IncoTermID" class="form-control" ng-model="formData.ImportExport.IncoTermID">
+        <option ng-repeat="incoTerm in valuesData.IncoTerms" value="{{incoTerm.ID}}">
+            {{ incoTerm.IncoName }}
+        </option>
+    </select>
+</div>
+
+

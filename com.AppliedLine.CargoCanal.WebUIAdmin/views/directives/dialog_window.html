@@ -1,0 +1,25 @@
+﻿<div class="fullscreen" ng-show="showDialog">
+    <div class="fullscreen-dialog-sm">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="row margin-0">
+                        <div class="col-sm-12">
+                            <div class="row margin-bottom-30">
+                                <button type="button" class="close margin-b-10" aria-label="Close" ng-click="closeDialog()">
+                                    <span class="h1" aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <div class="h4 text-center" ng-bind-html="trustEntryAsHtml(dialogMsg)"></div>
+                            </div>
+                            <div class="form-group text-center margin-top-30" ng-show="confirmMode">
+                                <button type="button" class="btn btn-primary btn-lg" ng-click="confirmDialog()">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

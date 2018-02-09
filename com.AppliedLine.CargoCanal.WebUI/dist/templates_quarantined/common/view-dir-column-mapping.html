@@ -1,0 +1,24 @@
+<div>
+    <!-- MappingModel edit area -->
+    <div class="margin-top-15 row" ng-show="flgIsHidden">
+        <div class="form-inline col-xs-12 col-md-12">
+            <div class="form-group">
+                <!-- toggles the checkboxes of the column mappings-->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" class="default-checkbox" ng-model="allMappings" ng-click="toggleCurrentMapping(allMappings)" />
+                        Check All
+                    </label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="h in customReportHeaders">
+            <label class="font-9em margin-right-15">
+                <input type="checkbox" class="default-checkbox" ng-model="currentColumnMapping.ColumnMappings[$index]" /> {{h}}
+            </label>
+        </div>
+    </div>
+</div>
+

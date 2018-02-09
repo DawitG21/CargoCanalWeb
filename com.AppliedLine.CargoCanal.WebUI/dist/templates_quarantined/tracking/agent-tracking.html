@@ -1,0 +1,45 @@
+<div class="row">
+    <p class="form-inline ">
+        <a href="" data-ng-click="gotoAgentTracking()">
+            <span class="fa fa-refresh"></span> <span data-i18n="_Refresh_"></span>
+        </a>
+        <input type="text" ng-model="searchText" class="form-control pull-right" data-i18n-attr="_Search_|placeholder" />
+        <br />
+    </p>
+</div>
+<div class="row" ng-repeat="t in trackings | filter: searchText">
+    <hr />
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="row col-lg-12" data-i18n="_TrackingNumber_"></label>
+            <label class="font-normal">{{t.TrackingNumber}}</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="row col-lg-12">Doc</label>
+            <label class="font-normal">{{t.ImportExportID}}</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label class="row col-lg-12" data-i18n="_Date_"></label>
+            <label class="font-normal">{{t.DateInserted | date: "yyyy MMM dd @hh:MM a" | uppercase}}</label>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="form-group">
+            <label data-i18n="_CustomerEmail_"></label>
+            <div class="input-group">
+                <input type="text" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}"
+                       class="form-control"
+                       ng-model="t.CustomerEmail" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" data-ng-click="updateTracking(t)">
+                        <span class="glyphicon glyphicon-floppy-saved"></span>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div id="status-buttons-mob" class="mob-only text-center">
+    <button class="button-left" ui-sref="dashboard.{{link}}.add.item"><span class="fa fa-chevron-circle-left"></span></button>
+    <button class="button-right" ui-sref="dashboard.{{link}}.add.cost"><span class="fa fa-chevron-circle-right"></span></button>
+</div>
+<div ng-repeat="item in formData.ImportExport.Items">
+    <div class="form-group">
+        <label for="StuffModeID" data-i18n="_StuffMode_"></label>
+        <select name="StuffModeID" class="form-control" ng-model="item.ItemDetail.StuffModeID">
+            <option ng-repeat="stuffMode in valuesData.StuffModes" value="{{stuffMode.ID}}">
+                {{ stuffMode.Description }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="DestinationID" data-i18n="_Destination_"></label>
+        <select name="DestinationID" class="form-control" ng-model="item.ItemDetail.DestinationID">
+            <option ng-repeat="location in valuesData.Locations" value="{{location.ID}}">
+                {{ location.Location }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="StatusID" data-i18n="_Status_"></label>
+        <select name="StatusID" class="form-control" ng-model="item.ItemDetail.StatusID">
+            <option ng-repeat="status in valuesData.Statuses" value="{{status.ID}}">
+                {{ status.Description }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="StatusDate" data-i18n="_StatusDate_"></label>
+        <!-- date starts-->
+        <div ng-controller="datepickerPopupController" class="form-group">
+            <div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="input-group">
+                            <input type="text" class="form-control" id="StatusDate" name="StatusDate" readonly
+                                   uib-datepicker-popup="{{format}}"
+                                   ng-init="item.ItemDetail.StatusDate = item.ItemDetail.StatusDate? setDate2(item.ItemDetail.StatusDate) : dt"
+                                   ng-model="item.ItemDetail.StatusDate"
+                                   is-open="popup1.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- date ends -->
+
+    </div>
+</div>
+<div class="form-group row desk-only">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="dashboard.{{link}}.add.cost" class="btn btn-block btn-lg">
+            <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>
+

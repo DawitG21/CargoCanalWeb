@@ -1,0 +1,35 @@
+﻿<div class="fullscreen">
+    <div class="col-md-6 col-md-offset-3">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2 data-i18n="_RegistrationType_"></h2>
+            </div>
+            <form class="text-center bg-color-white" data-ng-submit="gotoRegistration()">
+                <br />
+                <br />
+                <h4 data-i18n="_SelectRegistrationType_"></h4>
+                <div class="aligned-box margin-top-15">
+                    <input type="radio" name="regType" value="customer" class="form-control margin-bottom-15 inline-block"
+                           data-ng-model="regType" /> 
+                    <h3 class="inline-block" data-i18n="_Customer_"></h3>
+                </div>
+
+                <div class="aligned-box margin-bottom-15">
+                    <input type="radio" name="regType" value="agent" class="form-control margin-bottom-15 inline-block"
+                           data-ng-model="regType" /> 
+                    <h3 class="inline-block" data-i18n="_Agent_"></h3>
+                </div>
+                <div class="text-center margin-top-15 margin-bottom-15">
+                    <a ui-sref="home" data-i18n="_GoToHomePage_"></a>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg"
+                            data-ng-disabled="regType == undefined" data-i18n="_Next_">
+                    </button>
+                    <br />
+                    <br />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

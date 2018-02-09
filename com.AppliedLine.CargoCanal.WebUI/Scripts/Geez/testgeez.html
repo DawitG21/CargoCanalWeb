@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Amharic English Test Page</title>
+</head>
+
+<body>
+
+    <script src="../jquery-2.2.3.js"></script>
+    <script src="jquery-1.7.2.min.js"></script>
+    <script src="jquery.amharic.min.js"></script>
+    <div id="Menu">
+        <form id="form1" name="form1" method="post" action="">
+
+            <p>
+                <textarea name="faqTextarea" id="faqTextarea" cols="150" rows="10" jgeez-showtogglebutton="true" jgeez-showhelpbutton="true"
+                          jgeez-englishbutton="englishplain"
+                          jgeez-geezbutton="geezplain"></textarea>
+            </p>
+            <p>
+                Amharic
+                <input name="amharicEnglishRadio" type="radio" id="amharicEnglishRadio" value="1" checked="checked" />
+                <label for="radio"></label>
+                English
+                <input type="radio" name="amharicEnglishRadio" id="amharicEnglishRadio" value="2" />
+            </p>
+        </form>
+    </div>
+    <p>
+        This is a sample of enabling Amharic typing. Call to the jgeez script is included in this page.
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var defaultAmharicEnabled = true;
+                if (defaultAmharicEnabled)
+                    $("#faqTextarea").jGeez({ "enabled": true });
+                else
+                    $("#faqTextarea").jGeez({ "enabled": false });
+
+                /*
+                   //$("#faqTextarea").jGeez({"toggleshortcut":"9", "showtogglebutton":true, "enabled":false});//'enabled' : true, 'englishbutton' : 'English', 'geezbutton': 'Amharic'});
+
+
+                     function simulateKeyPress(character) {
+                  jQuery.event.trigger({ type : 'keypress', which : character.charCodeAt(0) });
+                }
+                    */
+                //$('#amharicEnglishRadio input:radio').click(function() {
+                $('input:radio').change(function () {
+
+                    var val = $("input[name=amharicEnglishRadio]:checked").val();
+
+
+
+                    if (val === '1') {//amharic
+
+                        $("#faqTextarea").jGeez({ "enabled": true });
+                        $("#faqTextarea").jGeez('reattachevents');
+                        $("#faqTextarea").focus();
+
+                        /*
+                          var myInput = document.getElementById('faqTextarea');
+                         var e = document.createEvent("Events");
+                    e.initEvent("keypress", true, true);
+
+                  e.key="Q";    // just enter the char you want to send
+                  e.keyCode=e.key.charCodeAt(0);
+                  e.which=e.keyCode;
+                  e.altKey=false;
+                  e.ctrlKey=true;
+                  e.shiftKey=false;
+                  e.metaKey=false;
+                  e.bubbles=false;
+                  myInput.dispatchEvent(e);
+                */
+
+                    } else if (val === '2') { //english
+                        $("#faqTextarea").jGeez({ "enabled": false });
+                        $("#faqTextarea ").jGeez('reattachevents');
+                        $("#faqTextarea").focus();
+
+                        /*
+                     var myInput = document.getElementById('faqTextarea');
+                       var e = document.createEvent("Events");
+                    e.initEvent("keypress", true, true);
+                  e.key="q";    // just enter the char you want to send
+                  e.keyCode=e.key.charCodeAt(0);
+                  e.which=e.keyCode;
+                  e.altKey=false;
+                  e.ctrlKey=true;
+                  e.shiftKey=false;
+                  e.metaKey=false;
+                  e.bubbles=false;
+                  myInput.dispatchEvent(e);
+                */
+
+                    } else
+                        alert(val);
+
+                });
+
+            });
+
+        </script>
+    </p>
+</body>
+</html>

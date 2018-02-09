@@ -1,0 +1,106 @@
+<div class="form-group" ng-hide="hideCarrier">
+    <label for="CarrierID" data-i18n="_Carrier_"></label>
+    <!--<select name="CarrierID" class="form-control" ng-model="newImport.CarrierID" ng-change="getVessels(newImport.CarrierID, newImport.VesselID)" required>
+        <option ng-repeat="c in carriers | filter: motFilter" value="{{c.ID}}">{{ c.CarrierName }}</option>
+    </select>-->
+    <!-- auto-complete implementation for vessel -->
+    <select name="CarrierID" class="form-control" ng-model="newImport.CarrierID" ng-required="!hideCarrier">
+        <option ng-repeat="c in carriers | filter: motFilter" value="{{c.ID}}">{{ c.CarrierName }}</option>
+    </select>
+</div>
+
+<div class="row" ng-hide="hideCarrier">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="VesselID" data-i18n="_VesselAirline_"></label>
+            <!--<select name="VesselID" class="form-control" ng-model="newImport.VesselID" required>
+                <option ng-repeat="v in carrierVessels" value="{{v.ID}}">{{ v.VesselName }}</option>
+            </select>-->
+
+            <!-- auto-complete implementation for vessel -->
+            <input name="Vessel" id="Vessel" type="text" class="form-control"
+                   placeholder="Vessel"
+                   auto-complete source="values/queryvessels"
+                   ng-minlength="3"
+                   ng-model="newImport.Vessel" ng-required="!hideCarrier" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="VoyageNumber" data-i18n="_VoyageFlightNo_"></label>
+            <input type="text" class="form-control" name="VoyageNumber" ng-model="newImport.VoyageNumber" ng-required="!hideCarrier" />
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CountryLoading" data-i18n="_CountryOfLoading_"></label>
+            <select id="CountryLoading" name="CountryLoading" class="form-control margin-bottom-15"
+                    ng-model="newImport.colID"
+                    ng-change="getPols(newImport.colID, newImport)">
+                <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="PortOfLoadingID" data-i18n="_PortOfLoading_"></label>
+            <select id="PortOfLoadingID" class="form-control margin-bottom-15" ng-model="newImport.PortOfLoadingID" required>
+                <option ng-repeat="p in pols" value="{{p.ID}}">{{p.PortName}}</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CountryDischarge" data-i18n="_CountryOfDischarge_"></label>
+            <select id="CountryDischarge" name="CountryDischarge" class="form-control margin-bottom-15"
+                    ng-model="newImport.codID"
+                    ng-change="getPods(newImport.codID, newImport)">
+                <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+            </select>
+            <h6 class="text-danger" ng-show="newImport.codID && (newImport.codID === newImport.colID)">Country of loading and country of discharge must be different.</h6>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="PortOfDischargeID" data-i18n="_PortOfDischarge_"></label>
+            <select id="PortOfDischargeID" class="form-control margin-bottom-15" ng-model="newImport.PortOfDischargeID" required>
+                <option ng-repeat="p in pods" value="{{p.ID}}">{{p.PortName}}</option>
+            </select>
+            <h6 class="text-danger" ng-show="newImport.PortOfDischargeID && (newImport.PortOfLoadingID === newImport.PortOfDischargeID)">Port of loading and port of discharge must be different.</h6>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="ETA">ETA</label>
+    <dir-datepicker dt="newImport.Import.ETA" max-date="null"></dir-datepicker>
+</div>
+
+<div class="form-group">
+    <label for="Remark" data-i18n="_Remark_"></label>
+    <input type="text" class="form-control" name="Remark" ng-model="newImport.Remark" />
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button ui-sref="import.add.bill" class="btn btn-lg nav-button">
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+            <button ui-sref="import.add.items" class="btn btn-lg pull-right nav-button"
+                    ng-disabled="((newImport.CarrierID == undefined
+                || newImport.Vessel == undefined || newImport.VoyageNumber == undefined) && !hideCarrier)
+                || newImport.PortOfLoadingID == undefined || newImport.PortOfDischargeID == undefined
+                    || newImport.codID == newImport.colID || newImport.PortOfLoadingID == newImport.PortOfDischargeID">
+                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>

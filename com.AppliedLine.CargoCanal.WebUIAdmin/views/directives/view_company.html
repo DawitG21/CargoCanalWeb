@@ -1,0 +1,30 @@
+﻿<div class="card slide-up" ng-repeat="c in company.data">
+    <section class="card-options">
+        <aside class="card-options-btn"></aside>
+        <article class="card-options-content">
+            <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $index)"></div>
+
+            <div class="card-option" ui-sref="manager.companyservices" ng-click="company.getServices($index)">
+                <span class="card-option icon">
+                    <span class="fa fa-shopping-bag"></span>
+                </span>
+            </div>
+            <div class="card-option" ng-click="company.changeIsActive($index)">
+                <span class="card-option icon">
+                    <span ng-class="getLockClass(c.IsActive)"></span>
+                </span>
+            </div>
+        </article>
+    </section>
+
+    <aside class="card-logo" ng-class="{iecompleted: c.IsActive, ieterminated: !c.IsActive}"></aside>
+    <article class="card-content">
+        <div class="col-sm-12">
+            <h4 ng-bind="c.CompanyName" class="font-bold-600"></h4>
+            <h4 ng-bind="c.TIN"></h4>
+        </div>
+        <div class="col-sm-6">
+            <h5 class="font-bold"></h5>
+        </div>
+    </article>
+</div>

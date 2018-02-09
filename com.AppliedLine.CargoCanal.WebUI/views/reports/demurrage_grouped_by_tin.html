@@ -1,0 +1,44 @@
+﻿<div class="table-responsive">
+    <table id="report_table" class="display table table-condensed table-bordered">
+        <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
+        <thead>
+            <tr>
+                <th class="text-center">Company</th>
+                <th class="text-center">Phone</th>
+                <th class="text-center">Bill</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Discharged</th>
+                <th class="text-center">Days Accum.</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr ng-repeat="d in report.data" ng-class="d.DemurrageStatus == 'Inactive'? '': 'text-danger'">
+                <td>{{d.CompanyName}}</td>
+                <td>{{d.Telephone}}</td>
+                <td>{{d.BillNumber}}</td>
+                <td>{{d.DemurrageStatus}}</td>
+                <td>{{d.StatusDate | date:'dd MMM yyyy'}}</td>
+                <td>{{d.DemurrageDays | number:0}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right" colspan="5">Total Accumulated Demurrage (Days)</th>
+                <th class="text-center">{{report.getTotal(report.data, 'DemurrageDays')| number:0}} days</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    setTimeout(function () {
+        $.extend($.fn.dataTable.defaults, {
+            dom: 'B<"clear">lfrtip',
+            buttons: ['excel', 'pdf', 'print']
+        });
+
+        $("#report_table").DataTable();
+    }, 0);
+</script>
+
+<!--<canvas id="reportChart"></canvas>-->

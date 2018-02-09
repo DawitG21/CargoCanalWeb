@@ -1,0 +1,79 @@
+<div ui-view>
+    <div class="jumbotron text-center home-background">
+        <h1>Ethiopian Maritime</h1>
+        <h3>Quick and easy service.</h3>
+        <div class="form-inline">
+            <div class="input-group">
+                <input type="search" class="form-control" data-i18n-attr="_EnterTrackingNumber_|placeholder"
+                       data-ng-model="TrackingNumber" />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" data-ng-click="track(TrackingNumber)" data-i18n="_Track_"></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 text-center">
+        <div class="col-xs-12" data-ng-hide="Login.UserName.length > 0">
+            <h3 data-i18n="_GetStarted_"></h3>
+        </div>
+        <div class="col-xs-12 margin-bottom-30" data-ng-hide="Login.UserName.length > 0">
+            <button ui-sref="registertype" data-i18n="_Register_" class="btn btn-primary button-square-lg"></button>
+            <button ui-sref="login" data-i18n="_Login_" class="btn btn-primary button-square-lg"></button>
+        </div>
+        <!--<h4>Manage Imports and Exports</h4>-->
+        <!--<p>
+            <button ui-sref="register" data-i18n="_Register_" class="btn btn-primary"></button> <span data-i18n="_GetStarted_"></span>
+            <br /><br />
+            <button ui-sref="login" data-i18n="_Login_" class="btn btn-primary"></button> <span data-i18n="_IfAlreadyAMember_"></span>
+        </p>
+
+        <ul class="list-unstyled">
+            <li>
+                <span class="glyphicon glyphicon-check text-info"></span>
+                <span data-i18n="_HomeNotes1_"></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-check text-info"></span>
+                <span data-i18n="_HomeNotes2_"></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-check text-info"></span>
+                <span data-i18n="_HomeNotes3_"></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-check text-info"></span>
+                <span data-i18n="_HomeNotes4_"></span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-check text-info"></span>
+                <span data-i18n="_HomeNotes5_"></span>
+            </li>
+        </ul>-->
+    </div>
+    <div class="row text-center">
+        <div class="col-xs-6 col-sm-3">
+            <div class="glyph-pads margin-bottom-15">
+                <span class="glyphicon glyphicon-import" style="font-size: 3em;"></span>
+                <h3 data-i18n="_HomeNotes1_"></h3>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div class="glyph-pads margin-bottom-15">
+                <span class="glyphicon glyphicon-export" style="font-size: 3em;"></span>
+                <h3 data-i18n="_HomeNotes2_"></h3>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div class="glyph-pads margin-bottom-15">
+                <span class="glyphicon glyphicon-signal" style="font-size: 3em;"></span>
+                <h3 data-i18n="_HomeNotes4_"></h3>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-3">
+            <div class="glyph-pads margin-bottom-15">
+                <span class="glyphicon glyphicon-record" style="font-size: 3em;"></span>
+                <h3 data-i18n="_HomeNotes3_"></h3>
+            </div>
+        </div>
+    </div>
+</div>

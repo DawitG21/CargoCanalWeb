@@ -1,0 +1,81 @@
+<ul class="nav nav-tabs">
+    <li role="presentation">
+        <a ui-sref="dashboard" data-i18n="_ShipmentsOnVoyage_"></a>
+    </li>
+    <li role="presentation" ui-sref-active="active">
+        <a ui-sref="dashboard.customsclearance" data-i18n="_AwaitingCustomsClearance_"></a>
+    </li>
+    <li role="presentation" ui-sref-active="active">
+        <a ui-sref="dashboard.customsdispatch" data-i18n="_AwaitingDispatch_"></a>
+    </li>
+    <li role="presentation" ui-sref-active="active">
+        <a ui-sref="dashboard.customsinspection" data-i18n="_AwaitingCustomsInspection_"></a>
+    </li>
+</ul>
+
+<h3 data-i18n="_AwaitingCustomsInspectionSub1_"></h3>
+<p data-i18n="_AwaitingCustomsInspectionSub2_"></p>
+<div class="form-inline">
+    <input type="search" class="form-control" data-ng-model="searchText" data-i18n-attr="_Search_|placeholder" />
+    <button type="button" class="btn btn-primary"
+            ng-click="getDispatchedImports()">
+        <span class="glyphicon glyphicon-refresh"></span>
+    </button>
+</div>
+<hr />
+<div>
+    <div data-table="table-svr">
+        <table class="table table-responsive" data-ng-show="dispatchedImports.length > 0">
+            <thead>
+                <tr>
+                    <th class="table-header"></th>
+                    <th class="table-header" ng-click="sortData('BoL')">
+                        <div class="inline-block">BoL <span ng-class="getSortClass('BoL')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('BoLDate')">
+                        <div class="inline-block">BoL Date <span ng-class="getSortClass('BoLDate')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('Expected')">
+                        <div class="inline-block">Expected <span ng-class="getSortClass('Expected')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('Dispatched')">
+                        <div class="inline-block">Dispatched <span ng-class="getSortClass('Dispatched')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('Description')">
+                        <div class="inline-block">Description <span ng-class="getSortClass('Description')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('Cargo')">
+                        <div class="inline-block">Cargo <span ng-class="getSortClass('Cargo')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('SubCargo')">
+                        <div class="inline-block">Sub Cargo <span ng-class="getSortClass('SubCargo')"></span></div>
+                    </th>
+                    <th class="table-header" ng-click="sortData('Agent')">
+                        <div class="inline-block">Agent <span ng-class="getSortClass('Agent')"></span></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in dispatchedImports | orderBy: sortColumn: reverseSort | filter : searchText">
+                    <td>
+                        <a href="" ng-click="initCInspected(r.ImportExportID, r.BoL)">
+                            <span class="glyphicon glyphicon-bed"></span>
+                        </a>
+                        <a href="">
+                            <span class="glyphicon glyphicon-alert"></span>
+                        </a>
+                    </td>
+                    <td>{{r.BoL}}</td>
+                    <td>{{r.BoLDate | date : "yyyy-MM-dd"}}</td>
+                    <td>{{r.Expected | date : "yyyy-MM-dd"}}</td>
+                    <td>{{r.Dispatched | date : "yyyy-MM-dd"}}</td>
+                    <td>{{r.Description}}</td>
+                    <td>{{r.Cargo}}</td>
+                    <td>{{r.SubCargo}}</td>
+                    <td>{{r.Agent}} {{r.Phone}} {{r.Email}} {{r.Company}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1 data-ng-hide="dispatchedImports.length > 0" class="text-center" data-i18n="_NoDocument_"></h1>
+</div>

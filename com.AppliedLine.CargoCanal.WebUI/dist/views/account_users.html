@@ -1,0 +1,17 @@
+<section class="row">
+    <div class="col-md-12">
+        <h3>Manage Users</h3>
+        <h4>{{User.Company.CompanyName}}</h4>
+        <h6 class="font-bold">Add, edit or disable users. Add or edit roles.</h6>
+    </div>
+</section>
+
+<section class="row margin-bottom-30">
+    <div class="col-sm-12 toolbox">
+        <a class="pointer" ng-click="account.users.add()"><span class="glyphicon glyphicon-plus-sign"></span> Add User</a>
+        <a class="pointer" ng-click="account.roles.add()"><span class="glyphicon glyphicon-plus-sign"></span> Add Role</a>
+        <a class="pointer" ng-click="account.users.getUsers()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a>
+    </div>
+</section>
+
+<dir-manage-users></dir-manage-users>

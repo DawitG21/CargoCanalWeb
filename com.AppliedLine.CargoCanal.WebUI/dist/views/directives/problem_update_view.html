@@ -1,0 +1,100 @@
+<div class="fullscreen" ng-show="problem.openWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="problem.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-heading text">
+                            Problems
+                            <span ng-if="problem.importExport.Bill">for {{problem.importExport.Bill}}</span>
+                            <span ng-if="problem.importExport.WayBill">for {{problem.importExport.WayBill}}</span>
+                        </h3>
+                    </div>
+
+                    <section>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="btn btn-default"
+                                        ng-click="problem.add()"
+                                        ng-hide="isNotFF || problem.importExport.Completed || problem.importExport.Terminated">
+                                    Add Problem
+                                </button>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <form name="formproblem" class="row insert-box" ng-show="problem.showFilters" novalidate>
+                            <div class=col-sm-6>
+                                <div class="form-group">
+                                    <label for="Problem">Problem</label>
+                                    <select id="Problem" name="Problem" class="form-control" ng-model="problem.newProblem.ProblemID" required>
+                                        <option ng-repeat="p in problems" value="{{p.ID}}">{{p.ProblemName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="ProblemDate">Problem Date</label>
+                                    <div class="form-group">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <dir-datepicker dt="problem.newProblem.ProblemDate" required></dir-datepicker>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <textarea placeholder="Type a message about the problem"
+                                              class="form-control"
+                                              ng-model="problem.newProblem.Messages[0].Message"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" ng-click="problem.save()" ng-disabled="formproblem.$invalid">Save</button>
+                                    <button type="reset" class="btn btn-default" ng-click="problem.hideFilters()">Cancel</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+                    
+                    <div class="row position-relative" ng-repeat="d in problem.data" ng-class="d.IsResolved? '' : 'text-danger'">
+                        <div class="col-xs-1">
+                            <button type="button" class="close" aria-label="Close" title="Delete"
+                                    ng-click="problem.delete(d)"
+                                    ng-if="problem.data.length > 0 && $index === 0 && !(isNotFF || d.IsResolved || problem.importExport.Completed || problem.importExport.Terminated)">
+                                <span class="h2" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="col-xs-11">
+                            <div class="col-xs-10 col-sm-8 padding-left-0">
+                                <h5>{{d.ProblemName}}</h5>
+                                <div ng-repeat="m in d.Messages">
+                                    <h5>{{m.Message}}</h5>
+                                    <h5><span class="glyphicon glyphicon-time"></span> {{m.DateInserted | date : 'dd MMM yyyy hh:mm a Z'}}</h5>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-2 col-sm-4 mobile-anchor-right">
+                                <h5 class="float-right text-danger">{{d.ProblemDate | date : 'dd MMM yyyy'}}</h5>
+                                <h5 class="float-right text-success" ng-if="d.IsResolved">{{d.ResolvedDate | date : 'dd MMM yyyy'}}</h5>
+                                <button ng-if="!d.IsResolved && !isNotFF" class="btn btn-default float-right" ng-click="problem.resolve(d)">Resolve</button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>

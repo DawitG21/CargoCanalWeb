@@ -1,0 +1,55 @@
+﻿<br />
+<div class="form-group">
+    <label data-i18n="_CustomsBrokerEmail_"></label>
+    <div class="input-group">
+        <input type="text" pattern="[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}"
+               class="form-control"
+               ng-model="CustomsBrokerClearable.customsbrokerusername"
+               ng-disabled="!editCustomsBroker" />
+        <span class="input-group-btn">
+            <button type="button" class="btn btn-danger" data-ng-click="editCustomsBroker = false" ng-show="editCustomsBroker">
+                <span class="glyphicon glyphicon-minus-sign"></span>
+            </button>
+            <button type="button" class="btn btn-success" data-ng-click="updateCustomsBrokerUserName()" ng-show="editCustomsBroker">
+                <span class="glyphicon glyphicon-floppy-saved"></span>
+            </button>
+            <button type="button" class="btn btn-primary" data-ng-click="editCustomsBroker = true" ng-hide="editCustomsBroker">
+                <span class="glyphicon glyphicon-edit"></span>
+            </button>
+        </span>
+    </div>
+</div>
+<!--<div class="col-xs-12 col-md-12 col-lg-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Customs Clearing Broker <button class="pull-right btn-default" ng-click="flgAllowChangingCustomsBroker=true">
+                    <span class="glyphicon glyphicon-edit"></span>
+                </button>
+            </h3>
+
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="customsBrokerUserNameDir">Broker Username</label>
+                <input type="text" class="form-control" name="customsBrokerUserNameDir"
+                       ng-model="CustomsBrokerClearable.customsbrokerusername" />
+            </div>
+        </div>
+        <div class="panel-footer" ng-show="flgAllowChangingCustomsBroker" ng-hide="!flgAllowChangingCustomsBroker">
+            <div class="form-group">
+                <label for="btnUpdateCustomsBrokerUserName">Hit the Update button to commit the changes</label>
+                <button id="btnUpdateCustomsBrokerUserName"
+                        ng-click="updateCustomsBrokerUserName()">
+                    Update
+                </button>
+                <div class="col-xs-12" ng-show="flgCCBLoading">
+                    <img ng-src="../../images/loading.gif" />
+                </div>
+                <div class="col-xs-12" ng-show="CustomsBrokerClearableProcessStatus.length > 0">
+                    {{CustomsBrokerClearableProcessStatus}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

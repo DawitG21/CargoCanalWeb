@@ -1,0 +1,84 @@
+<div class="row margin-0 margin-bottom-15">
+    <div class="col-xs-6 col-md-2">
+        <div class="dashboard-pad pad-blue" ui-sref="import">
+            <h1>{{dashboard.import.data.Total | numberparse}}</h1>
+            <h4>IMPORTS</h4>
+            <h5 class="dashboard-caption">
+                <span class="color-darkred font-bold-600 pointer" ui-sref="import" title="Pending">{{dashboard.import.data.PercentPending}} %</span>
+                <span class="pull-right font-bold-600 pointer" ui-sref="import" title="Completed">{{dashboard.import.data.PercentCompleted}} %</span>
+            </h5>
+        </div>
+    </div>
+
+    <div class="col-xs-6 col-md-2">
+        <div class="dashboard-pad" ui-sref="export">
+            <h1>{{dashboard.export.data.Total | numberparse}}</h1>
+            <h4>EXPORTS</h4>
+            <h5 class="dashboard-caption">
+                <span class="color-darkred font-bold-600 pointer" ui-sref="export">{{dashboard.export.data.PercentPending}} %</span>
+                <span class="pull-right font-bold-600 pointer" ui-sref="export">{{dashboard.export.data.PercentCompleted}} %</span>
+            </h5>
+        </div>
+    </div>
+</div>
+<div class="row margin-0">
+    <div class="col-md-6">
+        <div class="analytics-box">
+            <h3><span class="fa fa-bar-chart"></span> Shipments Analytics</h3>
+            <h6>Last 100 days import / export</h6>
+            <hr />
+            <canvas id="canvas1" width="300" height="200"></canvas>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="analytics-box">
+            <h3><span class="fa fa-bar-chart"></span> Demurrage Analytics</h3>
+            <h6>Last 60 days demurrage</h6>
+            <hr />
+            <canvas id="canvas2" width="300" height="200"></canvas>
+        </div>
+    </div>
+</div>
+<!--<div class="row margin-0">
+    <div class="col-md-6">
+        <div class="analytics-box">
+            <h3><span class="fa fa-map-marker"></span> Vessels Analytics</h3>
+            <h6>Inbound shipments on voyage</h6>
+            <hr />
+            <div id="map" class="map"></div>
+        </div>
+    </div>
+</div>
+<script>
+    function initMap() {
+        var latLngArray = [
+            { lat: -25.363, lng: 131.044 },
+            { lat: 9.081999, lng: 8.675276999999999 },
+            { lat: 9.145000000000001, lng: 40.489673 },
+            { lat: 20.593684, lng: 78.96288 }
+        ];
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 1,
+            center: { lat: 0, lng: 0 },
+            mapTypeControl: false,
+            scrollwheel: false,
+            zoomControl: false,
+            mapTypeId: 'hybrid' //terrain, hybrid, roadmap, satellite
+        });
+
+        //window.eqfeed_callback = function (results) {
+        for (var i = 0; i < latLngArray.length; i++) {
+            var marker = new google.maps.Marker({
+                position: latLngArray[i],
+                //label: 'ET',
+                map: map
+            });
+        }
+        //}
+
+    }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCwTw8Tyx3_bPBoZ43MXVDhY7TRnPvXl7Y&callback=initMap">
+</script>-->

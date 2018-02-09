@@ -1,0 +1,1337 @@
+[
+  {
+    "key": "_NoDocument_",
+    "value": "አሁን ምንም ዶክመት የለም",
+    "description": "No Document right now text"
+  },
+  {
+    "key": "_Success_",
+    "value": "ተሳክቷል",
+    "description": "Success text"
+  },
+  {
+    "key": "_SuccessUpdate_",
+    "value": "ምዝገባዉ ተሳክቷል.",
+    "description": "Record updated successfully. text"
+  },
+  {
+    "key": "_DischargedConfirmationText_",
+    "value": "እርግተኛ ነህ ይህ  ጭነት በ ቢል ኦፍ ሎዲንግ እንዲራገፍ ትፈልጋለህ",
+    "description": "Are you sure you want to discharge this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_ClearanceConfirmationText_",
+    "value": "ይሄን ሺፕመነተ  በ ቢል ኦፍ ሎዲንግ ክሊር እንዲደረግ እርግጠኛ ነህ",
+    "description": "Are you sure you want to clear this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_InspectedConfirmationText_",
+    "value": "ለዚህ ጭነት የግምሩክ ምርመራ በ ቢል ኦፍ ሎዲግ መጠናቀቁን እርግጠኛ ነህ",
+    "description": "Are you sure customs inspection completed for this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_DispatchedConfirmationText_",
+    "value": "እርግጠኛ ነህ ይሀ ጭነት በ ቢል ኦፍ ሎዲንግ እንዲላክ",
+    "description": "Are you sure you want to dispatch this shipment with Bill of Lading text"
+  },
+  {
+    "key": "_CustomsClearing_",
+    "value": "ከስተምስ ክሊሪንግ",
+    "description": "Customs Clearing text"
+  },
+  {
+    "key": "_ShipmentsOnVoyage_",
+    "value": "ጭነት በጉዞ ላይ",
+    "description": "Shipments On Voyage text"
+  },
+  {
+    "key": "_ShipmentsOnVoyageSub2_",
+    "value": "ሁሉም ጭነቶች በመድረስ ላይ",
+    "description": "All shipments due to arrive text"
+  },
+  {
+    "key": "_AwaitingCustomsClearance_",
+    "value": "ከስተምስ ክሊራንስ በመጠበቅ ላይ",
+    "description": "Awaiting Customs Clearance text"
+  },
+  {
+    "key": "_AwaitingCustomsClearanceSub1_",
+    "value": "ጭነት ደርሷል",
+    "description": "Shipments Arrived text"
+  },
+  {
+    "key": "_AwaitingCustomsClearanceSub2_",
+    "value": "ሁሉም ጭነት በወደብ ላይ ተራግፏል",
+    "description": "All shipments discharged at destination port text"
+  },
+  {
+    "key": "_AwaitingDispatch_",
+    "value": "እስኪረገፍ  እየተጠበቀ ነዉ",
+    "description": "Awaiting Dispatch text"
+  },
+  {
+    "key": "_AwaitingDispatchSub1_",
+    "value": "ጭነት ለማራገፍ ዝግጁ ነዉ",
+    "description": "Shipments Ready For Dispatch text"
+  },
+  {
+    "key": "_AwaitingDispatchSub2_",
+    "value": "ሁሉም ጭነቶች ለመራገፍ ዝግጁ ናቸዉ",
+    "description": "All shipments ready to be dispatched text"
+  },
+  {
+    "key": "_AwaitingCustomsInspection_",
+    "value": "ከስተምስ ምርመራ በመጠበቅ ላይ",
+    "description": "Awaiting Customs Inspection text"
+  },
+  {
+    "key": "_AwaitingCustomsInspectionSub1_",
+    "value": "ጭነት ለምርመራ ተዘጋጅቷል",
+    "description": "Shipments Ready for Inspection text"
+  },
+  {
+    "key": "_AwaitingCustomsInspectionSub2_",
+    "value": "ሁሉም ጭነት ተራግፎ ለምርመራ ዝግጁ ነዉ",
+    "description": "All shipments dispached and ready for inspection text"
+  },
+  {
+    "key": "_AccountType_",
+    "value": "አካዉንት ታይፕ",
+    "description": "Account Type text"
+  },
+  {
+    "key": "_DefaultCustomsClearingBrokerEmail_",
+    "value": "የ ከስተም ደላሎች ኢ-ሜል",
+    "description": "Default Customs Clearing Broker Email text"
+  },
+  {
+    "key": "Importer",
+    "value": "አስመጪ",
+    "description": "Importer text"
+  },
+  {
+    "key": "Exporter",
+    "value": "ለኪ",
+    "description": "Exporter text"
+  },
+  {
+    "key": "Importer and Exporter",
+    "value": "አስመጪናላኪ",
+    "description": "Importer and Exporter text"
+  },
+  {
+    "key": "Customs Clearing",
+    "value": "ከስተም ክሊሪንግ",
+    "description": "Customs Clearing text"
+  },
+  {
+    "key": "Freight Forwarder",
+    "value": "Freight Forwarder",
+    "description": "Freight Forwarder text"
+  },
+  {
+    "key": "Others",
+    "value": "ሌሎች",
+    "description": "Others text"
+  },
+  {
+    "key": "Government",
+    "value": "መንግስት",
+    "description": "Government text"
+  },
+  {
+    "key": "_StatusSummaryReport_",
+    "value": "ስታተስ  ሰመሪ  ሪፖርት",
+    "description": "Status Summary Report text"
+  },
+  {
+    "key": "Reports By Status",
+    "value": "ሪፖርት ባይ ስታተስ",
+    "description": "Reports By Status text"
+  },
+  {
+    "key": "At Dry Port",
+    "value": "ደረቅ ወደብ ላይ",
+    "description": "At Dry Port text"
+  },
+  {
+    "key": "Cargo Delivered (CD 2) ***",
+    "value": "ጭነት ደርሷል (CD 2) ***",
+    "description": "Cargo Delivered (CD 2) *** text"
+  },
+  {
+    "key": "Cargo Dispatched (CD 1) ***",
+    "value": "ጭነት ተልኳል (CD 1) ***",
+    "description": "Cargo Dispatched (CD 1) *** text"
+  },
+  {
+    "key": "Cargo Ready for Loading (CRL) ***",
+    "value": "ጭነት ለመጓዝ ዝግጁ (CRL) ***",
+    "description": "Cargo Ready for Loading (CRL) *** text"
+  },
+  {
+    "key": "On Voyage ***",
+    "value": "በጉዞ ላይ ***",
+    "description": "On Voyage *** text"
+  },
+  {
+    "key": "Under Custom Inspection (UC 1)",
+    "value": "በጉምሩክ ምርመራ ላይ (UC 1)",
+    "description": "Under Custom Inspection (UC 1) text"
+  },
+  {
+    "key": "Under Port Clearance (UPC) ***",
+    "value": "በወደብ ክሊራንስ ለይ (UPC) ***",
+    "description": "Under Port Clearance (UPC) *** text"
+  },
+  {
+    "key": "Arrived at Sea Port ***",
+    "value": "ወደብ ላይ ደርሷል ***",
+    "description": "Arrived at Sea Port *** text"
+  },
+  {
+    "key": "Awaiting Empty Container (AEC)",
+    "value": "በዶ ኮንቴነር በመጠበቅ ላይ (AEC)",
+    "description": "Awaiting Empty Container (AEC) text"
+  },
+  {
+    "key": "Awaiting Vessel (AV)",
+    "value": "የጭነት መኪና በመጠባበቅ ላይ (AV)",
+    "description": "Awaiting Vessel (AV) text"
+  },
+  {
+    "key": "Container Terminal (CT)",
+    "value": "ኮንቴነር ማጠራቀሚያ (CT)",
+    "description": "Container Terminal (CT) text"
+  },
+  {
+    "key": "Submited DCT Port Terminal",
+    "value": "ወደ DCT ወደብ መጨረሻ የተላከ",
+    "description": "Submited DCT Port Terminal text"
+  },
+  {
+    "key": "Transport to Port ***",
+    "value": "ወደ  ወደብ ተጓጓጉዟል ***",
+    "description": "Transport to Port *** text"
+  },
+  {
+    "key": "Under Stuffing (UC)",
+    "value": "በመጫን ላይ (UC)",
+    "description": "Under Stuffing (UC) text"
+  },
+  {
+    "key": "Cargo Discharged",
+    "value": "ጭነት ተራግፏል",
+    "description": "Cargo Discharged text"
+  },
+  {
+    "key": "Cargo Loaded ***",
+    "value": "ጭነት ተጭኗል ***",
+    "description": "Cargo Loaded *** text"
+  },
+  {
+    "key": "Under Custom Clearance (UCC) ***",
+    "value": "በግምሩክ ማጣራት ስር (UCC) ***",
+    "description": "Under Custom Clearance (UCC) *** text"
+  },
+  {
+    "key": "_GrandAverage_",
+    "value": "አጠቃላይ አማካኝ",
+    "description": "Grand Average text"
+  },
+  {
+    "key": "_GrandTotal_",
+    "value": "አጠቃላይ ድምር",
+    "description": "Grand Total text"
+  },
+  {
+    "key": "_CargoWeightReport_",
+    "value": "የጭነት ክብደት ሪፖርት",
+    "description": "Cargo Weight Report text"
+  },
+  {
+    "key": "_CargoInTransitWeightReport_",
+    "value": "የጭነት የጉዞ ላይ ክብድት",
+    "description": "Cargo In Transit Weight Report text"
+  },
+  {
+    "key": "_TransitTimeReport_",
+    "value": "ማጓጓዝ የወሰደዉ ጊዜ ሪፖርት",
+    "description": "Transit Time Report text"
+  },
+  {
+    "key": "_ValRequired_",
+    "value": "ይህ ቦታ ባዶ መሆን አይችልም.",
+    "description": "This field is required text"
+  },
+  {
+    "key": "_ValInvalidEntry_",
+    "value": "ያስገቡት ስተት ነዉ.",
+    "description": "Entry is invalid text"
+  },
+  {
+    "key": "_ValTooShort_",
+    "value": "ያስገቡት ቃል በጣም አጭር ነዉ.",
+    "description": "Entry is too short text"
+  },
+  {
+    "key": "_ValTooLong_",
+    "value": "ያስገቡት ቃል በጣም ረጅም ነዉ.",
+    "description": "Entry is too long text"
+  },
+  {
+    "key": "_ValPasswordMismatch_",
+    "value": "ሚስጥር ቃሉ አንዳይነት አይደለም.",
+    "description": "Password does not match text"
+  },
+  {
+    "key": "_GetStarted_",
+    "value": "ለመጀመር",
+    "description": "Get started text"
+  },
+  {
+    "key": "_IfAlreadyAMember_",
+    "value": "አባል ከሆኑ",
+    "description": "if you are already a member text"
+  },
+  {
+    "key": "_HomeNotes1_",
+    "value": "የገቡ  እቃዎችን ሁኔታ መቆጣጠር",
+    "description": "Home page notes (manage imports ...) text"
+  },
+  {
+    "key": "_HomeNotes2_",
+    "value": "የተላኩ እቃዎችን ሁኔታ መቆጣጠር",
+    "description": "Home page notes (manage exports ...) text"
+  },
+  {
+    "key": "_HomeNotes3_",
+    "value": "በማጓጓዝ ላይ ችግር ካለ ያሰዉቁ",
+    "description": "Home page notes (report problems ...) text"
+  },
+  {
+    "key": "_HomeNotes4_",
+    "value": "የዘገየ ወይም የተበላሸ ካለ ሪፖርት ያድርጉ",
+    "description": "Home page notes (generate reports ...) text"
+  },
+  {
+    "key": "_HomeNotes5_",
+    "value": "እና ሌሎችም ተግባራት ...",
+    "description": "Home page notes (and more features) text"
+  },
+  {
+    "key": "_Home_",
+    "value": "መኖሪያ ቤት",
+    "description": "Home text"
+  },
+  {
+    "key": "_Register_",
+    "value": "ይመዝገቡ",
+    "description": "Register text"
+  },
+  {
+    "key": "_Dashboard_",
+    "value": "ዳሽ ቦርድ",
+    "description": "Dashboard text"
+  },
+  {
+    "key": "_CreateUser_",
+    "value": "Create User",
+    "description": "Create User Account text"
+  },
+  {
+    "key": "_AdminAccount_",
+    "value": "መለያ ፍጠር",
+    "description": "Admin Account text"
+  },
+  {
+    "key": "_CustomsClearingAccount_",
+    "value": "Customs Clearing Account",
+    "description": "Customs Clearing Account text"
+  },
+  {
+    "key": "_Next_",
+    "value": "ወደሚቀጥለው",
+    "description": "Next text"
+  },
+  {
+    "key": "_Submit_",
+    "value": "ያስተላልፉ",
+    "description": "Submit text"
+  },
+  {
+    "key": "_SignUp_",
+    "value": "ይመዝገቡ",
+    "description": "Sign Up text"
+  },
+  {
+    "key": "_Login_",
+    "value": "ይግቡ",
+    "description": "Login text"
+  },
+  {
+    "key": "_Logout_",
+    "value": "ይውጡ",
+    "description": "Logout text"
+  },
+  {
+    "key": "_TrackShipment_",
+    "value": "ዕቃዎን ይከታተሉ",
+    "description": "Track Shipment text"
+  },
+  {
+    "key": "_Track_",
+    "value": "ዕቃዎን »",
+    "description": "Track text"
+  },
+  {
+    "key": "_EnterTrackingNumber_",
+    "value": "ትራኪንግ ቁጥር ያስገቡ",
+    "description": "Enter tracking number text"
+  },
+  {
+    "key": "_EnterYourCredentials_",
+    "value": "ሚስጥር ቃል ያስገቡ",
+    "description": "Enter your credentials text"
+  },
+  {
+    "key": "_Email_",
+    "value": "ኢሜይል",
+    "description": "Email text"
+  },
+  {
+    "key": "_CustomerEmail_",
+    "value": "ደንበኛ ኢሜይል",
+    "description": "Customer's Email text"
+  },
+  {
+    "key": "_CustomsBrokerEmail_",
+    "value": "Customs Broker's Email",
+    "description": "Customs Broker's Email text"
+  },
+  {
+    "key": "_Password_",
+    "value": "ሚስጥር ቃል",
+    "description": "Password text"
+  },
+  {
+    "key": "_ConfirmPassword_",
+    "value": "ያረጋግጡ",
+    "description": "Confirm Password text"
+  },
+  {
+    "key": "_Credential_",
+    "value": "ክረደንሻል",
+    "description": "Credential text"
+  },
+  {
+    "key": "_Profile_",
+    "value": "ፕሮፋይል",
+    "description": "Profile text"
+  },
+  {
+    "key": "_Company_",
+    "value": "ኩባንያ",
+    "description": "Company text"
+  },
+  {
+    "key": "_FirstName_",
+    "value": "ስምዎ",
+    "description": "First Name text"
+  },
+  {
+    "key": "_MiddleName_",
+    "value": "የአባት ስም",
+    "description": "Middle Name text"
+  },
+  {
+    "key": "_LastName_",
+    "value": "የአያት ስም",
+    "description": "Last Name text"
+  },
+  {
+    "key": "_Phone_",
+    "value": "ስልክ",
+    "description": "Phone text"
+  },
+  {
+    "key": "_CompanyName_",
+    "value": "ካምፓኒ ስም",
+    "description": "Company Name text"
+  },
+  {
+    "key": "_CompanyType_",
+    "value": "ካምፓኒ አይነት",
+    "description": "Company Type text"
+  },
+  {
+    "key": "_Address_",
+    "value": "አድራሻ",
+    "description": "Address text"
+  },
+  {
+    "key": "_TownCity_",
+    "value": "ከተማ",
+    "description": "Town/City text"
+  },
+  {
+    "key": "_State_",
+    "value": "ክልል",
+    "description": "State text"
+  },
+  {
+    "key": "_POBox_",
+    "value": "ፖ.ሳ.ቁ",
+    "description": "PO Box text"
+  },
+  {
+    "key": "_HouseNo_",
+    "value": "የቤት ቁጥር",
+    "description": "House No text"
+  },
+  {
+    "key": "_Country_",
+    "value": "ሀገር",
+    "description": "Country text"
+  },
+  {
+    "key": "_ContactName_",
+    "value": "ኮንታክት ስም",
+    "description": "Contact Name text"
+  },
+  {
+    "key": "_ContactMobile_",
+    "value": "ኮንታክት ሞባይል",
+    "description": "Contact Mobile text"
+  },
+  {
+    "key": "_Website_",
+    "value": "ድረ ገጽ",
+    "description": "Website text"
+  },
+  {
+    "key": "_LicenseNumber_",
+    "value": "ሰሌዳ",
+    "description": "License Number text"
+  },
+  {
+    "key": "_LicenseUnder_",
+    "value": "ሰሌዳ ባለቤት",
+    "description": "License Under text"
+  },
+  {
+    "key": "_LicenseIssuedDate_",
+    "value": "ሰሌዳ ቀን",
+    "description": "License Issued Date text"
+  },
+  {
+    "key": "_LastRenewedDate_",
+    "value": "ሰሌዳ የታደሰበት ቀን",
+    "description": "Last Renewed Date text"
+  },
+  {
+    "key": "_LoadingMessage_",
+    "value": "በመጫን ላይ ... እባክዎ ይጠብቁ",
+    "description": "Message while fetching resources from the server."
+  },
+  {
+    "key": "_LogoutMessage_",
+    "value": "ለደንነትዎ ጥንቃቄ ሎግአውት ይንኩ",
+    "description": "Message on logout page after logout menu is clicked."
+  },
+  {
+    "key": "_LoginMessage_",
+    "value": "እየገባ ነው…….ትንሽ ይቆዩ",
+    "description": "Message on login page after login button is clicked."
+  },
+  {
+    "key": "_TypeYourPassword_",
+    "value": "የይለፍ ቃልዎን ይተይቡ",
+    "description": "Type your password message."
+  },
+  {
+    "key": "_Hi_",
+    "value": "ሃይ",
+    "description": "Hi user@mail.com on user account page."
+  },
+  {
+    "key": "_YourAccountInfo_",
+    "value": "አካውንት እንፎርሜሽን",
+    "description": "Label on user account page below Hi."
+  },
+  {
+    "key": "_LoginNameAndPassword_",
+    "value": "ሎግ ስም እና የሚስጥር ቃል",
+    "description": "Panel header on user account page."
+  },
+  {
+    "key": "_AgentInformation_",
+    "value": "ወኪል መረጃ",
+    "description": "Panel header on user account page."
+  },
+  {
+    "key": "_CustomerInformation_",
+    "value": "የደንበኛ መረጃ",
+    "description": "Panel header on customer account page."
+  },
+  {
+    "key": "_CompanyDetails_",
+    "value": "ካምፓኒ ድቴል",
+    "description": "Panel header on user account page"
+  },
+  {
+    "key": "_AddMoreCompanyDetails_",
+    "value": "ተማሪ ካምፓኒ ድቴል (ግዴታ ያልሆነ)",
+    "description": "Button text to add more company details"
+  },
+  {
+    "key": "_HideCompanyDetails_",
+    "value": "ሸፍን ካምፓኒ ድቴል",
+    "description": "Button text to hide company details"
+  },
+  {
+    "key": "_UpdateChanges_",
+    "value": "አፕዴት ቼንጅ",
+    "description": "Update Changes text"
+  },
+  {
+    "key": "_UpdatingChanges_",
+    "value": "ለውጦች በማዘመን ላይ. ቆይ በናተህ ...",
+    "description": "Updating Changes text"
+  },
+  {
+    "key": "_CompletingRegistration_",
+    "value": "ምዝገባ በማጠናቀቅ ላይ. ቆይ በናተህ ...",
+    "description": "Completing Registration text"
+  },
+  {
+    "key": "_DashboardCompanyInfo_",
+    "value": "የካምፓኒ ትራንዛክሽን ይመልከቱ",
+    "description": "Text under the company name"
+  },
+  {
+    "key": "_Imports_",
+    "value": "ገቢ ዕቃ",
+    "description": "Imports text"
+  },
+  {
+    "key": "_Exports_",
+    "value": "ወጪ ዕቃ",
+    "description": "Exports text"
+  },
+  {
+    "key": "_Reports_",
+    "value": "ሪፖርቶች",
+    "description": "Reports text"
+  },
+  {
+    "key": "_CustomReports_",
+    "value": "የተጣራ ሪፖርት",
+    "description": "Custom Reports text"
+  },
+  {
+    "key": "_PendingImports_",
+    "value": "የገቢ ዕቃ እየተጠበቀ ነው",
+    "description": "Pending Imports text"
+  },
+  {
+    "key": "_PendingExports_",
+    "value": "የወጢ ዕቃ እየተጠበቀ ነው",
+    "description": "Pending Exports text"
+  },
+  {
+    "key": "_ProblemsImports_",
+    "value": "የገቢ ዕቃ ችግሮች",
+    "description": "Problems Imports text"
+  },
+  {
+    "key": "_ProblemsExports_",
+    "value": "የወጢ ዕቃ ችግሮች",
+    "description": "Problems Exports text"
+  },
+  {
+    "key": "_TotalDemurrage_",
+    "value": "ጠቅላላ ድምሬጅ",
+    "description": "Total Demurrage text"
+  },
+  {
+    "key": "_Refresh_",
+    "value": "ርፍሬሽ",
+    "description": "Refresh text"
+  },
+  {
+    "key": "_AddImport_",
+    "value": "ገቢ ዕቃ ጠምር",
+    "description": "Add Import text"
+  },
+  {
+    "key": "_TotalImports_",
+    "value": "ጠቅላላ ገቢ ዕቃ",
+    "description": "Total Imports text"
+  },
+  {
+    "key": "_DemurrageImports_",
+    "value": "ገቢ ዕቃ ድምሬጅ",
+    "description": "Demurrage Imports text"
+  },
+  {
+    "key": "_AddExport_",
+    "value": "ወጢ ዕቃ ጠምር",
+    "description": "Add Export text"
+  },
+  {
+    "key": "_TotalExports_",
+    "value": "ጠቅላላ ውጢ ዕቃ",
+    "description": "Total Exports text"
+  },
+  {
+    "key": "_DemurrageExports_",
+    "value": "የወጢ ዕቃ ድምሬጅ",
+    "description": "Demurrage Exports text"
+  },
+  {
+    "key": "_Statuses_",
+    "value": "ስታተስ",
+    "description": "Statuses text"
+  },
+  {
+    "key": "_Problems_",
+    "value": "ችግር",
+    "description": "Problems text"
+  },
+  {
+    "key": "_Problem_",
+    "value": "ችግር",
+    "description": "Problem text"
+  },
+  {
+    "key": "_ProblemDate_",
+    "value": "ችግር ቀን",
+    "description": "Problem Date text"
+  },
+  {
+    "key": "_Date_",
+    "value": "ቀን",
+    "description": "Date text"
+  },
+  {
+    "key": "_AddProblem_",
+    "value": "ችግር አክል",
+    "description": "Add Problem text"
+  },
+  {
+    "key": "_Created_",
+    "value": "የተፈጠረ",
+    "description": "Created text"
+  },
+  {
+    "key": "_Occured_",
+    "value": "ተከስቷል",
+    "description": "Occured text"
+  },
+  {
+    "key": "_Resolved_",
+    "value": "የተፈታ",
+    "description": "Resolved text"
+  },
+  {
+    "key": "_ReportProblemsTitle_",
+    "value": "የወጢ ዕቃ  ችግር ዶኩመንት",
+    "description": "Documents w/ Problems Report title"
+  },
+  {
+    "key": "_ReportPendingDocumentsTitle_",
+    "value": "ዶኩመንት ሪፖርት እየጠበቀ ነው",
+    "description": "Pending Documents Report title"
+  },
+  {
+    "key": "_ReportDemurrageTitle_",
+    "value": "ድመሬጅ ሪፖርት",
+    "description": "Demurrage Report title"
+  },
+  {
+    "key": "_ReportFilterToggle_",
+    "value": " ለመሸፈን ይንኩ/ለማሳየት  ይንኩ",
+    "description": "Report filter toggle"
+  },
+  {
+    "key": "_Go_",
+    "value": "ሂድ",
+    "description": "Report filter Go button"
+  },
+  {
+    "key": "_Close_",
+    "value": "ገጠመ",
+    "description": "Close button"
+  },
+  {
+    "key": "_Cancel_",
+    "value": "ሰርዝ",
+    "description": "Cancel text"
+  },
+  {
+    "key": "_DocumentType_",
+    "value": "የሰነድ አይነት",
+    "description": "Report filter Document Type text"
+  },
+  {
+    "key": "_From_",
+    "value": "ከ",
+    "description": "Report filter From text"
+  },
+  {
+    "key": "_To_",
+    "value": "ወደ",
+    "description": "Report filter To text"
+  },
+  {
+    "key": "_RecordsFetched_",
+    "value": "ሬኮርድ ተገኘ.",
+    "description": "Message displayed with reports pull"
+  },
+  {
+    "key": "_SearchInvalid_",
+    "value": "ፍለጋው ትክክል አይደለም",
+    "description": "Message displayed if reports returns 404"
+  },
+  {
+    "key": "_Search_",
+    "value": "ፍለጋ",
+    "description": "Search text"
+  },
+  {
+    "key": "_ConnectionBroken_",
+    "value": "ኮኔክሽን የለም",
+    "description": "Message displayed if reports return -1"
+  },
+  {
+    "key": "_DaysAccumulated_",
+    "value": "ጠቅላላ ቐኖች",
+    "description": "days accumulated text"
+  },
+  {
+    "key": "_CargoDischarged_",
+    "value": "ዕቃው ወረደ",
+    "description": "Cargo Discharged text"
+  },
+  {
+    "key": "_Consignee_",
+    "value": "ባለቤት",
+    "description": "Consignee text"
+  },
+  {
+    "key": "_Carrier_",
+    "value": "የመርከብ ባለቤት",
+    "description": "Carrier text"
+  },
+  {
+    "key": "_Item_",
+    "value": "ዕቃ",
+    "description": "Item text"
+  },
+  {
+    "key": "_Detail_",
+    "value": "ደቴል",
+    "description": "Detail text"
+  },
+  {
+    "key": "_Cost_",
+    "value": "ዋጋ",
+    "description": "Cost text"
+  },
+  {
+    "key": "_ReferenceNo_",
+    "value": "ሪፈራንስ ቁጥር.",
+    "description": "Reference No. text"
+  },
+  {
+    "key": "_DateInitiated_",
+    "value": "ስራው የተጀመረበት ቀን",
+    "description": "Date Initiated text"
+  },
+  {
+    "key": "_TypeOfImport_",
+    "value": "አስመጣ አይነት",
+    "description": "Type Of Import text"
+  },
+  {
+    "key": "_TypeOfExport_",
+    "value": "የወጥ እቃ ምክንያት",
+    "description": "Type Of Export text"
+  },
+  {
+    "key": "_ModeOfTransport_",
+    "value": "የመጓጓዣ አይነት",
+    "description": "Mode Of Transport text"
+  },
+  {
+    "key": "_BillOfLading_",
+    "value": "ቢል ኦፍ ሌዲንግ",
+    "description": "Bill Of Lading text"
+  },
+  {
+    "key": "_LoadingDate_",
+    "value": "የተጣነበት ቀን",
+    "description": "Loading Date (date on BoL) text"
+  },
+  {
+    "key": "_DeliveryTerm_",
+    "value": "ደሊቨሪ ተርም",
+    "description": "Delivery Term text"
+  },
+  {
+    "key": "_ShippingInstructionNo_",
+    "value": "ሺፕፒንግ ኢንስትራክሽን ቁጥር",
+    "description": "Shipping Instruction No. text"
+  },
+  {
+    "key": "_ShippingInstructionDate_",
+    "value": "ሺፕፒንግ ኢንስትራክሽን ቀን",
+    "description": "Shipping Instruction Date text"
+  },
+  {
+    "key": "_AirWayBill_",
+    "value": "ዌይ ቢል",
+    "description": "Way Bill text"
+  },
+  {
+    "key": "_TruckWayBill_",
+    "value": "ዌይ ቢል",
+    "description": "Way Bill text"
+  },
+  {
+    "key": "_WayBillDate_",
+    "value": "ዌይ ቢል ቀን",
+    "description": "Way Bill Date text"
+  },
+  {
+    "key": "_DeclarationNo_",
+    "value": "ደክለሬሽን ቁጥር",
+    "description": "Declaration No. text"
+  },
+  {
+    "key": "_DeclarationDate_",
+    "value": "ደክለሬሽን ቀን",
+    "description": "Declaration Date text"
+  },
+  {
+    "key": "_ProductOrigin_",
+    "value": "ፕሮዳክት ኦሪጅን",
+    "description": "Product Origin text"
+  },
+  {
+    "key": "_StuffingLocation_",
+    "value": "የስታግክኝ ቦታ",
+    "description": "Stuffing Location text"
+  },
+  {
+    "key": "_ReceivedDate_",
+    "value": "የገባበት ቀን",
+    "description": "Received Date text"
+  },
+  {
+    "key": "_OriginalDocumentDate_",
+    "value": "ኦሪጅናል ዶኩመንት ቀን",
+    "description": "Original Document Date text"
+  },
+  {
+    "key": "_VesselAirline_",
+    "value": "መርከብ/አውሮፕላን",
+    "description": " Vessel/Airline text"
+  },
+  {
+    "key": "_VoyageFlightNo_",
+    "value": "ቮየጅ/በረራ ቁጥር",
+    "description": "Voyage/Flight No. text"
+  },
+  {
+    "key": "_CountryOfLoading_",
+    "value": "የተጣነበት ሀገር",
+    "description": "Country of Loading text"
+  },
+  {
+    "key": "_PortOfLoading_",
+    "value": "የተጣነበት ወደብ",
+    "description": "Port of Loading text"
+  },
+  {
+    "key": "_CountryOfDischarge_",
+    "value": "የተራገፈበት ሀገር",
+    "description": "Country of Discharge text"
+  },
+  {
+    "key": "_PortOfDischarge_",
+    "value": "የተራገፈበት ወደብ",
+    "description": "Port of Discharge text"
+  },
+  {
+    "key": "_CargoDischargeDate_",
+    "value": "የተራገፈበት ቀን",
+    "description": "Cargo Discharge Date text"
+  },
+  {
+    "key": "_Remark_",
+    "value": "አስተያየት",
+    "description": "Remark text"
+  },
+  {
+    "key": "_ItemOrderNo_",
+    "value": "የዕቃ ርደር ቁጥር",
+    "description": "Item Order No. text"
+  },
+  {
+    "key": "_CargoStatus_",
+    "value": "የጭነት ሁኔታ",
+    "description": "Cargo Status text"
+  },
+  {
+    "key": "_Cargo_",
+    "value": "ካርጎ",
+    "description": "Cargo text"
+  },
+  {
+    "key": "_SubCargo_",
+    "value": "ሰብ ካርጎ",
+    "description": "Sub Cargo text"
+  },
+  {
+    "key": "_GrossWeight_",
+    "value": "ጠቅላላ ክብደት",
+    "description": "Gross Weight text"
+  },
+  {
+    "key": "_NetWeight_",
+    "value": "የእቃው ክብደት",
+    "description": "Net Weight text"
+  },
+  {
+    "key": "_WeightUnit_",
+    "value": "የክብደት መለኪያ",
+    "description": "Weight Unit text"
+  },
+  {
+    "key": "_Volume_",
+    "value": "ቮልዩም",
+    "description": "Volume text"
+  },
+  {
+    "key": "_VolumeUnit_",
+    "value": "ይቮልዩም መለኪያ",
+    "description": "Volume Unit text"
+  },
+  {
+    "key": "_Quantity_",
+    "value": "ብዛት",
+    "description": "Quantity text"
+  },
+  {
+    "key": "_Dangerous_",
+    "value": "አደገኛ",
+    "description": "Dangerous text"
+  },
+  {
+    "key": "_Description_",
+    "value": "ዝርዝር",
+    "description": "Description text"
+  },
+  {
+    "key": "_StuffMode_",
+    "value": "ስታፍ ሞድ",
+    "description": "Stuff Mode text"
+  },
+  {
+    "key": "_Destination_",
+    "value": "መድረሻ",
+    "description": "Destination text"
+  },
+  {
+    "key": "_Completed_",
+    "value": "የተጠናቀቁ",
+    "description": "Completed text"
+  },
+  {
+    "key": "_MarkAsCompleted_",
+    "value": "ምልክት ተጠናቋል እንደ",
+    "description": "Mark as completed text"
+  },
+  {
+    "key": "_DocumentCompleted_",
+    "value": "የሰነድ ተጠናቋል",
+    "description": "Document completed text"
+  },
+  {
+    "key": "_TerminateDocument_",
+    "value": "ሰነድ ለማቋረጥ",
+    "description": "Terminate document text"
+  },
+  {
+    "key": "_Terminated_",
+    "value": "ተቋርጧል",
+    "description": "Terminated text"
+  },
+  {
+    "key": "_Terminate_",
+    "value": "ጪረሰ",
+    "description": "Terminate text"
+  },
+  {
+    "key": "_Status_",
+    "value": "ስታተስ",
+    "description": "Status text"
+  },
+  {
+    "key": "_AddStatus_",
+    "value": "ሁኔታ አክል",
+    "description": "Add Status text"
+  },
+  {
+    "key": "_StatusDate_",
+    "value": "ስታተስ ቀን",
+    "description": "Status Date text"
+  },
+  {
+    "key": "_Freight_",
+    "value": "ፍሬት",
+    "description": "Freight text"
+  },
+  {
+    "key": "_Insurance_",
+    "value": "ኢንሹራንስ",
+    "description": "Insurance text"
+  },
+  {
+    "key": "_InlandTransport_",
+    "value": "የመንገድ ምኌኌዣ",
+    "description": "Inland Transport text"
+  },
+  {
+    "key": "_PortStorageDemurrage_",
+    "value": "የወደብ ማስቀመጣ እና ድመሬጅ ዋጋ",
+    "description": "Port Storage Demurrage text"
+  },
+  {
+    "key": "_InlandStorage_",
+    "value": "አገር ውስጥ ማስቀመጣ ዋጋ",
+    "description": "Inland Storage text"
+  },
+  {
+    "key": "_PortHandling_",
+    "value": "የወደብ አገልግሎት ዋጋ",
+    "description": "Port Handling text"
+  },
+  {
+    "key": "_TruckDetention_",
+    "value": "የመኪና መታሰር ቅጣት",
+    "description": "Truck Detention text"
+  },
+  {
+    "key": "_DryPortCharge_",
+    "value": "የደረቅ ወደብ ዋጋ",
+    "description": "Dry Port Charge text"
+  },
+  {
+    "key": "_MaterialCost_",
+    "value": "ዕቃው የተገዛበት ዋጋ",
+    "description": "Material Cost text"
+  },
+  {
+    "key": "_OtherCharges_",
+    "value": "ሌላ ወጢ",
+    "description": "Other Charges text"
+  },
+  {
+    "key": "_TrackingDetails_",
+    "value": "ትራኪንግ ዝርዝሮች",
+    "description": "Tracking Details text"
+  },
+  {
+    "key": "_TrackingNumber_",
+    "value": "መከታተያ ቁጥር",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_TrackingAgentCustomerMessageL1_",
+    "value": "አጠቃላይ የክትትል ቁጥር ይህን ግብይት በጥብቅ ተገቢነት ነው እና እድገት ለማየት ጥቅም ላይ ይውላል.",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_TrackingAgentCustomerMessageL2_",
+    "value": "ሰነዱን በመፍጠር ላይ ሳለ አንተ ደንበኛ ኢሜይል ገብቶ ከሆነ, እነርሱ ደግሞ የኢሜይል ጋር ወደ ትግበራ በመግባት ይህን ሰነድ መከታተል አትችልም ነበር.",
+    "description": "Tracking Number text"
+  },
+  {
+    "key": "_AcceptTerminationOf_",
+    "value": "ሰነድ መቋረጥ ተቀበል",
+    "description": "Terminate text"
+  },
+  {
+    "key": "_BySelectingCheckboxMessage_",
+    "value": "ከታች ያለውን አመልካች ሳጥን በመምረጥ.",
+    "description": "phrase from either complete document, terminate document or other pages"
+  },
+  {
+    "key": "_ProcessNotReversedMessage_",
+    "value": "በዚህ ሂደት ሊቀለበስ አይችልም እባክዎ ልብ ይበሉ.",
+    "description": "phrase from either terminate document or other pages"
+  },
+  {
+    "key": "_AcceptCompletionOf_",
+    "value": "ሰነድ መጠናቀቅ ተቀበል",
+    "description": "Accept completion text"
+  },
+  {
+    "key": "_CompletedNotReversedMessage_",
+    "value": "ተጠናቋል ምልክት ተደርጎበታል ሰነዶች ሊቀለበስ አይችልም እባክዎ ልብ ይበሉ . ይሁን እንጂ , እነዚህ ሪፖርቶች ላይ የሚገኝ ይሆናል.",
+    "description": "phrase from either complete document, terminate document or other pages"
+  },
+  {
+    "key": "_NoteTheFollowing_",
+    "value": "የሚከተሉትን እባክዎ ልብ ይበሉ:",
+    "description": "Please note the following: text"
+  },
+  {
+    "key": "_ProblemsMustBeClosedMessage_",
+    "value": "ከዚህ ሰነድ ጋር የተጎዳኙ ሁሉም በመጠባበቅ ላይ ችግሮች መዘጋት አለበት.",
+    "description": "Message requesting the user to close problems text"
+  },
+  {
+    "key": "_StatusMandatoryMessage_",
+    "value": "ተጠናቋል እንደ ሰነዱን ምልክት ሊሆን አይችልም ያለ የሚከተሉት ሁኔታዎች የግዴታ ናቸው:",
+    "description": "Message requesting the user to fulfil mandatory statuses text"
+  },
+  {
+    "key": "_CloseProblem_",
+    "value": "ዝጋ ችግር",
+    "description": "Close Problem text"
+  },
+  {
+    "key": "_AcceptClosingProblem_",
+    "value": "መዝጊያ ችግር ተቀበል",
+    "description": "Accept termination text"
+  },
+  {
+    "key": "_HoweverCreateProblemMessage_",
+    "value": "ሆኖም ግን, የአሁኑን ሰነድ ጋር የተያያዘ አዲስ ችግር ሊፈጥር ይችላል.",
+    "description": "Message notifying the user could create a new problem after a previous problem is closed"
+  },
+  {
+    "key": "_RegistrationType_",
+    "value": "የምዝገባ አይነት",
+    "description": "Registration Type text"
+  },
+  {
+    "key": "_SelectRegistrationType_",
+    "value": "ይምረጡ ምዝገባ አይነት",
+    "description": "Select Registration Type text"
+  },
+  {
+    "key": "_Customer_",
+    "value": "ደምበኛ",
+    "description": "Customer text"
+  },
+  {
+    "key": "_Agent_",
+    "value": "ወኪል",
+    "description": "Agent text"
+  },
+  {
+    "key": "_GoToHomePage_",
+    "value": "መነሻ ገጽ ሂድ",
+    "description": "Go to home page text"
+  },
+  {
+    "key": "_AllDocuments_",
+    "value": "ሁሉም ሰነዶች",
+    "description": "All Documents text"
+  },
+  {
+    "key": "_WhyRegister_",
+    "value": "ለምንድን ነው ይመዝገቡ?",
+    "description": "Why Register? text"
+  },
+  {
+    "key": "_TrackAllYourShipmentMessage_",
+    "value": "የመከታተያ ቁጥር ያስገቡ ሳያስፈልግ ሁሉ ላኩ ይከታተሉ.",
+    "description": "Why Register answer text"
+  },
+  {
+    "key": "_TrackAllYourShipmentGimmick_",
+    "value": "ለማንኛውም አንድ የመከታተያ ቁጥር ያስፈልገዋል ማን የእርስዎ ኢሜይል ጋር.",
+    "description": "Why Register answer gimmick text"
+  },
+  {
+    "key": "_HowDoesItWork_",
+    "value": "እንዴት ነው የሚሰራው?",
+    "description": "How does it work? text"
+  },
+  {
+    "key": "_HowDoesItWorkAnswer1_",
+    "value": "በመጀመሪያ , የኢሜይል እና አንድ የይለፍ ቃል ጋር መስመር ላይ መመዝገብ ይኖርብዎታል.",
+    "description": "How does it work? first answer text"
+  },
+  {
+    "key": "_HowDoesItWorkAnswer2_",
+    "value": "ሁለተኛ, ሁሉ ላኩ ኢሜይልዎን ያስገቡ ወደ መላኪያ ወኪል ማሳወቅ.",
+    "description": "How does it work? second answer text"
+  },
+  {
+    "key": "_YeahItsThatSimple_",
+    "value": "አዎ, ይህን ያህል ቀላል ነው!",
+    "description": "Yeah, it's that simple! text"
+  },
+  {
+    "key": "_Note_",
+    "value": "ማስታወሻ",
+    "description": "NOTE text"
+  },
+  {
+    "key": "_PreviousShipmentNotLinked1_",
+    "value": "የእርስዎ ተወካዩ እነሱን ይዘምናል ድረስ የኢሜይል መለያ ጋር አልተገናኘም ነበር ቀዳሚ ላኩ በእርስዎ መከታተያ ገጽ ላይ የማያንጸባረቅ ይሆናል.",
+    "description": "Message notifying the customer previous shipments won't reflect except agent updates"
+  },
+  {
+    "key": "_PreviousShipmentNotLinked2_",
+    "value": "ሆኖም ግን, መነሻ ገጽ ላይ የመከታተያ ቁጥር በማስገባት ላኩ መመልከት ይችላሉ.",
+    "description": "Message notifying customer can track from home page"
+  },
+  {
+    "key": "_DocumentsWithProblemsReport_",
+    "value": "ችግሮችን ሪፖርት ጋር ሰነዶች",
+    "description": "Documents with Problems Report text"
+  },
+  {
+    "key": "_PendingDocumentsReport_",
+    "value": "በመጠባበቅ ላይ ሰነዶች ሪፖርት",
+    "description": "Pending Documents Report text"
+  },
+  {
+    "key": "_DemurrageReport_",
+    "value": "ድምሬጅ ሪፖርት",
+    "description": "Demurrage Report text"
+  },
+  {
+    "key": "_Pending_",
+    "value": "በመጠባበቅ ላይ",
+    "description": "Pending text"
+  },
+  {
+    "key": "_Done_",
+    "value": "ተከናውኗል",
+    "description": "Done text"
+  },
+  {
+    "key": "_RegSuccess_",
+    "value": "ምዝገባዉ ተሳክቷል",
+    "description": "Registration Successful text"
+  },
+  {
+    "key": "_RegSuccessMessage_",
+    "value": "ምዝገባዎትን በሙሉ አጠናቀዋል.",
+    "description": "Registration completed successfully text"
+  },
+  {
+    "key": "_ClickLoginButton_",
+    "value": "የሚለዉን በመጫን አካዉንተዎን ይጠቀሙ",
+    "description": "Click the login button to access your account text"
+  }
+]

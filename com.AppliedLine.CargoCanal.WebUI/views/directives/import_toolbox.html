@@ -1,0 +1,15 @@
+﻿<div ui-view>
+    <div class="toolbox">
+        <div class="form-inline">
+            <form class="form-group" ng-submit="searchImports(true)">
+                <div class="control-group">
+                    <input class="control-group-textbox" type="search" placeholder="Search by BoL" ng-model="searchText" />
+                    <i class="control-group-button" ng-click="searchImports(true)"><span class="glyphicon glyphicon-search"></span></i>
+                </div>
+            </form>
+            <a ui-sref="import.add" ng-hide="isNotFF" ng-click="initImport()"><span class="glyphicon glyphicon-plus-sign"></span> Add Import</a>
+            <a href="" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a>
+        </div>
+    </div>
+    <dir-import-view></dir-import-view>
+</div>

@@ -1,0 +1,100 @@
+﻿<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="DeclarationNo" data-i18n="_DeclarationNo_"></label>
+            <input type="text" class="form-control" id="DeclarationNo" ng-model="newExport.Export.DeclarationNo" required />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="DeclarationDate" data-i18n="_DeclarationDate_"></label>
+            <dir-datepicker dt="newExport.Export.DeclarationDate" required></dir-datepicker>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="SIN" data-i18n="_ShippingInstructionNo_"></label>
+            <input type="text" class="form-control" id="SIN" ng-model="newExport.Export.ShippingInstructionNo" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="ShippingInstructionDate" data-i18n="_ShippingInstructionDate_"></label>
+            <dir-datepicker dt="newExport.Export.ShippingInstructionDate"></dir-datepicker>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="WayBill" data-i18n="_TruckWayBill_" render-name-for="{{newExport.ModeOfTransportID}}"></label>
+            <input type="text" class="form-control" id="WayBill" ng-model="newExport.Export.WayBill" required />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="WayBillDate" data-i18n="_WayBillDate_"></label>
+            <dir-datepicker dt="newExport.Export.WayBillDate" required></dir-datepicker>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="OriginID">Origin of Export</label>
+            <select id="OriginID" class="form-control" ng-model="newExport.Export.OriginID" required>
+                <option ng-repeat="l in locations" value="{{l.ID}}">
+                    {{ l.LocationName }}
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="StuffingLocationID" data-i18n="_StuffingLocation_"></label>
+            <select id="StuffingLocationID" class="form-control" ng-model="newExport.Export.StuffingLocationID" required>
+                <option ng-repeat="l in locations" value="{{l.ID}}">
+                    {{ l.LocationName }}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!--<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CPORecievedDate">CPO <span data-i18n="_ReceivedDate_"></span></label>
+            <dir-datepicker dt="newExport.Export.CPORecievedDate"></dir-datepicker>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="OriginalDocumentDate" data-i18n="_OriginalDocumentDate_"></label>
+            <dir-datepicker dt="newExport.Export.OriginalDocumentDate"></dir-datepicker>
+        </div>
+    </div>
+</div>-->
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button ui-sref="export.add.bill" class="btn btn-lg nav-button">
+                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            </button>
+            <button ui-sref="export.add.carrier" class="btn btn-lg pull-right nav-button"
+                    ng-disabled="newExport.Export.DeclarationNo == undefined || newExport.Export.DeclarationDate == undefined
+                    || newExport.Export.WayBill == undefined || newExport.Export.WayBillDate == undefined
+                    || newExport.Export.OriginID == undefined || newExport.Export.StuffingLocationID == undefined">
+                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
+        </div>
+    </div>
+</div>

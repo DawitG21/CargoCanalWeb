@@ -1,0 +1,48 @@
+<section class="toolbox">
+    <h3>Reports</h3>
+
+    <section class="row">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select class="form-control" ng-options="c.label for c in (report.list | orderBy: 'label')" ng-model="report.filter.name" ng-change="report.loadView()">
+                        <option value="" style="color:#c3c3c3;">--- Select a report ---</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section ng-switch on="report.filter.name.value" class="row margin-top-15">
+        <rpt-filter-date-tin-bill ng-switch-when="bill_statuses_grouped_by_tin_report"></rpt-filter-date-tin-bill>
+        <rpt-filter-date-tin-cargo ng-switch-when="cargo_dispatched_weight_grouped_by_month_report"></rpt-filter-date-tin-cargo>
+        <rpt-filter-date-tin-cargo ng-switch-when="cargo_import_weight_grouped_by_tin_report"></rpt-filter-date-tin-cargo>
+        <rpt-filter-tin-cargo-country ng-switch-when="cargo_on_voyage_only_grouped_by_country_report"></rpt-filter-tin-cargo-country>
+        <rpt-filter-date-tin-problem ng-switch-when="problem_grouped_by_tin_report"></rpt-filter-date-tin-problem>
+        <rpt-filter-tin-problem ng-switch-when="problem_grouped_by_tin_unresolved_report"></rpt-filter-tin-problem>
+        <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_report"></rpt-filter-date-tin>
+        <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_active_report"></rpt-filter-date-tin>
+        <rpt-filter-date-bill ng-switch-when="transit_time_grouped_by_import_report"></rpt-filter-date-bill>
+        <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_report"></rpt-filter-date-country>
+        <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_summary_report"></rpt-filter-date-country>
+        <rpt-filter-date-tin ng-switch-when="transit_time_grouped_by_tin_report"></rpt-filter-date-tin>
+    </section>
+</section>
+
+
+<section id="reportdata">
+    <section class="row">
+        <div class="col-md-12" ng-show="report.data || report.data.length > 0">
+            <div class="panel">
+                <div class="panel-heading">
+                    <h4 class="panel-title font-bold">{{report.filter.name.label}}</h4>
+                </div>
+                <div class="panel-body">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+<link rel="stylesheet" href="assets/css/datatables.min.css" />

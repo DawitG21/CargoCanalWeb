@@ -1,0 +1,67 @@
+﻿<div class="container-fluid">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#rd-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand padding-top-0" ui-sref="home">
+            <img src="src/assets/images/cargocanal_text_64.png" alt="CargoCanal" class="logo" />
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="rd-navbar">
+        <ul class="nav navbar-nav">
+            <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
+                <a ui-sref="register" data-i18n="_Register_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Login.Token.length > 0">
+                <a ui-sref="dashboard" data-i18n="_Dashboard_"></a>
+            </li>
+            <!-- freight forwarder links -->
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
+                <a ui-sref="import" ng-click="prepCards()" data-i18n="_Imports_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
+                <a ui-sref="export" ng-click="prepCards()" data-i18n="_Exports_"></a>
+            </li>
+
+
+            <!-- maritime links -->
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
+                <a ui-sref="maritime.import" ng-click="prepCards()" data-i18n="_Imports_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
+                <a ui-sref="maritime.export" ng-click="prepCards()" data-i18n="_Exports_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
+                <a ui-sref="report" data-i18n="_Reports_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
+                <a ui-sref="customreport" data-i18n="_CustomReports_"></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="" id="langEnUS" title="English"
+                   class="inline-block"
+                   ng-click="setEnglishLanguage()">A</a>|
+                <a href="" id="langAmET" title="Amharic"
+                   class="inline-block"
+                   ng-click="setAmharicLanguage()">አ</a>
+            </li>
+            <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
+                <a ui-sref="login" data-i18n="_Login_"></a>
+            </li>
+            <li ui-sref-active="active" ng-show="User.Login.Token.length > 0">
+                <a ui-sref="login" ng-click="logout()" data-i18n="_Logout_"></a>
+            </li>
+            <li ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
+                <a class="img-profile-wr" ui-sref="account">
+                    <span class="img-profile-name" ng-bind="User.Person.FirstName"></span><img class="common-sprite user-32 img-profile" ng-src="{{User.Person.PhotoDataUrl}}" />
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

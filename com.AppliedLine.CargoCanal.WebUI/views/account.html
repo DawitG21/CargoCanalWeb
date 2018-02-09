@@ -1,0 +1,11 @@
+﻿<section class="text-center col-sm-4">
+    <img class="img-profile common-sprite user-128" ng-src="{{User.Person.PhotoDataUrl}}" />
+    <span class="anchor glyphicon glyphicon-pencil" title="Replace Image" ui-sref=".uploadprofileimage"></span>
+
+    <dir-user-links></dir-user-links>
+    
+</section>
+
+<section class="col-sm-8" ui-view>
+    <dir-user-profile-view></dir-user-profile-view>
+</section>

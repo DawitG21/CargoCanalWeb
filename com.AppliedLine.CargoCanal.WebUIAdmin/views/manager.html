@@ -1,0 +1,19 @@
+﻿<div ui-view>
+    <div class="toolbox">
+        <div class="form-inline">
+            <form class="form-group" ng-submit="company.getCompanies(searchText)">
+                <div class="control-group">
+                    <input class="control-group-textbox" type="search" placeholder="Search by Company Name or TIN" ng-model="searchText" />
+                    <i class="control-group-button" ng-click="company.getCompanies(searchText)"><span class="glyphicon glyphicon-search"></span></i>
+                </div>
+            </form>
+            <a ui-sref="manager.addcompany"><span class="glyphicon glyphicon-tower"></span> Add Company</a>
+            <a ui-sref="manager.addcarrier" ng-click="addCarrier()"><span class="glyphicon glyphicon-plane"></span> Add Carrier</a>
+            <a ui-sref="manager.addport" ng-click="addPort()"><span class="glyphicon glyphicon-road"></span> Add Port</a>
+            <a ui-sref="manager.addvessel" ng-click="addVessel()"><span class="glyphicon glyphicon-star"></span> Add Vessel</a>
+            <a ui-sref="manager.addlocation" ng-click="addLocation()"><span class="glyphicon glyphicon-map-marker"></span> Add Location</a>
+        </div>
+    </div>
+    
+    <company-list-view></company-list-view>
+</div>

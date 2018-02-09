@@ -1,0 +1,12 @@
+{
+	"name": "CargoCanal",
+	"short_name": "CargoCanal",
+	"icons": [
+		{
+		  "src": "favicon.png",
+		  "type": "image/png",
+		  "sizes": "128x128"
+		}
+	],
+	"theme_color": "#40437B"
+}

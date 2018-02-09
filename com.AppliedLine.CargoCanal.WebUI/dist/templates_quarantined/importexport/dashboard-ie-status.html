@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+        <div id="form-container">
+            <div class="page-header text-center">
+                <h2 data-i18n="_AddStatus_"></h2>
+
+                <div id="status-buttons" class="text-center">
+                    <a ui-sref-active="active" ui-sref="."><span>1</span> <label class="font-normal" data-i18n="_Status_"></label></a>
+                </div>
+            </div>
+            <form id="signup-form" ng-submit="saveStatusUpdate()">
+                <div id="form-views" ui-view>
+                    <p ng-class="messageClass">{{message}}</p>
+                    <h5> Doc #: {{selectedID}}</h5>
+
+                    <div class="form-group">
+                        <label for="StatusID" data-i18n="_Status_"></label>
+                        <select name="StatusID" class="form-control" ng-model="newStatus.StatusID">
+                            <option ng-repeat="s in valuesData.Statuses" value="{{s.ID}}">
+                                {{ s.Description }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ddlYear" data-i18n="_StatusDate_"></label>
+                        <div class="form-inline">
+                            <select id="ddlYear" name="ddlYear" class="form-control" ng-model="stus.Year">
+                                <option value="">Year</option>
+                            </select>
+                            <select id="ddlMonth" name="ddlMonth" class="form-control" ng-model="stus.Month">
+                                <option value="">Month</option>
+                            </select>
+                            <select id="ddlDay" name="ddlDay" class="form-control" ng-model="stus.Day">
+                                <option value="">Day</option>
+                            </select>
+                        </div>
+                        <script>
+                            var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                            var year = new Date().getFullYear() - 1;
+
+                            $('#ddlYear').empty();
+                            $('#ddlMonth').empty();
+                            $('#ddlDay').empty();
+
+                            for (var i = 0; i < 11; i++) {
+                                $('#ddlYear').append(new Option((year + i), (year + i)));
+                            }
+
+                            for (var i = 0; i < 12; i++) {
+                                $('#ddlMonth').append(new Option(months[i], i + 1));
+                            }
+
+                            for (var i = 1; i <= 31; i++) {
+                                $('#ddlDay').append(new Option(i, i));
+                            }
+
+                        </script>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-xs-6">
+                            <button type="submit" class="btn btn-primary btn-lg" data-i18n="_Submit_"></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

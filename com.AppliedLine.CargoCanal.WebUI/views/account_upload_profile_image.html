@@ -1,0 +1,69 @@
+﻿<!--<div ng-controller="uploadCtrl">
+    <form name="myForm">
+        <div>Crop Image and Upload</div>
+        <button ngf-select ng-model="picFile" accept="image/*">
+            Select Picture
+        </button>
+        <div ngf-drop ng-model="picFile" ngf-pattern="image/*"
+             class="cropArea">
+            <img-crop image="picFile  | ngfDataUrl"
+                      result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+            </img-crop>
+        </div>
+        <div>
+            <img ng-src="{{croppedDataUrl}}" />
+        </div>
+        <button ng-click="upload(croppedDataUrl, picFile.name)">Submit</button>
+
+        <span class="progress" ng-show="progress >= 0">
+            <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+        </span>
+        <span ng-show="result">Upload Successful</span>
+        <span class="err" ng-show="errorMsg">{{errorMsg}}</span>
+    </form>
+</div>-->
+<div class="fullscreen" ng-controller="uploadCtrl">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+
+                <form name="myForm">
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div ngf-drop ng-model="picFile" ngf-pattern="image/*" class="cropArea">
+                                        <button class="btn btn-default" ngf-select ng-model="picFile" accept="image/*">
+                                            Upload Photo
+                                        </button>
+                                        
+                                        <img-crop image="picFile  | ngfDataUrl"
+                                                  result-image="croppedDataUrl" ng-init="croppedDataUrl=''">
+                                        </img-crop>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <button ng-click="" class="btn btn-danger">Delete Photo</button>
+                                        <button ng-click="upload(croppedDataUrl, picFile.name)" class="btn btn-primary pull-right">Save Photo</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

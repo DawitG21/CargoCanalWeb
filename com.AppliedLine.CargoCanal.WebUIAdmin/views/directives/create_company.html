@@ -1,0 +1,51 @@
+﻿<div class="login-logo">
+    <img src="Content/Images/cargocanal_text.png" alt="logo" class="logo">
+</div>
+<form name="form" id="form" ng-submit="saveNewCompany()">
+    
+    <div class="form-group">
+        <label for="Country">Country</label>
+        <select name="Country" class="form-control" 
+                ng-model="newCompany.Company.CountryID">
+            <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="CompanyType">Company Type</label>
+        <select name="CompanyType" class="form-control" 
+                ng-model="newCompany.Company.CompanyTypeID">
+            <option ng-repeat="c in companyTypes | filter: consigneeCompany" value="{{c.ID}}">{{c.Name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="CompanyName" class="sr-only">Company Name</label>
+        <input name="CompanyName" type="text" class="form-control" placeholder="Company Name" ng-model="newCompany.Company.CompanyName" />
+    </div>
+    <div class="form-group">
+        <label for="TIN" class="sr-only">TIN</label>
+        <input name="TIN" type="text" class="form-control" placeholder="TIN" ng-model="newCompany.Company.TIN" />
+    </div>
+    <div class="form-group">
+        <label for="FirstName" class="sr-only">First Name</label>
+        <input name="FirstName" type="text" class="form-control" placeholder="First Name" ng-model="newCompany.Person.FirstName" />
+    </div>
+    <div class="form-group">
+        <label for="LastName" class="sr-only">Last Name</label>
+        <input name="LastName" type="text" class="form-control" placeholder="Last Name" ng-model="newCompany.Person.LastName" />
+    </div>
+    <div class="form-group">
+        <label for="Email" class="sr-only">Email</label>
+        <input name="Email" type="text" class="form-control" placeholder="Email" ng-model="newCompany.Person.Email" />
+    </div>
+    <div class="form-group">
+        <label for="Password" class="sr-only">Password</label>
+        <input name="Password" type="password" class="form-control" placeholder="Password" ng-model="newCompany.Login.Password" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Register</button>
+    </div>
+
+    <div class="login-footer">
+        <small>By registering you agree to the <a ui-sref="termsofservice">Terms of Service.</a></small>
+    </div>
+</form>

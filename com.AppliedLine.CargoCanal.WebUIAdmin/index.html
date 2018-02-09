@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <base href="/" />
+    <title>CargoCanal Admin</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Appliedline.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
+    <meta http-equiv="expires" content="Fri, 24 Feb 2017 00:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png" />
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/font-awesome.css" rel="stylesheet" />
+    <link href="Content/style.css" rel="stylesheet" />
+</head>
+
+<body ng-controller="mainController" ng-class="modalOpenClass()">
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <dir-menu-top></dir-menu-top>
+    </nav>
+
+    <div class="container">
+        <section ui-view class="main-body"></section>
+
+        <div class="loader-container" ng-show="loader">
+            <div class="loader-wrapper">
+                <div class="loader-cubes">
+                    <i class="loader-box loader-box-3"></i>
+                    <i class="loader-box loader-box-2"></i>
+                    <i class="loader-box loader-box-1"></i>
+                    <i class="loader-box loader-box-4"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <section class="row">
+            <section class="col-md-12 text-center">
+                <small><a class="pointer" ui-sref="termsofservice">Terms of Service</a></small> |
+                <small><a class="pointer" ui-sref="privacypolicy">Privacy Policy</a></small>
+            </section>
+        </section>
+
+        <h6 class="text-center">
+            &copy; 2017 CargoCanal by
+            <a href="//appliedline.com" target="_blank">
+                Appliedline <i class="common-sprite appliedline_32"></i>
+            </a>
+        </h6>
+    </footer>
+
+    <dir-dialog-window></dir-dialog-window>
+    <script src="Scripts/jquery-3.1.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-sanitize.js"></script>
+    <script src="Scripts/angular-ui-router.js"></script>
+    <script src="Scripts/ngStorage.js"></script>
+    <script src="Scripts/app/app.js"></script>
+    <script src="Scripts/app/services.js"></script>
+    <script src="Scripts/app/controller.js"></script>
+    <script src="Scripts/app/directives.js"></script>
+
+    <!-- styles the cards dynamically-->
+    <script id="cardsjs" type="text/javascript"></script>
+</body>
+</html>

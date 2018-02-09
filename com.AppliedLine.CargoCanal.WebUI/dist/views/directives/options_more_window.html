@@ -1,0 +1,122 @@
+<div class="fullscreen" ng-show="optionsMore.openWindow">
+    <div class="fullscreen-dialog-sm fullscreen-small-top">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="optionsMore.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-heading text" ng-if="imports || tinOrLcData" ng-bind="record.Bill"></h3>
+                        <h3 class="modal-heading text" ng-if="exports" ng-bind="record.WayBill"></h3>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="">
+                                <div class="card-sm" ng-click="preview.import.show(record)" ng-hide="imports == undefined && tinOrLcData == undefined">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite container-32"></span>
+                                            <i class="badge icon-data">{{record.Items.length}}</i>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>View Document</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="preview.export.show(record)" ng-hide="exports == undefined">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite container-32"></span>
+                                            <i class="badge icon-data">{{record.Items.length}}</i>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>View Document</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="status.getStatuses(record)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite bell-32"></span>
+                                            <i class="badge icon-data">i</i>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Statuses</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="problem.getProblems(record)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite fire-32"></span>
+                                            <i ng-class="{'badge icon-data bg-color-red': record.ProblemsUnresolved, 'badge icon-data': !record.ProblemsUnresolved}">{{record.ProblemsUnresolved}}</i>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Problems</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="consigneeInfo.show(record)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="glyphicon glyphicon-user"></span>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Consignee</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="costInfo.show(record, recordIndex)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="glyphicon glyphicon-usd"></span>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Cost</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="markAsDone(record, recordIndex)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="glyphicon glyphicon-check"></span>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Done</h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <a href="">
+                                <div class="card-sm" ng-click="terminateImportExport(record, recordIndex)">
+                                    <aside class="card-logo">
+                                        <span class="card-option icon">
+                                            <span class="glyphicon glyphicon-trash"></span>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4>Recycle</h4>
+                                    </article>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<!--<p>Activate a subscription and try it for 30 days free.</p>
+<p>See active subscriptions and attach renewal picture as evidence</p>
+<p>See all service available for subscription</p>-->
+<section class="margin-bottom-30">
+    <h4>Current subscriptions</h4>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Subscription</th>
+                <th>Activated</th>
+                <th>Expiry</th>
+                <th>Cost</th>
+                <th>Plan</th>
+                <!--<th></th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="s in account.subscription.data" class="slide-up" ng-class="{'text-danger': !s.IsActive, 'color-theme': s.IsActive}">
+                <td>{{s.SubscriptionName}}</td>
+                <td>{{s.ActivatedDate | date: 'MMMM dd, yyyy'}}</td>
+                <td>{{s.ExpiryDate | date: 'MMMM dd, yyyy'}}</td>
+                <td>{{s.Currency}} {{s.Cost|number}} {{s.RenewalCycle}}</td>
+                <td>{{s.ServiceType}}</td>
+                <!--<td>
+                    <button type="button" class="btn btn-primary" ng-click="company.renewSubscription(s)">Renew</button>
+                </td>-->
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+<section class="row margin-top-30">
+    <div class="col-md-12">
+        <h4 class="font-bold-600">
+            <span class="fa fa-shopping-bag"></span> Marketplace
+        </h4>
+        <div class="line-edged"></div>
+    </div>
+</section>
+
+<section class="row">
+    <div class="col-sm-12">
+        <div class="service" ng-repeat="s in subscriptionTypes">
+            <div class="service-wrapper">
+                <div class="service-icon text-center"><span class="fa fa-cogs"></span></div>
+                <h4 class="service-name" ng-bind="s.SubscriptionName"></h4>
+                <h5 class="desc" title="{{s.Description}}" ng-bind="s.Description"></h5>
+                <h6 class="font-bold">
+                    <span ng-if="s.Cost > 0">{{s.Currency}} {{s.Cost|number}} {{s.RenewalCycle}}</span>
+                    <span ng-if="s.Cost === 0" class="text-success">FREE</span>
+                </h6>
+                <button type="button" class="btn btn-primary" ng-click="account.subscription.set(s)" ng-disabled="doesServiceExist(s.SubscriptionName)">
+                    <span class="fa fa-shopping-cart"></span> Subscribe
+                </button>
+            </div>
+        </div>
+    </div>
+</section>

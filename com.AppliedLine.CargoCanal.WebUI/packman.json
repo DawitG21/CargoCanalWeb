@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "signalr.js": {
+      "path": "Scripts",
+      "version": "2.2.2",
+      "files": [
+        "jquery.signalR.min.js"
+      ]
+    }
+  }
+}

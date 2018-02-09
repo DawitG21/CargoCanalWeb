@@ -1,0 +1,63 @@
+<section class="toolbox">
+    <h3 data-i18n="_CustomReports_"></h3>
+
+    <section class="row">
+        <div class="col-md-12">
+            <div class="form-inline">
+                <div class="form-group">
+                    <select class="form-control" ng-model="currentColumnMapping" ng-change="submitQuery()"
+                            ng-options="m.Name for m in mappingsCollection | orderBy : 'Name'">
+                        <option value="">-- Choose Customized Report --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <!--button to show the column mapping edit area-->
+                    <button type="button" class="btn btn-primary" ng-click="showMappingView()">
+                        <span class="glyphicon glyphicon-cog"></span> Customize
+                    </button>
+                    <input type="search" class="form-control" data-ng-model="searchText" data-i18n-attr="_Search_|placeholder" />
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</section>
+
+<div class="fullscreen" ng-hide="mapIsHidden">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <div>
+                    <custom-reports-query-builder></custom-reports-query-builder>
+                    <mapping-directive></mapping-directive>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <!-- actual report area including headers-->
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered" data-ng-show="customReport.length > 0">
+            <caption>{{currentColumnMapping.Name}}</caption>
+            <thead>
+                <tr>
+                    <th class="text-nowrap"
+                        ng-repeat="h in customReportHeaders"
+                        ng-show="currentColumnMapping.ColumnMappings[$index]"
+                        ng-click="sortData(h)">
+                        <div class="inline-block">{{h}} <span ng-class="getSortClass(h)"></span></div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="r in customReport | orderBy: sortColumn: reverseSort | filter : searchText">
+                    <td ng-repeat="c in r track by $index" ng-show="currentColumnMapping.ColumnMappings[$index]">{{c}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="table-responsive">
+    <table id="report_table" class="display table table-condensed table-bordered">
+        <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
+        <thead>
+            <tr>
+                <th class="text-center">Country</th>
+                <th class="text-center">Port</th>
+                <th class="text-center">Company</th>
+                <th class="text-center">Cargo</th>
+                <th class="text-center">Gross Weight (KG)</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr ng-repeat="d in report.data">
+                <td>{{d.Country}}</td>
+                <td>{{d.PortName}}</td>
+                <td>{{d.CompanyName}}</td>
+                <td>{{d.CargoName}}</td>
+                <td>{{d.TotalWeightKg | number:3}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th class="text-right" colspan="4">Total Weight (KG)</th>
+                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg') | number:3}} KG</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    setTimeout(function () {
+        $.extend($.fn.dataTable.defaults, {
+            dom: 'B<"clear">lfrtip',
+            buttons: ['excel', 'pdf', 'print']
+        });
+
+        $("#report_table").DataTable();
+    }, 0);
+</script>
+
+<!--<canvas id="reportChart"></canvas>-->

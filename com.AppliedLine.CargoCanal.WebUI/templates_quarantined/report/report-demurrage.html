@@ -1,0 +1,93 @@
+﻿<h5 data-ng-class="messageClass">{{reports.DemurrageTable.length}}&nbsp;<span data-i18n="{{message}}"></span></h5>
+<h5 class="font-bold report-title" data-i18n="_DemurrageReport_"></h5>
+
+<div class="form-group">
+    <!--button to show the column mapping edit area-->
+    <button type="button" class="btn btn-primary" ng-click="mapIsHidden = !mapIsHidden">
+        <span class="glyphicon glyphicon-cog"></span>
+    </button>
+</div>
+
+<div class="fullscreen" ng-hide="mapIsHidden">
+    <div class="bg-color-white padding-20 fullscreen-content">
+        <custom-reports-query-builder></custom-reports-query-builder>
+        <mapping-directive></mapping-directive>
+    </div>
+</div>
+
+<div class="form-group">
+    <div id="report-view" ui-view class="font-9em">
+        <div data-table="table-svr">
+            <table class="table table-responsive table-tbody" data-ng-show="reports.DemurrageTable.length > 0">
+                <thead>
+                    <tr>
+                        <th class="table-header" ng-click="sortData('DocumentNo')">
+                            <div class="inline-block">BoL <span ng-class="getSortClass('DocumentNo')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('DocumentDate')">
+                            <div class="inline-block">BoL Date <span ng-class="getSortClass('DocumentDate')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('DischargedDate')">
+                            <div class="inline-block">Discharged <span ng-class="getSortClass('DischargedDate')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('ReferenceNo')">
+                            <div class="inline-block">REF # <span ng-class="getSortClass('ReferenceNo')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('DemurrageDays')">
+                            <div class="inline-block">Days <span ng-class="getSortClass('DemurrageDays')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('Company')">
+                            <div class="inline-block">Company <span ng-class="getSortClass('Company')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('Name')">
+                            <div class="inline-block">Agent <span ng-class="getSortClass('Name')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('Phone')">
+                            <div class="inline-block">Phone <span ng-class="getSortClass('Phone')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData('Description')">
+                            <div class="inline-block">Description <span ng-class="getSortClass('Description')"></span></div>
+                        </th>
+                        <th class="table-header" ng-click="sortData(h)" ng-repeat="h in customReportHeaders"
+                            ng-show="currentColumnMapping.ColumnMappings[$index]">
+                            <!--ng-hide="$index == (customReportHeaders.length - 1)">-->
+                            <div class="inline-block">{{h}} <span ng-class="getSortClass(h)"></span></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody data-ng-repeat="record in reports.DemurrageTable | orderBy: sortColumn: reverseSort | filter: searchText" id="tbody{{$index}}" onclick="c---(this.id)">
+                    <tr>
+                        <td>{{record.DocumentNo}}</td>
+                        <td>{{record.DocumentDate | date: "yyyy/MM/dd"}}</td>
+                        <td>{{record.DischargedDate | date: "yyyy/MM/dd"}}</td>
+                        <td>{{record.ReferenceNo}}</td>
+                        <td>
+                            <span class="badge" data-ng-class="getDemurrageHighlight(record.DemurrageDays)">
+                                {{record.DemurrageDays}}
+                            </span>
+                        </td>
+                        <td>{{record.Company}}</td>
+                        <td>{{record.Name}}</td>
+                        <td>{{record.Phone}}</td>
+                        <td>
+                            <span class="font-85em">{{record.Description}}</span>
+                        </td>
+                        <td ng-repeat="c in fetchImports(reports.DemmurageImportsWithStatuses, record.RecordNo)"
+                            ng-show="currentColumnMapping.ColumnMappings[$index]">
+                            <!--ng-hide="$index == (customReportHeaders.length - 1)">-->
+                            {{c}}
+                        </td>
+                    </tr>
+                    <tr class="border-top-hidden display-none">
+                        <td colspan="6">
+                            <span class="fa fa-user"></span> {{record.Name}}
+                            <span class="fa fa-phone margin-left-15"></span> {{record.Phone}}
+                            <span class="fa fa-laptop margin-left-15"></span> {{record.Email}}
+                            <span class="fa fa-group margin-left-15"></span> {{record.Company}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

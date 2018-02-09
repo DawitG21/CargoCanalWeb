@@ -1,0 +1,22 @@
+<div>
+    <h3 data-i18n="_Reports_"></h3>
+    <div class="form-inline">
+        <input type="search" class="form-control" data-ng-model="searchText" data-i18n-attr="_Search_|placeholder" />
+    </div>
+    <hr />
+
+    <form role="form" data-ng-submit="processForm()">
+        <div>
+            <span id="filter-switch">
+                <span class="glyphicon glyphicon-filter margin-bottom-15"></span>
+                <span class="font-85em text-underline" data-i18n="_ReportFilterToggle_"></span>
+            </span>
+            <dir-report-filters id="report-filter"></dir-report-filters>
+        </div>
+    </form>
+
+    <div class="margin-top-15" ui-view>
+
+    </div>
+
+</div>

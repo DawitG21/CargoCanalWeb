@@ -1,0 +1,65 @@
+﻿<h5 data-ng-class="messageClass">{{count}}&nbsp;<span data-i18n="{{message}}"></span></h5>
+<h5 class="font-bold report-title">Transit Time Report</h5>
+<div class="form-group">
+    <div id="report-view" ui-view class="font-9em">
+        <div data-table="table-svr">
+            <table class="table table-responsive table-tbody" data-ng-show="reports.length > 0">
+                <thead>
+                    <tr>
+                        <th class="table-header">BoL</th>
+                        <th class="table-header">Origin</th>
+                        <th class="table-header">Loaded - Voyage</th>
+                        <th class="table-header">Voyage - Discharged</th>
+                        <th class="table-header">Discharged - UCC</th>
+                        <th class="table-header">UCC - Ready For Loading</th>
+                        <th class="table-header">RL - Dispatched</th>
+                        <th class="table-header">DP - UC1</th>
+                        <th class="table-header">UC1 - Delivered</th>
+                        <th class="table-header">Transit Time</th>
+                    </tr>
+                </thead>
+                <tbody class="expandable" data-ng-repeat="record in reports | filter: searchText" id="tbody{{$index}}" onclick="c(this.id)">
+                    <tr ng-class="getETAFlagAndRowColor(record.Origin, record.VoyageToDischarged, $index)">
+                        <td>{{record.Import.BillOfLading}}</td>
+                        <td>{{record.Origin}}</td>
+                        <td>{{record.LoadedToVoyage}}</td>
+                        <td>{{record.VoyageToDischarged}}</td>
+                        <td>{{record.DischargedToUCC}}</td>
+                        <td>{{record.UCCToReadyLoading}}</td>
+                        <td>{{record.ReadyToDispatched}}</td>
+                        <td>{{record.DispatchedToUCI}}</td>
+                        <td>{{record.UCIToDelivered}}</td>
+                        <td>{{record.TotalTransitTime}}</td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr class="font-bold totals-line">
+                        <td colspan="10">Total Records: {{reports.length}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="2">Grand Average</td>
+                        <td>{{getAverage(reports, 'LoadedToVoyage') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'VoyageToDischarged') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'DischargedToUCC') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'UCCToReadyLoading') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'ReadyToDispatched') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'DispatchedToUCI') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'UCIToDelivered') | number: 0}}</td>
+                        <td>{{getAverage(reports, 'TotalTransitTime') | number: 0}}</td>
+                    </tr>
+                    <tr class="font-bold">
+                        <td colspan="2">Grand Total</td>
+                        <td>{{getTotal(reports, 'LoadedToVoyage') | number}}</td>
+                        <td>{{getTotal(reports, 'VoyageToDischarged') | number}}</td>
+                        <td>{{getTotal(reports, 'DischargedToUCC') | number}}</td>
+                        <td>{{getTotal(reports, 'UCCToReadyLoading') | number}}</td>
+                        <td>{{getTotal(reports, 'ReadyToDispatched') | number}}</td>
+                        <td>{{getTotal(reports, 'DispatchedToUCI') | number}}</td>
+                        <td>{{getTotal(reports, 'UCIToDelivered') | number}}</td>
+                        <td>{{getTotal(reports, 'TotalTransitTime') | number}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

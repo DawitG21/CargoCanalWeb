@@ -1,0 +1,97 @@
+<div class="banner-company">
+    <i class="logo-company common-sprite people"></i>
+    <h5>Love working at ...</h5>
+    <h4 class="font-bold">{{User.Company.CompanyName}}</h4>
+    <h5 class="font-bold">TIN: {{User.Company.TIN}}</h5>
+</div>
+
+<form name="formprofile" ng-submit="account.profile.save()" class="tile" novalidate>
+    <div class="form-group">
+        <label class="">Contact Information</label>
+        <button class="close" type="button" ng-click="account.profile.edit()" ng-hide="account.profile.editEnabled">
+            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+            <span class="sr-only">Edit</span>
+        </button>
+        <button class="close" type="button" ng-click="account.profile.editEnabled=false" ng-show="account.profile.editEnabled">
+            <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
+
+    <div class="row" ng-show="account.profile.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-user pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>First name</label>
+            <input type="tel" class="form-control textbox-editor margin-bottom-15" placeholder="First name" required
+                   ng-model="account.profile.data.FirstName" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.profile.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Middle name</label>
+            <input type="tel" class="form-control textbox-editor margin-bottom-15" placeholder="Middle name"
+                   ng-model="account.profile.data.MiddleName" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.profile.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Last name</label>
+            <input type="tel" class="form-control textbox-editor margin-bottom-15" placeholder="Last name" required
+                   ng-model="account.profile.data.LastName" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-earphone pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Phone</label>
+            <p ng-hide="account.profile.editEnabled">{{User.Person.Phone}}</p>
+            <input type="tel" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. +251 91 234 5678"
+                   ng-show="account.profile.editEnabled"
+                   ng-model="account.profile.data.Phone" />
+            <hr ng-hide="account.profile.editEnabled" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-envelope pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Email</label>
+            <p ng-hide="account.profile.editEnabled"><a href="mailto:{{User.Person.Email}}">{{User.Person.Email}}</a></p>
+            <input name="Email" type="email" class="form-control textbox-editor" placeholder="Email e.g. john.doe@mail.com" required
+                   ng-pattern="regexEmail"
+                   ng-show="account.profile.editEnabled"
+                   ng-model="account.profile.data.Email" />
+            <h6 class="text-danger" ng-show="account.profile.editEnabled && formprofile.Email.$invalid"
+                ng-hide="formprofile.Email.$valid || !account.profile.editEnabled">
+                Enter a valid email address.
+            </h6>
+
+            <button type="submit" class="btn btn-default btn-lg nav-button margin-top-15"
+                    ng-show="account.profile.editEnabled"
+                    ng-disabled="formprofile.$invalid || formprofile.Email.$invalid">
+                Save
+            </button>
+
+        </div>
+    </div>
+</form>
+
+<a ng-click="account.password.change()" class="pointer">
+    <span class="glyphicon glyphicon-lock"></span>&nbsp;Change password
+</a>
+<dir-password-change></dir-password-change>

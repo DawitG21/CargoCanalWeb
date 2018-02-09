@@ -1,0 +1,39 @@
+<h5 data-ng-class="messageClass">{{count}}&nbsp;<span data-i18n="{{message}}"></span></h5>
+<h5 class="font-bold report-title" data-i18n="_DocumentsWithProblemsReport_"></h5>
+<div class="form-group">
+
+    <div id="report-view" ui-view class="font-9em">
+        <div data-table="table-svr">
+            <table class="table table-bordered table-responsive" data-ng-show="reports.length > 0">
+                <thead>
+                    <tr>
+                        <th class="table-header">#</th>
+                        <th class="table-header" data-i18n="_Problem_"></th>
+                        <th class="table-header" data-i18n="_Date_"></th>
+                        <th class="table-header" data-i18n="_Agent_"></th>
+                        <th class="table-header" data-i18n="_Company_"></th>
+                        <th class="table-header" data-i18n="_Email_"></th>
+                        <th class="table-header" data-i18n="_Phone_"></th>
+                        <th class="table-header">Ref #</th>
+                        <th class="table-header">BoL/SIn</th>
+                        <th class="table-header">BoL/SIn <span data-i18n="_Date_"></span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="record in reports">
+                        <td>{{record.DocType}} {{record.RecordNo}}</td>
+                        <td>{{record.Problem}}</td>
+                        <td>{{record.ProblemDate | date: "yyyy/MM/dd"}}</td>
+                        <td>{{record.Name}}</td>
+                        <td>{{record.Company}}</td>
+                        <td>{{record.Email}}</td>
+                        <td>{{record.Phone}}</td>
+                        <td>{{record.ReferenceNo}}</td>
+                        <td>{{record.DocumentNo}}</td>
+                        <td>{{record.DocumentDate | date: "yyyy/MM/dd"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

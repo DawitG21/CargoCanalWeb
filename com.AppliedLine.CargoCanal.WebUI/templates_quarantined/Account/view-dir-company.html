@@ -1,0 +1,98 @@
+﻿<div class="form-group">
+    <label class="control-label" for="CompanyName" data-i18n="_CompanyName_"></label>
+    <input type="text" class="form-control" id="CompanyName" ng-model="formData.Company.CompanyName" />
+</div>
+<div class="form-group">
+    <label class="control-label" for="CompanyTypeID" data-i18n="_CompanyType_"></label>
+    <select id="CompanyTypeID" class="form-control" ng-model="formData.Company.CompanyTypeID">
+        <option ng-repeat="companyType in valuesData.CompanyTypes" value="{{companyType.ID}}">
+            {{ companyType.Name }}
+        </option>
+    </select>
+</div>
+<button type="button" class="btn btn-block" 
+        ng-click="showMoreCompanyDetails()" data-i18n="{{companyMoreDetailsButtonLabel}}">
+</button>
+
+<div ng-show="flgShowMoreCompanyDetails">
+    <div class="form-group">
+        <label class="control-label" for="Address" data-i18n="_Address_"></label>
+        <input type="text" class="form-control" id="Address" ng-model="formData.Company.Address" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="TownCity" data-i18n="_TownCity_"></label>
+        <input type="text" class="form-control" id="TownCity" ng-model="formData.Company.TownCity" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="State" data-i18n="_State_"></label>
+        <input type="text" class="form-control" id="State" ng-model="formData.Company.State" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="POBox" data-i18n="_POBox_"></label>
+        <input type="text" class="form-control" id="POBox" ng-model="formData.Company.POBox" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Wereda">Wereda</label>
+        <input type="text" class="form-control" id="Wereda" ng-model="formData.Company.Wereda" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="KefleKetema">Kefle Ketema</label>
+        <input type="text" class="form-control" id="KefleKetema" ng-model="formData.Company.KefleKetema" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Kebele">Kebele</label>
+        <input type="text" class="form-control" id="Kebele" ng-model="formData.Company.Kebele" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="HouseNo" data-i18n="_HouseNo_"></label>
+        <input type="text" class="form-control" id="HouseNo" ng-model="formData.Company.HouseNo" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Country" data-i18n="_Country_"></label>
+        <select id="Country" class="form-control" ng-model="formData.Company.Country">
+            <option ng-repeat="country in valuesData.Countries" value="{{country.Name}}">
+                {{ country.Name }}
+            </option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="CompanyPhone" data-i18n="_Phone_"></label>
+        <input type="text" class="form-control" id="CompanyPhone" ng-model="formData.Company.Telephone" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="ContactName" data-i18n="_ContactName_"></label>
+        <input type="text" class="form-control" id="ContactName" ng-model="formData.Company.ContactName" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="ContactMobile" data-i18n="_ContactMobile_"></label>
+        <input type="text" class="form-control" id="ContactMobile" ng-model="formData.Company.ContactMobile" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Email" data-i18n="_Email_"></label>
+        <input type="text" class="form-control" id="Email" ng-model="formData.Company.Email" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="Website" data-i18n="_Website_"></label>
+        <input type="text" class="form-control" id="Website" ng-model="formData.Company.Website" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="TIN">TIN</label>
+        <input type="text" class="form-control" id="TIN" ng-model="formData.Company.TIN" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="LicenseNumber" data-i18n="_LicenseNumber_"></label>
+        <input type="text" class="form-control" id="LicenseNumber" ng-model="formData.Company.LicenseNumber" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="LicenseUnder" data-i18n="_LicenseUnder_"></label>
+        <input type="text" class="form-control" id="LicenseUnder" ng-model="formData.Company.LicenseUnder" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="LastRenewedDate" data-i18n="_LastRenewedDate_"></label>
+        <input type="text" class="form-control" id="LastRenewedDate" ng-model="formData.Company.LastRenewedDate" />
+    </div>
+    <div class="form-group">
+        <label class="control-label" for="LicenseIssuedDate" data-i18n="_LicenseIssuedDate_"></label>
+        <input type="text" class="form-control" id="LicenseIssuedDate" ng-model="formData.Company.LicenseIssuedDate" />
+    </div>
+</div>

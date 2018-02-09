@@ -1,0 +1,35 @@
+<div id="status-buttons-mob" class="mob-only text-center">
+    <button class="button-left" ui-sref="register" type="button"><span class="fa fa-chevron-circle-left"></span></button>
+    <button class="button-right" ui-sref="register.company"
+            ng-disabled="!(formData.Person.FirstName.length > 0 && formData.Person.LastName.length >0)">
+        <span class="fa fa-chevron-circle-right"></span>
+    </button>
+</div>
+<div class="form-group">
+    <label for="FirstName" data-i18n="_FirstName_"></label>
+    <input type="text" class="form-control" name="FirstName"
+           ng-model="formData.Person.FirstName" />
+</div>
+<div class="form-group">
+    <label for="MiddleName" data-i18n="_MiddleName_"></label>
+    <input type="text" class="form-control" name="MiddleName"
+           ng-model="formData.Person.MiddleName" />
+</div>
+<div class="form-group">
+    <label for="LastName" data-i18n="_LastName_"></label>
+    <input type="text" class="form-control" name="LastName"
+           ng-model="formData.Person.LastName" />
+</div>
+<div class="form-group">
+    <label for="Phone" data-i18n="_Phone_"></label>
+    <input type="text" class="form-control" name="Phone"
+           ng-model="formData.Person.Phone" />
+</div>
+
+<div class="form-group row desk-only" ng-show="formData.Person.FirstName.length > 0 && formData.Person.LastName.length >0">
+    <div class="col-xs-6 col-xs-offset-3">
+        <a ui-sref="register.company" class="btn btn-block btn-lg">
+            <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-circle-arrow-right"></span>
+        </a>
+    </div>
+</div>

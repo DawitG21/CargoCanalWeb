@@ -1,0 +1,102 @@
+﻿<div>
+    <button type="button" class="close margin-b-10" aria-label="Close" ng-click="hideMapping()">
+        <span class="h1" aria-hidden="true">&times;</span>
+    </button>
+
+    <div class="form-inline">
+        <button type="button" class="btn btn-success"
+                ng-click="addNewQuery()">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+        </button>
+        <button type="button" class="btn btn-danger"
+                ng-click="resetAllQuery()">
+            <span class="glyphicon glyphicon-repeat"></span>
+        </button>
+        <button type="button" class="btn btn-primary"
+                ng-hide="controlHidden"
+                ng-click="submitQuery()">
+            <span class="glyphicon glyphicon-cloud-download"></span>
+        </button>
+    </div>
+    <hr />
+    <div>
+        <!--select mapping from list of already existing column mappings area-->
+        <!--selecting a mapping from this dropdown will set the currentColumnMapping-->
+        <!--see explanation for ng-options at http://www.undefinednull.com/2014/08/11/a-brief-walk-through-of-the-ng-options-in-angularjs/-->
+        <div class="info">{{mappingStatusMessage}}</div>
+        <div class="row">
+            <div class="form-inline col-xs-12 col-md-12">
+                <div class="form-group margin-bottom-15">
+                    <select class="form-control" ng-model="currentColumnMapping" ng-change="getDBTables(currentColumnMapping)"
+                            ng-options="m.Name for m in mappingsCollection | orderBy : 'Name'">
+                        <option value="">-- Choose Customized Report --</option>
+                    </select>
+                </div>
+                <div class="form-group margin-bottom-15">
+                    <!--button to show the column mapping edit area-->
+                    <button type="button" class="btn btn-primary"
+                            ng-click="flgIsHidden = !flgIsHidden">
+                        Edit Columns
+                    </button>
+                    <!--the add new mapping button-->
+                    <button class="btn btn-primary" ng-click="setAddedColumnMapping()"
+                            ng-hide="flgAddNewMapping">
+                        Add Mapping
+                    </button>
+
+                </div>
+                <div class="form-group margin-bottom-15">
+                    <div class="input-group" ng-show="flgAddNewMapping">
+                        <input type="text" class="form-control" placeholder="Customized Report name"
+                               ng-model="currentColumnMapping.Name" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-danger" data-ng-click="flgAddNewMapping = false">
+                                <span class="glyphicon glyphicon-minus-sign"></span>
+                            </button>
+                            <button type="button" class="btn btn-success" ng-click="saveMapping()">Save</button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-repeat="q in currentColumnMapping.MappingModelParams" class="row">
+            <div class="form-group col-md-3">
+                <label for="Tables" class="control-label">Tables</label><span class="glyphicon glyphicon-minus-sign text-danger"></span>
+                <div class="form-group">
+                    <select id="Lop" class="form-control" ng-model="q.Lop" ng-hide="$index==0">
+                        <option value="AND">AND</option>
+                        <option value="OR">OR</option>
+                    </select>
+                    <select id="Tables" name="Tables" class="form-control" ng-change="getTableColumns(q.TableName, $index)" ng-model="q.TableName" ng-disabled="dbTables==null">
+                        <option ng-repeat="t in dbTables" value="{{t}}">{{t}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="Columns" class="control-label">Columns</label>
+                <select id="Columns" name="Columns" class="form-control" ng-model="q.ColumnName" ng-disabled="q.TableName==null">
+                    <option ng-repeat="c in tableColumns[$index]" value="{{c}}">{{c}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="Operator" class="control-label">Operator</label>
+                <select id="Operator" name="Operator" class="form-control" ng-model="q.Op" ng-disabled="q.ColumnName==undefined">
+                    <option value="=">=</option>
+                    <option value=">">&gt;</option>
+                    <option value="!>">!&gt;</option>
+                    <option value="<">&lt;</option>
+                    <option value="!<">!&lt;</option>
+                    <option value="<>">&lt;&gt;</option>
+                    <option value="LIKE">LIKE</option>
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="Value" class="control-label">Value</label>
+                <input type="text" id="Value" name="Value" class="form-control" ng-model="q.Val" ng-disabled="q.Op==undefined" />
+            </div>
+        </div>
+    </div>
+</div>

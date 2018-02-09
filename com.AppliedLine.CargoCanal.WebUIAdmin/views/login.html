@@ -1,0 +1,30 @@
+﻿<section>
+    <section class="col-sm-6 login-side-info color-theme">
+        <h3 class="font-bold-600">
+            CargoCanal Administration
+        </h3>
+        <h3 class="font-bold-600">Go the extra mile in making the client smile.</h3>
+        <h3 class="font-bold-600">Together we achieve unlimited possibilities ...</h3>
+    </section>
+    <section class="login-box">
+        <div class="login-logo">
+            <img src="Content/Images/cargocanal_text.png" alt="logo" class="logo">
+        </div>
+        <form name="form" id="form" ng-submit="signIn()" novalidate>
+            <!--<h3 class="login-title">Sign In</h3>-->
+            <div class="form-group">
+                <p class="text-danger">{{loginFailed}}</p>
+                <label for="UserName" class="sr-only">Username</label>
+                <input name="UserName" type="email" class="form-control" placeholder="Username" ng-model="login.Username" />
+            </div>
+            <div class="form-group">
+                <label for="Password" class="sr-only">Password</label>
+                <input name="Password" type="password" class="form-control" placeholder="Password" ng-model="login.Password" />
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                <h6 class="color-theme">Forgot password?</h6>
+            </div>
+        </form>
+    </section>
+</section>

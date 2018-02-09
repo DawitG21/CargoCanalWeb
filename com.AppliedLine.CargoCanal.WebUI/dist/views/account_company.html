@@ -1,0 +1,187 @@
+<div class="banner-company">
+    <i class="logo-company common-sprite people"></i>
+    <h4 class="font-bold">{{User.Company.CompanyName}}</h4>
+    <h5 class="font-bold">TIN: {{User.Company.TIN}}</h5>
+</div>
+
+<form name="form" ng-submit="account.company.save()" class="tile" novalidate>
+    <div class="form-group">
+        <label class="">Company Information</label>
+        <button class="close" type="button" ng-click="account.company.edit()" ng-hide="account.company.editEnabled">
+            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+            <span class="sr-only">Edit</span>
+        </button>
+        <button class="close" type="button" ng-click="account.company.editEnabled=false" ng-show="account.company.editEnabled">
+            <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
+
+    <div class="row" ng-show="account.company.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-tower pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Company Name</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15" placeholder="My Company"
+                   ng-model="account.company.data.CompanyName" />
+        </div>
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-earphone pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>TIN</label>
+            <input name="TIN" type="text" class="form-control textbox-editor margin-bottom-15" placeholder="0000012345"
+                   ng-model="account.company.data.TIN" ng-minlength="10" ng-maxlength="10" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-globe pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Address</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20">{{User.Company.Address}}</p>
+            <input type="text" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. 3, Super Drive Way"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.Address" />
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.company.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-globe pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Town / City</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.TownCity" />
+        </div>
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-globe pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>State</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.State" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-phone-alt pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Telephone</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20">{{User.Company.Telephone}}</p>
+            <input type="text" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. +251 91 234 5678"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.Telephone" />
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-envelope pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Email</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20"><a href="mailto:{{User.Company.Email}}">{{User.Company.Email}}</a></p>
+            <input type="email" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. john.doe@mail.com"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.Email"
+                   ng-pattern="regexEmail" />
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-user pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Contact Name</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20">{{User.Company.ContactName}}</p>
+            <input type="text" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. John Micheal Doe"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.ContactName" />
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-earphone pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-5">
+            <label>Contact Mobile</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20">{{User.Company.ContactMobile}}</p>
+            <input type="tel" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. +251 91 234 5678"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.ContactMobile" />
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-link pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>Website</label>
+            <p ng-hide="account.company.editEnabled" class="min-height-20"><a href="{{User.Company.Website}}" target="_blank">{{User.Company.Website}}</a></p>
+            <input type="url" class="form-control textbox-editor margin-bottom-15" placeholder="e.g. http://www.mycompany.com"
+                   ng-show="account.company.editEnabled"
+                   ng-model="account.company.data.Website"
+                   ng-pattern="regexUrl" />
+
+            <hr ng-hide="account.company.editEnabled" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.company.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-inbox pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-11">
+            <label>PO Box</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.POBox" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.company.editEnabled">
+        <div class="col-xs-2 col-sm-1">
+            <span class="glyphicon glyphicon-map-marker pull-right"></span>
+        </div>
+        <div class="col-xs-10 col-sm-2">
+            <label>HouseNo</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.HouseNo" />
+        </div>
+        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-2">
+            <label>Wereda</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.Wereda" />
+        </div>
+
+        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-2">
+            <label>Kefle Ketema</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.KefleKetema" />
+        </div>
+
+        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-2">
+            <label>Kebele</label>
+            <input type="text" class="form-control textbox-editor margin-bottom-15"
+                   ng-model="account.company.data.Kebele" />
+        </div>
+    </div>
+
+    <div class="row" ng-show="account.company.editEnabled">
+        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-11">
+            <button type="submit" class="btn btn-default btn-lg nav-button margin-top-15"
+                    ng-click="account.company.save()" ng-disabled="form.$invalid">
+                Save
+            </button>
+
+        </div>
+    </div>
+</form>

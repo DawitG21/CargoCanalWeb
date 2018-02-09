@@ -1,0 +1,72 @@
+﻿<div class="form-group">
+    <div id="report-view" ui-view class="font-9em">
+        <div class="col-xs-12 text-center">
+            <h3>
+                {{statusreport.Name}}
+                <button class="btn btn-primary" ng-click="viewColumns()">Columns</button>
+            </h3>
+        </div>
+        <div data-table="table-svr">
+            <table class="table table-responsive">
+                <thead>
+                    <tr>
+                        <th class="table-header">Days</th>
+                        <th class="table-header" ng-click="sortData(h)"
+                            ng-repeat="h in customReportHeaders"
+                            ng-show="currentColumnMapping.ColumnMappings[$index]">
+                            <div class="inline-block">{{h}} <span ng-class="getSortClass(h)"></span></div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="r in statusreport.ImportExport | orderBy: sortColumn: reverseSort | filter: searchText">
+                        <td>
+                            <span class="badge" ng-class="getStatusDaysClass(r.ImportExportID)">
+                                {{getStatusDays(r.ImportExportID)}}
+                            </span>
+                        </td>
+                        <td ng-repeat="c in r" ng-show="currentColumnMapping.ColumnMappings[$index]">{{c}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="fullscreen" ng-hide="mapIsHidden">
+        <div class="bg-color-white padding-20 fullscreen-content">
+            <div>
+                <div class="form-inline">
+                    <button type="button" class="btn btn-default color-red" ng-click="hideColumns()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+
+                <!-- MappingModel edit area -->
+                <div class="margin-top-15 row">
+                    <div class="form-inline col-xs-12 col-md-12">
+                        <div class="form-group">
+                            <!-- toggles the checkboxes of the column mappings-->
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" class="default-checkbox" ng-model="allMappings"
+                                           ng-click="toggleCurrentMapping(allMappings)" />
+                                    Check All
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="h in customReportHeaders">
+                        <label class="font-9em margin-right-15">
+                            <input type="checkbox" class="default-checkbox"
+                                   ng-model="currentColumnMapping.ColumnMappings[$index]" /> {{h}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

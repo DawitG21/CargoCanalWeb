@@ -1,0 +1,52 @@
+<div class="form-group">
+    <label for="DeclarationNo" data-i18n="_DeclarationNo_"></label>
+    <input type="text" class="form-control" id="DeclarationNo" ng-model="formData.ImportExport.DeclarationNo" />
+</div>
+<div class="form-group">
+    <label for="ddlYear" data-i18n="_DeclarationDate_"></label>
+    <input type="text" class="form-control" id="DeclarationNo" ng-model="formData.ImportExport.DeclarationDate | date:'yyyy-MM-dd'" />
+</div>
+<div class="form-group">
+    <label for="OriginID" data-i18n="_ProductOrigin_"></label>
+    <select id="OriginID" class="form-control" ng-model="formData.ImportExport.OriginID">
+        <option ng-repeat="l in valuesData.Locations" value="{{l.ID}}">
+            {{ l.Location }}
+        </option>
+    </select>
+</div>
+<div class="form-group">
+    <label for="StuffingLocationID" data-i18n="_StuffingLocation_"></label>
+    <select id="StuffingLocationID" class="form-control" ng-model="formData.ImportExport.StuffingLocationID">
+        <option ng-repeat="l in valuesData.Locations" value="{{l.ID}}">
+            {{ l.Location }}
+        </option>
+    </select>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="ETA">ETA</label>
+            <input type="text" class="form-control" id="ETA" ng-model="formData.ImportExport.ETA | date:'yyyy-MM-dd'" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="ATA">ATA</label>
+            <input type="text" class="form-control" id="ATA" ng-model="formData.ImportExport.ATA | date:'yyyy-MM-dd'" />
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="CPORecievedDate">CPO <span data-i18n="_ReceivedDate_"></span></label>
+            <input type="text" class="form-control" id="CPORecievedDate" ng-model="formData.ImportExport.CPORecievedDate | date:'yyyy-MM-dd'" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label for="OriginalDocumentDate" data-i18n="_OriginalDocumentDate_"></label>
+            <input type="text" class="form-control" id="OriginalDocumentDate" ng-model="formData.ImportExport.OriginalDocumentDate | date:'yyyy-MM-dd'" />
+        </div>
+    </div>
+</div>
