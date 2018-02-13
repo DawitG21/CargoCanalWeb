@@ -60,26 +60,20 @@ gulp.task('movelib', ['movefont'], function () {
 gulp.task('dist_clean', ['movelib'], function () {
     gulp.src(['src/**/*.*', '!src/**/*.js', '!src/**/*.css', '!src/**/*.html'], { base: 'src/' })
         .pipe(gulp.dest('dist'));
-})
+});
 
-//gulp.task('dist', ['dist_clean'], function () {
-//    gulp.src(['src/**/*.js', 'src/**/*.css', 'src/**/*.html', '!src/assets/images/**/*.*'], { base: 'src/' })
-//        .pipe(replace('src/', ''))
-//        .pipe(replace('http://localhost:49931', 'https://appliedline.com/cargocanalapi'))
-//        .pipe(gulp.dest('dist'));
-//})
 
 gulp.task('dist', ['dist_clean'], function () {
     gulp.src(['src/**/*.js', 'src/**/*.css', '!src/assets/images/**/*.*'], { base: 'src/' })
         .pipe(replace('src/', ''))
         .pipe(replace('http://localhost:49931', 'https://appliedline.com/cargocanalapi'))
         .pipe(gulp.dest('dist'));
-})
+});
 
 gulp.task('root_clean', ['dist'], function () {
     gulp.src(filesToMove.root_clean, { base: './' })
         .pipe(gulp.dest('dist'));
-})
+});
 
 gulp.task('web_config', ['root_clean'], function () {
     gulp.src(filesToMove.webconfig, { base: './' })

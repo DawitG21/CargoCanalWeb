@@ -10343,3 +10343,8 @@ This is an example of how to use the image sprite in your own CSS files
 	height: 128px;
 	background-position: -10px -1560px;
 }
+.common-sprite.google-play-badge-h60 {
+	width: 155px;
+	height: 60px;
+	background-position: -10px -1698px;
+}
