@@ -30,6 +30,8 @@ namespace com.AppliedLine.CargoCanal.WebAPI
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // enable Tracing
+            config.EnableSystemDiagnosticsTracing();
 
             config.Routes.MapHttpRoute(
                 name: "ActionApi",
