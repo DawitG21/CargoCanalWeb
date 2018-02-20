@@ -705,7 +705,6 @@
     <Content Include="dist\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="dist\assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="dist\assets\i18n\resources-locale_am-ET.json" />
-    <Content Include="dist\assets\i18n\resources-locale_default.json" />
     <Content Include="dist\assets\i18n\resources-locale_en-US.json" />
     <Content Include="dist\Web.config" />
     <Content Include="manifest.webmanifest" />

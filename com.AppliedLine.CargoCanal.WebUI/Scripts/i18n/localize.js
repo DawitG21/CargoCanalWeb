@@ -18,6 +18,12 @@
 
                 // success handler for all server communication
                 successCallback: function (data) {
+                    // hack for 200 response instead of 404
+                    if (JSON.stringify(data).includes('<html')) {
+                        localize.setUrl('src/assets/i18n/resources-locale_en-US.json');
+                        return;
+                    }
+
                     // store the returned array in the dictionary
                     localize.dictionary = data;
                     // set the flag that the resource are loaded
@@ -42,6 +48,7 @@
                 buildUrl: function () {
                     if (!localize.language) {
                         var lang, androidLang;
+                        
                         // works for earlier version of Android (2.3.x)
                         if ($window.navigator && $window.navigator.userAgent && (androidLang = $window.navigator.userAgent.match(/android.*\W(\w\w)-(\w\w)\W/i))) {
                             lang = androidLang[1];
@@ -60,12 +67,13 @@
                     // build the url to retrieve the localized resource file
                     var url = localize.url || localize.buildUrl();
                     // request the resource file
-                    $http({ method: "GET", url: url, cache: false }).then(localize.successCallback, function (error) {
-                        // the request failed set the url to the default resource file
-                        var url = 'src/assets/i18n/resources-locale_default.json';
-                        // request the default resource file
-                        $http({ method: "GET", url: url, cache: false }).then(localize.successCallback);
-                    });
+                    $http({ method: "GET", url: url, cache: false })
+                        .then(localize.successCallback, function (error) {
+                            // the request failed set the url to the default resource file
+                            url = 'src/assets/i18n/resources-locale_en-US.json';
+                            // request the default resource file
+                            $http({ method: "GET", url: url, cache: false }).then(localize.successCallback);
+                        });
                 },
 
                 // checks the dictionary for a localized resource string
