@@ -488,7 +488,6 @@
     <Content Include="Scripts\jquery.signalR.min.js" />
     <Content Include="src\assets\css\style-bundle-defer.min.css" />
     <Content Include="src\assets\i18n\resources-locale_am-ET.json" />
-    <Content Include="src\assets\i18n\resources-locale_default.json" />
     <Content Include="src\assets\i18n\resources-locale_en-US.json" />
     <Content Include="favicon.png" />
     <Content Include="fonts\fontawesome-webfont.svg" />

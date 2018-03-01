@@ -930,7 +930,7 @@ var api = serverUrl + '/api';
                     .then(function (data) {
                         if (data !== null) {
                             $scope.imports = data.value;
-                            $scope.groupedImports = $filter('groupByDate')($scope.imports, 'DateInserted')
+                            $scope.groupedImports = $filter('groupByDate')($scope.imports, 'DateInserted');
                             $scope.odataInfo = data.odataInfo;
                             appFactory.prepCards();
                         }
@@ -955,22 +955,57 @@ var api = serverUrl + '/api';
                     });
             };
 
+            function confirmDoneOrRecycle(d, pindex, cindex, model, message, fnc) {
+                $scope.confirmed = false;
+                if (!d && model) {
+                    d = model.d;
+                    $scope.confirmed = true; // user confirmed
+                    $rootScope.closeDialog(); // close the confirm dialog
+                }
+
+                // d should exist by now
+                if (!d || $scope.invalidOperation(d)) {
+                    return undefined;
+                }
+
+
+                // show confirm dialog before recycle
+                if (!$scope.confirmed) {
+                    appFactory.showDialog(message + ' <b>' + d.Bill + '</b>?', null, true,  fnc);
+                    model = {
+                        d: d,
+                        pindex: pindex,
+                        cindex: cindex
+                    };
+                }
+
+                return model;
+            }
+
             // mark an import/export as completed
             $scope.markAsDone = function (d, pindex, cindex) {
-                if ($scope.invalidOperation(d)) {
-                    return false;
-                }
+                
+                $scope.doneData = confirmDoneOrRecycle(d,
+                    pindex,
+                    cindex,
+                    $scope.doneData,
+                    'You will no longer be able to update this document if you mark it as done. Continue done on document',
+                    $scope.markAsDone);
+
+                if (!$scope.confirmed) return false;
 
                 $http({
                     method: 'GET',
-                    url: api + '/importexport/importexportmarkasdone?id=' + d.ID,
+                    url: api + '/importexport/importexportmarkasdone?id=' + $scope.doneData.d.ID,
                     headers: { 'Content-Type': 'application/json; charset=utf-8' }
                 })
                     .then(function (response) {
                         if ($scope.exports === undefined)
-                            $scope.groupedImports[pindex].value[cindex].Completed = true;
+                            $scope.groupedImports[$scope.doneData.pindex].value[$scope.doneData.cindex].Completed = true;
                         else
-                            $scope.groupedExports[pindex].value[cindex].Completed = true;
+                            $scope.groupedExports[$scope.doneData.pindex].value[$scope.doneData.cindex].Completed = true;
+
+                        appFactory.showDialog('Document marked as done.');
                     }, function (error) {
                         switch (error.data.Message) {
                             case 'ERROR_STATUS_NOT_DELIVERED':
@@ -988,24 +1023,30 @@ var api = serverUrl + '/api';
 
             // terminate an importExport document and remove from collection
             $scope.terminateImportExport = function (d, pindex, cindex) {
-                if ($scope.invalidOperation(d)) {
-                    return false;
-                }
+
+                $scope.recycleData = confirmDoneOrRecycle(d,
+                    pindex,
+                    cindex,
+                    $scope.recycleData,
+                    'You will no longer be able to update this document if recycled. Continue recycle on document',
+                    $scope.terminateImportExport);
+
+                if (!$scope.confirmed) return false;
 
                 $http({
                     method: 'POST',
                     url: api + '/importexport/importexportterminate',
-                    data: { ID: d.ID, Token: $rootScope.User.Login.Token },
+                    data: { ID: $scope.recycleData.d.ID, Token: $rootScope.User.Login.Token },
                     headers: { 'Content-Type': 'application/json; charset=utf-8' }
                 })
                     .then(function (response) {
                         // remove the document from the collection
                         if ($scope.exports === undefined)
-                            $scope.groupedImports[pindex].value[cindex].Terminated = true;
+                            $scope.groupedImports[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true; // is imports
                         else
-                            $scope.groupedExports[pindex].value[cindex].Terminated = true;
+                            $scope.groupedExports[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true; // is exports
 
-                        appFactory.showDialog('Document moved to Trash.');
+                        appFactory.showDialog('Document has been recycled.');
                     }, function (error) {
                         if (error.status === -1) {
                             // connection broken
@@ -1367,6 +1408,9 @@ var api = serverUrl + '/api';
                                 // update view with company name
                                 $scope.consigneeInfo.data.Consignee.CompanyName = $scope.consigneeInfo.dataRef.Consignee.CompanyName = response.CompanyName;
                                 $scope.consigneeInfo.data.Consignee.TIN = $scope.consigneeInfo.dataRef.Consignee.TIN = response.TIN;
+                                $scope.consigneeInfo.data.Consignee.ContactName = $scope.consigneeInfo.dataRef.Consignee.ContactName = response.ContactName;
+                                $scope.consigneeInfo.data.Consignee.ContactMobile = $scope.consigneeInfo.dataRef.Consignee.ContactMobile = response.ContactMobile;
+                                $scope.consigneeInfo.data.Consignee.Email = $scope.consigneeInfo.dataRef.Consignee.Email = response.Email;
 
                                 $scope.consigneeInfo.message = 'TIN updated successfully.';
                                 appFactory.showDialog($scope.consigneeInfo.message);

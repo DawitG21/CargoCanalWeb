@@ -209,9 +209,10 @@
             // optionsMore object helpers
             $rootScope.optionsMore = {
                 openWindow: false,
-                show: function (record, recordIndex) {
+                show: function (record, recordIndex, recordChildIndex) {
                     $rootScope.record = record;
                     $rootScope.recordIndex = recordIndex;
+                    $rootScope.recordChildIndex = recordChildIndex;
                     $rootScope.optionsMore.openWindow = true;
                     service.setModalOpen(true);
                 },
@@ -220,6 +221,7 @@
                     service.setModalOpen(false);
                     $rootScope.record = undefined;
                     $rootScope.recordIndex = undefined;
+                    $rootScope.recordChildIndex = undefined;
                 }
             };
 

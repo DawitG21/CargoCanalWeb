@@ -29,7 +29,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.FreightExRate" required></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.FreightExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.FreightExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.PortHandlingExRate" required></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.PortHandlingExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.PortHandlingExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InlandTransportExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.InlandTransportExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.InlandTransportExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -71,7 +71,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.DischargePortStorageExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.DischargePortStorageExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.DischargePortStorageExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -85,7 +85,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InlandStorageExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.InlandStorageExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.InlandStorageExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InsuranceExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.InsuranceExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.InsuranceExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                             <select class="form-control" required ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.AgentCommisionExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.AgentCommisionExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.AgentCommisionExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
@@ -127,7 +127,7 @@
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.TruckDetentionExRate"></select>
                                         </div>
                                         <div class="col-xs-2">
-                                            <kbd>${{costInfo.data.Cost.TruckDetentionExRate.Rate | number:2}}</kbd>
+                                            <kbd>{{costInfo.data.Cost.TruckDetentionExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>

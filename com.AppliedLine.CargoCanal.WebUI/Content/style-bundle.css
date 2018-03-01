@@ -8980,7 +8980,7 @@ body {
     overflow: hidden
 }
 
-.nav .img-profile-name{
+.nav .img-profile-name {
     margin-right: 35px;
 }
 
@@ -9652,21 +9652,21 @@ i.loader-box-4 {
     overflow: hidden;
 }
 
-.fullscreen .modal-heading.text {
-    float: left;
-    margin-top: 15px;
-    font-weight: 400;
-}
-
-.fullscreen .modal-heading.close {
-    color: white;
-    opacity: 0.7;
-}
-
-    .fullscreen .modal-heading.close:hover, .fullscreen .modal-heading.close:focus {
-        color: white;
-        opacity: 0.9;
+    .fullscreen .modal-heading.text {
+        float: left;
+        margin-top: 15px;
+        font-weight: 400;
     }
+
+    .fullscreen .modal-heading.close {
+        color: white;
+        opacity: 0.7;
+    }
+
+        .fullscreen .modal-heading.close:hover, .fullscreen .modal-heading.close:focus {
+            color: white;
+            opacity: 0.9;
+        }
 
 .float-right {
     float: right;
@@ -9970,7 +9970,6 @@ i.loader-box-4 {
     z-index: 2;
 }
 
-
 .card-options-close {
     left: 100%;
 }
@@ -10010,7 +10009,15 @@ i.loader-box-4 {
     text-align: center;
     cursor: pointer;
     overflow: hidden;
+    -webkit-transition: all 1s;
+    -moz-transition: all 1s;
+    -o-transition: all 1s;
+    transition: all 1s;
 }
+
+    .card-option:hover {
+        background-color: #9090ad;
+    }
 
     .card-option.icon {
         display: inline-block;

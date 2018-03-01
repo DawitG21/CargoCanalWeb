@@ -13,7 +13,7 @@
         <section class="card-options">
             <aside class="card-options-btn"></aside>
             <article class="card-options-content">
-                <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $index)"></div>
+                <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $parent.$index, $index)"></div>
 
                 <div class="card-option" ng-click="preview.import.show(d)">
                     <span class="card-option icon">
