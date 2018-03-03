@@ -85,8 +85,11 @@
     <Content Include="Content\images\google-play-badge-h60.png" />
     <Content Include="Content\images\icons\caret_white_l_16.png" />
     <Content Include="Content\images\icons\caret_white_r_16.png" />
+    <Content Include="Content\images\icons\done-32.png" />
     <Content Include="Content\images\icons\fullscreen_black_24.png" />
     <Content Include="Content\images\icons\fullscreen_black_32.png" />
+    <Content Include="Content\images\icons\money-32.png" />
+    <Content Include="Content\images\icons\trash-32.png" />
     <Content Include="Content\images\icons\user_128.png" />
     <Content Include="Content\images\icons\user_32.png" />
     <Content Include="Content\images\icons\user_64.png" />

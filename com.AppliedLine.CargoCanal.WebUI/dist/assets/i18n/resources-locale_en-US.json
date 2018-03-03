@@ -1,5 +1,15 @@
 [
   {
+    "key": "_Preview_",
+    "value": "Preview",
+    "description": "Preview"
+  },
+  {
+    "key": "_Recycle_",
+    "value": "Recycle",
+    "description": "Recycle"
+  },
+  {
     "key": "_NoDocument_",
     "value": "No document right now",
     "description": "No Document right now text"

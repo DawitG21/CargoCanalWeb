@@ -9906,10 +9906,22 @@ i.loader-box-4 {
     text-align: center;
 }
 
+.select-custom {
+    margin: 15px 15px 0 0;
+    border-radius: 8px;
+    color: white;
+    background: #8691c9;
+}
+
+    .select-custom:focus {
+        outline: none;
+    }
+
 /* card sytles*/
 .card, .card-sm {
     width: 100%;
     height: 102px;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px 0;
     position: relative;
@@ -9954,6 +9966,10 @@ i.loader-box-4 {
     height: 32px;
 }
 
+.no-background, .card-logo.no-background {
+    background-color: transparent;
+}
+
 .card-sm .card-content {
     left: 50px;
     height: 32px;
@@ -9975,7 +9991,7 @@ i.loader-box-4 {
 }
 
 .card-options-open {
-    left: 460px;
+    left: 380px;
 }
 
     .card-options-open ~ .card-logo {
@@ -10016,7 +10032,7 @@ i.loader-box-4 {
 }
 
     .card-option:hover {
-        background-color: #9090ad;
+        background-color: #ddd; /*#9090ad;*/
     }
 
     .card-option.icon {
@@ -10057,10 +10073,33 @@ i.loader-box-4 {
     width: 32px;
     height: 32px;
     padding: 4px;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     opacity: 0;
 }
 
+.square-wrapper {
+    position: relative;
+    width: 80px;
+    margin: 0 10px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.square-img-wr {
+    position: relative;
+    width: inherit;
+    height: 40px;
+}
+
+.square-text {
+    font-size: 1em;
+    line-height: 1;
+    text-align: center;
+    margin: 5px 0 0;
+    font-weight: 500;
+    white-space: pre-line;
+}
 
 /* upload profile picture styles*/
 .cropArea {
@@ -10290,68 +10329,83 @@ This is an example of how to use the image sprite in your own CSS files
 	height: 128px;
 	background-position: -10px -836px;
 }
+.common-sprite.done-32 {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -974px;
+}
+.common-sprite.money-32 {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1016px;
+}
+.common-sprite.trash-32 {
+	width: 32px;
+	height: 32px;
+	background-position: -10px -1058px;
+}
 .common-sprite.people {
 	width: 100px;
 	height: 100px;
-	background-position: -10px -974px;
+	background-position: -10px -1100px;
 }
 .common-sprite.caret_white_l_16 {
 	width: 16px;
 	height: 16px;
-	background-position: -10px -1084px;
+	background-position: -10px -1210px;
 }
 .common-sprite.caret_white_r_16 {
 	width: 16px;
 	height: 16px;
-	background-position: -10px -1110px;
+	background-position: -10px -1236px;
 }
 .common-sprite.fullscreen_black_24 {
 	width: 24px;
 	height: 24px;
-	background-position: -10px -1136px;
+	background-position: -10px -1262px;
 }
 .common-sprite.fullscreen_black_32 {
 	width: 32px;
 	height: 32px;
-	background-position: -10px -1170px;
+	background-position: -10px -1296px;
 }
 .common-sprite.appliedline_32 {
 	width: 32px;
 	height: 32px;
-	background-position: -10px -1212px;
+	background-position: -10px -1338px;
 }
 .common-sprite.appliedline_64 {
 	width: 64px;
 	height: 64px;
-	background-position: -10px -1254px;
+	background-position: -10px -1380px;
 }
 .common-sprite.cargocanal_32 {
 	width: 32px;
 	height: 32px;
-	background-position: -10px -1328px;
+	background-position: -10px -1454px;
 }
 .common-sprite.cargocanal_64 {
 	width: 64px;
 	height: 64px;
-	background-position: -10px -1370px;
+	background-position: -10px -1496px;
 }
 .common-sprite.cargocanal_text_32 {
 	width: 96px;
 	height: 32px;
-	background-position: -10px -1444px;
+	background-position: -10px -1570px;
 }
 .common-sprite.cargocanal_text_64 {
 	width: 192px;
 	height: 64px;
-	background-position: -10px -1486px;
+	background-position: -10px -1612px;
 }
 .common-sprite.cargocanal_text_128 {
 	width: 383px;
 	height: 128px;
-	background-position: -10px -1560px;
+	background-position: -10px -1686px;
 }
 .common-sprite.google-play-badge-h60 {
 	width: 155px;
 	height: 60px;
-	background-position: -10px -1698px;
+	background-position: -10px -1824px;
 }

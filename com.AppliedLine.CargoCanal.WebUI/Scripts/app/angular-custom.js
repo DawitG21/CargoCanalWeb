@@ -1320,34 +1320,39 @@ var api = serverUrl + '/api';
                 appFactory.setIsTinValid(bool);
             };
 
-
             $rootScope.closeWindow = function () {
                 $rootScope.showWindow = false;
                 appFactory.setModalOpen(false);
             };
 
-            $scope.setEnglishLanguage = function () {
-                localize.setLanguage('en-US');
-                // call global variable in script.js to disable Amharic writing
-                $sessionStorage.amET = undefined;
+            $scope.setLanguage = function () {
+                localize.setLanguage($scope.lang);
+                if (localize.language === 'am-ET') {
+                    // call global variable in script.js to enable Amharic writing
+                    $sessionStorage.amET = true;
+                } else {
+                    $sessionStorage.amET = undefined;
+                }
             };
 
-            $scope.setAmharicLanguage = function () {
-                localize.setLanguage('am-ET');
-                // call global variable in script.js to enable Amharic writing
-                $sessionStorage.amET = true;
-            };
+            if ($sessionStorage.amET) {
+                $scope.lang = 'am-ET';
+                $scope.setLanguage();
+            }
+            else {
+                localize.initLocalizedResources();
+                $scope.lang = localize.language;
+            }
 
-            if ($sessionStorage.amET) $scope.setAmharicLanguage();
-            else localize.initLocalizedResources();
-
+            
             // SIGNALR CODES
             var clientProxy = signalRHubProxy(serverUrl, 'accountHub');
-            clientProxy.on('toggleUserAccess', function (data) {
-                if ($rootScope.User && $rootScope.User.Login.ID === data.ID) {
-                    $scope.logout();
-                }
-            })
+            clientProxy.on('toggleUserAccess',
+                function(data) {
+                    if ($rootScope.User && $rootScope.User.Login.ID === data.ID) {
+                        $scope.logout();
+                    }
+                });
             
 
 
@@ -2244,7 +2249,7 @@ var api = serverUrl + '/api';
 
                 // show confirm dialog before recycle
                 if (!$scope.confirmed) {
-                    appFactory.showDialog(message + ' <b>' + d.Bill + '</b>?', null, true,  fnc);
+                    appFactory.showDialog(message + ' <b>' + (d.Bill || d.WayBill) + '</b>?', null, true,  fnc);
                     model = {
                         d: d,
                         pindex: pindex,

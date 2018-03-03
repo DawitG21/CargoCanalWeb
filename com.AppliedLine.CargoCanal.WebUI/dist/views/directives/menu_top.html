@@ -44,23 +44,25 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="" id="langEnUS" title="English"
-                   class="inline-block"
-                   ng-click="setEnglishLanguage()">A</a>|
-                <a href="" id="langAmET" title="Amharic"
-                   class="inline-block"
-                   ng-click="setAmharicLanguage()">አ</a>
+                <span class="glyphicon glyphicon-globe"></span>
+                <select class="select-custom" ng-model="lang" ng-change="setLanguage()">
+                    <option value="en-US">English</option>
+                    <option value="am-ET">አማርኛ</option>
+                </select>
             </li>
             <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
                 <a ui-sref="login" data-i18n="_Login_"></a>
-            </li>
-            <li ui-sref-active="active" ng-show="User.Login.Token.length > 0">
-                <a ui-sref="login" ng-click="logout()" data-i18n="_Logout_"></a>
             </li>
             <li ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
                 <a class="img-profile-wr" ui-sref="account">
                     <span class="img-profile-name" ng-bind="User.Person.FirstName"></span><img class="common-sprite user-32 img-profile" ng-src="{{User.Person.PhotoDataUrl}}" />
                 </a>
+            </li>
+            <li class="dropdown" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a ui-sref="login" ng-click="logout()" data-i18n="_Logout_"></a></li>
+                </ul>
             </li>
         </ul>
     </div>

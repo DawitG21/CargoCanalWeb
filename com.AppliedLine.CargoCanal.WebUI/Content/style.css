@@ -969,10 +969,22 @@ i.loader-box-4 {
     text-align: center;
 }
 
+.select-custom {
+    margin: 15px 15px 0 0;
+    border-radius: 8px;
+    color: white;
+    background: #8691c9;
+}
+
+    .select-custom:focus {
+        outline: none;
+    }
+
 /* card sytles*/
 .card, .card-sm {
     width: 100%;
     height: 102px;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 10px 0;
     position: relative;
@@ -1017,6 +1029,10 @@ i.loader-box-4 {
     height: 32px;
 }
 
+.no-background, .card-logo.no-background {
+    background-color: transparent;
+}
+
 .card-sm .card-content {
     left: 50px;
     height: 32px;
@@ -1038,7 +1054,7 @@ i.loader-box-4 {
 }
 
 .card-options-open {
-    left: 460px;
+    left: 380px;
 }
 
     .card-options-open ~ .card-logo {
@@ -1079,7 +1095,7 @@ i.loader-box-4 {
 }
 
     .card-option:hover {
-        background-color: #9090ad;
+        background-color: #ddd; /*#9090ad;*/
     }
 
     .card-option.icon {
@@ -1120,10 +1136,33 @@ i.loader-box-4 {
     width: 32px;
     height: 32px;
     padding: 4px;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     opacity: 0;
 }
 
+.square-wrapper {
+    position: relative;
+    width: 80px;
+    margin: 0 10px 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.square-img-wr {
+    position: relative;
+    width: inherit;
+    height: 40px;
+}
+
+.square-text {
+    font-size: 1em;
+    line-height: 1;
+    text-align: center;
+    margin: 5px 0 0;
+    font-weight: 500;
+    white-space: pre-line;
+}
 
 /* upload profile picture styles*/
 .cropArea {

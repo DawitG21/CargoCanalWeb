@@ -8,54 +8,82 @@
         <aside class="card-options-btn"></aside>
         <article class="card-options-content">
             <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $index)"></div>
-            <div ng-if="d.ImpExpTypeID == 1" class="card-option" ng-click="preview.import.show(d)">
-                <span class="card-option icon">
-                    <span class="common-sprite container-32"></span>
-                    <i class="badge icon-data">{{d.Items.length}}</i>
-                </span>
+            <div class="square-wrapper" ng-if="d.ImpExpTypeID == 1" ng-click="preview.import.show(d)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite container-32"></span>
+                        <i class="badge icon-data">{{d.Items.length}}</i>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Preview_">Preview</p>
             </div>
-            <div ng-if="d.ImpExpTypeID == 2" class="card-option" ng-click="preview.export.show(d)">
-                <span class="card-option icon">
-                    <span class="common-sprite container-32"></span>
-                    <i class="badge icon-data">{{d.Items.length}}</i>
-                </span>
+            <div class="square-wrapper" ng-if="d.ImpExpTypeID == 2" ng-click="preview.export.show(d)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite container-32"></span>
+                        <i class="badge icon-data">{{d.Items.length}}</i>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Preview_">Preview</p>
             </div>
-            <div class="card-option" ng-click="status.getStatuses(d)">
-                <span class="card-option icon">
-                    <span class="common-sprite bell-32"></span>
-                    <i class="badge icon-data">i</i>
-                </span>
+
+            <div class="square-wrapper" ng-click="status.getStatuses(d)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite bell-32"></span>
+                        <i class="badge icon-data">i</i>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Statuses_"></p>
             </div>
-            <div class="card-option" ng-click="problem.getProblems(d)">
-                <span class="card-option icon">
-                    <span class="common-sprite fire-32"></span>
-                    <i ng-class="{'badge icon-data bg-color-red': d.ProblemsUnresolved, 'badge icon-data': !d.ProblemsUnresolved}">{{d.ProblemsUnresolved}}</i>
-                </span>
+
+            <div class="square-wrapper" ng-click="problem.getProblems(d)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite fire-32"></span>
+                        <i ng-class="{'badge icon-data bg-color-red': d.ProblemsUnresolved, 'badge icon-data': !d.ProblemsUnresolved}">{{d.ProblemsUnresolved}}</i>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Problems_"></p>
             </div>
-            <div class="card-option" ng-click="consigneeInfo.show(d)">
-                <span class="card-option icon">
-                    <span class="glyphicon glyphicon-user"></span>
-                    <p>Consignee</p>
-                </span>
+
+            <div class="square-wrapper" ng-click="consigneeInfo.show(d)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite user-32"></span>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Consignee_"></p>
             </div>
-            <div class="card-option" ng-click="costInfo.show(d, $index)">
-                <span class="card-option icon">
-                    <span class="glyphicon glyphicon-usd"></span>
-                    <p>Costs</p>
-                </span>
+
+            <div class="square-wrapper" ng-click="costInfo.show(d, $parent.$index, $index)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite money-32"></span>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Cost_"></p>
             </div>
-            <div class="card-option" ng-click="markAsDone(d, $index)">
-                <span class="card-option icon">
-                    <span class="glyphicon glyphicon-check"></span>
-                    <p>Done</p>
-                </span>
+
+            <div class="square-wrapper" ng-click="markAsDone(d, $parent.$index, $index)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite done-32"></span>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Done_"></p>
             </div>
-            <div class="card-option" ng-click="terminateImportExport(d, $index)">
-                <span class="card-option icon">
-                    <span class="glyphicon glyphicon-trash"></span>
-                    <p>Recycle</p>
-                </span>
+
+            <div class="square-wrapper" ng-click="terminateImportExport(d, $parent.$index, $index)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite trash-32"></span>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Recycle_">Recycle</p>
             </div>
+            
+
         </article>
     </section>
 

@@ -1,5 +1,15 @@
 [
   {
+    "key": "_Preview_",
+    "value": "እይታ",
+    "description": "Preview"
+  },
+  {
+    "key": "_Recycle_",
+    "value": "መተው",
+    "description": "Recycle"
+  },
+  {
     "key": "_NoDocument_",
     "value": "አሁን ምንም ዶክመት የለም",
     "description": "No Document right now text"
