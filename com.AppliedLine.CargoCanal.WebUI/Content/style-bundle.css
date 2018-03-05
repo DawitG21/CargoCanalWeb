@@ -9079,6 +9079,21 @@ label {
     cursor: pointer;
 }
 
+.button-outline {
+    padding: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+
+    .button-outline:hover {
+        background-color: #3d3d3d;
+        color: #fff;
+    }
+
+a.button-outline:hover, a.button-outline:focus {
+    text-decoration: none;
+}
+
 #badges {
     overflow: auto;
     font-size: 14px;

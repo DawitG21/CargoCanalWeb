@@ -47,7 +47,13 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-sm-push-4"></div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="Quantity"><span data-i18n="_Cargo_"></span> <span data-i18n="_Quantity_"></span></label>
+                                            <input type="number" min="0" class="form-control" name="Quantity" ng-model="newItem.Quantity" required />
+                                        </div>
+                                    </div>
+                                    <!--<div class="col-sm-push-4"></div>-->
                                 </div>
 
                                 <section class="section-header">
@@ -98,7 +104,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <!--<div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="Quantity" data-i18n="_Quantity_"></label>
@@ -106,7 +112,7 @@
 
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>
@@ -124,14 +130,14 @@
                             </section>
                             <section>
                                 <div>
-                                    <a ng-click="initItemDetail()" class="pointer" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus-sign tiny-button"></span> Item Detail</a>
-                                    <a name="files" class="pointer"
+                                    <a ng-click="initItemDetail()" class="button-outline" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus-sign tiny-button"></span> Item Detail</a>
+                                    <a name="files" class="button-outline"
                                        ng-model="files"
                                        ngf-select="uploadFiles($files, $invalidFiles)"
                                        ngf-keep="true"
                                        accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
-                                       ngf-max-size="2MB"
-                                       ngf-multiple="true"><span class="glyphicon glyphicon-paperclip tiny-button"></span>Attach (2MB/file)</a> 
+                                       ngf-max-size="16MB"
+                                       ngf-multiple="true"><span class="glyphicon glyphicon-paperclip tiny-button"></span>Attach (16MB/file)</a> 
                                 </div>
                                 
                                 <div style="overflow: auto; padding-top: 10px;">
@@ -176,8 +182,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <button class="btn btn-primary" ng-click="addItemDetailToItem()" ng-disabled="formItemDetail.$invalid">Save</button>
-                                            <button class="btn btn-default" ng-click="hideItemDetailEntry()">Cancel</button>
+                                            <button class="btn btn-primary" ng-click="addItemDetailToItem()" ng-disabled="formItemDetail.$invalid" data-i18n="_Save_">Save</button>
+                                            <button class="btn btn-default" ng-click="hideItemDetailEntry()" data-i18n="_Cancel_"></button>
                                         </div>
                                     </div>
                                 </form>
@@ -187,7 +193,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <button type="submit" ng-click="addNewItemToItems()" ng-disabled="formItem.$invalid" class="btn btn-default pull-right">Add Item</button>
+                                        <button type="submit" class="btn btn-default pull-right" 
+                                                ng-click="addNewItemToItems()" ng-disabled="formItem.$invalid" data-i18n="_Done_"></button>
                                         <p ng-show="disableAddToItems" class="text-danger">{{itemDetailsMsg}}</p>
                                     </div>
                                 </div>

@@ -780,6 +780,11 @@
     "description": "Cancel text"
   },
   {
+    "key": "_Save_",
+    "value": "አስቀምጥ",
+    "description": "Save text"
+  },
+  {
     "key": "_DocumentType_",
     "value": "የሰነድ አይነት",
     "description": "Report filter Document Type text"

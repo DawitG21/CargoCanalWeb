@@ -780,6 +780,11 @@
     "description": "Cancel text"
   },
   {
+    "key": "_Save_",
+    "value": "Save",
+    "description": "Save text"
+  },
+  {
     "key": "_DocumentType_",
     "value": "Document Type",
     "description": "Report filter Document Type text"
