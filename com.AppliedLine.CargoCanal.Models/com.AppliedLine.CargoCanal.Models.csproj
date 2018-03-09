@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyticsParams.cs" />
     <Compile Include="CallParams.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="Carrier.cs" />

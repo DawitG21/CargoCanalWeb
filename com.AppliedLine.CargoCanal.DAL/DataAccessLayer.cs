@@ -1279,13 +1279,15 @@ namespace com.AppliedLine.CargoCanal.DAL
             }
         }
 
-        public JObject DashboardShipmentsAnalytics(Guid token)
+        public JObject DashboardShipmentsAnalytics(Guid token, int days)
         {
             using (SqlConnection con = Connection)
             {
                 SqlCommand command = new SqlCommand("Dashboard_ShipmentsAnalytics", con);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@TOKEN", token);
+                command.Parameters.AddWithValue("@days", days);
+                command.Parameters["@days"].Direction = ParameterDirection.InputOutput;
 
                 SqlDataAdapter da = new SqlDataAdapter(command);
                 DataSet ds = new DataSet("ShipmentsAnalytics");
@@ -1325,7 +1327,7 @@ namespace com.AppliedLine.CargoCanal.DAL
             }
         }
 
-        public JObject DashboardDemurrageAnalytics(Guid token)
+        public JObject DashboardDemurrageAnalytics(Guid token, int days)
         {
             using (SqlConnection con = Connection)
             {
@@ -1333,6 +1335,8 @@ namespace com.AppliedLine.CargoCanal.DAL
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@TOKEN", token);
                 command.Parameters.AddWithValue("@DemurrageGrace", _DEMURRAGE_GRACE);
+                command.Parameters.AddWithValue("@days", days);
+                command.Parameters["@days"].Direction = ParameterDirection.InputOutput;
 
                 SqlDataAdapter da = new SqlDataAdapter(command);
                 DataSet ds = new DataSet("DemurrageAnalytics");
@@ -1342,8 +1346,11 @@ namespace com.AppliedLine.CargoCanal.DAL
                 {
                     return new JObject(
                         new JProperty("labels", new JArray(_utcNow)),
-                        new JProperty("datasets", new JArray(new JObject(new JProperty("data", 0), new JProperty("label", ""))))
-                        );
+                        new JProperty("datasets", new JArray(new JObject(
+                            new JProperty("data", 0), 
+                            new JProperty("label", ""), 
+                            new JProperty("status", "")))
+                        ));
                 }
 
                 // build json object
@@ -1358,6 +1365,7 @@ namespace com.AppliedLine.CargoCanal.DAL
                     labels.Add(cdt.AddDays(_DEMURRAGE_GRACE + cday));
                 }
 
+                labels.Add(DateTimeOffset.UtcNow.Date);
                 var labelsDistinct = labels.OrderBy(d => d).Distinct();
                 labels = new JArray();
                 foreach (var dtLabel in labelsDistinct)
@@ -1382,7 +1390,10 @@ namespace com.AppliedLine.CargoCanal.DAL
                         else data.Add(null);
                     }
 
-                    datasets.Add(new JObject(new JProperty("data", data), new JProperty("label", r["BillNumber"].ToString())));
+                    datasets.Add(new JObject(new JProperty("data", data),
+                        new JProperty("status", r["DemurrageStatus"].ToString()),
+                        new JProperty("label", r["BillNumber"].ToString())
+                    ));
                 }
 
 

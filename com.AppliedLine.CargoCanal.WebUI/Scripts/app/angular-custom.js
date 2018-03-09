@@ -1285,6 +1285,12 @@ var api = serverUrl + '/api';
             $rootScope.googleApiKey = 'AIzaSyCwTw8Tyx3_bPBoZ43MXVDhY7TRnPvXl7Y';
             $rootScope.host = api.substring(0, api.lastIndexOf('/'));
 
+            $rootScope.days = [
+                { label: '7 days', value: 7 },
+                { label: '30 days', value: 30 },
+                { label: '90 days', value: 90 },
+                { label: '180 days', value: 180 }
+            ];
 
             // TODO: Get User Preference Cookie if it exists
             //       e.g. Language
@@ -1440,7 +1446,7 @@ var api = serverUrl + '/api';
             };
 
             $scope.signIn = function () {
-
+                $scope.loginFailed = '';
                 $http({
                     method: 'POST',
                     url: api + '/account/postlogin',
@@ -1461,7 +1467,7 @@ var api = serverUrl + '/api';
                         // activate session validation
                         // $rootScope.workerValidateSession();
                     }, function (error) {
-                        $scope.loginFailed = "Invalid login attempt."
+                        $scope.loginFailed = "Invalid login attempt.";
                     });
             };
         }]);
@@ -1470,6 +1476,13 @@ var api = serverUrl + '/api';
         function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory) {
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User == null) $state.go('home');
+
+            var shipmentCanvas, shipmentChart;
+            var demurrageChart, demurrageCanvas;
+            const suggestedMax = 5; // maximum step size
+
+            $scope.daysOfShipmentActivity = $rootScope.days[2].value;
+            $scope.daysOfDemurrageActivity = $rootScope.days[2].value;
 
 
             $scope.dashboard = {
@@ -1519,13 +1532,16 @@ var api = serverUrl + '/api';
                 },
                 shipments: {
                     data: {},
-                    get: function () {
+                    get: function (data) {
                         // TODO: fetch only once script is done loading
                         // send user token which the server would use to process dashboard data
+                        let max = 0;
+                        $scope.daysOfShipmentActivity = data || $scope.daysOfShipmentActivity;
+                        
                         $http({
                             method: 'POST',
                             url: api + '/importexport/dashboardshipmentsanalytics',
-                            data: $rootScope.User.Login,
+                            data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfShipmentActivity },
                             headers: { 'Content-Type': 'application/json; charset=utf-8' }
                         })
                             .then(function (response) {
@@ -1537,15 +1553,11 @@ var api = serverUrl + '/api';
                                 $scope.chartOptions = {
                                     backgroundColors: [
                                         'rgba(65, 192, 192, 0.1)',
-                                        'rgba(255, 10, 182, 0.1)',
-                                        'rgba(85, 255, 100, 0.1)',
-                                        'rgba(95, 0, 11, 0.1)'
+                                        'rgba(255, 10, 182, 0.1)'
                                     ],
                                     borderColors: [
                                         'rgba(65, 192, 192, 1)',
-                                        'rgba(255, 10, 182, 1)',
-                                        'rgba(85, 255, 100, 1)',
-                                        'rgba(95, 0, 11, 1)'
+                                        'rgba(255, 10, 182, 1)'
                                     ]
                                 };
 
@@ -1571,10 +1583,22 @@ var api = serverUrl + '/api';
                                     $scope.dashboard.shipments.data.datasets[i].backgroundColor = $scope.chartOptions.backgroundColors[mod];
                                     $scope.dashboard.shipments.data.datasets[i].borderColor = $scope.chartOptions.borderColors[mod];
                                     $scope.dashboard.shipments.data.datasets[i].lineTension = 0;
+
+                                    let o = $scope.dashboard.shipments.data.datasets[i].data;
+                                    for (let j in o) {
+                                        if (o[j] !== null && o[j] > max) {
+                                            max = o[j];
+                                        }
+                                    }
                                 }
 
-                                chartjsFactory.setCanvas('canvas1');
-                                var lineChart = chartjsFactory.createChart('line',
+                                // clear the existing chart
+                                if (shipmentChart) {
+                                    shipmentChart.destroy();
+                                }
+
+                                shipmentCanvas = chartjsFactory.setCanvas('canvas1');
+                                shipmentChart = chartjsFactory.createChart('line',
                                     $scope.dashboard.shipments.data,
                                     {
                                         scales: {
@@ -1590,7 +1614,9 @@ var api = serverUrl + '/api';
                                                     labelString: 'No. of Cargo'
                                                 },
                                                 ticks: {
-                                                    stepSize: 5
+                                                    beginAtZero: true,
+                                                    stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
+                                                    suggestedMax: suggestedMax
                                                 }
                                             }]
                                         }
@@ -1600,13 +1626,16 @@ var api = serverUrl + '/api';
                 },
                 demurrage: {
                     data: {},
-                    get: function () {
+                    get: function (data) {
                         // TODO: fetch only once script is done loading
                         // send user token which the server would use to process dashboard data
+                        let max = 0;
+                        $scope.daysOfDemurrageActivity = data || $scope.daysOfDemurrageActivity;
+                        
                         $http({
                             method: 'POST',
                             url: api + '/importexport/dashboarddemurrageanalytics',
-                            data: $rootScope.User.Login,
+                            data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfDemurrageActivity },
                             headers: { 'Content-Type': 'application/json; charset=utf-8' }
                         })
                             .then(function (response) {
@@ -1616,36 +1645,35 @@ var api = serverUrl + '/api';
 
                                 let rgbObj = appFactory.getRgbArray(response.data.datasets.length)
                                 $scope.dashboard.demurrage.data = response.data;
-                                $scope.chartOptions = {
-                                    'backgroundColors': [
-                                        'rgba(65, 192, 192, 0.4)',
-                                        'rgba(255, 10, 182, 0.4)',
-                                        'rgba(85, 255, 100, 0.4)',
-                                        'rgba(95, 0, 11, 0.4)'
-                                    ],
-                                    'borderColors': [
-                                        'rgba(65, 192, 192, 1)',
-                                        'rgba(255, 10, 182, 1)',
-                                        'rgba(85, 255, 100, 1)',
-                                        'rgba(95, 0, 11, 1)'
-                                    ]
-                                };
+
                                 // filter the date part of the data labels
-                                for (var i in $scope.dashboard.demurrage.data.labels) {
+                                for (let i in $scope.dashboard.demurrage.data.labels) {
                                     $scope.dashboard.demurrage.data.labels[i] = $filter('date')($scope.dashboard.demurrage.data.labels[i], 'MMM dd');
                                 }
-                                for (var i in $scope.dashboard.demurrage.data.datasets) {
-                                    let mod = i % $scope.chartOptions.borderColors.length;
-                                    $scope.dashboard.demurrage.data.datasets[i].backgroundColor = rgbObj.rgbaOpaque[mod]; // $scope.chartOptions.backgroundColors[mod];//'transparent';
-                                    $scope.dashboard.demurrage.data.datasets[i].borderColor = rgbObj.rgb[mod]; // $scope.chartOptions.borderColors[mod];
+                                for (let i in $scope.dashboard.demurrage.data.datasets) {
+                                    $scope.dashboard.demurrage.data.datasets[i].backgroundColor = rgbObj.rgbaOpaque[i]; //'transparent';
+                                    $scope.dashboard.demurrage.data.datasets[i].borderColor = rgbObj.rgb[i];
                                     $scope.dashboard.demurrage.data.datasets[i].lineTension = 0;
                                     $scope.dashboard.demurrage.data.datasets[i].pointRadius = $scope.dashboard.demurrage.data.datasets[i].pointHoverRadius= 10;
                                     //$scope.dashboard.demurrage.data.datasets[i].spanGaps = false;
+
+                                    // get the maximum days gathered
+                                    let o = $scope.dashboard.demurrage.data.datasets[i].data;
+                                    for (let j in o) {
+                                        if (o[j] !== null && o[j] > max) {
+                                            max = o[j];
+                                            break;
+                                        }
+                                    }
                                 }
 
+                                // clear the existing chart
+                                if (demurrageChart) {
+                                    demurrageChart.destroy();
+                                }
 
-                                chartjsFactory.setCanvas('canvas2');
-                                var lineChart = chartjsFactory.createChart('line',
+                                demurrageCanvas = chartjsFactory.setCanvas('canvas2');
+                                demurrageChart = chartjsFactory.createChart('line',
                                     $scope.dashboard.demurrage.data,
                                     {
                                         tooltips: {
@@ -1655,7 +1683,7 @@ var api = serverUrl + '/api';
                                             xAxes: [{
                                                 scaleLabel: {
                                                     display: true,
-                                                    labelString: 'Cargo Discharged (Date)'
+                                                    labelString: 'Cargo Dispatched (Date)'
                                                 }
                                             }],
                                             yAxes: [{
@@ -1664,7 +1692,9 @@ var api = serverUrl + '/api';
                                                     labelString: 'Demurrage (Days)'
                                                 },
                                                 ticks: {
-                                                    stepSize: 5
+                                                    beginAtZero: true,
+                                                    stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
+                                                    suggestedMax: suggestedMax
                                                 }
                                             }]
                                         },
@@ -3326,7 +3356,7 @@ var api = serverUrl + '/api';
                         headers: { 'Content-Type': 'application/json; charset=utf-8' }
                     })
                         .then(function (response) {
-                            let actualData = response.data.Table ? response.data.Table : response.data;
+                            let actualData = response.data.Table || response.data;
                             $scope.report.data = actualData;
                             //$scope.report.data = $filter('groupByField')(actualData, $scope.report.groupBy);
 
@@ -4676,7 +4706,7 @@ angular.module("chartjsAngular", [])
         var service = {};
 
         service.setCanvas = function (ctx) {
-            _ctx = document.getElementById(ctx);
+            return _ctx = document.getElementById(ctx);
         };
 
         service.createChart = function (_type, _data, _options) {

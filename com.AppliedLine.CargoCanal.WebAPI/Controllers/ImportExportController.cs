@@ -39,15 +39,15 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
 
         [HttpPost]
-        public IHttpActionResult DashboardShipmentsAnalytics(Login login)
+        public IHttpActionResult DashboardShipmentsAnalytics(AnalyticsParams analytics)
         {
-            return Json(dal.DashboardShipmentsAnalytics(login.Token));
+            return Json(dal.DashboardShipmentsAnalytics(analytics.Token, analytics.Days));
         }
 
         [HttpPost]
-        public IHttpActionResult DashboardDemurrageAnalytics(Login login)
+        public IHttpActionResult DashboardDemurrageAnalytics(AnalyticsParams analytics)
         {
-            return Json(dal.DashboardDemurrageAnalytics(login.Token));
+            return Json(dal.DashboardDemurrageAnalytics(analytics.Token, analytics.Days));
         }
 
 

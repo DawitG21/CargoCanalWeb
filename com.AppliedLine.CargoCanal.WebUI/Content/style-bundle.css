@@ -8961,6 +8961,10 @@ body {
     border-bottom: 3px solid;
 }
 
+    .navbar.navbar-default {
+        background-color: rgba(255,255,255,.9);
+    }
+
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: white;
     background-color: #37264c;
@@ -8990,13 +8994,22 @@ body {
     border-radius: 50% !important;
     overflow: hidden;
 }
+.cc-feature-banner {
+
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
 
 .heading-display {
+    padding-top: 50px;
     font-weight: 500;
     letter-spacing: 3px;
     word-spacing: 5px;
     margin: 20px 0 30px;
-    font-size: 5em;
+    font-size: 4.5em;
+    color: black;
 }
 
 .heading-article {
@@ -9073,6 +9086,11 @@ label {
     overflow: hidden;
     margin-bottom: 2em;
     background-color: white;
+}
+
+.select-right {
+    position: absolute;
+    right: 30px;
 }
 
 .pointer {
@@ -9706,6 +9724,16 @@ i.loader-box-4 {
     text-overflow: ellipsis;
 }
 
+    .attachment:hover {
+        -moz-transition: 1s all;
+        -o-transition: 1s all;
+        -webkit-transition: 1s all;
+        transition: 1s all;
+        -moz-box-shadow: inset 0 0 3px rgb(255,0,0);
+        -webkit-box-shadow: inset 0 0 3px rgb(255,0,0);
+        box-shadow: inset 0 0 3px rgb(255,0,0);
+    }
+
 .bg-white {
     background-color: white !important;
 }
@@ -9734,7 +9762,7 @@ i.loader-box-4 {
 }
 
 .padding-top-0 {
-    padding-top: 0;
+    padding-top: 0 !important;
 }
 
 .padding-20 {
@@ -9823,9 +9851,9 @@ i.loader-box-4 {
     }
 
     .service .desc {
-        height: 30px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        height: 50px;
+        /*text-overflow: ellipsis;
+        white-space: nowrap;*/
         overflow: hidden;
     }
 
@@ -10035,7 +10063,7 @@ i.loader-box-4 {
 .card-option {
     width: 80px;
     height: 60px;
-    margin: 5px;
+    /*margin: 5px;*/
     display: inline-block;
     text-align: center;
     cursor: pointer;
@@ -10096,7 +10124,7 @@ i.loader-box-4 {
 .square-wrapper {
     position: relative;
     width: 80px;
-    margin: 0 10px 10px;
+    margin: 5px 10px 10px;
     display: inline-block;
     vertical-align: top;
 }

@@ -4,7 +4,7 @@
         var service = {};
 
         service.setCanvas = function (ctx) {
-            _ctx = document.getElementById(ctx);
+            return _ctx = document.getElementById(ctx);
         };
 
         service.createChart = function (_type, _data, _options) {

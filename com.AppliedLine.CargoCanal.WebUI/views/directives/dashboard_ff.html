@@ -23,17 +23,25 @@
 </div>
 <div class="row margin-0">
     <div class="col-md-6">
-        <div class="analytics-box">
+        <div id="shipment-box" class="analytics-box">
+            <select ng-model="daysOfShipmentActivity" class="select-right"
+                    ng-options="d.value as d.label for d in days"
+                    ng-change="dashboard.shipments.get(daysOfShipmentActivity)">
+            </select>
             <h3><span class="fa fa-bar-chart"></span> Shipments Analytics</h3>
-            <h6>Last 100 days import / export</h6>
+            <h6>Last {{daysOfShipmentActivity}} days import / export</h6>
             <hr />
             <canvas id="canvas1" width="300" height="200"></canvas>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="analytics-box">
+        <div id="demurrage-box" class="analytics-box">
+            <select ng-model="daysOfDemurrageActivity" class="select-right"
+                    ng-options="d.value as d.label for d in days"
+                    ng-change="dashboard.demurrage.get(daysOfDemurrageActivity)">
+            </select>
             <h3><span class="fa fa-bar-chart"></span> Demurrage Analytics</h3>
-            <h6>Last 60 days demurrage</h6>
+            <h6>Last {{daysOfDemurrageActivity}} days demurrage</h6>
             <hr />
             <canvas id="canvas2" width="300" height="200"></canvas>
         </div>

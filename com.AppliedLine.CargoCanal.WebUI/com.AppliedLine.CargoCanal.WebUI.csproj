@@ -82,6 +82,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\images\cargocanal-feature-graphic-web.png" />
     <Content Include="Content\images\google-play-badge-h60.png" />
     <Content Include="Content\images\icons\caret_white_l_16.png" />
     <Content Include="Content\images\icons\caret_white_r_16.png" />
@@ -208,9 +209,12 @@
     <Content Include="dist\assets\css\style-bundle.min.css" />
     <Content Include="dist\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="dist\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="dist\assets\images\cargocanal-feature-graphic-web.png" />
     <Content Include="dist\assets\images\cargocanal_text_128.png" />
     <Content Include="dist\assets\images\cargocanal_text_32.png" />
     <Content Include="dist\assets\images\cargocanal_text_64.png" />
+    <Content Include="dist\assets\images\google-play-badge-h60.png" />
+    <Content Include="dist\assets\images\google-play-badge.png" />
     <Content Include="dist\assets\images\icons\airplane-24.png" />
     <Content Include="dist\assets\images\icons\airplane-32.png" />
     <Content Include="dist\assets\images\icons\appliedline_32px.png" />
@@ -543,9 +547,12 @@
     <Content Include="src\assets\css\style-bundle.min.css" />
     <Content Include="src\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="src\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\assets\images\cargocanal-feature-graphic-web.png" />
     <Content Include="src\assets\images\cargocanal_text_128.png" />
     <Content Include="src\assets\images\cargocanal_text_32.png" />
     <Content Include="src\assets\images\cargocanal_text_64.png" />
+    <Content Include="src\assets\images\google-play-badge-h60.png" />
+    <Content Include="src\assets\images\google-play-badge.png" />
     <Content Include="src\assets\images\icons\airplane-24.png" />
     <Content Include="src\assets\images\icons\airplane-32.png" />
     <Content Include="src\assets\images\icons\appliedline_32px.png" />
@@ -561,8 +568,10 @@
     <Content Include="src\assets\images\icons\cargocanal_64px.png" />
     <Content Include="src\assets\images\icons\container-24.png" />
     <Content Include="src\assets\images\icons\container-32.png" />
+    <Content Include="src\assets\images\icons\done-32.png" />
     <Content Include="src\assets\images\icons\fire-24.png" />
     <Content Include="src\assets\images\icons\fire-32.png" />
+    <Content Include="src\assets\images\icons\money-32.png" />
     <Content Include="src\assets\images\icons\pipe-24.png" />
     <Content Include="src\assets\images\icons\pipe-32.png" />
     <Content Include="src\assets\images\icons\railway-24.png" />
@@ -574,6 +583,9 @@
     <Content Include="src\assets\images\icons\user-128.png" />
     <Content Include="src\assets\images\icons\user-32.png" />
     <Content Include="src\assets\images\icons\user-64.png" />
+    <Content Include="src\assets\images\icons\user_128.png" />
+    <Content Include="src\assets\images\icons\user_32.png" />
+    <Content Include="src\assets\images\icons\user_64.png" />
     <Content Include="src\assets\images\people.png" />
     <Content Include="src\assets\images\people_720.png" />
     <Content Include="src\assets\images\themes\base\accordion.css" />
