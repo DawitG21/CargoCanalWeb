@@ -57,8 +57,8 @@
     border-radius: 50% !important;
     overflow: hidden;
 }
-.cc-feature-banner {
 
+.cc-feature-banner {
 }
 
 .overflow-hidden {
@@ -1057,7 +1057,9 @@ i.loader-box-4 {
         left: 24px;
     }
 
-.card:hover .card-options-btn {
+.card:hover .card-options-btn,
+.card:focus .card-options-btn,
+.card:active .card-options-btn {
     transition: left .3s ease-out;
     left: -25px;
 }
@@ -1091,7 +1093,7 @@ i.loader-box-4 {
     overflow: visible;
     right: 10px;
     left: 100%;
-    background-color: #eee; /*#5f9ea0;*/
+    background-color: #fff; /*#5f9ea0;*/
     transition: left .7s;
     z-index: 2;
 }
@@ -1186,6 +1188,23 @@ i.loader-box-4 {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     opacity: 0;
+    animation-name: glow;
+    animation-duration: 1.5s;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes glow {
+    from {
+        opacity: .2;
+        transform: scale(.7);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .square-wrapper {
@@ -1235,9 +1254,36 @@ form .progress {
         width: 0;
     }
 
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    .card .card-content {
+        left: 130px;
+    }
 
+    .card-options-open {
+        left: 380px;
+    }
 
+        .card-options-open .card-options-more-btn {
+            right: -10px;
+            opacity: 1;
+            transition: all .5s;
+        }
 
+    .card-options-close .card-options-more-btn {
+        right: -32px;
+        opacity: 0;
+    }
+}
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    .card .card-content {
+        left: 130px;
+    }
+
+    .card-options-open {
+        left: 160px;
+    }
+}
 
 
 
