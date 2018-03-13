@@ -7,7 +7,7 @@ const htmlmin = require('gulp-htmlmin');
 var filesToMove = {
     'css': ['content/style-bundle.min.css', 'content/style-bundle-defer.min.css', 'content/datatables.min.css', 'content/common-sprite.sprite.*'],
     'datatable_img': ['bower_components/datatables/media/images/*.*'],
-    'fonts': ['fonts/*.*'],
+    'fonts': ['fonts/**/*.*'],
     'image': ['content/images/**/*.*'],
     'content': ['content/themes/**/*.*'],
     'lib': ['scripts/bundles/*.min.js',

@@ -8141,9 +8141,9 @@ label {
     color: #000;
     background-color: white;
     font-weight: bold;
-    -moz-box-shadow: 0px 0px 10px rgba(38, 29, 57, 0.79);
-    -webkit-box-shadow: 0px 0px 10px rgba(38, 29, 57, 0.79);
-    box-shadow: 0px 0px 10px rgba(38, 29, 57, 0.79);
+    -moz-box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
+    -webkit-box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
+    box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
 }
 
 .select-right {
@@ -8936,20 +8936,72 @@ i.loader-box-4 {
     margin: 20px 0 30px 0;
 }
 
+.bar-ratings.bar-rating-bg-blue .bar-rating,
+.bar-ratings.bar-rating-bg-blue .badge {
+    background: #93b6f2;
+}
+
+.bar-ratings.bar-rating-bg-blue .badge {
+    color: #000;
+}
+
+.bar-rating-wrapper {
+    width: 50px;
+    float: left;
+    margin-right: 5px;
+}
+
+.bar-rating {
+    height: 10px;
+    display: inline-block;
+    border-radius: 5px;
+    float: right;
+    /*background: #4ed34e; #adff2f, #93b6f2*/
+}
+
+    .bar-rating.bar-rating-5 {
+        width: 50px;
+    }
+
+    .bar-rating.bar-rating-4 {
+        width: 40px;
+    }
+
+    .bar-rating.bar-rating-3 {
+        width: 30px;
+    }
+
+    .bar-rating.bar-rating-2 {
+        width: 20px;
+    }
+
+    .bar-rating.bar-rating-1 {
+        width: 10px;
+    }
+
 .dashboard-pad {
     background-color: #c12828;
-    padding: 5px 5px 25px;
+    padding: 5px 10px 25px;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     min-height: 130px;
-    color: white;
+    color: #f5f5f5;
     position: relative;
     animation: fadeIn 3s normal;
+    margin-bottom: 10px;
 }
 
     .dashboard-pad.pad-blue {
         background-color: rgba(62, 84, 121, 1);
+    }
+
+    .dashboard-pad.pad-red {
+        background-color: rgba(193, 40, 40, 1);
+    }
+
+    .dashboard-pad.pad-grey {
+        background-color: #333;
     }
 
 

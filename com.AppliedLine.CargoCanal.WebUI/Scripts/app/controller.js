@@ -199,8 +199,8 @@ var api = serverUrl + '/api';
             };
         }]);
 
-    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', 'chartjsFactory', 'appFactory',
-        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory) {
+    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', 'chartjsFactory', 'appFactory', 'appAnalytics',
+        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory, appAnalytics) {
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User == null) $state.go('home');
 
@@ -450,6 +450,28 @@ var api = serverUrl + '/api';
             // load dashboard shipment analysis
             $scope.dashboard.shipments.get();
             $scope.dashboard.demurrage.get();
+
+
+            // Analytics: Top Import Countries
+            appAnalytics.topImportCountries()
+                .then(function (data) {
+                    // data returned
+                    $scope.topImportCountries = data;
+                },
+                (error) => {
+                    // error occurred
+                });
+
+
+            // Analytics: Top Export Countries
+            appAnalytics.topExportCountries()
+                .then(function (data) {
+                    // data returned
+                    $scope.topExportCountries = data;
+                },
+                (error) => {
+                    // error occurred
+                });
 
 
             // TODO: Google Maps get Latitude and Longitude Information

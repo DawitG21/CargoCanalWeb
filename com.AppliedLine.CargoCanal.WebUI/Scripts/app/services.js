@@ -127,6 +127,8 @@
             $rootScope.modalOpen = bool;
         };
 
+        
+        // Service RGB
         service.getRgbArray = function (length) {
             const rgb = [];
             const rgbaOpaque = [];

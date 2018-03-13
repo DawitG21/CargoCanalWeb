@@ -530,7 +530,7 @@ namespace com.AppliedLine.CargoCanal.DAL
 
                     await documentable.SaveImportExportDocs(importExport.Documents, id);
                 }
-                catch
+                catch (Exception e)
                 {
                     dal.DeleteImportExport(id);
                     return 0;

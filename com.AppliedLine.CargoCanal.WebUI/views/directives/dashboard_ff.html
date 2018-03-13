@@ -1,6 +1,6 @@
 ﻿<div class="row margin-0 margin-bottom-15">
     <div class="col-xs-6 col-md-2">
-        <div class="dashboard-pad pad-blue" ui-sref="import">
+        <div class="dashboard-pad pad-blue pointer" ui-sref="import">
             <h1>{{dashboard.import.data.Total | numberparse}}</h1>
             <h4>IMPORTS</h4>
             <h5 class="dashboard-caption">
@@ -11,13 +11,43 @@
     </div>
 
     <div class="col-xs-6 col-md-2">
-        <div class="dashboard-pad" ui-sref="export">
+        <div class="dashboard-pad pad-red pointer" ui-sref="export">
             <h1>{{dashboard.export.data.Total | numberparse}}</h1>
             <h4>EXPORTS</h4>
             <h5 class="dashboard-caption">
                 <span class="color-darkred font-bold-600 pointer" ui-sref="export">{{dashboard.export.data.PercentPending}} %</span>
                 <span class="pull-right font-bold-600 pointer" ui-sref="export">{{dashboard.export.data.PercentCompleted}} %</span>
             </h5>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+        <div class="dashboard-pad pad-grey">
+            <h5>Top Import Countries</h5>
+            <div class="bar-ratings bar-rating-bg-blue" ng-repeat="d in topImportCountries">
+                <div class="bar-rating-wrapper">
+                    <i class="bar-rating" ng-class="'bar-rating-' + (topImportCountries.length - $index)"></i>
+                </div>
+                <h6>
+                    <span class="font-bold-600">{{d.Country}}</span>
+                    <span class="badge pull-right font-bold-600">{{d.TotalCount | numberparse}}</span>
+                </h6>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+        <div class="dashboard-pad pad-grey">
+            <h5>Top Export Countries</h5>
+            <div class="bar-ratings bar-rating-bg-blue" ng-repeat="d in topExportCountries">
+                <div class="bar-rating-wrapper">
+                    <i class="bar-rating" ng-class="'bar-rating-' + (topExportCountries.length - $index)"></i>
+                </div>
+                <h6>
+                    <span class="font-bold-600">{{d.Country}}</span>
+                    <span class="badge pull-right font-bold-600">{{d.TotalCount | numberparse}}</span>
+                </h6>
+            </div>
         </div>
     </div>
 </div>

@@ -50,6 +50,17 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             return Json(dal.DashboardDemurrageAnalytics(analytics.Token, analytics.Days));
         }
 
+        [HttpPost]
+        public IHttpActionResult TopImportCountries(AnalyticsParams analytics)
+        {
+            return Json(dal.DashboardTopImportCountries(analytics.Token));
+        }
+
+        [HttpPost]
+        public IHttpActionResult TopExportCountries(AnalyticsParams analytics)
+        {
+            return Json(dal.DashboardTopExportCountries(analytics.Token));
+        }
 
         [HttpPost]
         public async Task<IHttpActionResult> PostDocument()

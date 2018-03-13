@@ -4,6 +4,7 @@
     "inputFiles": [
       "Scripts/app/app.js",
       "Scripts/app/services.js",
+      "Scripts/app/services.analytics.js",
       "Scripts/app/services.signalr.js",
       "Scripts/app/controller.js",
       "Scripts/app/controller.upload.js",

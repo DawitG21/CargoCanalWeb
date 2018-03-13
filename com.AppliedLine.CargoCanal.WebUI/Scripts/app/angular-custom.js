@@ -339,6 +339,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             $rootScope.modalOpen = bool;
         };
 
+        
+        // Service RGB
         service.getRgbArray = function (length) {
             const rgb = [];
             const rgbaOpaque = [];
@@ -1238,6 +1240,36 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 })();
 (function () {
     'use strict';
+
+
+    app.service('appAnalytics', ['$rootScope', '$http', function ($rootScope, $http) {
+        let _helperTopCountries = function (url) {
+            return $http({
+                method: 'POST',
+                url: api + url,
+                data: { Token: $rootScope.User.Login.Token },
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    return response.data;
+                }, function (error) {
+                    throw new Error(error);
+                });
+        };
+
+        // Service Analytics for imports
+        this.topImportCountries = function () {
+            return _helperTopCountries('/importexport/topimportcountries');
+        };
+
+        // Service Analytics for exports
+        this.topExportCountries = function () {
+            return _helperTopCountries('/importexport/topexportcountries');
+        };
+    }]);
+})();
+(function () {
+    'use strict';
     app.factory('signalRHubProxy', ['$rootScope', function ($rootScope) {
         function signalRHubProxyFactory(serverUrl, hubName) {
             var connection = $.hubConnection(serverUrl);
@@ -1472,8 +1504,8 @@ var api = serverUrl + '/api';
             };
         }]);
 
-    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', 'chartjsFactory', 'appFactory',
-        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory) {
+    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', 'chartjsFactory', 'appFactory', 'appAnalytics',
+        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory, appAnalytics) {
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User == null) $state.go('home');
 
@@ -1723,6 +1755,28 @@ var api = serverUrl + '/api';
             // load dashboard shipment analysis
             $scope.dashboard.shipments.get();
             $scope.dashboard.demurrage.get();
+
+
+            // Analytics: Top Import Countries
+            appAnalytics.topImportCountries()
+                .then(function (data) {
+                    // data returned
+                    $scope.topImportCountries = data;
+                },
+                (error) => {
+                    // error occurred
+                });
+
+
+            // Analytics: Top Export Countries
+            appAnalytics.topExportCountries()
+                .then(function (data) {
+                    // data returned
+                    $scope.topExportCountries = data;
+                },
+                (error) => {
+                    // error occurred
+                });
 
 
             // TODO: Google Maps get Latitude and Longitude Information

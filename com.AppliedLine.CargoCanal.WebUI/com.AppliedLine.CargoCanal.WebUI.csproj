@@ -494,9 +494,20 @@
     <Content Include="dist\views\reports\transit_time_grouped_by_tin.html" />
     <Content Include="dist\views\terms_of_service.html" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\angular-animate.js" />
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-messages.js" />
+    <Content Include="Scripts\angular-messages.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\services.analytics.js" />
     <Content Include="Scripts\app\services.signalr.js" />
     <Content Include="Scripts\jquery.signalR.min.js" />
     <Content Include="src\assets\css\style-bundle-defer.min.css" />
+    <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="src\assets\i18n\resources-locale_am-ET.json" />
     <Content Include="src\assets\i18n\resources-locale_en-US.json" />
     <Content Include="favicon.png" />
@@ -504,14 +515,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="index.html" />
-    <Content Include="Scripts\angular-animate.js" />
-    <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-chart.js" />
-    <Content Include="Scripts\angular-messages.js" />
-    <Content Include="Scripts\angular-messages.min.js" />
-    <Content Include="Scripts\angular-mocks.js" />
-    <Content Include="Scripts\angular-sanitize.js" />
-    <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-ui-router.js" />
     <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular-ui\datepicker-popup-demo.html" />
@@ -519,8 +523,6 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\angular-custom.js" />
     <Content Include="Scripts\app\angular-custom.min.js">
       <DependentUpon>angular-custom.js</DependentUpon>
@@ -713,9 +715,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="package.json" />
     <Content Include="dist\assets\bower_components\datatables\media\images\Sorting icons.psd" />
     <Content Include="dist\assets\fonts\fontawesome-webfont.eot" />
@@ -738,6 +737,9 @@
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="packman.json" />
     <None Include="Properties\PublishProfiles\localIIS.pubxml" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -851,6 +853,10 @@
     <Content Include="src\assets\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="src\assets\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="src\assets\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

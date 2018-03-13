@@ -1406,6 +1406,49 @@ namespace com.AppliedLine.CargoCanal.DAL
         }
 
 
+        public DataTable DashboardTopImportCountries(Guid token)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand command = new SqlCommand("DashboardTopImportCountries", con);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TOKEN", token);
+
+                SqlDataAdapter da = new SqlDataAdapter(command);
+                DataSet ds = new DataSet("TopImportCountries");
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    return ds.Tables[0];
+                }
+
+                return null;
+            }
+        }
+
+        public DataTable DashboardTopExportCountries(Guid token)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand command = new SqlCommand("DashboardTopExportCountries", con);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@TOKEN", token);
+
+                SqlDataAdapter da = new SqlDataAdapter(command);
+                DataSet ds = new DataSet("TopExportCountries");
+                da.Fill(ds);
+
+                if (ds.Tables.Count > 0)
+                {
+                    return ds.Tables[0];
+                }
+
+                return null;
+            }
+        }
+
+
         public async Task<long> InsertImportExport(ImportExport importExport)
         {
             string dateInitiated = DateTimeOffsetString(importExport.DateInitiated);
