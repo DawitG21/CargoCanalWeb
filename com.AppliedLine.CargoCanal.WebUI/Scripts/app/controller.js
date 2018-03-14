@@ -77,16 +77,16 @@ var api = serverUrl + '/api';
                 $scope.lang = localize.language;
             }
 
-            
+
             // SIGNALR CODES
             var clientProxy = signalRHubProxy(serverUrl, 'accountHub');
             clientProxy.on('toggleUserAccess',
-                function(data) {
+                function (data) {
                     if ($rootScope.User && $rootScope.User.Login.ID === data.ID) {
                         $scope.logout();
                     }
                 });
-            
+
 
 
             // TODO: Move common functions to factory
@@ -199,8 +199,8 @@ var api = serverUrl + '/api';
             };
         }]);
 
-    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', 'chartjsFactory', 'appFactory', 'appAnalytics',
-        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, chartjsFactory, appFactory, appAnalytics) {
+    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', '$timeout', 'chartjsFactory', 'appFactory', 'appAnalytics',
+        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, $timeout, chartjsFactory, appFactory, appAnalytics) {
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User == null) $state.go('home');
 
@@ -264,91 +264,103 @@ var api = serverUrl + '/api';
                         // send user token which the server would use to process dashboard data
                         let max = 0;
                         $scope.daysOfShipmentActivity = data || $scope.daysOfShipmentActivity;
-                        
-                        $http({
-                            method: 'POST',
-                            url: api + '/importexport/dashboardshipmentsanalytics',
-                            data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfShipmentActivity },
-                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                        })
-                            .then(function (response) {
-                                // no data to draw Chart
-                                if (response.data === null || response.data === undefined
-                                    || response.data.labels.length === 0) return;
+                        $scope.loadingShipments = true;
 
-                                $scope.dashboard.shipments.data = response.data;
-                                $scope.chartOptions = {
-                                    backgroundColors: [
-                                        'rgba(65, 192, 192, 0.1)',
-                                        'rgba(255, 10, 182, 0.1)'
-                                    ],
-                                    borderColors: [
-                                        'rgba(65, 192, 192, 1)',
-                                        'rgba(255, 10, 182, 1)'
-                                    ]
-                                };
+                        // clear the existing chart
+                        if (shipmentChart) {
+                            shipmentChart.destroy();
+                        }
 
-                                $scope.dashboard.shipments.data.datasets = [];
+                        // wait a few seconds
+                        $timeout(() => {
 
-                                for (var i in $scope.dashboard.shipments.data.data) {
-                                    $scope.dashboard.shipments.data.datasets.push({
-                                        data: angular.copy($scope.dashboard.shipments.data.data[i]),
-                                        label: $scope.dashboard.shipments.data.series[i]
-                                    });
-                                }
+                            $http({
+                                method: 'POST',
+                                url: api + '/importexport/dashboardshipmentsanalytics',
+                                data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfShipmentActivity },
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            })
+                                .then(function (response) {
+                                    // no data to draw Chart
+                                    if (response.data === null || response.data === undefined
+                                        || response.data.labels.length === 0) return;
 
-                                $scope.dashboard.shipments.data.data = undefined;
-                                $scope.dashboard.shipments.data.series = undefined;
+                                    $scope.dashboard.shipments.data = response.data;
+                                    $scope.chartOptions = {
+                                        backgroundColors: [
+                                            'rgba(65, 192, 192, 0.1)',
+                                            'rgba(255, 10, 182, 0.1)'
+                                        ],
+                                        borderColors: [
+                                            'rgba(65, 192, 192, 1)',
+                                            'rgba(255, 10, 182, 1)'
+                                        ]
+                                    };
 
-                                // filter the date part of the data labels
-                                for (var i in $scope.dashboard.shipments.data.labels) {
-                                    $scope.dashboard.shipments.data.labels[i] = $filter('date')($scope.dashboard.shipments.data.labels[i], 'MMM dd');
-                                }
+                                    $scope.dashboard.shipments.data.datasets = [];
 
-                                for (var i in $scope.dashboard.shipments.data.datasets) {
-                                    let mod = i % $scope.chartOptions.borderColors.length;
-                                    $scope.dashboard.shipments.data.datasets[i].backgroundColor = $scope.chartOptions.backgroundColors[mod];
-                                    $scope.dashboard.shipments.data.datasets[i].borderColor = $scope.chartOptions.borderColors[mod];
-                                    $scope.dashboard.shipments.data.datasets[i].lineTension = 0;
+                                    for (var i in $scope.dashboard.shipments.data.data) {
+                                        $scope.dashboard.shipments.data.datasets.push({
+                                            data: angular.copy($scope.dashboard.shipments.data.data[i]),
+                                            label: $scope.dashboard.shipments.data.series[i]
+                                        });
+                                    }
 
-                                    let o = $scope.dashboard.shipments.data.datasets[i].data;
-                                    for (let j in o) {
-                                        if (o[j] !== null && o[j] > max) {
-                                            max = o[j];
+                                    $scope.dashboard.shipments.data.data = undefined;
+                                    $scope.dashboard.shipments.data.series = undefined;
+
+                                    // filter the date part of the data labels
+                                    for (var i in $scope.dashboard.shipments.data.labels) {
+                                        $scope.dashboard.shipments.data.labels[i] = $filter('date')($scope.dashboard.shipments.data.labels[i], 'MMM dd');
+                                    }
+
+                                    for (var i in $scope.dashboard.shipments.data.datasets) {
+                                        let mod = i % $scope.chartOptions.borderColors.length;
+                                        $scope.dashboard.shipments.data.datasets[i].backgroundColor = $scope.chartOptions.backgroundColors[mod];
+                                        $scope.dashboard.shipments.data.datasets[i].borderColor = $scope.chartOptions.borderColors[mod];
+                                        $scope.dashboard.shipments.data.datasets[i].lineTension = 0;
+
+                                        let o = $scope.dashboard.shipments.data.datasets[i].data;
+                                        for (let j in o) {
+                                            if (o[j] !== null && o[j] > max) {
+                                                max = o[j];
+                                            }
                                         }
                                     }
-                                }
 
-                                // clear the existing chart
-                                if (shipmentChart) {
-                                    shipmentChart.destroy();
-                                }
+                                    // clear the existing chart
+                                    if (shipmentChart) {
+                                        shipmentChart.destroy();
+                                    }
 
-                                shipmentCanvas = chartjsFactory.setCanvas('canvas1');
-                                shipmentChart = chartjsFactory.createChart('line',
-                                    $scope.dashboard.shipments.data,
-                                    {
-                                        scales: {
-                                            xAxes: [{
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Date Inserted'
-                                                }
-                                            }],
-                                            yAxes: [{
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'No. of Cargo'
-                                                },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
-                                                    suggestedMax: suggestedMax
-                                                }
-                                            }]
-                                        }
-                                    });
-                            });
+                                    shipmentCanvas = chartjsFactory.setCanvas('canvas1');
+                                    shipmentChart = chartjsFactory.createChart('line',
+                                        $scope.dashboard.shipments.data,
+                                        {
+                                            scales: {
+                                                xAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: 'Date Inserted'
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: 'No. of Cargo'
+                                                    },
+                                                    ticks: {
+                                                        beginAtZero: true,
+                                                        stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
+                                                        suggestedMax: suggestedMax
+                                                    }
+                                                }]
+                                            }
+                                        });
+                                    $scope.loadingShipments = false;
+                                }, (error) => { $scope.loadingShipments = false; });
+
+                        }, 5000);
                     }
                 },
                 demurrage: {
@@ -358,89 +370,95 @@ var api = serverUrl + '/api';
                         // send user token which the server would use to process dashboard data
                         let max = 0;
                         $scope.daysOfDemurrageActivity = data || $scope.daysOfDemurrageActivity;
+                        $scope.loadingDemurrage = true;
+
+                        // clear the existing chart
+                        if (demurrageChart) {
+                            demurrageChart.destroy();
+                        }
                         
-                        $http({
-                            method: 'POST',
-                            url: api + '/importexport/dashboarddemurrageanalytics',
-                            data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfDemurrageActivity },
-                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                        })
-                            .then(function (response) {
-                                // no data to draw Chart
-                                if (response.data === null || response.data === undefined
-                                    || response.data.labels.length === 0) return;
+                        // wait a few seconds
+                        $timeout(() => {
 
-                                let rgbObj = appFactory.getRgbArray(response.data.datasets.length)
-                                $scope.dashboard.demurrage.data = response.data;
+                            $http({
+                                method: 'POST',
+                                url: api + '/importexport/dashboarddemurrageanalytics',
+                                data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfDemurrageActivity },
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            })
+                                .then(function (response) {
+                                    // no data to draw Chart
+                                    if (response.data === null || response.data === undefined
+                                        || response.data.labels.length === 0) return;
 
-                                // filter the date part of the data labels
-                                for (let i in $scope.dashboard.demurrage.data.labels) {
-                                    $scope.dashboard.demurrage.data.labels[i] = $filter('date')($scope.dashboard.demurrage.data.labels[i], 'MMM dd');
-                                }
-                                for (let i in $scope.dashboard.demurrage.data.datasets) {
-                                    $scope.dashboard.demurrage.data.datasets[i].backgroundColor = rgbObj.rgbaOpaque[i]; //'transparent';
-                                    $scope.dashboard.demurrage.data.datasets[i].borderColor = rgbObj.rgb[i];
-                                    $scope.dashboard.demurrage.data.datasets[i].lineTension = 0;
-                                    $scope.dashboard.demurrage.data.datasets[i].pointRadius = $scope.dashboard.demurrage.data.datasets[i].pointHoverRadius= 10;
-                                    //$scope.dashboard.demurrage.data.datasets[i].spanGaps = false;
+                                    let rgbObj = appFactory.getRgbArray(response.data.datasets.length)
+                                    $scope.dashboard.demurrage.data = response.data;
 
-                                    // get the maximum days gathered
-                                    let o = $scope.dashboard.demurrage.data.datasets[i].data;
-                                    for (let j in o) {
-                                        if (o[j] !== null && o[j] > max) {
-                                            max = o[j];
-                                            break;
+                                    // filter the date part of the data labels
+                                    for (let i in $scope.dashboard.demurrage.data.labels) {
+                                        $scope.dashboard.demurrage.data.labels[i] = $filter('date')($scope.dashboard.demurrage.data.labels[i], 'MMM dd');
+                                    }
+                                    for (let i in $scope.dashboard.demurrage.data.datasets) {
+                                        $scope.dashboard.demurrage.data.datasets[i].backgroundColor = rgbObj.rgbaOpaque[i]; //'transparent';
+                                        $scope.dashboard.demurrage.data.datasets[i].borderColor = rgbObj.rgb[i];
+                                        $scope.dashboard.demurrage.data.datasets[i].lineTension = 0;
+                                        $scope.dashboard.demurrage.data.datasets[i].pointRadius = $scope.dashboard.demurrage.data.datasets[i].pointHoverRadius = 10;
+                                        //$scope.dashboard.demurrage.data.datasets[i].spanGaps = false;
+
+                                        // get the maximum days gathered
+                                        let o = $scope.dashboard.demurrage.data.datasets[i].data;
+                                        for (let j in o) {
+                                            if (o[j] !== null && o[j] > max) {
+                                                max = o[j];
+                                                break;
+                                            }
                                         }
                                     }
-                                }
-
-                                // clear the existing chart
-                                if (demurrageChart) {
-                                    demurrageChart.destroy();
-                                }
-
-                                demurrageCanvas = chartjsFactory.setCanvas('canvas2');
-                                demurrageChart = chartjsFactory.createChart('line',
-                                    $scope.dashboard.demurrage.data,
-                                    {
-                                        tooltips: {
-                                            mode: 'label',
-                                        },
-                                        scales: {
-                                            xAxes: [{
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Cargo Dispatched (Date)'
-                                                }
-                                            }],
-                                            yAxes: [{
-                                                scaleLabel: {
-                                                    display: true,
-                                                    labelString: 'Demurrage (Days)'
-                                                },
-                                                ticks: {
-                                                    beginAtZero: true,
-                                                    stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
-                                                    suggestedMax: suggestedMax
-                                                }
-                                            }]
-                                        },
-                                        legend: {
-                                            display: false,
-                                            //position: 'right',
-                                            //labels: {
-                                            //    fontColor: 'rgb(255, 99, 132)'
-                                            //}
-                                        }
-                                    });
-                            });
+                                    
+                                    demurrageCanvas = chartjsFactory.setCanvas('canvas2');
+                                    demurrageChart = chartjsFactory.createChart('line',
+                                        $scope.dashboard.demurrage.data,
+                                        {
+                                            tooltips: {
+                                                mode: 'label',
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: 'Cargo Dispatched (Date)'
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: 'Demurrage (Days)'
+                                                    },
+                                                    ticks: {
+                                                        beginAtZero: true,
+                                                        stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
+                                                        suggestedMax: suggestedMax
+                                                    }
+                                                }]
+                                            },
+                                            legend: {
+                                                display: false,
+                                                //position: 'right',
+                                                //labels: {
+                                                //    fontColor: 'rgb(255, 99, 132)'
+                                                //}
+                                            }
+                                        });
+                                    $scope.loadingDemurrage = false;
+                                }, (error) => { $scope.loadingDemurrage = false; });
+                        }, 5000);
                     }
                 },
                 maps: {
                     data: {}
                 }
             };
-           
+
             //Chart.defaults.global.elements.line.backgroundColor = 'transparent';
 
             // load dashboard import data
@@ -448,30 +466,57 @@ var api = serverUrl + '/api';
             // load dashboard export data
             $scope.dashboard.export.get();
             // load dashboard shipment analysis
-            $scope.dashboard.shipments.get();
-            $scope.dashboard.demurrage.get();
+
+
+            // Analytics: loading variables
+            $scope.loadingShipments = true;
+            $scope.loadingDemurrage = true;
+            $scope.loadingTopImport = true;
+            $scope.loadingTopExport = true;
+
+
+            // Analytics: Shipments - wait for DOM
+            $timeout(() => {
+                $scope.dashboard.shipments.get();
+            });
+
+
+            // Analytics: Demurrage - wait for DOM
+            $timeout(() => {
+                $scope.dashboard.demurrage.get();
+            });
 
 
             // Analytics: Top Import Countries
-            appAnalytics.topImportCountries()
-                .then(function (data) {
-                    // data returned
-                    $scope.topImportCountries = data;
-                },
-                (error) => {
-                    // error occurred
-                });
+            $timeout(() => {
+                appAnalytics.topImportCountries()
+                    .then(function (data) {
+                        // data returned
+                        $scope.topImportCountries = data;
+                        $scope.loadingTopImport = false;
+                    },
+                    (error) => {
+                        // error occurred
+                        $scope.loadingTopImport = false;
+                    });
+            }, 4000);
+
 
 
             // Analytics: Top Export Countries
-            appAnalytics.topExportCountries()
-                .then(function (data) {
-                    // data returned
-                    $scope.topExportCountries = data;
-                },
-                (error) => {
-                    // error occurred
-                });
+            $timeout(() => {
+                appAnalytics.topExportCountries()
+                    .then(function (data) {
+                        // data returned
+                        $scope.topExportCountries = data;
+                        $scope.loadingTopExport = false;
+                    },
+                    (error) => {
+                        // error occurred
+                        $scope.loadingTopExport = false;
+                    });
+            }, 4000);
+
 
 
             // TODO: Google Maps get Latitude and Longitude Information
@@ -965,7 +1010,7 @@ var api = serverUrl + '/api';
                         }
                     });
             };
-                        
+
             // get most recent exports for company
             $scope.getExports();
 
@@ -1028,7 +1073,7 @@ var api = serverUrl + '/api';
 
                 // show confirm dialog before recycle
                 if (!$scope.confirmed) {
-                    appFactory.showDialog(message + ' <b>' + (d.Bill || d.WayBill) + '</b>?', null, true,  fnc);
+                    appFactory.showDialog(message + ' <b>' + (d.Bill || d.WayBill) + '</b>?', null, true, fnc);
                     model = {
                         d: d,
                         pindex: pindex,
@@ -1041,7 +1086,7 @@ var api = serverUrl + '/api';
 
             // mark an import/export as completed
             $scope.markAsDone = function (d, pindex, cindex) {
-                
+
                 $scope.doneData = confirmDoneOrRecycle(d,
                     pindex,
                     cindex,
@@ -1580,7 +1625,7 @@ var api = serverUrl + '/api';
             }
             // get the exchange rates of the day
             if ($rootScope.exRates === undefined) {
-                appFactory.getExRate().done(function () {});
+                appFactory.getExRate().done(function () { });
             }
 
         }]);

@@ -14,56 +14,56 @@
     <div class="collapse navbar-collapse" id="rd-navbar">
         <ul class="nav navbar-nav">
             <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
-                <a ui-sref="register" data-i18n="_Register_"></a>
+                <a ui-sref="register" class="text-uppercase" data-i18n="_Register_"></a>
             </li>
             <li ui-sref-active="active" ng-show="User.Login.Token.length > 0">
-                <a ui-sref="dashboard" data-i18n="_Dashboard_"></a>
+                <a ui-sref="dashboard" class="text-uppercase" data-i18n="_Dashboard_"></a>
             </li>
             <!-- freight forwarder links -->
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
-                <a ui-sref="import" ng-click="prepCards()" data-i18n="_Imports_"></a>
+                <a ui-sref="import" class="text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
             </li>
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
-                <a ui-sref="export" ng-click="prepCards()" data-i18n="_Exports_"></a>
+                <a ui-sref="export" class="text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
             </li>
 
 
             <!-- maritime links -->
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
-                <a ui-sref="maritime.import" ng-click="prepCards()" data-i18n="_Imports_"></a>
+                <a ui-sref="maritime.import" class="text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
             </li>
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
-                <a ui-sref="maritime.export" ng-click="prepCards()" data-i18n="_Exports_"></a>
+                <a ui-sref="maritime.export" class="text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
             </li>
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
-                <a ui-sref="report" data-i18n="_Reports_"></a>
+                <a ui-sref="report" class="text-uppercase" data-i18n="_Reports_"></a>
             </li>
             <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
-                <a ui-sref="customreport" data-i18n="_CustomReports_"></a>
+                <a ui-sref="customreport" class="text-uppercase" data-i18n="_CustomReports_"></a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li>
                 <select class="select-custom" ng-model="lang" ng-change="setLanguage()">
-                    <option value="en-US">English</option>
-                    <option value="am-ET">አማርኛ</option>
+                    <option value="en-US">us-ENGLISH</option>
+                    <option value="am-ET">et-አማርኛ</option>
                 </select>
             </li>
             <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
-                <a ui-sref="login" data-i18n="_Login_"></a>
+                <a ui-sref="login" class="text-uppercase" data-i18n="_Login_"></a>
             </li>
             <li class="hidden-md hidden-lg" ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
-                <a ui-sref="login" ng-click="logout()" data-i18n="_Logout_"></a>
+                <a ui-sref="login" class="text-uppercase" ng-click="logout()" data-i18n="_Logout_"></a>
             </li>
             <li ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
-                <a class="img-profile-wr" ui-sref="account">
+                <a class="img-profile-wr text-uppercase" ui-sref="account">
                     <span class="img-profile-name" ng-bind="User.Person.FirstName"></span><img class="common-sprite user-32 img-profile" ng-src="{{User.Person.PhotoDataUrl}}" />
                 </a>
             </li>
             <li class="dropdown hidden-xs hidden-sm" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a ui-sref="login" ng-click="logout()" data-i18n="_Logout_"></a></li>
+                    <li><a ui-sref="login" class="text-uppercase" ng-click="logout()" data-i18n="_Logout_"></a></li>
                 </ul>
             </li>
         </ul>

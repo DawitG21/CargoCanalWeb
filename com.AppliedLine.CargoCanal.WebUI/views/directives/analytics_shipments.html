@@ -1,0 +1,9 @@
+﻿<div id="shipment-box" class="analytics-box">
+    <select ng-model="daysOfShipmentActivity" class="select-right"
+            ng-options="d.value as d.label for d in days"
+            ng-change="dashboard.shipments.get(daysOfShipmentActivity)"></select>
+    <h3 class="font-bold-600"><span class="fa fa-bar-chart color-theme"></span> Shipments Analytics</h3>
+    <h6>Last {{daysOfShipmentActivity}} days import and export</h6>
+    <hr />
+    <canvas id="canvas1" width="300" height="200"></canvas>
+</div>

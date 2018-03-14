@@ -1,0 +1,12 @@
+﻿<div class="dashboard-pad pad-grey">
+    <h5>Aggregated Top Import Countries</h5>
+    <div class="bar-ratings bar-rating-bg-blue" ng-repeat="d in topImportCountries">
+        <div class="bar-rating-wrapper">
+            <i class="bar-rating" ng-class="'bar-rating-' + (topImportCountries.length - $index)"></i>
+        </div>
+        <h6>
+            <span class="font-bold-600">{{d.Country}}</span>
+            <span class="badge pull-right font-bold-600">{{d.TotalCount | numberparse}}</span>
+        </h6>
+    </div>
+</div>

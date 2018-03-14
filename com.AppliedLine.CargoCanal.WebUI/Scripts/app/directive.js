@@ -1,5 +1,43 @@
 ﻿(function () {
 
+    app.directive('dirLoading', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/loading.html'
+        };
+    });
+
+    app.directive('dirAnalyticsShipments', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/analytics_shipments.html'
+        };
+    });
+
+    app.directive('dirAnalyticsDemurrage', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/analytics_demurrage.html'
+        };
+    });
+
+    app.directive('dirAnalyticsTopImportCountries', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/analytics_top_import_countries.html'
+        };
+    });
+    app.directive('dirAnalyticsTopExportCountries', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/analytics_top_export_countries.html'
+        };
+    });
     app.directive('dirMenuTop', function () {
         return {
             restrict: 'E',

@@ -22,57 +22,23 @@
     </div>
 
     <div class="col-xs-12 col-md-4">
-        <div class="dashboard-pad pad-grey">
-            <h5>Top Import Countries</h5>
-            <div class="bar-ratings bar-rating-bg-blue" ng-repeat="d in topImportCountries">
-                <div class="bar-rating-wrapper">
-                    <i class="bar-rating" ng-class="'bar-rating-' + (topImportCountries.length - $index)"></i>
-                </div>
-                <h6>
-                    <span class="font-bold-600">{{d.Country}}</span>
-                    <span class="badge pull-right font-bold-600">{{d.TotalCount | numberparse}}</span>
-                </h6>
-            </div>
-        </div>
+        <dir-analytics-top-import-countries></dir-analytics-top-import-countries>
+        <dir-loading ng-show="loadingTopImport" class="loading"></dir-loading>
     </div>
 
     <div class="col-xs-12 col-md-4">
-        <div class="dashboard-pad pad-grey">
-            <h5>Top Export Countries</h5>
-            <div class="bar-ratings bar-rating-bg-blue" ng-repeat="d in topExportCountries">
-                <div class="bar-rating-wrapper">
-                    <i class="bar-rating" ng-class="'bar-rating-' + (topExportCountries.length - $index)"></i>
-                </div>
-                <h6>
-                    <span class="font-bold-600">{{d.Country}}</span>
-                    <span class="badge pull-right font-bold-600">{{d.TotalCount | numberparse}}</span>
-                </h6>
-            </div>
-        </div>
+        <dir-analytics-top-export-countries></dir-analytics-top-export-countries>
+        <dir-loading ng-show="loadingTopExport" class="loading"></dir-loading>
     </div>
 </div>
 <div class="row margin-0">
     <div class="col-md-6">
-        <div id="shipment-box" class="analytics-box">
-            <select ng-model="daysOfShipmentActivity" class="select-right"
-                    ng-options="d.value as d.label for d in days"
-                    ng-change="dashboard.shipments.get(daysOfShipmentActivity)"></select>
-            <h3 class="font-bold-600"><span class="fa fa-bar-chart color-theme"></span> Shipments Analytics</h3>
-            <h6>Last {{daysOfShipmentActivity}} days import and export</h6>
-            <hr />
-            <canvas id="canvas1" width="300" height="200"></canvas>
-        </div>
+        <dir-analytics-shipments></dir-analytics-shipments>
+        <dir-loading ng-show="loadingShipments" class="loading"></dir-loading>
     </div>
     <div class="col-md-6">
-        <div id="demurrage-box" class="analytics-box">
-            <select ng-model="daysOfDemurrageActivity" class="select-right"
-                    ng-options="d.value as d.label for d in days"
-                    ng-change="dashboard.demurrage.get(daysOfDemurrageActivity)"></select>
-            <h3 class="font-bold-600"><span class="fa fa-bar-chart color-theme"></span> Demurrage Analytics</h3>
-            <h6>Last {{daysOfDemurrageActivity}} days demurrage</h6>
-            <hr />
-            <canvas id="canvas2" width="300" height="200"></canvas>
-        </div>
+        <dir-analytics-demurrage></dir-analytics-demurrage>
+        <dir-loading ng-show="loadingDemurrage" class="loading"></dir-loading>
     </div>
 </div>
 <!--<div class="row margin-0">

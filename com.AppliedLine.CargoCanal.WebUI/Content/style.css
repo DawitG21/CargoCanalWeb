@@ -148,12 +148,19 @@ label {
     border: 1px solid lightgrey;
     padding: 1em;
     margin-bottom: 2em;
+    min-height: 480px;
     color: #000;
     background-color: white;
     font-weight: bold;
     -moz-box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
     -webkit-box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
     box-shadow: 0px 0px 10px rgba(212, 210, 217, 0.8);
+}
+
+.loading {
+    top: 40%;
+    position: absolute;
+    width: 100%;
 }
 
 .select-right {
@@ -963,7 +970,6 @@ i.loader-box-4 {
 
 .bar-rating {
     height: 10px;
-    display: inline-block;
     border-radius: 5px;
     float: right;
     /*background: #4ed34e; #adff2f, #93b6f2*/
@@ -990,15 +996,13 @@ i.loader-box-4 {
     }
 
 .dashboard-pad {
-    background-color: #c12828;
-    padding: 5px 10px 25px;
+    padding: 5px 10px 0;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    min-height: 130px;
+    min-height: 160px;
     color: #f5f5f5;
     position: relative;
-    animation: fadeIn 3s normal;
     margin-bottom: 10px;
 }
 
@@ -1077,7 +1081,7 @@ i.loader-box-4 {
     margin: 15px 15px 0 0;
     border-radius: 8px;
     color: white;
-    background: #8691c9;
+    background: #37264c;
 }
 
     .select-custom:focus {
@@ -1448,5 +1452,9 @@ form .progress {
 
     .select-custom {
         margin: 0;
+    }
+
+    .analytics-box {
+        min-height: 320px;
     }
 }

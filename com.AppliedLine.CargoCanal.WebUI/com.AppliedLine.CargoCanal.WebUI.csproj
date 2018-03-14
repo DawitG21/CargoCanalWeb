@@ -85,6 +85,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\cargocanal-feature-graphic-web.png" />
+    <Content Include="Content\images\ellipsis_4s_64px.gif" />
+    <Content Include="Content\images\gear.svg" />
     <Content Include="Content\images\google-play-badge-h60.png" />
     <Content Include="Content\images\icons\caret_white_l_16.png" />
     <Content Include="Content\images\icons\caret_white_r_16.png" />
@@ -215,6 +217,7 @@
     <Content Include="dist\assets\images\cargocanal_text_128.png" />
     <Content Include="dist\assets\images\cargocanal_text_32.png" />
     <Content Include="dist\assets\images\cargocanal_text_64.png" />
+    <Content Include="dist\assets\images\ellipsis_4s_64px.gif" />
     <Content Include="dist\assets\images\google-play-badge-h60.png" />
     <Content Include="dist\assets\images\google-play-badge.png" />
     <Content Include="dist\assets\images\icons\airplane-24.png" />
@@ -232,8 +235,10 @@
     <Content Include="dist\assets\images\icons\cargocanal_64px.png" />
     <Content Include="dist\assets\images\icons\container-24.png" />
     <Content Include="dist\assets\images\icons\container-32.png" />
+    <Content Include="dist\assets\images\icons\done-32.png" />
     <Content Include="dist\assets\images\icons\fire-24.png" />
     <Content Include="dist\assets\images\icons\fire-32.png" />
+    <Content Include="dist\assets\images\icons\money-32.png" />
     <Content Include="dist\assets\images\icons\pipe-24.png" />
     <Content Include="dist\assets\images\icons\pipe-32.png" />
     <Content Include="dist\assets\images\icons\railway-24.png" />
@@ -245,6 +250,9 @@
     <Content Include="dist\assets\images\icons\user-128.png" />
     <Content Include="dist\assets\images\icons\user-32.png" />
     <Content Include="dist\assets\images\icons\user-64.png" />
+    <Content Include="dist\assets\images\icons\user_128.png" />
+    <Content Include="dist\assets\images\icons\user_32.png" />
+    <Content Include="dist\assets\images\icons\user_64.png" />
     <Content Include="dist\assets\images\people.png" />
     <Content Include="dist\assets\images\people_720.png" />
     <Content Include="dist\assets\images\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -427,6 +435,10 @@
     <Content Include="dist\views\directives\account_role_perm_user.html" />
     <Content Include="dist\views\directives\account_user_profile_view.html" />
     <Content Include="dist\views\directives\add_item_fullscreen.html" />
+    <Content Include="dist\views\directives\analytics_demurrage.html" />
+    <Content Include="dist\views\directives\analytics_shipments.html" />
+    <Content Include="dist\views\directives\analytics_top_export_countries.html" />
+    <Content Include="dist\views\directives\analytics_top_import_countries.html" />
     <Content Include="dist\views\directives\create_company.html" />
     <Content Include="dist\views\directives\dashboard_bank.html" />
     <Content Include="dist\views\directives\dashboard_bank_search_view.html" />
@@ -447,6 +459,7 @@
     <Content Include="dist\views\directives\import_bill_preview.html" />
     <Content Include="dist\views\directives\import_summary.html" />
     <Content Include="dist\views\directives\import_toolbox.html" />
+    <Content Include="dist\views\directives\loading.html" />
     <Content Include="dist\views\directives\menu_top.html" />
     <Content Include="dist\views\directives\options_more_window.html" />
     <Content Include="dist\views\directives\passwordchange.html" />
@@ -556,6 +569,7 @@
     <Content Include="src\assets\images\cargocanal_text_128.png" />
     <Content Include="src\assets\images\cargocanal_text_32.png" />
     <Content Include="src\assets\images\cargocanal_text_64.png" />
+    <Content Include="src\assets\images\ellipsis_4s_64px.gif" />
     <Content Include="src\assets\images\google-play-badge-h60.png" />
     <Content Include="src\assets\images\google-play-badge.png" />
     <Content Include="src\assets\images\icons\airplane-24.png" />
@@ -641,6 +655,11 @@
     <Content Include="src\lib\jquery.utils.min.js" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
+    <Content Include="views\directives\analytics_demurrage.html" />
+    <Content Include="views\directives\analytics_shipments.html" />
+    <Content Include="views\directives\analytics_top_export_countries.html" />
+    <Content Include="views\directives\analytics_top_import_countries.html" />
+    <Content Include="views\directives\loading.html" />
     <Content Include="views\directives\options_more_window.html" />
     <Content Include="views\directives\export_toolbox.html" />
     <Content Include="views\directives\import_toolbox.html" />
