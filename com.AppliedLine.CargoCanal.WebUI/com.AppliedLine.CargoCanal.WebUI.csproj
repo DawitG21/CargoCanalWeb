@@ -211,6 +211,7 @@
     <Content Include="dist\assets\css\datatables.min.css" />
     <Content Include="dist\assets\css\style-bundle-defer.min.css" />
     <Content Include="dist\assets\css\style-bundle.min.css" />
+    <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="dist\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="dist\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="dist\assets\images\cargocanal-feature-graphic-web.png" />
@@ -754,6 +755,10 @@
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff2" />
+    <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.eot" />
+    <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.ttf" />
+    <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.woff" />
+    <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="packman.json" />
     <None Include="Properties\PublishProfiles\localIIS.pubxml" />
     <Content Include="Scripts\angular.min.js.map" />

@@ -13,10 +13,10 @@ var api = serverUrl + '/api';
             $rootScope.host = api.substring(0, api.lastIndexOf('/'));
 
             $rootScope.days = [
-                { label: '7 days', value: 7 },
-                { label: '30 days', value: 30 },
-                { label: '90 days', value: 90 },
-                { label: '180 days', value: 180 }
+                { label: '7 DAYS', value: 7 },
+                { label: '30 DAYS', value: 30 },
+                { label: '90 DAYS', value: 90 },
+                { label: '180 DAYS', value: 180 }
             ];
 
             // TODO: Get User Preference Cookie if it exists
@@ -288,11 +288,11 @@ var api = serverUrl + '/api';
                                     $scope.dashboard.shipments.data = response.data;
                                     $scope.chartOptions = {
                                         backgroundColors: [
-                                            'rgba(65, 192, 192, 0.1)',
+                                            'rgba(62, 84, 121, 0.1)',
                                             'rgba(255, 10, 182, 0.1)'
                                         ],
                                         borderColors: [
-                                            'rgba(65, 192, 192, 1)',
+                                            'rgba(62, 84, 121, 1)',
                                             'rgba(255, 10, 182, 1)'
                                         ]
                                     };
