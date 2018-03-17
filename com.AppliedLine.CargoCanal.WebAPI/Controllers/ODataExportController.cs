@@ -22,7 +22,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         }
 
         [HttpPost]
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 10)]
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 20)]
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult GetExports([FromODataUri]int key, ODataActionParameters parameters)
         {
@@ -39,7 +39,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         }
 
         [HttpPost]
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 10)]
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 20)]
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult SearchExports([FromODataUri]int key, ODataActionParameters parameters)
         {

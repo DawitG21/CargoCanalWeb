@@ -14,6 +14,14 @@ using System.Web;
 namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 {
     //[ODataRoutePrefix("OnDuct")]
+    public class Duct
+    {
+        public int ID { get; set; }
+        public string ProductName { get; set; }
+        public decimal Price { get; set; }
+    }
+
+
     public class ODataImportController : ODataController
     {
         CargoCanalDBEntities dbEntities = new CargoCanalDBEntities();
@@ -57,7 +65,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
 
         [HttpPost]
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 10)]
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 20)]
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult GetImports([FromODataUri]int key, ODataActionParameters parameters)
         {
@@ -74,7 +82,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         }
 
         [HttpPost]
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 10)]
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 20)]
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult SearchImports([FromODataUri]int key, ODataActionParameters parameters)
         {
@@ -95,12 +103,5 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             if (imports == null || imports.Count == 0) return NotFound();
             return Ok(imports.AsQueryable());
         }
-    }
-
-    public class Duct
-    {
-        public int ID { get; set; }
-        public string ProductName { get; set; }
-        public decimal Price { get; set; }
     }
 }

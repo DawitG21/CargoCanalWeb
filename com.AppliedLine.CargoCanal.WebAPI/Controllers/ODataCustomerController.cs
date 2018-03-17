@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using com.AppliedLine.CargoCanal.Models;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Query;
-using System.Web.OData.Routing;
 using com.AppliedLine.CargoCanal.DAL;
-using System.Web;
 
 namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 {
@@ -22,7 +18,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         }
 
         [HttpPost]
-        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 10)]
+        [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All, PageSize = 20)]
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult SearchImportExport([FromODataUri]int key, ODataActionParameters parameters)
         {

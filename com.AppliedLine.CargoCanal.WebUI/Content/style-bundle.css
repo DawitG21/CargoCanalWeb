@@ -8943,6 +8943,7 @@ i.loader-box-4 {
     margin: 20px 0 30px 0;
 }
 
+/* ratings bar start */
 .bar-ratings.bar-rating-bg-blue .bar-rating,
 .bar-ratings.bar-rating-bg-blue .badge {
     background: #93b6f2;
@@ -8961,29 +8962,66 @@ i.loader-box-4 {
 .bar-rating {
     height: 10px;
     border-radius: 5px;
+    width: 0;
     float: right;
     /*background: #4ed34e; #adff2f, #93b6f2*/
 }
 
     .bar-rating.bar-rating-5 {
         width: 50px;
+        animation: 2s stretch;
     }
 
     .bar-rating.bar-rating-4 {
         width: 40px;
+        animation: 2s stretch;
     }
 
     .bar-rating.bar-rating-3 {
         width: 30px;
+        animation: 2s stretch;
     }
 
     .bar-rating.bar-rating-2 {
         width: 20px;
+        animation: 2s stretch;
     }
 
     .bar-rating.bar-rating-1 {
         width: 10px;
+        animation: 2s stretch;
     }
+
+@keyframes stretch {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: width;
+    }
+}
+
+@-moz-keyframes stretch {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: width;
+    }
+}
+
+@-webkit-keyframes stretch {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: width;
+    }
+}
+/* ratings bar end */
 
 .dashboard-pad {
     padding: 5px 10px 0;
