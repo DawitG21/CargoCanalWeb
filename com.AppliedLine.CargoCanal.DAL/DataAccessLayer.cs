@@ -1359,15 +1359,18 @@ namespace com.AppliedLine.CargoCanal.DAL
                 JArray labels = new JArray();
                 foreach (var r in table)
                 {
-                    var cdt = DateTimeOffset.Parse(r["StatusDate"].ToString()).UtcDateTime.Date;
+                    var cdt = DateTimeOffset.Parse(r["StatusDate"].ToString()).Date;
                     var cday = Convert.ToInt64(r["DemurrageDays"]);
                     labels.Add(cdt);
                     labels.Add(cdt.AddDays(_DEMURRAGE_GRACE + cday));
                 }
 
+                // add today to labels array
                 labels.Add(DateTimeOffset.UtcNow.Date);
+
                 var labelsDistinct = labels.OrderBy(d => d).Distinct();
                 labels = new JArray();
+
                 foreach (var dtLabel in labelsDistinct)
                 {
                     labels.Add(dtLabel);
@@ -1378,7 +1381,7 @@ namespace com.AppliedLine.CargoCanal.DAL
                 foreach (var r in table)
                 {
                     JArray data = new JArray();
-                    DateTime cdt = DateTimeOffset.Parse(r["StatusDate"].ToString()).UtcDateTime.Date;
+                    DateTime cdt = DateTimeOffset.Parse(r["StatusDate"].ToString()).Date;
                     long cday = Convert.ToInt64(r["DemurrageDays"]);
 
                     foreach (var dtLabel in labels)
@@ -1392,6 +1395,9 @@ namespace com.AppliedLine.CargoCanal.DAL
 
                     datasets.Add(new JObject(new JProperty("data", data),
                         new JProperty("status", r["DemurrageStatus"].ToString()),
+                        new JProperty("company", r["CompanyName"].ToString()),
+                        new JProperty("currentStatus", r["CurrentStatus"].ToString()),
+                        new JProperty("discharged", r["StatusDate"]),
                         new JProperty("label", r["BillNumber"].ToString())
                     ));
                 }
