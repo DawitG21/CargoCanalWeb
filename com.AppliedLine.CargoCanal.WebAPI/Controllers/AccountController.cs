@@ -242,7 +242,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                     //  Delete the existing physical file from the server
                     if (person != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{person.PhotoFilename}");
 
-                    savedFile = FileProcessor.SaveFileOnDisc(fileDir, part, person?.PhotoFilename);
+                    savedFile = FileProcessor.SaveFileOnDisc(fileDir, part);
                 }
 
                 // save file to database
