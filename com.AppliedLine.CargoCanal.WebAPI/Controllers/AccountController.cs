@@ -213,6 +213,13 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             }
         }
 
+        [HttpGet]
+        // get a user's person information
+        public IHttpActionResult GetPerson(long id)
+        {
+            return Ok(dal.SelectPerson(id));
+        }
+
         [HttpPost]
         public async Task<IHttpActionResult> PostProfilePhoto()
         {
