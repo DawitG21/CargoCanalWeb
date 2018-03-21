@@ -69,7 +69,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult GetImports([FromODataUri]int key, ODataActionParameters parameters)
         {
-            int dbPageSize = 20; // TODO: make this a global const
+            int dbPageSize = 25; // TODO: make this a global const; value has to be higher than PageSize
             int skip = 0;
             
             // set db rows to skip
@@ -86,7 +86,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
         // post http://localhost:49931/odata/ODataImport(key)/GetImports?id=3&$expand=LC
         public IHttpActionResult SearchImports([FromODataUri]int key, ODataActionParameters parameters)
         {
-            int dbPageSize = 20; // TODO: make this a global const
+            int dbPageSize = 25; // TODO: make this a global const; value has to be higher than PageSize
             int skip = 0;
             SearchBill search = new SearchBill();
 
