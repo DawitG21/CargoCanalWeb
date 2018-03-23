@@ -168,6 +168,7 @@ var api = serverUrl + '/api';
     app.controller('loginController', ["$scope", "$http", "$sessionStorage", "$rootScope", "$state", "appFactory",
         function ($scope, $http, $sessionStorage, $rootScope, $state, appFactory) {
             $scope.login = {};
+            $scope.processing = false;
 
             $scope.forgotPassword = function () {
                 $state.go('passwordreset');
@@ -175,6 +176,7 @@ var api = serverUrl + '/api';
 
             $scope.signIn = function () {
                 $scope.loginFailed = '';
+                $scope.processing = true;
                 $http({
                     method: 'POST',
                     url: api + '/account/postlogin',
@@ -196,6 +198,7 @@ var api = serverUrl + '/api';
                         // $rootScope.workerValidateSession();
                     }, function (error) {
                         $scope.loginFailed = "Invalid login attempt.";
+                        $scope.processing = false;
                     });
             };
         }]);
