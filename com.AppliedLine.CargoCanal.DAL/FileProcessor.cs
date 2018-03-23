@@ -70,6 +70,8 @@ namespace com.AppliedLine.CargoCanal.DAL
             if (string.IsNullOrEmpty(filename)) newfilename = oldfilename + Guid.NewGuid().ToString() + fileExt;
             else newfilename = filename;
 
+            newfilename = newfilename.Replace(" ", string.Empty);
+
             // Create directory if it does not exist exempting Execute permission
             CreateDirectory(path);
 

@@ -1912,6 +1912,12 @@ var api = serverUrl + '/api';
 
             // adds blank itemDetail object for creating
             $scope.initItemDetail = function () {
+                // don't allow new item detail if the quantity limit is reached
+                if ($scope.newItem.Quantity > 0 &&
+                    $scope.newItem.ItemDetails.length === $scope.newItem.Quantity) {
+                    return;
+                }
+
                 $scope.newItemDetail = {};
                 $scope.showItemDetailEntry = true;
             };
@@ -4473,10 +4479,10 @@ app.filter('numberparse', function () {
         let denominator = 1;
         let remainder = 0;
         let numberString = '';
-        let thousand = 1000;
-        let million = Math.pow(thousand, 2);
-        let billion = Math.pow(thousand, 3);
-        let trillion = Math.pow(thousand, 4);
+        const thousand = 1000;
+        const million = Math.pow(thousand, 2);
+        const billion = Math.pow(thousand, 3);
+        const trillion = Math.pow(thousand, 4);
 
         while ((numerator * denominator >= denominator * thousand)) {
             denominator *= thousand;
@@ -4485,26 +4491,30 @@ app.filter('numberparse', function () {
             remainder = number % denominator;
         }
 
-        let remDiv = (remainder / denominator).toString();
-        let remStr = remDiv.substr(remDiv.indexOf('.') + 1, 1);
+        const remDiv = (remainder / denominator).toString();
+        const remStr = remDiv.substr(remDiv.indexOf('.') + 1, 1);
+        const kText = ' K';
+        const mText = ' M';
+        const bText = ' B';
+        const tText = ' T';
 
         numberString = numerator;
 
         switch (denominator) {
             case thousand:
-                numberString += (remStr === '0' ? 'K' : '.' + remStr + 'K');
+                numberString += (remStr === '0' ? kText : '.' + remStr + kText);
                 break;
             case million:
-                numberString += (remStr === '0' ? 'M' : '.' + remStr + 'M');
+                numberString += (remStr === '0' ? mText : '.' + remStr + mText);
                 break;
             case billion:
-                numberString += (remStr === '0' ? 'B' : '.' + remStr + 'B');
+                numberString += (remStr === '0' ? bText : '.' + remStr + bText);
                 break;
             case trillion:
-                numberString += (remStr === '0' ? 'T' : '.' + remStr + 'T');
+                numberString += (remStr === '0' ? tText : '.' + remStr + tText);
                 break;
             default:
-                numberString = '999T+';
+                numberString = '999' + tText + '+';
         }
         
         return numberString;

@@ -607,6 +607,12 @@ var api = serverUrl + '/api';
 
             // adds blank itemDetail object for creating
             $scope.initItemDetail = function () {
+                // don't allow new item detail if the quantity limit is reached
+                if ($scope.newItem.Quantity > 0 &&
+                    $scope.newItem.ItemDetails.length === $scope.newItem.Quantity) {
+                    return;
+                }
+
                 $scope.newItemDetail = {};
                 $scope.showItemDetailEntry = true;
             };
