@@ -14,5 +14,6 @@ namespace com.AppliedLine.CargoCanal.Models
         public string Filepath { get; set; }
         public string FileExtension { get; set; }
         public string FileData { get; set; }
+        public long Size { get; set; }
     }
 }

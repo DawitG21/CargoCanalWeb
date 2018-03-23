@@ -142,6 +142,9 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                 FileProcessor.CreateFileFromByteOnDisc(fileDir, doc.Filename, Convert.FromBase64String(doc.FileData));
                 doc.Filepath = $"{docsDir.Substring(2)}/{doc.Filename}";
                 doc.FileData = string.Empty;
+
+                var fileInfo = FileProcessor.GetFileInfo(fileDir, doc.Filename);
+                doc.Size = fileInfo.Length;
             }
 
             return Ok(docs);

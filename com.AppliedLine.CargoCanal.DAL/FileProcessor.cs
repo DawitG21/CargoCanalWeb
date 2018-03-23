@@ -143,5 +143,16 @@ namespace com.AppliedLine.CargoCanal.DAL
 
             return filesSaved;
         }
+
+        public static FileInfo GetFileInfo(string path, string filename)
+        {
+            var filepath = Path.Combine(path, filename);
+            if (File.Exists(filepath))
+            {
+                return new FileInfo(filepath);
+            }
+
+            return null;
+        }
     }
 }
