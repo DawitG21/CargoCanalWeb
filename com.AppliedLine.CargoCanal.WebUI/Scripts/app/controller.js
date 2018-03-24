@@ -1765,6 +1765,19 @@ var api = serverUrl + '/api';
                 return false;
             };
 
+            /**
+             * <parameter>
+             *      attachmentType: number
+             * </parameter>
+             * The attachmentType parameter accepts the following numbers and represent the following
+             * 0 = USER_PROFILE_IMAGE
+             * 1 = COMPANY_LOGO
+             * 2 = SHIPMENT_ATTACHMENT
+             */
+            $scope.setAttachmentType = function (attachmentType) {
+                $rootScope.attachmentType = attachmentType;
+            };
+
             $scope.account = {
                 password: {
                     change: function () {

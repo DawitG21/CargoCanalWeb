@@ -10,17 +10,34 @@
             $state.go('account');
         }
 
+        let url_attachment;
+        switch ($rootScope.attachmentType) {
+            case 0: url_attachment = '/account/postprofilephoto'; break;
+            default: url_attachment = '/account/postcompanyphoto';
+        }
+        
         // upload the profile picture
         $scope.upload = function (dataUrl, name) {
+            let data = { file: Upload.dataUrltoBlob(dataUrl, name) };
+
+            if ($rootScope.attachmentType === 0) {
+                data.personId = $rootScope.User.Person.ID;
+            } else {
+                data.companyId = $rootScope.User.Company.ID;
+            }
+
             Upload.upload({
-                url: api + '/account/PostProfilePhoto',
-                data: {
-                    file: Upload.dataUrltoBlob(dataUrl, name),
-                    personId: $rootScope.User.Person.ID
-                },
+                url: api + url_attachment,
+                data: data
             }).then(function (response) {
                 $timeout(function () {
-                    $rootScope.User.Person.PhotoDataUrl = dataUrl;
+                    if ($rootScope.attachmentType === 0) {
+                        // set the user profile base64 img
+                        $rootScope.User.Person.PhotoDataUrl = dataUrl;
+                    } else {
+                        // set the company profile base64 img
+                        $rootScope.User.Company.PhotoDataUrl = dataUrl;
+                    }
                 });
             }, function (response) {
                 if (response.status > 0) $scope.errorMsg = response.status

@@ -321,6 +321,7 @@ namespace com.AppliedLine.CargoCanal.DAL
 
             return new Company()
             {
+                ID = Convert.ToInt64(reader["ID"]),
                 Address = reader["Address"].ToString(),
                 CompanyName = reader["CompanyName"].ToString(),
                 CompanyTypeID = Convert.ToInt64(reader["CompanyTypeID"]),
@@ -329,7 +330,6 @@ namespace com.AppliedLine.CargoCanal.DAL
                 CountryID = Convert.ToInt64(reader["CountryID"]),
                 Email = reader["Email"].ToString(),
                 HouseNo = reader["HouseNo"].ToString(),
-                ID = Convert.ToInt64(reader["ID"]),
                 IsActive = Convert.ToBoolean(reader["IsActive"]),
                 Kebele = reader["Kebele"].ToString(),
                 KefleKetema = reader["KefleKetema"].ToString(),
@@ -343,7 +343,9 @@ namespace com.AppliedLine.CargoCanal.DAL
                 TIN = reader["TIN"].ToString(),
                 TownCity = reader["TownCity"].ToString(),
                 Website = reader["Website"].ToString(),
-                Wereda = reader["Wereda"].ToString()
+                Wereda = reader["Wereda"].ToString(),
+                Photo = reader["Photo"].ToString(),
+                PhotoFilename = reader["PhotoFilename"].ToString()
             };
         }
 
@@ -467,6 +469,32 @@ namespace com.AppliedLine.CargoCanal.DAL
                 }
 
                 return companies;
+            }
+        }
+
+        public async Task<string> UpdateCompanyPhoto(Company company)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand cmd = new SqlCommand("sp_Company_UpdatePhoto", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                var pID = new SqlParameter("@companyId", company.ID);
+                var pPhotoFilename = new SqlParameter("@PhotoFilename", company.PhotoFilename);
+                var pPhoto = new SqlParameter("@Photo", company.Photo);//@oldfilename
+                var oldfilename = new SqlParameter()
+                {
+                    ParameterName = "@oldfilename",
+                    SqlDbType = SqlDbType.NVarChar,
+                    Size = 50,
+                    Direction = ParameterDirection.Output
+                };
+
+                cmd.Parameters.AddRange(new[] { pID, pPhotoFilename, pPhoto, oldfilename });
+
+                await cmd.ExecuteNonQueryAsync();
+                return oldfilename.Value.ToString();
             }
         }
 

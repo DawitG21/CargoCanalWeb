@@ -181,6 +181,13 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             return BadRequest();
         }
 
+        [HttpGet]
+        // get a user's company information
+        public IHttpActionResult GetCompany(long id)
+        {
+            return Ok(dal.SelectCompanyById(id));
+        }
+
         [HttpPost]
         public IHttpActionResult PostLogin(Login login)
         {
@@ -255,6 +262,50 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                 // save file to database
                 var file = savedFile.ToArray()[0];
                 await dal.UpdatePersonPhoto(new Person() { ID = personId, Photo = file.Value, PhotoFilename = file.Key });
+
+                return Ok(file.Value);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IHttpActionResult> PostCompanyPhoto()
+        {
+            try
+            {
+                var context = HttpContext.Current;
+                var urlReferrer = context.Request.UrlReferrer;
+
+                IEnumerable<HttpContent> multiparts = null;
+                Task.Factory.StartNew(
+                    () => multiparts = Request.Content.ReadAsMultipartAsync().Result.Contents,
+                    CancellationToken.None,
+                    TaskCreationOptions.LongRunning,
+                    TaskScheduler.Default).Wait();
+
+                // no file uploaded
+                if (multiparts.Count() == 0) return BadRequest();
+
+                string fileDir = context.Server.MapPath(profilesDir);
+
+                var companyId = Convert.ToInt64(context.Request.Form["companyid"].ToString()); // get the company id
+                Dictionary<string, string> savedFile = new Dictionary<string, string>();
+                foreach (var part in multiparts)
+                {
+                    if (part.Headers.ContentType == null) continue; // not a file e.g. personId
+                    Company company = dal.SelectCompanyById(companyId);
+                    //  Delete the existing physical file from the server
+                    if (company != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{company.PhotoFilename}");
+
+                    savedFile = FileProcessor.SaveFileOnDisc(fileDir, part);
+                }
+
+                // save file to database
+                var file = savedFile.ToArray()[0];
+                await dal.UpdateCompanyPhoto(new Company() { ID = companyId, Photo = file.Value, PhotoFilename = file.Key });
 
                 return Ok(file.Value);
             }

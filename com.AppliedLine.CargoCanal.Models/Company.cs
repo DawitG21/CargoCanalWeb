@@ -33,6 +33,8 @@ namespace com.AppliedLine.CargoCanal.Models
         public DateTime? LastRenewedDate { get; set; }
         public DateTime? LicenseIssuedDate { get; set; }
         public bool IsActive { get; set; }
+        public string PhotoFilename { get; set; }
+        public string Photo { get; set; }
 
         public bool Equals(Company other)
         {
