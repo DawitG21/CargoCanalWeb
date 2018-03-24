@@ -47,7 +47,7 @@
                 <p class="square-text" data-i18n="_Problems_"></p>
             </div>
 
-            <div class="square-wrapper" ng-click="consigneeInfo.show(d)">
+            <div ng-hide="isNotFF" class="square-wrapper" ng-click="consigneeInfo.show(d)">
                 <div class="square-img-wr">
                     <span class="card-option icon">
                         <span class="common-sprite user-32"></span>
@@ -56,7 +56,7 @@
                 <p class="square-text" data-i18n="_Consignee_"></p>
             </div>
 
-            <div class="square-wrapper" ng-click="costInfo.show(d, $parent.$index, $index)">
+            <div ng-hide="isNotFF" class="square-wrapper" ng-click="costInfo.show(d, $parent.$index, $index)">
                 <div class="square-img-wr">
                     <span class="card-option icon">
                         <span class="common-sprite money-32"></span>
@@ -65,7 +65,7 @@
                 <p class="square-text" data-i18n="_Cost_"></p>
             </div>
 
-            <div class="square-wrapper" ng-click="markAsDone(d, $parent.$index, $index)">
+            <div ng-hide="isNotFF" class="square-wrapper" ng-click="markAsDone(d, $parent.$index, $index)">
                 <div class="square-img-wr">
                     <span class="card-option icon">
                         <span class="common-sprite done-32"></span>
@@ -74,7 +74,7 @@
                 <p class="square-text" data-i18n="_Done_"></p>
             </div>
 
-            <div class="square-wrapper" ng-click="terminateImportExport(d, $parent.$index, $index)">
+            <div ng-hide="isNotFF" class="square-wrapper" ng-click="terminateImportExport(d, $parent.$index, $index)">
                 <div class="square-img-wr">
                     <span class="card-option icon">
                         <span class="common-sprite trash-32"></span>

@@ -636,6 +636,12 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 default:
                     $rootScope.User.Person.PhotoDataUrl = 'data:image/jpg;base64,' + $rootScope.User.Person.Photo;
             }
+
+            switch ($rootScope.User.Company.Photo) {
+                case null: case undefined: case '': break;
+                default:
+                    $rootScope.User.Company.PhotoDataUrl = 'data:image/jpg;base64,' + $rootScope.User.Company.Photo;
+            }
         };
 
 
@@ -1496,7 +1502,7 @@ var api = serverUrl + '/api';
                         // get the user collection and save it in session
                         $sessionStorage.__user = $rootScope.User = response.data;
 
-                        // set the user profile picutre base64
+                        // set user profile and company profile pictures to base64
                         appFactory.setDataImage();
                         if ($rootScope.User.Login.LastSeen === null) {
                             $state.go('account');
@@ -3076,15 +3082,14 @@ var api = serverUrl + '/api';
 
             /**
              * <parameter>
-             *      attachmentType: number
+             *      photoType: number
              * </parameter>
-             * The attachmentType parameter accepts the following numbers and represent the following
+             * The photoType parameter accepts the following numbers and represent the following
              * 0 = USER_PROFILE_IMAGE
              * 1 = COMPANY_LOGO
-             * 2 = SHIPMENT_ATTACHMENT
              */
-            $scope.setAttachmentType = function (attachmentType) {
-                $rootScope.attachmentType = attachmentType;
+            $scope.setPhotoType = function (photoType) {
+                $rootScope.photoType = photoType;
             };
 
             $scope.account = {
@@ -3746,6 +3751,16 @@ var api = serverUrl + '/api';
 }());
 (function () {
     app.controller('uploadCtrl', ['$scope', '$rootScope', '$state', 'appFactory', 'Upload', '$timeout', function ($scope, $rootScope, $state, appFactory, Upload, $timeout) {
+        /**
+        * <parameter>
+        *      photoType: number
+        * </parameter>
+        * The photoType parameter accepts the following numbers and represent the following
+        * 0 = USER_PROFILE_IMAGE
+        * 1 = COMPANY_LOGO
+        */
+
+
         // disable <body> scrolling
         appFactory.setModalOpen(true);
 
@@ -3754,12 +3769,12 @@ var api = serverUrl + '/api';
         // return to parent state
         $scope.closeWindow = function () {
             appFactory.setModalOpen(false);
-            if ($rootScope.attachmentType === 0) $state.go('account');
+            if ($rootScope.photoType === 0) $state.go('account');
             else $state.go('account.company');
         }
 
         let url_attachment;
-        switch ($rootScope.attachmentType) {
+        switch ($rootScope.photoType) {
             case 0: url_attachment = '/account/postprofilephoto'; break;
             default: url_attachment = '/account/postcompanyphoto';
         }
@@ -3768,7 +3783,7 @@ var api = serverUrl + '/api';
         $scope.upload = function (dataUrl, name) {
             let data = { file: Upload.dataUrltoBlob(dataUrl, name) };
 
-            if ($rootScope.attachmentType === 0) {
+            if ($rootScope.photoType === 0) {
                 data.personId = $rootScope.User.Person.ID;
             } else {
                 data.companyId = $rootScope.User.Company.ID;
@@ -3779,7 +3794,7 @@ var api = serverUrl + '/api';
                 data: data
             }).then(function (response) {
                 $timeout(function () {
-                    if ($rootScope.attachmentType === 0) {
+                    if ($rootScope.photoType === 0) {
                         // set the user profile base64 img
                         $rootScope.User.Person.PhotoDataUrl = dataUrl;
                     } else {

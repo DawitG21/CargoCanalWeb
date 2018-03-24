@@ -13,5 +13,6 @@ namespace com.AppliedLine.CargoCanal.Models
         public string Email { get; set; }
         public string PhotoFilename { get; set; }
         public string Photo { get; set; }
+        public string Filepath { get; set; }
     }
 }

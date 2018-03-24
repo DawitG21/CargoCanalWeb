@@ -831,10 +831,36 @@ i.loader-box-4 {
 }
 
 .logo-company {
+    position: relative;
     float: right;
     margin-right: 10px;
     height: 100px;
+    overflow: hidden;
 }
+
+    .logo-company .logo-replace-text {
+        display: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        top: 35%;
+        left: 0;
+        right: 0;
+        color: #fff;
+        font-weight: bold;
+        text-shadow: 0 0 10px #000;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .logo-company img {
+        cursor: pointer;
+    }
+
+        .logo-company img:hover + .logo-replace-text,
+        .logo-company .logo-replace-text:hover {
+            display: block;
+        }
 
 .padding-left-0 {
     padding-left: 0

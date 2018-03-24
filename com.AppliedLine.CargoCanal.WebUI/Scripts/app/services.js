@@ -420,6 +420,12 @@
                 default:
                     $rootScope.User.Person.PhotoDataUrl = 'data:image/jpg;base64,' + $rootScope.User.Person.Photo;
             }
+
+            switch ($rootScope.User.Company.Photo) {
+                case null: case undefined: case '': break;
+                default:
+                    $rootScope.User.Company.PhotoDataUrl = 'data:image/jpg;base64,' + $rootScope.User.Company.Photo;
+            }
         };
 
 

@@ -35,6 +35,7 @@ namespace com.AppliedLine.CargoCanal.Models
         public bool IsActive { get; set; }
         public string PhotoFilename { get; set; }
         public string Photo { get; set; }
+        public string Filepath { get; set; }
 
         public bool Equals(Company other)
         {

@@ -1,6 +1,9 @@
 ﻿<div class="banner-company">
-    <!--<i class="logo-company common-sprite people" ng-click="setAttachmentType(0)" ui-sref=".uploadprofileimage"></i>-->
-    <img class="img-profile logo-company common-sprite people" ng-src="{{User.Company.PhotoDataUrl}}" ng-click="setAttachmentType(1)" ui-sref=".uploadcompanylogo" />
+    <div class="logo-company" ng-click="setPhotoType(1)" ui-sref=".uploadcompanylogo">
+        <img class="img-profile common-sprite people"
+             ng-src="{{User.Company.PhotoDataUrl}}" />
+        <h4 class="logo-replace-text">Replace Image</h4>
+    </div>
 
     <h4 class="font-bold">{{User.Company.CompanyName}}</h4>
     <h5 class="font-bold">TIN: {{User.Company.TIN}}</h5>

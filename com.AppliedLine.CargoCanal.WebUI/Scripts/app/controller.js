@@ -187,7 +187,7 @@ var api = serverUrl + '/api';
                         // get the user collection and save it in session
                         $sessionStorage.__user = $rootScope.User = response.data;
 
-                        // set the user profile picutre base64
+                        // set user profile and company profile pictures to base64
                         appFactory.setDataImage();
                         if ($rootScope.User.Login.LastSeen === null) {
                             $state.go('account');
@@ -1767,15 +1767,14 @@ var api = serverUrl + '/api';
 
             /**
              * <parameter>
-             *      attachmentType: number
+             *      photoType: number
              * </parameter>
-             * The attachmentType parameter accepts the following numbers and represent the following
+             * The photoType parameter accepts the following numbers and represent the following
              * 0 = USER_PROFILE_IMAGE
              * 1 = COMPANY_LOGO
-             * 2 = SHIPMENT_ATTACHMENT
              */
-            $scope.setAttachmentType = function (attachmentType) {
-                $rootScope.attachmentType = attachmentType;
+            $scope.setPhotoType = function (photoType) {
+                $rootScope.photoType = photoType;
             };
 
             $scope.account = {
