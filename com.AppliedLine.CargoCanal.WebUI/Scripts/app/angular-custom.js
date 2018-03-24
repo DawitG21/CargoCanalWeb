@@ -132,6 +132,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/account_company.html',
         controller: 'adminCtrl'
     });
+    $stateProvider.state('account.company.uploadcompanylogo', {
+        url: '/uclogo',
+        templateUrl: 'views/account_upload_profile_image.html'
+    });
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
@@ -3747,9 +3751,11 @@ var api = serverUrl + '/api';
 
         // close the upload window
         // enable <body> scrolling
+        // return to parent state
         $scope.closeWindow = function () {
             appFactory.setModalOpen(false);
-            $state.go('account');
+            if ($rootScope.attachmentType === 0) $state.go('account');
+            else $state.go('account.company');
         }
 
         let url_attachment;

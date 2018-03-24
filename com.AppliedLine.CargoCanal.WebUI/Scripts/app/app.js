@@ -132,6 +132,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/account_company.html',
         controller: 'adminCtrl'
     });
+    $stateProvider.state('account.company.uploadcompanylogo', {
+        url: '/uclogo',
+        templateUrl: 'views/account_upload_profile_image.html'
+    });
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',

@@ -5,9 +5,11 @@
 
         // close the upload window
         // enable <body> scrolling
+        // return to parent state
         $scope.closeWindow = function () {
             appFactory.setModalOpen(false);
-            $state.go('account');
+            if ($rootScope.attachmentType === 0) $state.go('account');
+            else $state.go('account.company');
         }
 
         let url_attachment;
