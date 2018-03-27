@@ -298,7 +298,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             {
                 var context = HttpContext.Current;
                 var urlReferrer = context.Request.UrlReferrer;
-
+                
                 IEnumerable<HttpContent> multiparts = null;
                 Task.Factory.StartNew(
                     () => multiparts = Request.Content.ReadAsMultipartAsync().Result.Contents,
@@ -306,20 +306,25 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                     TaskCreationOptions.LongRunning,
                     TaskScheduler.Default).Wait();
 
+                
                 // no file uploaded
                 if (multiparts.Count() == 0) return BadRequest();
 
+                // get the person id
+                var personId = Convert.ToInt64(context.Request.Form["personid"].ToString()); 
                 string fileDir = context.Server.MapPath(profilesDir);
-
-                var personId = Convert.ToInt64(context.Request.Form["personid"].ToString()); // get the person id
                 Dictionary<string, string> savedFile = new Dictionary<string, string>();
+                
                 foreach (var part in multiparts)
                 {
-                    if (part.Headers.ContentType == null) continue; // not a file e.g. personId
+                   if (part.Headers.ContentType == null) continue; // not a file e.g. personId
+                    
                     Person person = dal.SelectPerson(personId);
+                    
                     //  Delete the existing physical file from the server
                     if (person != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{person.PhotoFilename}");
 
+                    // Save new file on disk
                     savedFile = FileProcessor.SaveFileOnDisc(fileDir, part);
                 }
 
@@ -331,7 +336,8 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                Console.WriteLine(ex.Message);
+                return BadRequest("Server exception->failed to upload file");
             }
         }
 
