@@ -2647,7 +2647,7 @@ namespace com.AppliedLine.CargoCanal.DAL
                 };
                 var pID = new SqlParameter("@personId", person.ID);
                 var pPhotoFilename = new SqlParameter("@PhotoFilename", person.PhotoFilename);
-                var pPhoto = new SqlParameter("@Photo", person.Photo);//@oldfilename
+                var pPhoto = new SqlParameter("@Photo", person.Photo);
                 var oldfilename = new SqlParameter()
                 {
                     ParameterName = "@oldfilename",

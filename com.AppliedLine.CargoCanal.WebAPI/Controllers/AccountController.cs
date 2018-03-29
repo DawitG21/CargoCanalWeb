@@ -220,10 +220,13 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 var companyId = Convert.ToInt64(context.Request.Form["companyid"].ToString()); // get the company id
                 Dictionary<string, string> savedFile = new Dictionary<string, string>();
+
+                Company company = dal.SelectCompanyById(companyId);
+
                 foreach (var part in multiparts)
                 {
                     if (part.Headers.ContentType == null) continue; // not a file e.g. personId
-                    Company company = dal.SelectCompanyById(companyId);
+                    
                     //  Delete the existing physical file from the server
                     if (company != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{company.PhotoFilename}");
 
@@ -232,9 +235,13 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 // save file to database
                 var file = savedFile.ToArray()[0];
-                await dal.UpdateCompanyPhoto(new Company() { ID = companyId, Photo = file.Value, PhotoFilename = file.Key });
 
-                return Ok(file.Value);
+                company.Photo = file.Value;
+                company.PhotoFilename = file.Key;
+
+                await dal.UpdateCompanyPhoto(company);
+
+                return Ok(company);
             }
             catch (Exception ex)
             {
@@ -314,12 +321,12 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                 var personId = Convert.ToInt64(context.Request.Form["personid"].ToString()); 
                 string fileDir = context.Server.MapPath(profilesDir);
                 Dictionary<string, string> savedFile = new Dictionary<string, string>();
-                
+
+                Person person = dal.SelectPerson(personId);
+
                 foreach (var part in multiparts)
                 {
                    if (part.Headers.ContentType == null) continue; // not a file e.g. personId
-                    
-                    Person person = dal.SelectPerson(personId);
                     
                     //  Delete the existing physical file from the server
                     if (person != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{person.PhotoFilename}");
@@ -330,9 +337,12 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 // save file to database
                 var file = savedFile.ToArray()[0];
-                await dal.UpdatePersonPhoto(new Person() { ID = personId, Photo = file.Value, PhotoFilename = file.Key });
 
-                return Ok(file.Value);
+                person.Photo = file.Value;
+                person.PhotoFilename = file.Key;
+                await dal.UpdatePersonPhoto(person);
+
+                return Ok(person);
             }
             catch (Exception ex)
             {
