@@ -472,6 +472,23 @@ namespace com.AppliedLine.CargoCanal.DAL
             }
         }
 
+        public async Task<long> DeleteCompanyPhoto(Guid token)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand cmd = new SqlCommand("sp_Company_RemovePhoto", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                var tokenParam = new SqlParameter("@token", token);
+
+                cmd.Parameters.AddRange(new[] { tokenParam });
+
+                var result = await cmd.ExecuteNonQueryAsync();
+                return result;
+            }
+        }
+
         public async Task<string> UpdateCompanyPhoto(Company company)
         {
             using (SqlConnection con = Connection)
@@ -2660,6 +2677,23 @@ namespace com.AppliedLine.CargoCanal.DAL
 
                 await cmd.ExecuteNonQueryAsync();
                 return oldfilename.Value.ToString();
+            }
+        }
+
+        public async Task<long> DeletePersonPhoto(Guid token)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand cmd = new SqlCommand("sp_Person_RemovePhoto", con)
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                var tokenParam = new SqlParameter("@token", token);
+
+                cmd.Parameters.AddRange(new[] { tokenParam });
+
+                var result = await cmd.ExecuteNonQueryAsync();
+                return result;
             }
         }
 

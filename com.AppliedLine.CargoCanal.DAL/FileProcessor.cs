@@ -94,6 +94,8 @@ namespace com.AppliedLine.CargoCanal.DAL
 
         public static Dictionary<string, string> CreateFileFromByteOnDisc(string path, string filename, byte[] data)
         {
+            if (string.IsNullOrEmpty(filename)) return null;
+
             if (!File.Exists(Path.Combine(path, filename)))
             {
                 // Create directory if it does not exist exempting Execute permission

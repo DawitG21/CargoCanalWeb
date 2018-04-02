@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <button ng-click="" class="btn btn-danger">Delete Photo</button>
+                                        <button ng-click="delete()" ng-disabled="noPhoto()" class="btn btn-danger">Delete Photo</button>
                                         <button ng-click="upload(croppedDataUrl, picFile.name)" class="btn btn-primary pull-right">Save Photo</button>
                                     </div>
                                 </div>

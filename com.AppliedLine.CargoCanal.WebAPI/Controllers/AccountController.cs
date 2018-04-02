@@ -194,7 +194,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             FileProcessor.CreateFileFromByteOnDisc(fileDir, company.PhotoFilename, Convert.FromBase64String(company.Photo));
             company.Filepath = $"{profilesDir.Substring(2)}/{company.PhotoFilename}";
             company.Photo = string.Empty; // don't need to return the raw data
-            
+
             return Ok(company);
         }
 
@@ -226,7 +226,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                 foreach (var part in multiparts)
                 {
                     if (part.Headers.ContentType == null) continue; // not a file e.g. personId
-                    
+
                     //  Delete the existing physical file from the server
                     if (company != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{company.PhotoFilename}");
 
@@ -247,6 +247,26 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteCompanyPhoto(User user)
+        {
+            var result = await dal.DeleteCompanyPhoto(user.Login.Token);
+            if (result > 0)
+            {
+                // delete file from server
+                var context = HttpContext.Current;
+                string fileDir = context.Server.MapPath(profilesDir);
+                FileProcessor.DeleteFileOnDisc($"{fileDir}\\{user.Company.PhotoFilename}");
+
+                user.Company.Photo = string.Empty;
+                user.Company.PhotoFilename = string.Empty;
+                user.Company.Filepath = string.Empty;
+                return Ok(user.Company);
+            }
+
+            return BadRequest();
         }
 
         [HttpPost]
@@ -291,9 +311,12 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             // clear FileData
             Person person = dal.SelectPerson(id);
 
-            FileProcessor.CreateFileFromByteOnDisc(fileDir, person.PhotoFilename, Convert.FromBase64String(person.Photo));
-            person.Filepath = $"{profilesDir.Substring(2)}/{person.PhotoFilename}";
-            person.Photo = string.Empty; // don't need to return the raw data
+            if (!string.IsNullOrEmpty(person.PhotoFilename))
+            {
+                FileProcessor.CreateFileFromByteOnDisc(fileDir, person.PhotoFilename, Convert.FromBase64String(person.Photo));
+                person.Filepath = $"{profilesDir.Substring(2)}/{person.PhotoFilename}";
+                person.Photo = string.Empty; // don't need to return the raw data
+            }
 
             return Ok(person);
         }
@@ -305,7 +328,7 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
             {
                 var context = HttpContext.Current;
                 var urlReferrer = context.Request.UrlReferrer;
-                
+
                 IEnumerable<HttpContent> multiparts = null;
                 Task.Factory.StartNew(
                     () => multiparts = Request.Content.ReadAsMultipartAsync().Result.Contents,
@@ -313,12 +336,12 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                     TaskCreationOptions.LongRunning,
                     TaskScheduler.Default).Wait();
 
-                
+
                 // no file uploaded
                 if (multiparts.Count() == 0) return BadRequest();
 
                 // get the person id
-                var personId = Convert.ToInt64(context.Request.Form["personid"].ToString()); 
+                var personId = Convert.ToInt64(context.Request.Form["personid"].ToString());
                 string fileDir = context.Server.MapPath(profilesDir);
                 Dictionary<string, string> savedFile = new Dictionary<string, string>();
 
@@ -326,8 +349,8 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 foreach (var part in multiparts)
                 {
-                   if (part.Headers.ContentType == null) continue; // not a file e.g. personId
-                    
+                    if (part.Headers.ContentType == null) continue; // not a file e.g. personId
+
                     //  Delete the existing physical file from the server
                     if (person != null) FileProcessor.DeleteFileOnDisc($"{fileDir}\\{person.PhotoFilename}");
 
@@ -349,6 +372,26 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
                 Console.WriteLine(ex.Message);
                 return BadRequest("Server exception->failed to upload file");
             }
+        }
+
+        [HttpDelete]
+        public async Task<IHttpActionResult> DeleteProfilePhoto(User user)
+        {
+            var result = await dal.DeletePersonPhoto(user.Login.Token);
+            if (result > 0)
+            {
+                // delete file from server
+                var context = HttpContext.Current;
+                string fileDir = context.Server.MapPath(profilesDir);
+                FileProcessor.DeleteFileOnDisc($"{fileDir}\\{user.Person.PhotoFilename}");
+
+                user.Person.Photo = string.Empty;
+                user.Person.PhotoFilename = string.Empty;
+                user.Person.Filepath = string.Empty;
+                return Ok(user.Person);
+            }
+
+            return BadRequest();
         }
 
         [HttpPost]
