@@ -238,6 +238,8 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 company.Photo = file.Value;
                 company.PhotoFilename = file.Key;
+                company.Filepath = $"{fileDir}/{company.PhotoFilename}";
+
 
                 await dal.UpdateCompanyPhoto(company);
 
@@ -363,6 +365,8 @@ namespace com.AppliedLine.CargoCanal.WebAPI.Controllers
 
                 person.Photo = file.Value;
                 person.PhotoFilename = file.Key;
+                person.Filepath = $"{fileDir}/{person.PhotoFilename}";
+
                 await dal.UpdatePersonPhoto(person);
 
                 return Ok(person);
