@@ -4,7 +4,7 @@
     app.controller('commentCtrl', ['$scope', '$rootScope', '$state', 'appFactory', 'signalRHubProxy', 'commentService',
         function ($scope, $rootScope, $state, appFactory, signalRHubProxy, commentService) {
 
-            let maxLength = 1000;    // maximum characters allowed
+            let maxLength = 1000;    // maximum characters allowed as comment
             $scope.comments = [];
             $scope.comment = { CommentText: '' };
 

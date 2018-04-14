@@ -85,6 +85,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\cargocanal-feature-graphic-web.png" />
+    <Content Include="Content\images\comment_maxi.png" />
     <Content Include="Content\images\ellipsis_4s_64px.gif" />
     <Content Include="Content\images\gear.svg" />
     <Content Include="Content\images\google-play-badge-h60.png" />
@@ -221,6 +222,7 @@
     <Content Include="dist\assets\images\cargocanal_text_128.png" />
     <Content Include="dist\assets\images\cargocanal_text_32.png" />
     <Content Include="dist\assets\images\cargocanal_text_64.png" />
+    <Content Include="dist\assets\images\comment_maxi.png" />
     <Content Include="dist\assets\images\ellipsis_4s_64px.gif" />
     <Content Include="dist\assets\images\google-play-badge-h60.png" />
     <Content Include="dist\assets\images\google-play-badge.png" />
@@ -449,6 +451,7 @@
     <Content Include="dist\views\directives\analytics_shipments.html" />
     <Content Include="dist\views\directives\analytics_top_export_countries.html" />
     <Content Include="dist\views\directives\analytics_top_import_countries.html" />
+    <Content Include="dist\views\directives\comment.html" />
     <Content Include="dist\views\directives\create_company.html" />
     <Content Include="dist\views\directives\dashboard_bank.html" />
     <Content Include="dist\views\directives\dashboard_bank_search_view.html" />
@@ -530,6 +533,9 @@
     <Content Include="Scripts\app\services.comment.js" />
     <Content Include="Scripts\app\services.analytics.js" />
     <Content Include="Scripts\app\services.signalr.js" />
+    <Content Include="Scripts\bundles\angulars_and_chartjs.min.js">
+      <DependentUpon>angulars_and_chartjs.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery.signalR.min.js" />
     <Content Include="src\assets\css\style-bundle-defer.min.css" />
     <Content Include="src\assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
@@ -581,6 +587,7 @@
     <Content Include="src\assets\images\cargocanal_text_128.png" />
     <Content Include="src\assets\images\cargocanal_text_32.png" />
     <Content Include="src\assets\images\cargocanal_text_64.png" />
+    <Content Include="src\assets\images\comment_maxi.png" />
     <Content Include="src\assets\images\ellipsis_4s_64px.gif" />
     <Content Include="src\assets\images\google-play-badge-h60.png" />
     <Content Include="src\assets\images\google-play-badge.png" />
