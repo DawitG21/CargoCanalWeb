@@ -47,6 +47,8 @@
     <Compile Include="CallParams.cs" />
     <Compile Include="Cargo.cs" />
     <Compile Include="Carrier.cs" />
+    <Compile Include="Comment.cs" />
+    <Compile Include="CommentNew.cs" />
     <Compile Include="Company.cs" />
     <Compile Include="CompanyType.cs" />
     <Compile Include="Cost.cs" />

@@ -127,6 +127,19 @@
             $rootScope.modalOpen = bool;
         };
 
+        service.getPhotoUrl = (url) => {
+            if (!url) {
+                return '';
+            }
+
+            return serverUrl + '/' + url;
+        };
+
+
+        // Service Characters Remaining
+        service.xtersLeft = function (maxLength, xterLength) {
+            return maxLength - xterLength;
+        };
         
         // Service RGB
         service.getRgbArray = function (length) {
@@ -151,6 +164,8 @@
 
         // initialize common functions used by multiple controllers
         let _initHelpers = function () {
+            $rootScope.getPhotoUrl = service.getPhotoUrl;
+
             // return a class that sets the <body> overflow: hidden
             $rootScope.modalOpenClass = function () {
                 if ($rootScope.modalOpen) return 'fullscreen-open';
@@ -225,6 +240,14 @@
                     $rootScope.recordIndex = undefined;
                     $rootScope.recordChildIndex = undefined;
                 }
+            };
+
+
+            // comment helper window
+            $rootScope.commentInit = function (importExportID) {
+                $rootScope.showComment = true;
+                service.setModalOpen(true);
+                $rootScope.$broadcast('commentOpen', importExportID);
             };
 
 

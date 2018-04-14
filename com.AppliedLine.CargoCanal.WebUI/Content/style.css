@@ -52,6 +52,11 @@
     margin-right: 35px;
 }
 
+.comment {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    color: #000;
+}
 
 .img-profile {
     padding: 0;
@@ -83,6 +88,10 @@
     .heading-article ~ h4, .heading-display ~ h4 {
         line-height: 2.8rem;
     }
+
+textarea {
+    resize: none;
+}
 
 footer {
     position: absolute;
@@ -1229,7 +1238,7 @@ i.loader-box-4 {
 }
 
 .card-options-open {
-    left: 380px;
+    left: 280px;
 }
 
     .card-options-open ~ .card-logo {
@@ -1458,7 +1467,7 @@ form .progress {
         }
 
     .fullscreen {
-        padding: 0;
+        padding: 30px 15px;
     }
 
     .fullscreen-dialog {
@@ -1471,7 +1480,7 @@ form .progress {
     }
 
     .fullscreen-content {
-        min-height: 100vh;
+        min-height: 90vh;
     }
 
     .mobile-anchor-right {

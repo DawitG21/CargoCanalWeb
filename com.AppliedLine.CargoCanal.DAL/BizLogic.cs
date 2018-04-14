@@ -216,9 +216,11 @@ namespace com.AppliedLine.CargoCanal.DAL
             if(person != null && !string.IsNullOrEmpty(person.PhotoFilename))
             {
                 FileProcessor.CreateFileFromByteOnDisc(HttpContext.Current.Server.MapPath(profilesDir), person.PhotoFilename, Convert.FromBase64String(person.Photo));
+                person.Filepath = $"{profilesDir.Substring(2)}/{person.PhotoFilename}";
             }
 
             var company = dal.SelectCompanyById(person.CompanyID);
+            company.Filepath = $"{profilesDir.Substring(2)}/{company.PhotoFilename}";
 
             User user = new User()
             {

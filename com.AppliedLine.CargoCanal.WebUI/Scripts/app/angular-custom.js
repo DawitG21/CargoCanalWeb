@@ -343,6 +343,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
             $rootScope.modalOpen = bool;
         };
 
+        service.getPhotoUrl = (url) => {
+            if (!url) {
+                return '';
+            }
+
+            return serverUrl + '/' + url;
+        };
+
+
+        // Service Characters Remaining
+        service.xtersLeft = function (maxLength, xterLength) {
+            return maxLength - xterLength;
+        };
         
         // Service RGB
         service.getRgbArray = function (length) {
@@ -367,6 +380,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
         // initialize common functions used by multiple controllers
         let _initHelpers = function () {
+            $rootScope.getPhotoUrl = service.getPhotoUrl;
+
             // return a class that sets the <body> overflow: hidden
             $rootScope.modalOpenClass = function () {
                 if ($rootScope.modalOpen) return 'fullscreen-open';
@@ -441,6 +456,14 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                     $rootScope.recordIndex = undefined;
                     $rootScope.recordChildIndex = undefined;
                 }
+            };
+
+
+            // comment helper window
+            $rootScope.commentInit = function (importExportID) {
+                $rootScope.showComment = true;
+                service.setModalOpen(true);
+                $rootScope.$broadcast('commentOpen', importExportID);
             };
 
 
@@ -1280,29 +1303,75 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 })();
 (function () {
     'use strict';
+
+
+    app.service('commentService', ['$rootScope', '$http', function ($rootScope, $http) {
+        let _url = '/comment';
+
+
+        this.getComments = function (id) {
+            return $http({
+                method: 'GET',
+                url: api + _url + '/getcomment/' + id,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    return response.data;
+                }, function (error) {
+                    throw new Error(error);
+                });
+        };
+
+        // post a comment
+        this.submitComment = function (comment) {
+            // assign token
+            comment.Token = $rootScope.User.Login.Token;
+
+            return $http({
+                method: 'POST',
+                url: api + _url,
+                data: comment,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    return response.data;
+                }, function (error) {
+                    throw new Error(error);
+                });
+        };
+
+    }]);
+})();
+(function () {
+    'use strict';
     app.factory('signalRHubProxy', ['$rootScope', function ($rootScope) {
         function signalRHubProxyFactory(serverUrl, hubName) {
-            var connection = $.hubConnection(serverUrl);
-            var hubProxy = connection.createHubProxy(hubName);
-            connection.start().done(function () { });
+            var _connection = $.hubConnection(serverUrl);
+            var _hubProxy = _connection.createHubProxy(hubName);
+            //_connection.start()
+            //    .done(function () { console.log('connected id: ' + _connection.id); })
+            //    .fail(function () { console.log('could not connect'); });
             //connection.start({ withCredentials: false }).done(function () { });
 
             return {
                 on: function (eventName, callback) {
-                    hubProxy.on(eventName, function (result) {
+                    _hubProxy.on(eventName, function (result) {
                         var args = arguments;
                         $rootScope.$apply(function () {
-                            callback.apply(hubProxy, args);
+                            callback.apply(_hubProxy, args);
                         });
                     });
 
+                    _connection.start()
+                        .done(function () { console.log('connected-> id: ' + _connection.id); })
+                        .fail(function () { console.log('failed to connect'); });
                 },
                 off: function (eventName, callback) {
-                    hubProxy.off(eventName, function (result) {
+                    _hubProxy.off(eventName, function (result) {
                         var argsOff = arguments;
                         $rootScope.$apply(function () {
                             if (callback) {
-                                callback.apply(hubProxy, argsOff);
+                                callback.apply(_hubProxy, argsOff);
                             }
                         });
                     });
@@ -2346,6 +2415,7 @@ var api = serverUrl + '/api';
             // controller to handle status, problem updates for importExport documents
             if (!$rootScope.User || $rootScope.User === null) $state.go('home');
 
+            
             $scope.searchImports = function (searchIsNew) {
                 if ($scope.searchText === undefined || $scope.searchText === '') return;
                 if (searchIsNew) {
@@ -3750,6 +3820,72 @@ var api = serverUrl + '/api';
 
 }());
 (function () {
+    'use strict';
+
+    app.controller('commentCtrl', ['$scope', '$rootScope', '$state', 'appFactory', 'signalRHubProxy', 'commentService',
+        function ($scope, $rootScope, $state, appFactory, signalRHubProxy, commentService) {
+
+            let maxLength = 1000;    // maximum characters allowed
+            $scope.comments = [];
+            $scope.comment = { CommentText: '' };
+
+
+            // returns the total number of characters remaining
+            $scope.getXtersLeft = function () {
+                $scope.xtersLeft = appFactory.xtersLeft(maxLength, $scope.comment.CommentText.length);
+            };
+
+            $scope.getXtersLeft();  // init xtersLeft
+
+            $scope.closeWindow = function () {
+                $rootScope.showComment = false;
+                appFactory.setModalOpen(false);
+            };
+
+
+            // listen for open comment
+            $scope.$on('commentOpen', function (event, id) {
+                $scope.comment.ImportExportID = parseInt(id);
+
+                // get importExport comments thru service
+                commentService.getComments(id)
+                    .then(function (data) {
+                        $scope.comments = data;
+                    },
+                    function (err) {
+                        // handle error
+                    });
+            });
+
+
+            $scope.submit = function () {
+                // post comment and clear the comment box
+                commentService.submitComment($scope.comment)
+                    .then(function (data) {
+                        // $scope.comments.push
+                        $scope.comment.CommentText = '';
+                        $scope.getXtersLeft();
+                    }, function (err) {
+                        appFactory.showDialog('Oops! Something went wrong.', true);
+                    });
+            };
+
+
+
+            // SIGNALR CODES
+            let commentProxy = signalRHubProxy(serverUrl, 'commentHub');
+            commentProxy.on('commentAdded',
+                function (comment) {
+                    // add comment to matching importExport
+                    if (comment.ImportExportID === $scope.comment.ImportExportID) {
+                        $scope.comments.push(comment);
+                    }
+                });
+
+        }]);
+
+}());
+(function () {
     app.controller('uploadCtrl', ['$http', '$scope', '$rootScope', '$state', '$sessionStorage', 'appFactory', 'Upload', '$timeout', function ($http, $scope, $rootScope, $state, $sessionStorage, appFactory, Upload, $timeout) {
         /**
         * <parameter>
@@ -3988,6 +4124,15 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
     };
 }]);
 (function () {
+
+    app.directive('dirComment', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/comment.html',
+            controller: 'commentCtrl'
+        };
+    });
 
     app.directive('dirLoading', function () {
         return {

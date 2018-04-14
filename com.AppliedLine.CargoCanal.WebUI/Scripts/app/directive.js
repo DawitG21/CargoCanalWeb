@@ -1,5 +1,14 @@
 ﻿(function () {
 
+    app.directive('dirComment', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/comment.html',
+            controller: 'commentCtrl'
+        };
+    });
+
     app.directive('dirLoading', function () {
         return {
             restrict: 'E',

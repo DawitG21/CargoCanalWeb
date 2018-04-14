@@ -47,6 +47,15 @@
                 <p class="square-text" data-i18n="_Problems_"></p>
             </div>
 
+            <div class="square-wrapper" ng-click="commentInit(d.ID)">
+                <div class="square-img-wr">
+                    <span class="card-option icon">
+                        <span class="common-sprite comment-32"></span>
+                    </span>
+                </div>
+                <p class="square-text" data-i18n="_Comment_"></p>
+            </div>
+
             <div ng-hide="isNotFF" class="square-wrapper" ng-click="consigneeInfo.show(d)">
                 <div class="square-img-wr">
                     <span class="card-option icon">
@@ -82,7 +91,7 @@
                 </div>
                 <p class="square-text" data-i18n="_Recycle_">Recycle</p>
             </div>
-            
+
 
         </article>
     </section>
@@ -111,8 +120,9 @@
     <button type="button" class="btn btn-primary pull-right" ng-click="getImportExportByTinOrLc()">More Records &raquo;</button>
 </div>
 
-<!-- Options More view -->
 <dir-options-more-window></dir-options-more-window>
+<dir-comment></dir-comment>
+
 <!-- Export bill view -->
 <dir-export-bill-preview></dir-export-bill-preview>
 <!-- Import bill view -->

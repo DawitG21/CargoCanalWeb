@@ -260,6 +260,108 @@ namespace com.AppliedLine.CargoCanal.DAL
         }
         #endregion
 
+        #region Comments
+        public async Task<Comment> InsertComment(CommentNew comment)
+        {
+            if (comment == null) return null;
+            if (string.IsNullOrEmpty(comment.Tags)) comment.Tags = string.Empty;
+
+            try
+            {
+                using (SqlConnection con = Connection)
+                {
+                    SqlCommand command = new SqlCommand
+                    {
+                        CommandText = "spu_Comments_Insert",
+                        CommandType = CommandType.StoredProcedure,
+                        Connection = con
+                    };
+
+                    SqlParameter pId = new SqlParameter
+                    {
+                        ParameterName = "@id",
+                        SqlDbType = SqlDbType.BigInt,
+                        Direction = ParameterDirection.Output
+                    };
+                    SqlParameter pImpExpId = new SqlParameter("@importExportID", comment.ImportExportID);
+                    SqlParameter pComment = new SqlParameter("@comment", comment.CommentText);
+                    SqlParameter pTags = new SqlParameter("@tags", comment.Tags);
+                    SqlParameter pToken = new SqlParameter("@token", comment.Token);
+
+                    command.Parameters.AddRange(new[] { pId, pImpExpId, pComment, pTags, pToken });
+
+                    var reader = await command.ExecuteReaderAsync(CommandBehavior.SingleRow);
+
+                    while (reader.Read())
+                    {
+                        var commentAdded = new Comment
+                        {
+                            ID = Convert.ToInt64(reader["ID"]),
+                            ImportExportID = Convert.ToInt64(reader["ImportExportID"]),
+                            CommentText = reader["CommentText"].ToString(),
+                            CompanyTypeID = Convert.ToInt64(reader["CompanyTypeID"]),
+                            DateInserted = DateTimeOffset.Parse(reader["DateInserted"].ToString()),
+                            Fullname = reader["Fullname"].ToString(),
+                            Tags = reader["Tags"].ToString()
+                        };
+
+                        return commentAdded;
+                    }
+
+                    return null;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public DataTable SelectComment(long commentId)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand command = new SqlCommand
+                {
+                    CommandText = "spu_Comments_Select",
+                    CommandType = CommandType.StoredProcedure,
+                    Connection = con
+                };
+
+                command.Parameters.AddWithValue("@id", commentId);
+
+                var dt = new DataTable();
+                var da = new SqlDataAdapter(command);
+                da.Fill(dt);
+                
+                return dt;
+            }
+        }
+
+        public DataTable SelectComments(long importExportId)
+        {
+            using (SqlConnection con = Connection)
+            {
+                SqlCommand command = new SqlCommand
+                {
+                    CommandText = "spu_Comments_Select_All",
+                    CommandType = CommandType.StoredProcedure,
+                    Connection = con
+                };
+
+                command.Parameters.AddWithValue("@importExportID", importExportId);
+
+                var dt = new DataTable("comments");
+                var da = new SqlDataAdapter(command);
+                da.Fill(dt);
+
+                return dt;
+            }
+        }
+
+        #endregion
+
+
         #region Company
 
         public long ValidateInsertCompany(Company company, Guid token)
@@ -1392,8 +1494,8 @@ namespace com.AppliedLine.CargoCanal.DAL
                     return new JObject(
                         new JProperty("labels", new JArray(_utcNow)),
                         new JProperty("datasets", new JArray(new JObject(
-                            new JProperty("data", 0), 
-                            new JProperty("label", ""), 
+                            new JProperty("data", 0),
+                            new JProperty("label", ""),
                             new JProperty("status", "")))
                         ));
                 }

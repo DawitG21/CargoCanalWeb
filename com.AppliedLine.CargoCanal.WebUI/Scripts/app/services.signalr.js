@@ -2,27 +2,32 @@
     'use strict';
     app.factory('signalRHubProxy', ['$rootScope', function ($rootScope) {
         function signalRHubProxyFactory(serverUrl, hubName) {
-            var connection = $.hubConnection(serverUrl);
-            var hubProxy = connection.createHubProxy(hubName);
-            connection.start().done(function () { });
+            var _connection = $.hubConnection(serverUrl);
+            var _hubProxy = _connection.createHubProxy(hubName);
+            //_connection.start()
+            //    .done(function () { console.log('connected id: ' + _connection.id); })
+            //    .fail(function () { console.log('could not connect'); });
             //connection.start({ withCredentials: false }).done(function () { });
 
             return {
                 on: function (eventName, callback) {
-                    hubProxy.on(eventName, function (result) {
+                    _hubProxy.on(eventName, function (result) {
                         var args = arguments;
                         $rootScope.$apply(function () {
-                            callback.apply(hubProxy, args);
+                            callback.apply(_hubProxy, args);
                         });
                     });
 
+                    _connection.start()
+                        .done(function () { console.log('connected-> id: ' + _connection.id); })
+                        .fail(function () { console.log('failed to connect'); });
                 },
                 off: function (eventName, callback) {
-                    hubProxy.off(eventName, function (result) {
+                    _hubProxy.off(eventName, function (result) {
                         var argsOff = arguments;
                         $rootScope.$apply(function () {
                             if (callback) {
-                                callback.apply(hubProxy, argsOff);
+                                callback.apply(_hubProxy, argsOff);
                             }
                         });
                     });

@@ -1031,6 +1031,7 @@ var api = serverUrl + '/api';
             // controller to handle status, problem updates for importExport documents
             if (!$rootScope.User || $rootScope.User === null) $state.go('home');
 
+            
             $scope.searchImports = function (searchIsNew) {
                 if ($scope.searchText === undefined || $scope.searchText === '') return;
                 if (searchIsNew) {

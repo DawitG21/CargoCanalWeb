@@ -1,0 +1,61 @@
+<div class="fullscreen" ng-show="showComment">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+
+                <section>
+                    <div class="row margin-0">
+                        <div class="col-sm-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" class="close" aria-label="Close" ng-click="closeWindow()">
+                                        <span class="h1" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold-600">Comments</h4>
+
+                            <form name="form" ng-submit="submit()" novalidate>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="5" name="Description"
+                                                      ng-change="getXtersLeft()"
+                                                      ng-model="comment.CommentText" placeholder="Type your comment ..." />
+                                            <div class="margin-top-15">
+                                                <p class="pull-left">
+                                                    <img class="img-profile common-sprite user-24" ng-src="{{getPhotoUrl(User.Person.Filepath)}}" />
+                                                    {{User.Person.FirstName}} {{User.Person.LastName}}
+                                                </p>
+                                                <p class="pull-right" ng-class="{'text-danger': xtersLeft < 0, '': xtersLeft >= 0}">max {{xtersLeft}} characters.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary pull-right" 
+                                                    ng-disabled="comment.CommentText.length === 0 || xtersLeft < 0">Post comment</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <section>
+                                <div class="comment" ng-repeat="c in comments">
+                                    <p><span class="color-theme font-bold-600">{{c.Fullname}}</span> <small>{{c.DateInserted | date : 'MMM dd, yyyy'}}</small></p>
+                                    <p><small>{{c.CommentText}}</small></p>
+                                </div>
+                            </section>
+
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
