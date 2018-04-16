@@ -28,7 +28,7 @@
                                                     <img class="img-profile common-sprite user-24" ng-src="{{getPhotoUrl(User.Person.Filepath)}}" />
                                                     {{User.Person.FirstName}} {{User.Person.LastName}}
                                                 </p>
-                                                <p class="pull-right" ng-class="{'text-danger': xtersLeft < 0, '': xtersLeft >= 0}">{{xtersLeft}} characters.</p>
+                                                <div class="pull-right" ng-class="{'text-danger': xtersLeft < 0, '': xtersLeft >= 0}">{{xtersLeft}} characters.</div>
                                             </div>
                                         </div>
                                     </div>
