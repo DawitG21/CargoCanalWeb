@@ -3835,10 +3835,18 @@ var api = serverUrl + '/api';
                 $scope.xtersLeft = appFactory.xtersLeft(maxLength, $scope.comment.CommentText.length);
             };
 
-            $scope.getXtersLeft();  // init xtersLeft
+
+            // clear comment text and reset maximum xters left
+            $scope.clearComment = function () {
+                $scope.comment.CommentText = '';
+                $scope.getXtersLeft();
+            };
+
+
+            $scope.clearComment();  // init xtersLeft and comment text
 
             $scope.closeWindow = function () {
-                $scope.comment.CommentText = '';
+                $scope.clearComment();
                 $rootScope.showComment = false;
                 appFactory.setModalOpen(false);
             };
@@ -3863,8 +3871,7 @@ var api = serverUrl + '/api';
                 // post comment and clear the comment box
                 commentService.submitComment($scope.comment)
                     .then(function (data) {
-                        $scope.comment.CommentText = '';
-                        $scope.getXtersLeft();
+                        $scope.clearComment();
                     }, function (err) {
                         appFactory.showDialog('Oops! Something went wrong.', true);
                     });

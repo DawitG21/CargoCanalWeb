@@ -15,14 +15,17 @@
             };
 
 
+            // clear comment text and reset maximum xters left
             $scope.clearComment = function () {
                 $scope.comment.CommentText = '';
                 $scope.getXtersLeft();
             };
 
-            $scope.clearComment();  // init xtersLeft
+
+            $scope.clearComment();  // init xtersLeft and comment text
 
             $scope.closeWindow = function () {
+                $scope.clearComment();
                 $rootScope.showComment = false;
                 appFactory.setModalOpen(false);
             };
@@ -47,8 +50,7 @@
                 // post comment and clear the comment box
                 commentService.submitComment($scope.comment)
                     .then(function (data) {
-                        $scope.comment.CommentText = '';
-                        $scope.getXtersLeft();
+                        $scope.clearComment();
                     }, function (err) {
                         appFactory.showDialog('Oops! Something went wrong.', true);
                     });
