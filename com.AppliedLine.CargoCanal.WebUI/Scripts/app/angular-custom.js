@@ -3838,6 +3838,7 @@ var api = serverUrl + '/api';
             $scope.getXtersLeft();  // init xtersLeft
 
             $scope.closeWindow = function () {
+                $scope.comment.CommentText = '';
                 $rootScope.showComment = false;
                 appFactory.setModalOpen(false);
             };
@@ -3862,7 +3863,6 @@ var api = serverUrl + '/api';
                 // post comment and clear the comment box
                 commentService.submitComment($scope.comment)
                     .then(function (data) {
-                        // $scope.comments.push
                         $scope.comment.CommentText = '';
                         $scope.getXtersLeft();
                     }, function (err) {

@@ -14,7 +14,13 @@
                 $scope.xtersLeft = appFactory.xtersLeft(maxLength, $scope.comment.CommentText.length);
             };
 
-            $scope.getXtersLeft();  // init xtersLeft
+
+            $scope.clearComment = function () {
+                $scope.comment.CommentText = '';
+                $scope.getXtersLeft();
+            };
+
+            $scope.clearComment();  // init xtersLeft
 
             $scope.closeWindow = function () {
                 $rootScope.showComment = false;
@@ -41,7 +47,6 @@
                 // post comment and clear the comment box
                 commentService.submitComment($scope.comment)
                     .then(function (data) {
-                        // $scope.comments.push
                         $scope.comment.CommentText = '';
                         $scope.getXtersLeft();
                     }, function (err) {
