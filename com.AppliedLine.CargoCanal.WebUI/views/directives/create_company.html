@@ -16,7 +16,7 @@
     </div>
     <div class="form-group">
         <label for="TIN" class="sr-only">TIN</label>
-        <input name="TIN" type="text" class="form-control textbox-editor" placeholder="TIN" ng-model="newCompany.Company.TIN" ng-minlength="10" ng-maxlength="10" required />
+        <input name="TIN" type="text" class="form-control textbox-editor" placeholder="TIN" ng-model="newCompany.Company.TIN" ng-minlength="10" ng-maxlength="10" ng-pattern="regexTin" required />
     </div>
     <div class="form-group">
         <label for="FirstName" class="sr-only">First name</label>

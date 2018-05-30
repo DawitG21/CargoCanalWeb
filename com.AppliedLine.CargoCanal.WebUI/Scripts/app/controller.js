@@ -34,6 +34,7 @@ var api = serverUrl + '/api';
             $scope.regexEmail = "[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z]{2,}";
             $scope.regexNumber = "\\d+";
             $scope.regexPhone = "\\+?\\d+";
+            $scope.regexTin = /^\d{10}$/;
 
 
 
