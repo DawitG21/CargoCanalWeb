@@ -211,3 +211,8 @@ This is an example of how to use the image sprite in your own CSS files
 	height: 60px;
 	background-position: -10px -1926px;
 }
+.common-sprite.app_store_badge_US_h60 {
+	width: 155px;
+	height: 60px;
+	background-position: -10px -1996px;
+}

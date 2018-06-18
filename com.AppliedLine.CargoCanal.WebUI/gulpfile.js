@@ -16,7 +16,7 @@ var filesToMove = {
         'scripts/geez/jgeez.min.js'
     ],
     'root_clean': ['favicon.png'],
-    'root': ['views/**/*.*', 'templates_quarantined/**/*.*', 'index.html', 'manifest.webmanifest'],
+    'root': ['views/**/*.*', 'templates_quarantined/**/*.*', 'index.html', 'manifest.json'],
     'webconfig': ['Web.config']
 };
 

@@ -307,7 +307,7 @@ a.button-outline:hover, a.button-outline:focus {
 
 .loader-container {
     position: fixed;
-    z-index: 33;
+    z-index: 1033;
     top: 0;
     left: 0;
     right: 0;
@@ -319,7 +319,7 @@ a.button-outline:hover, a.button-outline:focus {
     position: relative;
     top: 40%;
     margin: 0 auto;
-    width: 132px;
+    width: 332px;
     background-color: #fff;
 }
 
@@ -327,6 +327,16 @@ a.button-outline:hover, a.button-outline:focus {
     position: absolute;
     top: 10px;
     padding: 20px;
+    text-align: center;
+    width: inherit;
+}
+
+.loader-text {
+    text-align: center;
+    color: #fff;
+    font-weight: 100;
+    padding: 30px;
+    width: inherit;
 }
 
 .loader-box {

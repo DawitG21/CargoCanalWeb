@@ -40,7 +40,8 @@
     "cargocanal_text_32": "Images/cargocanal_text_32.png",
     "cargocanal_text_64": "Images/cargocanal_text_64.png",
     "cargocanal_text_128": "Images/cargocanal_text_128.png",
-    "google-play-badge-h60": "Images/google-play-badge-h60.png"
+    "google-play-badge-h60": "Images/google-play-badge-h60.png",
+    "app_store_badge_US_h60": "Images/app_store_badge_US_h60.png"
   },
   "orientation": "vertical",
   "optimize": "lossless",

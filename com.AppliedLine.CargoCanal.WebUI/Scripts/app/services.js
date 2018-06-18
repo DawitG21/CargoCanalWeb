@@ -127,6 +127,18 @@
             $rootScope.modalOpen = bool;
         };
 
+        // show the loading animation
+        service.showLoader = (message) => {
+            $rootScope.loader = true;
+            $rootScope.loaderMessage = message;
+        };
+
+        // close the loading animation
+        service.closeLoader = () => {
+            $rootScope.loader = false;
+            $rootScope.loaderMessage = '';
+        };
+
         service.getPhotoUrl = (url) => {
             if (!url) {
                 return '';

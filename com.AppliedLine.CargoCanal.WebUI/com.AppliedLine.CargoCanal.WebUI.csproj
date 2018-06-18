@@ -84,7 +84,9 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\app_store_badge_US_h60.png" />
     <Content Include="Content\images\cargocanal-feature-graphic-web.png" />
+    <Content Include="Content\images\cargocanal_logo_1080_transparent.png" />
     <Content Include="Content\images\comment_maxi.png" />
     <Content Include="Content\images\ellipsis_4s_64px.gif" />
     <Content Include="Content\images\gear.svg" />
@@ -218,14 +220,15 @@
     <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.svg" />
     <Content Include="dist\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="dist\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="dist\assets\images\app_store_badge_US_h60.png" />
     <Content Include="dist\assets\images\cargocanal-feature-graphic-web.png" />
+    <Content Include="dist\assets\images\cargocanal_logo_1080_transparent.png" />
     <Content Include="dist\assets\images\cargocanal_text_128.png" />
     <Content Include="dist\assets\images\cargocanal_text_32.png" />
     <Content Include="dist\assets\images\cargocanal_text_64.png" />
     <Content Include="dist\assets\images\comment_maxi.png" />
     <Content Include="dist\assets\images\ellipsis_4s_64px.gif" />
     <Content Include="dist\assets\images\google-play-badge-h60.png" />
-    <Content Include="dist\assets\images\google-play-badge.png" />
     <Content Include="dist\assets\images\icons\airplane-24.png" />
     <Content Include="dist\assets\images\icons\airplane-32.png" />
     <Content Include="dist\assets\images\icons\appliedline_32px.png" />
@@ -266,7 +269,6 @@
     <Content Include="dist\assets\images\icons\user_32.png" />
     <Content Include="dist\assets\images\icons\user_64.png" />
     <Content Include="dist\assets\images\people.png" />
-    <Content Include="dist\assets\images\people_720.png" />
     <Content Include="dist\assets\images\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="dist\assets\images\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="dist\assets\images\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -774,8 +776,8 @@
     <Content Include="dist\assets\i18n\resources-locale_am-ET.json" />
     <Content Include="dist\assets\i18n\resources-locale_en-US.json" />
     <Content Include="dist\Web.config" />
-    <Content Include="manifest.webmanifest" />
-    <Content Include="dist\manifest.webmanifest" />
+    <Content Include="dist\manifest.json" />
+    <None Include="manifest.json" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.woff" />

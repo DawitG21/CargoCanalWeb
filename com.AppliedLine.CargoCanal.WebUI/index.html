@@ -2,11 +2,23 @@
 <html ng-app="app" lang="en">
 <head>
     <base href="/" />
-    <title>CargoCanal</title>
+    <title>CargoCanal &bull; Freight forwarding in hand.</title>
     <meta charset="utf-8" />
-    <meta name="description" content="Ethiopian Maritime management website." />
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#40437B">
+
+    <meta name="description" content="CargoCanal allows freight forwarders to save their cargo activity in the cloud and collaborate with team members and their Maritime Authority." />
     <meta name="author" content="Appliedline.com" />
-    <meta name="keywords" content="maritime, ethiopian maritime, freight, cargo, cargo movement, emaa" />
+    <meta name="keywords" content="appliedline, ethiopia, africa, maritime, ethiopian maritime, freight, forwarders, cargo, cargo movement, emaa" />
+
+    <meta property="og:url" content="https://cargocanal.com">
+    <meta property="og:site_name" content="CargoCanal">
+    <meta property="og:title" content="Freight forwarding in hand">
+    <meta property="og:description" content="CargoCanal allows freight forwarders to save their cargo activity in the cloud and collaborate with team members and their Maritime Authority.">
+    <meta property="og:image" content="https://cargocanal.com/assets/images/cargocanal_logo_1080_transparent.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
 
     <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
     <meta http-equiv="expires" content="Fri, 24 Feb 2017 00:00:00 GMT" />
@@ -15,9 +27,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <link rel="manifest" href="/manifest.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=2.3.6" />
-    <link href="src/assets/css/style-bundle.min.css?v=2.3.6" rel="stylesheet" />
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=2.3.7" />
+    <link href="src/assets/css/style-bundle.min.css?v=2.3.7" rel="stylesheet" />
 
 </head>
 <body ng-controller="mainCtrl" ng-class="modalOpenClass()">
@@ -36,6 +47,7 @@
                     <i class="loader-box loader-box-2"></i>
                     <i class="loader-box loader-box-1"></i>
                     <i class="loader-box loader-box-4"></i>
+                    <p ng-bind="loaderMessage" class="loader-text"></p>
                 </div>
             </div>
         </div>
@@ -54,13 +66,13 @@
     </footer>
 
     <dir-dialog-window></dir-dialog-window>
-    <link href="src/assets/css/style-bundle-defer.min.css?v=2.3.6" rel="stylesheet" />
+    <link href="src/assets/css/style-bundle-defer.min.css?v=2.3.7" rel="stylesheet" />
 
 
     <!-- Amharic libraries : jquery-1.7.2 is required -->
     <!--<script src="src/lib/jgeez-jquery.min.js"></script>-->
-    <script src="src/lib/jquery.utils.min.js?v=2.3.6"></script>
-    <script src="src/lib/angulars_and_chartjs.js?v=2.3.6"></script>
+    <script src="src/lib/jquery.utils.min.js?v=2.3.7"></script>
+    <script src="src/lib/angulars_and_chartjs.js?v=2.3.7"></script>
     <!-- format cards dynamically-->
     <script id="cardsjs" src="src/lib/cards.min.js"></script>
     <!-- format reports with paging -->

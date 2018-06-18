@@ -117,8 +117,11 @@ var api = serverUrl + '/api';
         if ($rootScope.User || $rootScope.User !== undefined) $state.go('home'); // user already logged in
 
         $scope.queryString = $location.search();
+
+        // verify link validity if it exists
         if ($scope.queryString.uid && $scope.queryString.usalt) {
-            // verify link validity
+            appFactory.showLoader('validating password reset link...');
+
             passwordFactory.checklink($scope.queryString)
                 .then(function (response) {
                     if (response.status === 200) {
@@ -128,10 +131,13 @@ var api = serverUrl + '/api';
                             Uid: $scope.queryString.uid,
                             Usalt: $scope.queryString.usalt
                         };
+
+                        appFactory.closeLoader();
                         $state.go('passwordreset.changepassword');
                     }
                     else {
-                        // link no longer exists redirect to 404 page
+                        // TODO: link no longer exists redirect to 404 page
+                        appFactory.closeLoader();
                     }
                 });
         }
@@ -178,6 +184,9 @@ var api = serverUrl + '/api';
             $scope.signIn = function () {
                 $scope.loginFailed = '';
                 $scope.processing = true;
+
+                appFactory.showLoader('verifying credentials...');
+
                 $http({
                     method: 'POST',
                     url: api + '/account/postlogin',
@@ -185,6 +194,8 @@ var api = serverUrl + '/api';
                     headers: { 'Content-Type': 'application/json; charset=utf-8' }
                 })
                     .then(function (response) {
+                        appFactory.closeLoader();
+
                         // get the user collection and save it in session
                         $sessionStorage.__user = $rootScope.User = response.data;
 
@@ -198,6 +209,8 @@ var api = serverUrl + '/api';
                         // activate session validation
                         // $rootScope.workerValidateSession();
                     }, function (error) {
+                        appFactory.closeLoader();
+
                         $scope.loginFailed = "Invalid login attempt.";
                         $scope.processing = false;
                     });
