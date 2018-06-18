@@ -346,7 +346,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         // show the loading animation
         service.showLoader = (message) => {
             $rootScope.loader = true;
-            $rootScope.loaderMessage = message;
+            $rootScope.loaderMessage = (!message) ? 'processing...' : message;
         };
 
         // close the loading animation
@@ -1375,8 +1375,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                     });
 
                     _connection.start()
-                        .done(function () { console.log('connected-> id: ' + _connection.id); })
-                        .fail(function () { console.log('failed to connect'); });
+                        .done(function () { console.log('connected signal'); }) // + _connection.id
+                        .fail(function () { console.log('failed signal'); });
                 },
                 off: function (eventName, callback) {
                     _hubProxy.off(eventName, function (result) {
@@ -3509,7 +3509,7 @@ var api = serverUrl + '/api';
             $scope.getImportExportByTinOrLc = function (searchButton) {
                 if ($scope.searchText === undefined || $scope.searchText === '') return;
 
-                $rootScope.loader = true;
+                appFactory.showLoader();
                 appFactory.setModalOpen(true);
 
                 appFactory.getImportExportByTinOrLc($scope.tinOrLcData, $scope.searchText, searchButton)
@@ -3520,7 +3520,7 @@ var api = serverUrl + '/api';
                             appFactory.prepCards();
                         }
                         appFactory.setModalOpen(false);
-                        $rootScope.loader = false;
+                        appFactory.closeLoader();
                     });
             };
         }]);
@@ -3536,7 +3536,7 @@ var api = serverUrl + '/api';
             $scope.getImportExportByTinOrLc = function (searchButton) {
                 if (searchButton && ($scope.searchText === undefined || $scope.searchText === '')) return;
 
-                $rootScope.loader = true;
+                appFactory.showLoader();
                 appFactory.setModalOpen(true);
 
                 appFactory.getImportExportByTinOrLc($scope.tinOrLcData, $scope.searchText, searchButton)
@@ -3548,7 +3548,7 @@ var api = serverUrl + '/api';
                         }
 
                         appFactory.setModalOpen(false);
-                        $rootScope.loader = false;
+                        appFactory.closeLoader();
                     });
             };
 
@@ -3566,7 +3566,7 @@ var api = serverUrl + '/api';
                 filter: { name: {}, Token: $rootScope.User.Login.Token },
                 groupBy: '',
                 generate: function () {
-                    $rootScope.loader = true;
+                    appFactory.showLoader('generating report...');
                     appFactory.setModalOpen(true);
                     $scope.report.data = [];
                     $scope.report.groupBy = '';
@@ -3588,9 +3588,12 @@ var api = serverUrl + '/api';
                             //$scope.report.data = $filter('groupByField')(actualData, $scope.report.groupBy);
 
                             $state.go('report.' + $scope.report.filter.name.value);
-                            $rootScope.loader = false;
+                            appFactory.closeLoader();
                             appFactory.setModalOpen(false);
-                        }, function (error) { $rootScope.loader = false; appFactory.setModalOpen(false); })
+                        }, function (error) {
+                            appFactory.closeLoader();
+                            appFactory.setModalOpen(false);
+                        })
                 },
                 getTotal: function (o, field) {
                     $scope.total = 0;

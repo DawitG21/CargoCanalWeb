@@ -52,6 +52,11 @@
     margin-right: 35px;
 }
 
+.comment-wr {
+    padding: 100px 0;
+    background-color: #fff;
+}
+
 .comment {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;

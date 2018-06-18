@@ -19,8 +19,8 @@
                     });
 
                     _connection.start()
-                        .done(function () { console.log('connected-> id: ' + _connection.id); })
-                        .fail(function () { console.log('failed to connect'); });
+                        .done(function () { console.log('connected signal'); }) // + _connection.id
+                        .fail(function () { console.log('failed signal'); });
                 },
                 off: function (eventName, callback) {
                     _hubProxy.off(eventName, function (result) {

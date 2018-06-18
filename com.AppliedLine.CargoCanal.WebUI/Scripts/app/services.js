@@ -130,7 +130,7 @@
         // show the loading animation
         service.showLoader = (message) => {
             $rootScope.loader = true;
-            $rootScope.loaderMessage = message;
+            $rootScope.loaderMessage = (!message) ? 'processing...' : message;
         };
 
         // close the loading animation
