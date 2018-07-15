@@ -13,7 +13,7 @@
             <label for="VesselID" data-i18n="_VesselAirline_"></label>
 
             <!-- auto-complete implementation for vessel -->
-            <input name="Vessel" id="Vessel" type="text" class="form-control"
+            <input name="Vessel" id="Vessel" type="text" class="form-control text-uppercase"
                    placeholder="Vessel"
                    auto-complete source="values/queryvessels"
                    ng-minlength="3"
@@ -23,7 +23,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="VoyageNumber" data-i18n="_VoyageFlightNo_"></label>
-            <input type="text" class="form-control" name="VoyageNumber" ng-model="newExport.VoyageNumber" />
+            <input type="text" class="form-control text-uppercase" name="VoyageNumber" ng-model="newExport.VoyageNumber" />
         </div>
     </div>
 </div>
@@ -83,16 +83,16 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         <div class="form-group">
-            <button ui-sref="export.add.bill2" class="btn btn-lg nav-button">
-                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            <button ui-sref="export.add.bill2" ng-click="scrollToTop()" class="btn btn-lg nav-button">
+                <span class="oi oi-chevron-left"></span> Previous
             </button>
-            <button ui-sref="export.add.items" class="btn btn-lg pull-right nav-button"
+            <button ui-sref="export.add.items" ng-click="scrollToTop()" class="btn btn-lg pull-right nav-button"
                     ng-disabled="(newExport.CarrierID == undefined && !hideCarrier)
                     || newExport.PortOfLoadingID == undefined || newExport.PortOfDischargeID == undefined
                     || newExport.codID == newExport.colID || newExport.PortOfLoadingID == newExport.PortOfDischargeID">
-                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                <span data-i18n="_Next_"></span> <span class="oi oi-chevron-right"></span>
             </button>
         </div>
     </div>

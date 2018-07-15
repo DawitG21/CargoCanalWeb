@@ -1,4 +1,4 @@
-<section>
+<section class="row">
     <section class="col-sm-6 login-side-info color-theme">
         <h3 class="font-bold-600">
             CargoCanal is changing how you work, allowing you to report to your regulatory body while you keep your clients in the loop.
@@ -6,29 +6,31 @@
         <h3 class="font-bold-600">Now you can keep your entire team up to date on all your cargo movements.</h3>
         <h3 class="font-bold-600">Collaborating just got exciting!</h3>
     </section>
-    <section class="login-box">
-        <div class="login-logo">
-            <i class="common-sprite cargocanal_text_64"></i>
-        </div>
-        <form name="form" id="form" ng-submit="signIn()" novalidate>
-            <!--<h3 class="login-title">Sign In</h3>-->
-            <div class="form-group">
-                <p class="text-danger">{{loginFailed}}</p>
-                <label for="UserName" class="sr-only">Email</label>
-                <input name="UserName" type="email" class="form-control" placeholder="Enter your email" ng-model="login.Username" />
+    <section class="col-sm-6">
+        <section class="login-box">
+            <div class="login-logo">
+                <i class="common-sprite cargocanal_text_64"></i>
             </div>
-            <div class="form-group">
-                <label for="Password" class="sr-only">Password</label>
-                <input name="Password" type="password" class="form-control" placeholder="Password" ng-model="login.Password" autocomplete="new-password" />
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="processing">Login</button>
-                <h6 class="color-theme pointer" ng-click="forgotPassword()">Forgot password?</h6>
-            </div>
+            <form name="form" id="form" ng-submit="signIn()" novalidate>
+                <!--<h3 class="login-title">Sign In</h3>-->
+                <div class="form-group">
+                    <p class="text-danger">{{loginFailed}}</p>
+                    <label for="UserName" class="sr-only">Email</label>
+                    <input name="UserName" type="email" class="form-control" placeholder="Enter your email" ng-model="login.Username" />
+                </div>
+                <div class="form-group">
+                    <label for="Password" class="sr-only">Password</label>
+                    <input name="Password" type="password" class="form-control" placeholder="Password" ng-model="login.Password" autocomplete="new-password" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="processing">Login</button>
+                    <h6 class="color-theme pointer" ng-click="forgotPassword()">Forgot password?</h6>
+                </div>
 
-            <div class="login-footer margin-top-30">
-                <small>By signing in you agree to the <a ui-sref="termsofservice">Terms of Service.</a></small>
-            </div>
-        </form>
+                <div class="login-footer margin-top-30">
+                    <small>By signing in you agree to the <a ui-sref="termsofservice">Terms of Service.</a></small>
+                </div>
+            </form>
+        </section>
     </section>
 </section>

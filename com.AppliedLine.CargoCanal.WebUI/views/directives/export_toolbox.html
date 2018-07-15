@@ -4,11 +4,11 @@
             <form class="form-group" ng-submit="searchExports(true)">
                 <div class="control-group">
                     <input class="control-group-textbox" type="search" placeholder="Search by SIn, Waybill or Dec. No" ng-model="searchText" />
-                    <i class="control-group-button" ng-click="searchExports(true)"><span class="glyphicon glyphicon-search"></span></i>
+                    <i class="control-group-button" ng-click="searchExports(true)"><span class="oi oi-magnifying-glass"></span></i>
                 </div>
             </form>
-            <a ui-sref="export.add" ng-hide="isNotFF" ng-click="initExport()"><span class="glyphicon glyphicon-plus-sign"></span> Add Export</a>
-            <a href="" ng-click="refresh()"><span class="glyphicon glyphicon-refresh"></span> Refresh</a>
+            <a ui-sref="export.add" ng-hide="isNotFF" ng-click="initExport()"><span class="oi oi-plus"></span> Add Export</a>
+            <a href="" ng-click="refresh()"><span class="oi oi-reload"></span> Refresh</a>
         </div>
     </div>
     <dir-export-view></dir-export-view>

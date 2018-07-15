@@ -1,4 +1,4 @@
-<div class="margin-bottom-15">
+<div class="overflow-auto margin-bottom-15">
     <p class="pull-left">Showing {{tinOrLcData.length}} records</p>
     <button type="button" class="btn btn-primary pull-right" ng-click="getImportExportByTinOrLc()">More Records &raquo;</button>
 </div>
@@ -99,23 +99,23 @@
     <aside class="card-logo" ng-class="{iecompleted: d.Completed, ieterminated: d.Terminated}">
         <div class="logo" ng-class="getMotIcon(d.MOT)"></div>
     </aside>
-    <article class="card-content">
-        <div class="col-sm-6">
+    <article class="row card-content">
+        <div class="col-sm-5">
             <h3 ng-bind="d.Bill" class="font-bold-600" ng-if="d.ImpExpTypeID == 1"></h3>
             <h3 ng-bind="d.WayBill" class="font-bold-600" ng-if="d.ImpExpTypeID == 2"></h3>
-            <h5>{{d.DateInserted | date: 'MMMM dd, yyyy'}} &bull; LC/EP #: {{d.LC.LCNumber}}</h5>
+            <h6>{{d.DateInserted | date: 'MMMM dd, yyyy'}} &bull; LC/EP #: {{d.LC.LCNumber}}</h6>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <h5>{{d.Consignee.CompanyName}} &bull; {{d.Consignee.TIN}}</h5>
-            <h5 class="font-bold" ng-if="d.Carrier">{{d.Carrier}}, {{d.Vessel}}</h5>
-            <h5 class="font-bold" ng-if="!d.Carrier">TRUCK CARRIER</h5>
-            <h5 class="font-bold" ng-if="d.ImpExpTypeID == 1">{{d.PortOfDischarge}} <span class="glyphicon glyphicon-arrow-left"></span> {{d.PortOfLoading}}</h5>
-            <h5 class="font-bold" ng-if="d.ImpExpTypeID == 2">{{d.PortOfLoading}} <span class="glyphicon glyphicon-arrow-right"></span> {{d.PortOfDischarge}}</h5>
+            <h6 class="font-bold text-ellipsis" ng-if="d.Carrier">{{d.Carrier}}, {{d.Vessel}}</h6>
+            <h6 class="font-bold text-ellipsis" ng-if="!d.Carrier">TRUCK CARRIER</h6>
+            <h6 class="font-bold text-ellipsis" ng-if="d.ImpExpTypeID == 1">{{d.PortOfDischarge}} <span class="oi oi-arrow-thick-left"></span> {{d.PortOfLoading}}</h6>
+            <h6 class="font-bold text-ellipsis" ng-if="d.ImpExpTypeID == 2">{{d.PortOfLoading}} <span class="oi oi-arrow-thick-right"></span> {{d.PortOfDischarge}}</h6>
         </div>
     </article>
 </div>
 
-<div class="margin-top-15" ng-hide="tinOrLcData.length === 0 || tinOrLcData === null || tinOrLcData === undefined">
+<div class="overflow-auto margin-top-15" ng-hide="tinOrLcData.length === 0 || tinOrLcData === null || tinOrLcData === undefined">
     <p class="pull-left">Showing {{tinOrLcData.length}} records</p>
     <button type="button" class="btn btn-primary pull-right" ng-click="getImportExportByTinOrLc()">More Records &raquo;</button>
 </div>

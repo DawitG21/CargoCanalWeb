@@ -15,20 +15,20 @@
                         </h3>
                     </div>
                     
-                    <div class="row">
-                        <div class="col-xs-12 col-md-8 col-md-offset-2">
+                    <!--<div class="row">
+                        <div class="col-xs-12 col-md-8 col-md-offset-2">-->
 
                             <form name="form" id="form" ng-submit="costInfo.save()" novalidate>
                                 <div class="form-group">
                                     <label for="Freight">Freight</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="Freight" type="number" min="0" string-to-number step="1.00" class="form-control" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="costInfo.data.Cost.Freight" required />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.FreightExRate" required></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.FreightExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -36,13 +36,13 @@
                                 <div class="form-group">
                                     <label for="PortHandling">Port Clearance / Handling</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="PortHandling" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.PortHandling" required />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.PortHandlingExRate" required></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.PortHandlingExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -50,27 +50,27 @@
                                 <div class="form-group">
                                     <label for="InlandTransport">Inland Transport</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="InlandTransport" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.InlandTransport" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InlandTransportExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.InlandTransportExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="DischargePortStorage">Port of Discharge  Storage</label>
+                                    <label for="DischargePortStorage">Port of Discharge Storage</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="DischargePortStorage" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.DischargePortStorage" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.DischargePortStorageExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.DischargePortStorageExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -78,13 +78,13 @@
                                 <div class="form-group">
                                     <label for="InlandStorage">Inland (Dry port) Storage</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="InlandStorage" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.InlandStorage" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InlandStorageExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.InlandStorageExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -92,13 +92,13 @@
                                 <div class="form-group">
                                     <label for="Insurance">Insurance</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="Insurance" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.Insurance" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.InsuranceExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.InsuranceExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -106,13 +106,13 @@
                                 <div class="form-group">
                                     <label for="AgentCommision">Agent Commision</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="AgentCommision" required type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.AgentCommision" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" required ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.AgentCommisionExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.AgentCommisionExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -120,13 +120,13 @@
                                 <div class="form-group">
                                     <label for="TruckDetention">Truck Detention</label>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-6">
                                             <input name="TruckDetention" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.TruckDetention" />
                                         </div>
-                                        <div class="col-xs-4">
+                                        <div class="col-4">
                                             <select class="form-control" ng-options="rate.Currency for rate in exRates.rates track by rate.Currency" ng-model="costInfo.data.Cost.TruckDetentionExRate"></select>
                                         </div>
-                                        <div class="col-xs-2">
+                                        <div class="col-2">
                                             <kbd>{{costInfo.data.Cost.TruckDetentionExRate.Rate | number:2}}/$</kbd>
                                         </div>
                                     </div>
@@ -140,12 +140,12 @@
                                     <input name="OtherChargesLocal" type="number" min="0" string-to-number step="1.00" class="form-control" ng-model="costInfo.data.Cost.OtherChargesLocal" />
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default btn-lg">Save</button>
+                                    <button type="submit" class="btn btn-secondary btn-lg">Save</button>
                                 </div>
                             </form>
 
-                        </div>
-                    </div>
+                        <!--</div>
+                    </div>-->
 
                 </section>
             </div>

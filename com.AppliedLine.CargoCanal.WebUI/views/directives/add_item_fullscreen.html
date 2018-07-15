@@ -7,16 +7,19 @@
                     <div class="row margin-0">
                         <div class="col-sm-12">
                             <div class="row">
-                                <button type="button" class="close" aria-label="Close" ng-click="closeWindow()">
-                                    <span class="h1" aria-hidden="true">&times;</span>
-                                </button>
+                                <div class="col">
+                                    <button type="button" class="close" aria-label="Close" ng-click="closeWindow()">
+                                        <span class="h1" aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
                             </div>
+
                             <form name="formItem" novalidate>
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="Description" data-i18n="_Description_"></label>
-                                            <textarea class="form-control" name="Description" ng-model="newItem.Description" required />
+                                            <textarea class="form-control text-uppercase" name="Description" ng-model="newItem.Description" required />
                                         </div>
                                     </div>
                                 </div>
@@ -130,16 +133,16 @@
                             </section>
                             <section>
                                 <div>
-                                    <a ng-click="initItemDetail()" class="button-outline" style="margin-right: 8px;"><span class="glyphicon glyphicon-plus-sign tiny-button"></span> Item Detail</a>
+                                    <a ng-click="initItemDetail()" class="button-outline" style="margin-right: 8px;"><span class="oi oi-plus tiny-button"></span> Item Detail</a>
                                     <a name="files" class="button-outline"
                                        ng-model="files"
                                        ngf-select="uploadFiles($files, $invalidFiles)"
                                        ngf-keep="true"
                                        accept="image/*,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel"
                                        ngf-max-size="16MB"
-                                       ngf-multiple="true"><span class="glyphicon glyphicon-paperclip tiny-button"></span>Attach (16MB/file)</a> 
+                                       ngf-multiple="true"><span class="glyphicon glyphicon-paperclip tiny-button"></span>Attach (16MB/file)</a>
                                 </div>
-                                
+
                                 <div style="overflow: auto; padding-top: 10px;">
                                     <h6 ng-show="files.length > 0">* click attachments below to remove.</h6>
                                     <div class="attachment" ng-repeat="f in files" ng-click="removeAttachment($index)" ng-bind="f.name" title="Remove"></div>
@@ -154,8 +157,8 @@
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <div class="form-group">
-                                                <label for="ItemNumber">Container/Chassis/Packing #</label>
-                                                <input type="text" class="form-control" name="ItemNumber" ng-model="newItemDetail.ItemNumber" required />
+                                                <label for="ItemNumber">Container/Chassis/Pkn. #</label>
+                                                <input type="text" class="form-control text-uppercase" name="ItemNumber" ng-model="newItemDetail.ItemNumber" required />
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
@@ -193,7 +196,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-default pull-right" 
+                                        <button type="submit" class="btn btn-primary pull-right"
                                                 ng-click="addNewItemToItems()" ng-disabled="formItem.$invalid" data-i18n="_Done_"></button>
                                         <p ng-show="disableAddToItems" class="text-danger">{{itemDetailsMsg}}</p>
                                     </div>

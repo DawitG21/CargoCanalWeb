@@ -1,11 +1,14 @@
-﻿<section class="text-center col-sm-4">
-    <img class="img-profile common-sprite user-128" ng-src="{{User.Person.PhotoDataUrl}}" />
-    <span class="anchor glyphicon glyphicon-pencil" title="Replace Image" ng-click="setPhotoType(0)" ui-sref=".uploadprofileimage"></span>
+﻿<div class="row">
 
-    <dir-user-links></dir-user-links>
-    
-</section>
+    <section class="text-center col-sm-4">
+        <img class="img-profile common-sprite user-128" ng-src="{{User.Person.PhotoDataUrl}}" />
+        <span class="anchor oi oi-pencil" title="Replace Image" ng-click="setPhotoType(0)" ui-sref=".uploadprofileimage"></span>
 
-<section class="col-sm-8" ui-view>
-    <dir-user-profile-view></dir-user-profile-view>
-</section>
+        <dir-user-links></dir-user-links>
+
+    </section>
+
+    <section class="col-sm-8" ui-view>
+        <dir-user-profile-view></dir-user-profile-view>
+    </section>
+</div>

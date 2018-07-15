@@ -1,71 +1,74 @@
-﻿<div class="container-fluid">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#rd-navbar" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand padding-top-0" ui-sref="home">
-            <img src="src/assets/images/cargocanal_text_64.png" alt="CargoCanal" class="logo" />
-        </a>
-    </div>
+﻿<!--<div class="navbar-header">-->
+<nav class="navbar navbar-expand-lg fixed-top navbar-light navbar-default">
+<div class="container-fluid">
+    <a class="navbar-brand padding-top-0" ui-sref="home">
+        <img src="src/assets/images/cargocanal_text_64.png" alt="CargoCanal" class="logo" />
+    </a>
+
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#rd-navbar" aria-controls="rd-navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <!--</div>-->
 
     <div class="collapse navbar-collapse" id="rd-navbar">
-        <ul class="nav navbar-nav">
-            <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
-                <a ui-sref="register" class="text-uppercase" data-i18n="_Register_"></a>
+        <ul class="nav navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item" ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
+                <a ui-sref="register" class="nav-link text-uppercase" data-i18n="_Register_"></a>
             </li>
-            <li ui-sref-active="active" ng-show="User.Login.Token.length > 0">
-                <a ui-sref="dashboard" class="text-uppercase" data-i18n="_Dashboard_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Login.Token.length > 0">
+                <a ui-sref="dashboard" class="nav-link text-uppercase" data-i18n="_Dashboard_"></a>
             </li>
             <!-- freight forwarder links -->
-            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
-                <a ui-sref="import" class="text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
+                <a ui-sref="import" class="nav-link text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
             </li>
-            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
-                <a ui-sref="export" class="text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 5">
+                <a ui-sref="export" class="nav-link text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
             </li>
 
 
             <!-- maritime links -->
-            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
-                <a ui-sref="maritime.import" class="text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
+                <a ui-sref="maritime.import" class="nav-link text-uppercase" ng-click="prepCards()" data-i18n="_Imports_"></a>
             </li>
-            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
-                <a ui-sref="maritime.export" class="text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99">
+                <a ui-sref="maritime.export" class="nav-link text-uppercase" ng-click="prepCards()" data-i18n="_Exports_"></a>
             </li>
-            <li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
-                <a ui-sref="report" class="text-uppercase" data-i18n="_Reports_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
+                <a ui-sref="report" class="nav-link text-uppercase" data-i18n="_Reports_"></a>
             </li>
-            <!--<li ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
-                <a ui-sref="customreport" class="text-uppercase" data-i18n="_CustomReports_"></a>
+            <!--<li class="nav-item" ui-sref-active="active" ng-show="User.Company.CompanyTypeID === 99 || User.Company.CompanyTypeID === 5">
+                <a ui-sref="customreport" class="nav-link text-uppercase" data-i18n="_CustomReports_"></a>
             </li>-->
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li>
+        <ul class="nav nav navbar-nav navbar-right">
+            <li class="nav-item">
                 <select class="select-custom" ng-model="lang" ng-change="setLanguage()">
-                    <option value="en-US">us-ENGLISH</option>
-                    <option value="am-ET">et-አማርኛ</option>
+                    <option value="en-US">ENGLISH</option>
+                    <option value="am-ET">አማርኛ</option>
                 </select>
             </li>
-            <li ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
-                <a ui-sref="login" class="text-uppercase" data-i18n="_Login_"></a>
+            <li class="nav-item" ui-sref-active="active" ng-hide="User.Login.Token.length > 0">
+                <a ui-sref="login" ng-click="scrollTop()" class="nav-link text-uppercase" data-i18n="_Login_"></a>
             </li>
-            <li class="hidden-md hidden-lg" ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
-                <a ui-sref="login" class="text-uppercase" ng-click="logout()" data-i18n="_Logout_"></a>
-            </li>
-            <li ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
-                <a class="img-profile-wr text-uppercase" ui-sref="account">
-                    <span class="img-profile-name" ng-bind="User.Person.FirstName"></span><img class="common-sprite user-32 img-profile" ng-src="{{User.Person.PhotoDataUrl}}" />
+            <!--<li class="nav-item hidden-md hidden-lg" ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
+                <a ui-sref="login" class="nav-link text-uppercase" ng-click="logout()" data-i18n="_Logout_"></a>
+            </li>-->
+            <li class="nav-item dropdown hidden-xs hidden-sm" ui-sref-active="active" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
+                <a href="#" id="navbarDropdown" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="text-capitalize" ng-bind="User.Person.FirstName"></span>
+                    <img class="common-sprite user-32 img-profile" ng-src="{{User.Person.PhotoDataUrl}}" />
                 </a>
-            </li>
-            <li class="dropdown hidden-xs hidden-sm" ng-if="User.Login" ng-hide="(User.Login.Token == '')">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="login" class="text-uppercase" ng-click="logout()" data-i18n="_Logout_"></a></li>
-                </ul>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                    <a ui-sref="account" class="nav-link text-capitalize">
+                        <span class="oi oi-cog"></span> Account settings
+                    </a>
+                    <a ui-sref="login" class="nav-link text-capitalize" ng-click="logout()">
+                        <span class="oi oi-account-logout"></span> <span data-i18n="_Logout_"></span>
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
 </div>
+</nav>

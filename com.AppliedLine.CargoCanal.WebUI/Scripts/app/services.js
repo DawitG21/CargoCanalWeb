@@ -178,6 +178,11 @@
         let _initHelpers = function () {
             $rootScope.getPhotoUrl = service.getPhotoUrl;
 
+            $rootScope.scrollToTop = function () {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            };
+
             // return a class that sets the <body> overflow: hidden
             $rootScope.modalOpenClass = function () {
                 if ($rootScope.modalOpen) return 'fullscreen-open';

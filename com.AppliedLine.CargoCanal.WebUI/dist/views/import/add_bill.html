@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="ReferenceNo" data-i18n="_ReferenceNo_"></label>
-            <input type="text" class="form-control" id="ReferenceNo" ng-model="newImport.ReferenceNo" />
+            <input type="text" class="form-control text-uppercase" id="ReferenceNo" ng-model="newImport.ReferenceNo" />
         </div>
     </div>
     <div class="col-sm-6">
@@ -17,7 +17,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="LCNumber">LC No.</label>
-            <input type="text" class="form-control" id="LCNumber" ng-model="newImport.LC.LCNumber" />
+            <input type="text" class="form-control text-uppercase" id="LCNumber" ng-model="newImport.LC.LCNumber" />
         </div>
     </div>
 </div>
@@ -46,7 +46,7 @@
             <label for="BillOfLading" data-i18n="_AirWayBill_" ng-show="newImport.ModeOfTransportID == 2"></label>
             <label for="BillOfLading" data-i18n="_TruckWayBill_" ng-show="newImport.ModeOfTransportID == 3"></label>
             <label for="BillOfLading" data-i18n="_BillOfLading_" ng-hide="newImport.ModeOfTransportID == 3" ng-show="newImport.ModeOfTransportID == 1 || newImport.ModeOfTransportID != 2"></label>
-            <input type="text" class="form-control" id="BillOfLading" name="BillOfLading" ng-model="newImport.Import.BillNumber" required />
+            <input type="text" class="form-control text-uppercase" id="BillOfLading" name="BillOfLading" ng-model="newImport.Import.BillNumber" required />
         </div>
     </div>
     <div class="col-sm-6">
@@ -67,16 +67,16 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         <div class="form-group">
-            <button ui-sref="import.add" class="btn btn-lg nav-button">
-                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            <button ui-sref="import.add" ng-click="scrollToTop()" class="btn btn-lg nav-button">
+                <span class="oi oi-chevron-left"></span> Previous
             </button>
-            <button ui-sref="import.add.carrier" class="btn btn-lg pull-right nav-button"
+            <button ui-sref="import.add.carrier" ng-click="scrollToTop()" class="btn btn-lg pull-right nav-button"
                     ng-disabled="newImport.ModeOfTransportID == undefined || newImport.DateInitiated == undefined
                 || newImport.ImportExportReasonID == undefined || newImport.Import.BillNumber == undefined
                 || newImport.Import.BillDate == undefined || newImport.IncoTermID == undefined">
-                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                <span data-i18n="_Next_"></span> <span class="oi oi-chevron-right"></span>
             </button>
         </div>
     </div>

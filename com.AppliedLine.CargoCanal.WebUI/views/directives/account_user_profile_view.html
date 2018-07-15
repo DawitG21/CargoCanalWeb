@@ -10,18 +10,18 @@
     <div class="form-group">
         <label class="">Contact Information</label>
         <button class="close" type="button" ng-click="account.profile.edit()" ng-hide="account.profile.editEnabled">
-            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+            <span aria-hidden="true" class="oi oi-pencil"></span>
             <span class="sr-only">Edit</span>
         </button>
         <button class="close" type="button" ng-click="account.profile.editEnabled=false" ng-show="account.profile.editEnabled">
-            <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+            <span aria-hidden="true" class="oi oi-circle-x"></span>
             <span class="sr-only">Close</span>
         </button>
     </div>
 
     <div class="row" ng-show="account.profile.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-user pull-right"></span>
+            <span class="oi oi-person pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>First name</label>
@@ -32,7 +32,7 @@
 
     <div class="row" ng-show="account.profile.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon pull-right"></span>
+            <span class="oi pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Middle name</label>
@@ -43,7 +43,7 @@
 
     <div class="row" ng-show="account.profile.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon pull-right"></span>
+            <span class="oi pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Last name</label>
@@ -54,7 +54,7 @@
 
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-earphone pull-right"></span>
+            <span class="fa fa-phone pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Phone</label>
@@ -68,7 +68,7 @@
 
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-envelope pull-right"></span>
+            <span class="oi oi-envelope-open pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Email</label>
@@ -93,6 +93,6 @@
 </form>
 
 <a ng-click="account.password.change()" class="pointer">
-    <span class="glyphicon glyphicon-lock"></span>&nbsp;Change password
+    <span class="oi oi-key"></span>&nbsp;Change password
 </a>
 <dir-password-change></dir-password-change>

@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="DeclarationNo" data-i18n="_DeclarationNo_"></label>
-            <input type="text" class="form-control" id="DeclarationNo" ng-model="newExport.Export.DeclarationNo" required />
+            <input type="text" class="form-control text-uppercase" id="DeclarationNo" ng-model="newExport.Export.DeclarationNo" required />
         </div>
     </div>
     <div class="col-sm-6">
@@ -18,7 +18,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="SIN" data-i18n="_ShippingInstructionNo_"></label>
-            <input type="text" class="form-control" id="SIN" ng-model="newExport.Export.ShippingInstructionNo" />
+            <input type="text" class="form-control text-uppercase" id="SIN" ng-model="newExport.Export.ShippingInstructionNo" />
         </div>
     </div>
     <div class="col-sm-6">
@@ -33,7 +33,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="WayBill" data-i18n="_TruckWayBill_" render-name-for="{{newExport.ModeOfTransportID}}"></label>
-            <input type="text" class="form-control" id="WayBill" ng-model="newExport.Export.WayBill" required />
+            <input type="text" class="form-control text-uppercase" id="WayBill" ng-model="newExport.Export.WayBill" required />
         </div>
     </div>
     <div class="col-sm-6">
@@ -84,16 +84,16 @@
 
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         <div class="form-group">
-            <button ui-sref="export.add.bill" class="btn btn-lg nav-button">
-                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            <button ui-sref="export.add.bill" ng-click="scrollToTop()" class="btn btn-lg nav-button">
+                <span class="oi oi-chevron-left"></span> Previous
             </button>
-            <button ui-sref="export.add.carrier" class="btn btn-lg pull-right nav-button"
+            <button ui-sref="export.add.carrier" ng-click="scrollToTop()" class="btn btn-lg pull-right nav-button"
                     ng-disabled="newExport.Export.DeclarationNo == undefined || newExport.Export.DeclarationDate == undefined
                     || newExport.Export.WayBill == undefined || newExport.Export.WayBillDate == undefined
                     || newExport.Export.OriginID == undefined || newExport.Export.StuffingLocationID == undefined">
-                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                <span data-i18n="_Next_"></span> <span class="oi oi-chevron-right"></span>
             </button>
         </div>
     </div>

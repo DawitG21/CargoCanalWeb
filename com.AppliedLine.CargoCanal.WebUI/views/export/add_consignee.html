@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <div class="col-md-6" ui-view>
         <div class="form-group">
-            <input name="ConsigneeTIN" id="ConsigneeTIN" type="text" class="form-control"
+            <input name="ConsigneeTIN" id="ConsigneeTIN" type="text" class="form-control text-uppercase"
                    placeholder="Consignee TIN"
                    auto-complete source="values/querypreviousconsignee" extraparams="{{User.Login.Token}}"
                    ng-model="newExport.Consignee.TIN" />
@@ -9,10 +9,10 @@
         </div>
 
         <div class="row">
-            <div class="col-xs-12">
+            <div class="col-12">
                 <div class="form-group">
                     <button type="button" ng-click="validateTin(newExport.Consignee.TIN, 'export.add.bill')" class="btn btn-lg pull-right nav-button">
-                        <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                        <span data-i18n="_Next_"></span> <span class="oi oi-chevron-right"></span>
                     </button>
                 </div>
             </div>

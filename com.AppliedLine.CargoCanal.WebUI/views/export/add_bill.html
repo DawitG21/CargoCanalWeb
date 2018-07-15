@@ -2,7 +2,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="ReferenceNo" data-i18n="_ReferenceNo_"></label>
-            <input type="text" class="form-control" id="ReferenceNo" ng-model="newExport.ReferenceNo" />
+            <input type="text" class="form-control text-uppercase" id="ReferenceNo" ng-model="newExport.ReferenceNo" />
         </div>
     </div>
     <div class="col-sm-6">
@@ -17,7 +17,7 @@
     <div class="col-sm-6">
         <div class="form-group">
             <label for="ExportPermission">Export Permission #</label>
-            <input type="text" class="form-control" id="ExportPermission" ng-model="newExport.LC.LCNumber" />
+            <input type="text" class="form-control text-uppercase" id="ExportPermission" ng-model="newExport.LC.LCNumber" />
         </div>
     </div>
 </div>
@@ -49,15 +49,15 @@
 </div>
 
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
         <div class="form-group">
-            <button ui-sref="export.add" class="btn btn-lg nav-button">
-                <span class="glyphicon glyphicon-chevron-left"></span> Previous
+            <button ui-sref="export.add" ng-click="scrollToTop()" class="btn btn-lg nav-button">
+                <span class="oi oi-chevron-left"></span> Previous
             </button>
-            <button ui-sref="export.add.bill2" class="btn btn-lg pull-right nav-button" 
+            <button ui-sref="export.add.bill2" ng-click="scrollToTop()" class="btn btn-lg pull-right nav-button" 
                     ng-disabled="newExport.ModeOfTransportID == undefined || newExport.DateInitiated == undefined
                     || newExport.ImportExportReasonID == undefined || newExport.IncoTermID == undefined">
-                <span data-i18n="_Next_"></span> <span class="glyphicon glyphicon-chevron-right"></span>
+                <span data-i18n="_Next_"></span> <span class="oi oi-chevron-right"></span>
             </button>
         </div>
     </div>

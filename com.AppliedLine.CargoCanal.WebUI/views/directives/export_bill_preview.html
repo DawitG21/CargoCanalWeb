@@ -10,127 +10,129 @@
                         <h3 class="text-uppercase modal-heading text">shipment preview</h3>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <section class="col-xs-6">
-                                    <p>Date Initiated: {{preview.export.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
-                                    <article>
-                                        <p>SHIP FROM</p>
-                                        <p>{{preview.export.data.PortOfLoading}}</p>
-                                    </article>
-                                    <article>
-                                        <p>SHIP TO</p>
-                                        <p>{{preview.export.data.PortOfDischarge}}</p>
-                                    </article>
-                                    <article>
-                                        <p>Declaration No.: {{preview.export.data.DeclarationNo}}</p>
-                                        <p>Declaration Date: {{preview.export.data.DeclarationDate | date : 'dd/MM/yyyy'}}</p>
-                                        
-                                        <!--<p>CPO Date: {{preview.export.data.CPORecievedDate | date : 'dd/MM/yyyy'}}</p>
-                                        <p>Original Doc. Date: {{preview.export.data.OriginalDocumentDate | date : 'dd/MM/yyyy'}}</p>-->
-                                    </article>
-                                </section>
-                                <section class="col-xs-6">
-                                    <p>Ref: {{preview.export.data.ReferenceNo}}</p>
-                                    <article>
-                                        <P>SIN No.: {{preview.export.data.ShippingInstructionNo}}</P>
-                                        <p>SIN Date: {{preview.export.data.ShippingInstructionDate | date: 'dd/MM/yyyy'}}</p>
-                                        <P>Waybill No.: {{preview.export.data.WayBill}}</P>
-                                        <p>Waybill Date: {{preview.export.data.WayBillDate | date: 'dd/MM/yyyy'}}</p>
-                                        <p>Reason for export: {{preview.export.data.Reason}}</p>
-                                    </article>
 
-                                </section>
+                    <div class="row">
+                        <section class="col">
+                            <p>Date Initiated: {{preview.export.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+                            <article>
+                                <p>SHIP FROM</p>
+                                <p>{{preview.export.data.PortOfLoading}}</p>
+                            </article>
+                            <article>
+                                <p>SHIP TO</p>
+                                <p>{{preview.export.data.PortOfDischarge}}</p>
+                            </article>
+                            <article>
+                                <p>Declaration No.: {{preview.export.data.DeclarationNo}}</p>
+                                <p>Declaration Date: {{preview.export.data.DeclarationDate | date : 'dd/MM/yyyy'}}</p>
+                            </article>
+                        </section>
+                        <section class="col">
+                            <p>Ref: {{preview.export.data.ReferenceNo}}</p>
+                            <article>
+                                <P>SIN No.: {{preview.export.data.ShippingInstructionNo}}</P>
+                                <p>SIN Date: {{preview.export.data.ShippingInstructionDate | date: 'dd/MM/yyyy'}}</p>
+                                <P>Waybill No.: {{preview.export.data.WayBill}}</P>
+                                <p>Waybill Date: {{preview.export.data.WayBillDate | date: 'dd/MM/yyyy'}}</p>
+                                <p>Reason for export: {{preview.export.data.Reason}}</p>
+                            </article>
+
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p>Origin: {{preview.export.data.Origin}}</p>
+                        </div>
+                        <div class="col">
+                            <p>Stuffed: {{preview.export.data.StuffingLocation}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Carrier Information</caption>
+                                    <thead>
+                                    <tr>
+                                        <th class="text-nowrap">MoT</th>
+                                        <th class="text-nowrap">Carrier</th>
+                                        <th class="text-nowrap">Vessel</th>
+                                        <th class="text-nowrap">Voyage/Flight No.</th>
+                                        <th class="text-nowrap">ETA</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{preview.export.data.MOT}}</td>
+                                        <td>{{preview.export.data.Carrier}}</td>
+                                        <td>{{preview.export.data.Vessel}}</td>
+                                        <td>{{preview.export.data.VoyageNumber}}</td>
+                                        <td>{{preview.export.data.ETA | date: 'dd/MM/yyyy'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">Freight Charge Terms: {{preview.export.data.IncoTerm}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <p>Origin: {{preview.export.data.Origin}}</p>
-                                </div>
-                                <div class="col-xs-6">
-                                    <p>Stuffed: {{preview.export.data.StuffingLocation}}</p>
-                                </div>
+                        </section>
+                    </div>
+
+                    <!--<div class="row">
+                        <section class="col">
+                            <p>Freight Charge Terms: {{preview.export.data.IncoTerm}}</p>
+                        </section>
+                    </div>-->
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Order Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">QTY</th>
+                                            <th class="text-nowrap">Content</th>
+                                            <th class="text-nowrap">Gross W.</th>
+                                            <th class="text-nowrap">Net W.</th>
+                                            <th class="text-nowrap">Vol</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="i in preview.export.data.Items">
+                                        <tr>
+                                            <td>{{i.Quantity | number}}</td>
+                                            <td>{{i.Description}}</td>
+                                            <td>{{i.GrossWeight}}</td>
+                                            <td>{{i.NetWeight}}</td>
+                                            <td>{{i.Volume}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">{{i.Dangerous | danger}}</td>
+                                            <td colspan="3">{{i.Cargo}} &bull; {{i.SubCargo}}</td>
+                                        </tr>
+                                        <tr ng-repeat="d in i.ItemDetails">
+                                            <td colspan="1">{{d.ItemNumber}}</td>
+                                            <td colspan="2">{{d.StuffMode}}</td>
+                                            <td colspan="2">{{d.Destination}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div class="row">
-                                <section class="col-xs-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-condensed">
-                                            <caption>Carrier Information</caption>
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-nowrap">MoT</th>
-                                                    <th class="text-nowrap">Carrier</th>
-                                                    <th class="text-nowrap">Vessel</th>
-                                                    <th class="text-nowrap">Voyage/Flight No.</th>
-                                                    <th class="text-nowrap">ETA</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>{{preview.export.data.MOT}}</td>
-                                                    <td>{{preview.export.data.Carrier}}</td>
-                                                    <td>{{preview.export.data.Vessel}}</td>
-                                                    <td>{{preview.export.data.VoyageNumber}}</td>
-                                                    <td>{{preview.export.data.ETA | date: 'dd/MM/yyyy'}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </section>
-                                <section class="col-xs-12">
-                                    <p>Freight Charge Terms: {{preview.export.data.IncoTerm}}</p>
-                                </section>
-                            </div>
-                            <div class="row">
-                                <section class="col-xs-12">
-                                    <div class="table-responsive">
-                                        <table class="table table-condensed">
-                                            <caption>Order Information</caption>
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-nowrap">QTY</th>
-                                                    <th class="text-nowrap">Content</th>
-                                                    <th class="text-nowrap">Gross W.</th>
-                                                    <th class="text-nowrap">Net W.</th>
-                                                    <th class="text-nowrap">Vol</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody ng-repeat="i in preview.export.data.Items">
-                                                <tr>
-                                                    <td>{{i.Quantity | number}}</td>
-                                                    <td>{{i.Description}}</td>
-                                                    <td>{{i.GrossWeight}}</td>
-                                                    <td>{{i.NetWeight}}</td>
-                                                    <td>{{i.Volume}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td colspan="2">{{i.Dangerous | danger}}</td>
-                                                    <td colspan="3">{{i.Cargo}} &bull; {{i.SubCargo}}</td>
-                                                </tr>
-                                                <tr ng-repeat="d in i.ItemDetails">
-                                                    <td colspan="1">{{d.ItemNumber}}</td>
-                                                    <td colspan="2">{{d.StuffMode}}</td>
-                                                    <td colspan="2">{{d.Destination}}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </section>
-                            </div>
-                            <div class="row">
-                                <section class="col-xs-12">
-                                    <p>REMARK: {{preview.export.data.Remark}}</p>
-                                </section>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div style="overflow: auto; padding-top: 10px;">
-                                        <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.export.data.Documents" ng-bind="f.DocumentName"></a>
-                                    </div>
-                                </div>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col">
+                            <p>REMARK: {{preview.export.data.Remark}}</p>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="attachment-wr">
+                                <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.export.data.Documents" ng-bind="f.DocumentName"></a>
                             </div>
                         </div>
                     </div>
+
                 </section>
 
             </div>

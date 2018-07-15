@@ -1,4 +1,4 @@
-<div class="margin-bottom-15">
+<div class="overflow-auto margin-bottom-15">
     <p class="pull-left">Showing {{imports.length}} records</p>
     <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getImports()">More Records &raquo;</button>
     <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchImports()">More Records &raquo;</button>
@@ -97,21 +97,21 @@
         <aside class="card-logo" ng-class="{iecompleted: d.Completed, ieterminated: d.Terminated}">
             <div class="logo" ng-class="getMotIcon(d.MOT)"></div>
         </aside>
-        <article class="card-content">
-            <div class="col-sm-6">
+        <article class="row card-content">
+            <div class="col-sm-5">
                 <h3 ng-bind="d.Bill" class="font-bold-600"></h3>
-                <h5>{{d.DateInserted | date: 'MMMM dd, yyyy'}}</h5>
+                <h6>{{d.DateInserted | date: 'MMMM dd, yyyy'}}</h6>
             </div>
-            <div class="col-sm-6">
-                <h5 class="font-bold" ng-if="d.Carrier">{{d.Carrier}}, {{d.Vessel}}</h5>
-                <h5 class="font-bold" ng-if="!d.Carrier">TRUCK CARRIER</h5>
-                <h5 class="font-bold">{{d.PortOfDischarge}} <span class="glyphicon glyphicon-arrow-left"></span> {{d.PortOfLoading}}</h5>
+            <div class="col-sm-7">
+                <h5 class="font-bold text-ellipsis" ng-if="d.Carrier">{{d.Carrier}}, {{d.Vessel}}</h5>
+                <h5 class="font-bold text-ellipsis" ng-if="!d.Carrier">TRUCK CARRIER</h5>
+                <h6 class="font-bold text-ellipsis">{{d.PortOfDischarge}} <span class="oi oi-arrow-thick-left"></span> {{d.PortOfLoading}}</h6>
             </div>
         </article>
     </div>
 </div>
 
-<div class="margin-top-15" ng-hide="imports.length == 0">
+<div class="overflow-auto margin-top-15" ng-hide="imports.length == 0">
     <p class="pull-left">Showing {{imports.length}} records</p>
     <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getImports()">More Records &raquo;</button>
     <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchImports()">More Records &raquo;</button>

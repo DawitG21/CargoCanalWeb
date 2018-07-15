@@ -8,6 +8,7 @@ var filesToMove = {
     'css': ['content/style-bundle.min.css', 'content/style-bundle-defer.min.css', 'content/datatables.min.css', 'content/common-sprite.sprite.*'],
     'datatable_img': ['bower_components/datatables/media/images/*.*'],
     'fonts': ['fonts/**/*.*'],
+    'open_iconic': ['content/open-iconic/**/*.*'],
     'image': ['content/images/**/*.*'],
     'content': ['content/themes/**/*.*'],
     'lib': ['scripts/bundles/*.min.js',
@@ -51,7 +52,12 @@ gulp.task('movefont', ['movecss'], function () {
         .pipe(gulp.dest('src/assets/fonts'));
 });
 
-gulp.task('movelib', ['movefont'], function () {
+gulp.task('moveopeniconic', ['movefont'], function () {
+    gulp.src(filesToMove.open_iconic)
+        .pipe(gulp.dest('src/assets/open-iconic'));
+});
+
+gulp.task('movelib', ['moveopeniconic'], function () {
     gulp.src(filesToMove.lib)
         .pipe(gulp.dest('src/lib'));
 });

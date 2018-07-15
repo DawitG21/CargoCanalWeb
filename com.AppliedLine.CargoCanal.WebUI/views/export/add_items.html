@@ -1,17 +1,17 @@
 ﻿<div class="text-center">
-    <button class="btn btn-default pull-left" ui-sref="export.add.carrier">
-        <span class="glyphicon glyphicon-chevron-left"></span> Previous
+    <button class="btn pull-left" ng-click="scrollToTop()" ui-sref="export.add.carrier">
+        <span class="oi oi-chevron-left"></span> Previous
     </button>
-    <button class="btn btn-default" ng-click="addNewItem()">
-        <span class="glyphicon glyphicon-plus-sign"></span> Add Item
+    <button class="btn" ng-click="addNewItem()">
+        <span class="oi oi-plus"></span> Add Item
     </button>
-    <button class="btn btn-default" ng-click="sendExport()" ng-disabled="newExport.Items.length == 0 || disableButton">
-        <span class="glyphicon glyphicon-send"></span> <span data-i18n="_Submit_"></span>
+    <button class="btn btn-primary" ng-click="sendExport()" ng-disabled="newExport.Items.length == 0 || disableButton">
+        <span class="oi oi-share"></span> <span data-i18n="_Submit_"></span>
     </button>
 </div>
 <hr />
 <h4 ng-repeat="i in newExport.Items">
-    <span class="glyphicon glyphicon-minus-sign text-danger pointer"
+    <span class="oi oi-minus text-danger pointer"
           ng-click="removeItem($index)"></span> {{i.ItemOrderNo}} {{i.Description}} x {{i.GrossWeight}} {{i.WeightUnitID | unit}} x {{i.Quantity}}
 </h4>
 

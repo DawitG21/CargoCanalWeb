@@ -13,18 +13,18 @@
     <div class="form-group">
         <label class="">Company Information</label>
         <button class="close" type="button" ng-click="account.company.edit()" ng-hide="account.company.editEnabled">
-            <span aria-hidden="true" class="glyphicon glyphicon-pencil"></span>
+            <span aria-hidden="true" class="oi oi-pencil"></span>
             <span class="sr-only">Edit</span>
         </button>
         <button class="close" type="button" ng-click="account.company.editEnabled=false" ng-show="account.company.editEnabled">
-            <span aria-hidden="true" class="glyphicon glyphicon-remove"></span>
+            <span aria-hidden="true" class="oi oi-circle-x"></span>
             <span class="sr-only">Close</span>
         </button>
     </div>
 
     <div class="row" ng-show="account.company.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-tower pull-right"></span>
+            <span class="oi oi-people pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Company Name</label>
@@ -32,7 +32,7 @@
                    ng-model="account.company.data.CompanyName" />
         </div>
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-certificate pull-right"></span>
+            <span class="oi oi-badge pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>TIN</label>
@@ -43,7 +43,7 @@
 
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-globe pull-right"></span>
+            <span class="oi oi-globe pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Address</label>
@@ -57,7 +57,7 @@
 
     <div class="row" ng-show="account.company.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-globe pull-right"></span>
+            <span class="oi oi-globe pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Town / City</label>
@@ -65,7 +65,7 @@
                    ng-model="account.company.data.TownCity" />
         </div>
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-globe pull-right"></span>
+            <span class="oi oi-globe pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>State</label>
@@ -75,7 +75,7 @@
     </div>
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-phone-alt pull-right"></span>
+            <span class="oi oi-pulse pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Telephone</label>
@@ -86,7 +86,7 @@
             <hr ng-hide="account.company.editEnabled" />
         </div>
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-envelope pull-right"></span>
+            <span class="oi oi-envelope-open pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Email</label>
@@ -101,7 +101,7 @@
 
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-user pull-right"></span>
+            <span class="oi oi-person pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Contact Name</label>
@@ -112,7 +112,7 @@
             <hr ng-hide="account.company.editEnabled" />
         </div>
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-earphone pull-right"></span>
+            <span class="fa fa-phone pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-5">
             <label>Contact Mobile</label>
@@ -127,7 +127,7 @@
 
     <div class="row">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-link pull-right"></span>
+            <span class="oi oi-link-intact pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>Website</label>
@@ -143,7 +143,7 @@
 
     <div class="row" ng-show="account.company.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-inbox pull-right"></span>
+            <span class="oi oi-box pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-11">
             <label>PO Box</label>
@@ -154,7 +154,7 @@
 
     <div class="row" ng-show="account.company.editEnabled">
         <div class="col-xs-2 col-sm-1">
-            <span class="glyphicon glyphicon-map-marker pull-right"></span>
+            <span class="oi oi-map-marker pull-right"></span>
         </div>
         <div class="col-xs-10 col-sm-2">
             <label>HouseNo</label>
@@ -167,7 +167,7 @@
                    ng-model="account.company.data.Wereda" />
         </div>
 
-        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-2">
+        <div class="col-xs-offset-2 col-sm-offset-1 col-xs-10 col-sm-3">
             <label>Kefle Ketema</label>
             <input type="text" class="form-control textbox-editor margin-bottom-15"
                    ng-model="account.company.data.KefleKetema" />

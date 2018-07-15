@@ -1,10 +1,10 @@
 ﻿<div class="row text-center margin-bottom-30">
-    <div class="col-sm-12">
+    <div class="col-12">
         <h4 class="text-uppercase font-bold-600">shipment preview</h4>
     </div>
 </div>
 <div class="row">
-    <section class="col-sm-6">
+    <section class="col-6">
         <p>Date Initiated: {{newExport.DateInitiated | date: 'dd/MM/yyyy'}}</p>
         <article>
             <p>SHIP FROM</p>
@@ -15,18 +15,18 @@
             <p ng-if="newExport.PortOfDischargeID">{{newExport.PortOfDischargeID | podName}}, {{newExport.codID | country}}</p>
         </article>
         <article>
-            <p>Declaration No.: {{newExport.Export.DeclarationNo}}</p>
+            <p class="text-uppercase">Declaration No.: {{newExport.Export.DeclarationNo}}</p>
             <p>Declaration Date: {{newExport.Export.DeclarationDate | date : 'dd/MM/yyyy'}}</p>
             <!--<p>CPO Date: {{newExport.Export.CPORecievedDate | date : 'dd/MM/yyyy'}}</p>
             <p>Original Doc. Date: {{newExport.Export.OriginalDocumentDate | date : 'dd/MM/yyyy'}}</p>-->
         </article>
     </section>
-    <section class="col-sm-6">
-        <p>Ref: {{newExport.ReferenceNo}}</p>
+    <section class="col-6">
+        <p class="text-uppercase">Ref: {{newExport.ReferenceNo}}</p>
         <article>
-            <P>SIN No.: {{newExport.Export.ShippingInstructionNo}}</P>
+            <P class="text-uppercase">SIN No.: {{newExport.Export.ShippingInstructionNo}}</P>
             <p>SIN Date: {{newExport.Export.ShippingInstructionDate | date: 'dd/MM/yyyy'}}</p>
-            <P>Waybill No.: {{newExport.Export.WayBill}}</P>
+            <P class="text-uppercase">Waybill No.: {{newExport.Export.WayBill}}</P>
             <p>Waybill Date: {{newExport.Export.WayBillDate | date: 'dd/MM/yyyy'}}</p>
             <p>Reason for export: {{newExport.ImportExportReasonID | reason}}</p>
         </article>
@@ -34,15 +34,15 @@
     </section>
 </div>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-6">
         <p>Origin: {{newExport.Export.OriginID | location}}</p>
     </div>
-    <div class="col-sm-6">
+    <div class="col-6">
         <p>Stuffed: {{newExport.Export.StuffingLocationID | location}}</p>
     </div>
 </div>
 <div class="row">
-    <section class="col-xs-12">
+    <section class="col-12">
         <div class="table-responsive">
             <table class="table table-condensed">
                 <caption>Carrier Information</caption>
@@ -59,22 +59,26 @@
                     <tr>
                         <td>{{newExport.ModeOfTransportID | mot}}</td>
                         <td>{{newExport.CarrierID | carrier}}</td>
+
                         <!--<td>{{newExport.VesselID | vessel}}</td>-->
                         <!-- auto-complete implementation for Vessel -->
-                        <td>{{newExport.Vessel}}</td>
-                        <td>{{newExport.VoyageNumber}}</td>
+                        <td class="text-uppercase">{{newExport.Vessel}}</td>
+                        <td class="text-uppercase">{{newExport.VoyageNumber}}</td>
                         <td>{{newExport.Export.ETA | date: 'dd/MM/yyyy'}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">Freight Charge Terms: {{newExport.IncoTermID | inco}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
-    <section class="col-xs-12">
+    <!--<section class="col-12">
         <p>Freight Charge Terms: {{newExport.IncoTermID | inco}}</p>
-    </section>
+    </section>-->
 </div>
 <div class="row">
-    <section class="col-xs-12">
+    <section class="col-12">
         <div class="table-responsive">
             <table class="table table-condensed">
                 <caption>Order Information</caption>
@@ -90,7 +94,7 @@
                 <tbody ng-repeat="i in newExport.Items">
                     <tr>
                         <td>{{i.Quantity | number}}</td>
-                        <td>{{i.Description}}</td>
+                        <td class="text-uppercase">{{i.Description}}</td>
                         <td>{{i.GrossWeight | number}} {{i.WeightUnitID | unit}}</td>
                         <td>{{i.NetWeight | number}} {{i.WeightUnitID | unit}}</td>
                         <td>{{i.Volume | number}} {{i.VolumeUnitID | unit}}</td>
@@ -100,8 +104,9 @@
                         <td colspan="3">{{i.CargoID | cargo}} <!--&bull; {{i.SubCargoID}}--></td>
                     </tr>
                     <tr ng-repeat="d in i.ItemDetails">
-                        <td colspan="1">{{d.ItemNumber}}</td>
+                        <td class="text-uppercase" colspan="1">{{d.ItemNumber}}</td>
                         <td colspan="4">{{d.StuffModeID | stuffMode}}</td>
+                        }<
                         <!--<td colspan="2">{{d.DestinationID}}</td>-->
                     </tr>
                 </tbody>
@@ -110,7 +115,7 @@
     </section>
 </div>
 <div class="row">
-    <section class="col-xs-12">
-        <p>REMARK: {{newExport.Remark}}</p>
+    <section class="col-12">
+        <p class="text-uppercase">REMARK: {{newExport.Remark}}</p>
     </section>
 </div>

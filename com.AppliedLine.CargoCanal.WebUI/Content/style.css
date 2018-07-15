@@ -22,26 +22,35 @@
 
 .navbar {
     border-bottom: 3px solid;
+    padding: 0;
 }
 
     .navbar.navbar-default {
         background-color: rgba(255,255,255,.9);
     }
 
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-    color: white;
-    background-color: #37264c;
+.navbar-nav .nav-link {
+    position: relative;
+}
+
+/*.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus,*/
+.navbar-light .navbar-nav .show > .nav-link,
+.navbar-light .navbar-nav .active > .nav-link,
+.navbar-light .navbar-nav .nav-link.show,
+.navbar-light .navbar-nav .nav-link.active {
+    color: #37264c;
+    font-weight: 400;
 }
 
 .nav .img-profile {
     border-radius: 50%;
     height: 32px;
     width: 32px;
-    position: absolute;
-    top: 9px;
-    right: 10px;
     background-color: #fff;
 }
+/*
 
 .nav a.img-profile-wr {
     min-width: 100px;
@@ -50,6 +59,20 @@
 
 .nav .img-profile-name {
     margin-right: 35px;
+}*/
+
+caption {
+    caption-side: top;
+}
+
+.overflow-auto {
+    overflow: auto;
+}
+
+.text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .comment-wr {
@@ -70,6 +93,7 @@
 }
 
 .cc-feature-banner {
+    height: 570px;
 }
 
 .overflow-hidden {
@@ -120,6 +144,7 @@ footer {
 
 .list-group-item-heading {
     clear: both;
+    margin-top: 20px;
 }
 
 caption {
@@ -196,7 +221,7 @@ label {
 
     .button-outline:hover {
         background-color: #3d3d3d;
-        color: #fff;
+        color: #fff !important;
     }
 
 a.button-outline:hover, a.button-outline:focus {
@@ -282,7 +307,7 @@ a.button-outline:hover, a.button-outline:focus {
 }
 
 .tiny-button {
-    font-size: 1.5em;
+    font-size: 1.3em;
     vertical-align: text-bottom;
     cursor: pointer;
 }
@@ -669,6 +694,7 @@ i.loader-box-4 {
 .badge.icon-data {
     left: -10px;
     position: relative;
+    color: #fff;
     background-color: #37264c;
 }
 
@@ -818,6 +844,11 @@ i.loader-box-4 {
     background-color: #f86262 !important;
 }
 
+.attachment-wr {
+    overflow: auto;
+    padding-top: 10px;
+}
+
 .attachment {
     float: left;
     margin: 0 10px 10px 0;
@@ -894,6 +925,10 @@ i.loader-box-4 {
 
 .padding-top-0 {
     padding-top: 0 !important;
+}
+
+.padding-top-8px {
+    padding-top: 8px;
 }
 
 .padding-20 {
@@ -1168,7 +1203,7 @@ i.loader-box-4 {
 }
 
 .select-custom {
-    margin: 15px 15px 0 0;
+    margin: 10px 15px 0 0;
     border-radius: 8px;
     color: white;
     background: #37264c;
@@ -1187,6 +1222,7 @@ i.loader-box-4 {
     padding: 10px 0;
     position: relative;
     overflow: hidden;
+    border: 0;
     border-bottom: 1px solid #eee;
 }
 
@@ -1254,10 +1290,13 @@ i.loader-box-4 {
 }
 
 .card-options-open {
-    left: 280px;
+    left: 230px;
 }
 
     .card-options-open ~ .card-logo {
+        -ms-transition: background-color 1s;
+        -o-transition: background-color 1s;
+        -webkit-transition: background-color 1s;
         transition: background-color 1s;
         background-color: #b2b3d7;
     }
@@ -1295,7 +1334,9 @@ i.loader-box-4 {
 }
 
     .card-option:hover {
-        background-color: #ddd; /*#9090ad;*/
+        -ms-transform: scale(1.2);
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
     }
 
     .card-option.icon {

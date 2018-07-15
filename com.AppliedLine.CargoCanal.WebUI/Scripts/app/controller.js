@@ -152,7 +152,7 @@ var api = serverUrl + '/api';
 
                 passwordFactory.reset($scope.passwordReset.data)
                     .then(function (response) {
-                        appFactory.showDialog('Check your email for a reset link.');
+                        appFactory.showDialog('Check your email for a link to reset your password. If it doesn\'t appear in your inbox within a few minutes, check your spam folder.');
                         $state.go('home');
                     });
             },
@@ -164,7 +164,7 @@ var api = serverUrl + '/api';
                             $state.go('login');
                         }
                         else {
-                            appFactory.showDialog('Password changed failed.', true);
+                            appFactory.showDialog('Password change failed.', true);
                         }
                     });
             }
@@ -1098,7 +1098,7 @@ var api = serverUrl + '/api';
 
                 // show confirm dialog before recycle
                 if (!$scope.confirmed) {
-                    appFactory.showDialog(message + ' <b>' + (d.Bill || d.WayBill) + '</b>?', null, true, fnc);
+                    appFactory.showDialog(message.replace('#DOC#', d.Bill || d.WayBill), null, true, fnc);
                     model = {
                         d: d,
                         pindex: pindex,
@@ -1116,7 +1116,7 @@ var api = serverUrl + '/api';
                     pindex,
                     cindex,
                     $scope.doneData,
-                    'You will no longer be able to update this document if you mark it as done. Continue done on document',
+                    'You will no longer be able to update this document (#DOC#) if you mark it as done. Would you like to proceed?',
                     $scope.markAsDone);
 
                 if (!$scope.confirmed) return false;
@@ -1155,7 +1155,7 @@ var api = serverUrl + '/api';
                     pindex,
                     cindex,
                     $scope.recycleData,
-                    'You will no longer be able to update this document if recycled. Continue recycle on document',
+                    'You will no longer be able to update this document (#DOC#) if recycled. Continue recycle on document',
                     $scope.terminateImportExport);
 
                 if (!$scope.confirmed) return false;
@@ -1624,10 +1624,12 @@ var api = serverUrl + '/api';
                     } else {
                         $scope.originalData = $scope.exports;
                     }
-                    for (var i in $scope.originalData) {
-                        if ($scope.originalData[i].ID == d.ID) {
-                            $scope.originalIndex = i;
-                            break;
+                    for (let i in $scope.originalData) {
+                        if ($scope.originalData.hasOwnProperty(i)) {
+                            if ($scope.originalData[i].ID == d.ID) {
+                                $scope.originalIndex = i;
+                                break;
+                            }
                         }
                     }
 
@@ -1715,35 +1717,40 @@ var api = serverUrl + '/api';
                 $scope.newCompany.Company.CompanyTypeID = 6;
                 $scope.disableButton = true; // disable button
                 $http({
-                    method: 'POST',
-                    url: api + '/account/postcompany',
-                    headers: { 'Content-Type': 'application/json' },
-                    data: $scope.newCompany
-                })
-                    .then(function (response) {
-                        $scope.message = 'Company created successfully.';
-                        appFactory.showDialog('Company created successfully.');
-                        // wait 2s then go to login page.
-                        setTimeout(function () {
-                            $state.go('login');
-                        }, 2000);
-                    }, function (error) {
-                        switch (error.status) {
+                        method: 'POST',
+                        url: api + '/account/postcompany',
+                        headers: { 'Content-Type': 'application/json' },
+                        data: $scope.newCompany
+                    })
+                    .then(function(response) {
+                            $scope.message = 'Company created successfully.';
+                            appFactory.showDialog('Company created successfully.');
+                            // wait 2s then go to login page.
+                            setTimeout(function() {
+                                    $state.go('login');
+                                },
+                                2000);
+                        },
+                        function(error) {
+                            switch (error.status) {
                             case 409 /* conflict */:
                                 appFactory.showDialog('Company name or TIN already exists.', true);
                                 break;
                             default:
                                 switch (error.data.Message) {
-                                    case 'ERROR_EMAIL_CONFLICT':
-                                        appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>', true); break;
-                                    default:
-                                        appFactory.showDialog('Oops! Something went wrong.', true); break;
+                                case 'ERROR_EMAIL_CONFLICT':
+                                    appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>',
+                                        true);
+                                    break;
+                                default:
+                                    appFactory.showDialog('Oops! Something went wrong.', true);
+                                    break;
                                 }
                                 break;
-                        }
+                            }
 
-                        $scope.disableButton = false; // enable button
-                    })
+                            $scope.disableButton = false; // enable button
+                        });
             }
 
             // get list of countries, company types
