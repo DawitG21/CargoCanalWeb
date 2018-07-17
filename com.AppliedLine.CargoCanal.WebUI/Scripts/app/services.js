@@ -117,7 +117,7 @@
         return service;
     }]);
 
-    app.factory('appFactory', ['$rootScope', '$state', '$http', '$q', '$sce', function ($rootScope, $state, $http, $q, $sce) {
+    app.factory('appFactory', ['$rootScope', '$sessionStorage', '$timeout', '$state', '$http', '$q', '$sce', function ($rootScope, $sessionStorage, $timeout, $state, $http, $q, $sce) {
         $rootScope.modalOpen = false;
         var _isTinValid = true;
         var service = {};
@@ -177,6 +177,16 @@
         // initialize common functions used by multiple controllers
         let _initHelpers = function () {
             $rootScope.getPhotoUrl = service.getPhotoUrl;
+
+            // logout of the app, go to home
+            // clear all saved cookies, sessions, rootscope
+            $rootScope.logout = function () {
+                // cancle the timeout operation
+                $timeout.cancel($rootScope.timeOutSession);
+
+                $sessionStorage.__user = $rootScope.User = undefined;
+                $state.go('home');
+            };
 
             $rootScope.scrollToTop = function () {
                 document.body.scrollTop = 0;

@@ -23,12 +23,12 @@ var api = serverUrl + '/api';
             // TODO: Get User Preference Cookie if it exists
             //       e.g. Language
 
-            // logout of the app, go to home
-            // clear all saved cookies, sessions, rootscope
-            $scope.logout = function () {
-                $sessionStorage.__user = $rootScope.User = undefined;
-                $state.go('home');
-            };
+            //// logout of the app, go to home
+            //// clear all saved cookies, sessions, rootscope
+            //$scope.logout = function () {
+            //    $sessionStorage.__user = $rootScope.User = undefined;
+            //    $state.go('home');
+            //};
 
             $scope.regexUrl = "https?://[a-zA-Z]+.+\\.[a-zA-Z]{2,}"; // e.g. http://test.com or https://test.com
             $scope.regexEmail = "[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z]{2,}";
@@ -172,8 +172,8 @@ var api = serverUrl + '/api';
 
     }]);
 
-    app.controller('loginController', ["$scope", "$http", "$sessionStorage", "$rootScope", "$state", "appFactory",
-        function ($scope, $http, $sessionStorage, $rootScope, $state, appFactory) {
+    app.controller('loginController', ["$scope", "$http", 'sessionTimeoutFactory',"$sessionStorage", "$rootScope", "$state", "appFactory",
+        function ($scope, $http, sessionTimeoutFactory, $sessionStorage, $rootScope, $state, appFactory) {
             $scope.login = {};
             $scope.processing = false;
 
@@ -195,6 +195,9 @@ var api = serverUrl + '/api';
                 })
                     .then(function (response) {
                         appFactory.closeLoader();
+
+                        // invoke timeout
+                        sessionTimeoutFactory.timeoutInit();
 
                         // get the user collection and save it in session
                         $sessionStorage.__user = $rootScope.User = response.data;
@@ -2458,4 +2461,4 @@ var api = serverUrl + '/api';
 
         }]);
 
-}());
+})();

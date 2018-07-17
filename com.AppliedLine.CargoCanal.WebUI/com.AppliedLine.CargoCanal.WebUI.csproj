@@ -3684,6 +3684,7 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\controller.comment.js" />
+    <Content Include="Scripts\app\factory.sessiontimeout.js" />
     <Content Include="Scripts\app\services.comment.js" />
     <Content Include="Scripts\app\services.analytics.js" />
     <Content Include="Scripts\app\services.signalr.js" />
@@ -5432,6 +5433,7 @@
     <Content Include="views\directives\options_more_window.html" />
     <Content Include="views\directives\export_toolbox.html" />
     <Content Include="views\directives\import_toolbox.html" />
+    <Content Include="views\directives\sessiontimeout.html" />
     <Content Include="views\errors\404.html" />
     <Content Include="views\directives\passwordchange.html" />
     <Content Include="views\privacy_policy.html" />

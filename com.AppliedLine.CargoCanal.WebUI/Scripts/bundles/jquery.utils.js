@@ -102,4 +102,4 @@ var delCond;
             enableAmharicWriting(false);
         }
     };
-}());
+})();

@@ -1,5 +1,13 @@
 ﻿(function () {
 
+    app.directive('viewSessionTimeout', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/sessiontimeout.html'
+        };
+    });
+
     app.directive('dirComment', function () {
         return {
             restrict: 'E',
@@ -254,7 +262,7 @@
         return {
             restrict: 'E',
             transclude: true,
-            templateUrl: 'views/directives/dialog_window.html',
+            templateUrl: 'views/directives/dialog_window.html'
             //controller: 'accountAdminCtrl'
         };
     });
@@ -357,7 +365,7 @@
                             attrs.i18n = '_AirWayBill_';
                             break;
                         default:
-                            attrs.i18n = '_TruckWayBill_'
+                            attrs.i18n = '_TruckWayBill_';
                             break;
                     }
                 }
@@ -522,4 +530,4 @@
         };
     });
 
-}());
+})();

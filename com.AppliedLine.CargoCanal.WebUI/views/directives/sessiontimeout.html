@@ -1,0 +1,19 @@
+﻿<div ng-show="displaySessionModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">Session Timeout</h5>
+            </div>
+
+            <div class="modal-body">
+                <p class="text-center">
+                    Your session will expire in
+                    <span id="countdownTimeout" class="text-danger" ng-bind="counter"></span>
+                    seconds. To remain active, move your mouse or press any key.
+                </p>
+
+                <progress value="{{counter}}" max="{{maxSessionCounter}}" id="progressTimeout" class="progress-bar bg-info"></progress>
+            </div>
+        </div>
+    </div>
+</div>

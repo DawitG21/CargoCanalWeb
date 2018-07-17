@@ -333,7 +333,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         return service;
     }]);
 
-    app.factory('appFactory', ['$rootScope', '$state', '$http', '$q', '$sce', function ($rootScope, $state, $http, $q, $sce) {
+    app.factory('appFactory', ['$rootScope', '$sessionStorage', '$timeout', '$state', '$http', '$q', '$sce', function ($rootScope, $sessionStorage, $timeout, $state, $http, $q, $sce) {
         $rootScope.modalOpen = false;
         var _isTinValid = true;
         var service = {};
@@ -393,6 +393,16 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         // initialize common functions used by multiple controllers
         let _initHelpers = function () {
             $rootScope.getPhotoUrl = service.getPhotoUrl;
+
+            // logout of the app, go to home
+            // clear all saved cookies, sessions, rootscope
+            $rootScope.logout = function () {
+                // cancle the timeout operation
+                $timeout.cancel($rootScope.timeOutSession);
+
+                $sessionStorage.__user = $rootScope.User = undefined;
+                $state.go('home');
+            };
 
             $rootScope.scrollToTop = function () {
                 document.body.scrollTop = 0;
@@ -1398,7 +1408,126 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
         return signalRHubProxyFactory;
     }]);
-}());
+})();
+(function () {
+    'use strict';
+
+    app.factory('sessionTimeoutFactory', ['$interval', '$timeout', '$document', '$rootScope', function ($interval, $timeout, $document, $rootScope) {
+        var factory = {};
+
+        let handlerModal;
+
+        // initializations 
+        const timeOutValue = 40000; // idle time of 40 seconds
+        $rootScope.maxSessionCounter = 20;// idle grace period
+        $rootScope.displaySessionModal = false;
+
+
+        const countdown = function () {
+            $rootScope.counter = $rootScope.counter - 1;
+        };
+
+
+        const resetCounter = function () {
+            $rootScope.counter = angular.copy($rootScope.maxSessionCounter); 
+        };
+
+
+        const showModal = function () {
+            $rootScope.$apply(() => {
+                $rootScope.displaySessionModal = true;
+            });
+        };
+
+
+        const hideModal = function () {
+            // $timeout to schedule scope in future stack 
+            // and ensure code is called in single $apply block
+
+            $timeout(() => {
+                $rootScope.displaySessionModal = false;
+            }, 0);
+        };
+
+
+        const clearModalInterval = function () {
+            $interval.cancel(handlerModal);
+        };
+
+
+        const logOut = function () {
+            hideModal();
+            $rootScope.logout();
+        };
+
+
+        const updateCounter = function () {
+            if ($rootScope.counter < 0) return;
+
+            countdown();
+
+            if ($rootScope.counter <= 0) {
+                // clear modal handler and logout
+                clearModalInterval();
+                logOut();
+            }
+        };
+
+        // show modal with countdown
+        // attach handler
+        const modalCountdown = function () {
+            resetCounter();
+
+            handlerModal = $interval(function () {
+                updateCounter();
+            }, 1000);
+        };
+
+
+        const startCountdown = function () {
+            showModal();
+            modalCountdown();
+        };
+
+
+
+        // used to initialize timeout countdown
+        factory.timeoutInit = function () {
+            $timeout.cancel($rootScope.timeOutSession);
+
+            $rootScope.timeOutSession = $timeout(function () {
+                startCountdown(); // initiates the countdown display
+            }, timeOutValue);
+        };
+
+
+        function cancelTimeOut(e) {
+            if ($rootScope.User) {
+                hideModal();
+
+                // clear handlerModal
+                clearModalInterval();
+
+                // invoke timeout listener if user is still connected
+                factory.timeoutInit();
+            }
+        }
+
+
+        var bodyElement = angular.element($document);
+        angular.forEach(['keydown', 'keyup', 'mousemove', 'click', 'DOMMouseScroll', 'mousewheel', 'mousedown',
+            'touchstart', 'touchmove', 'scroll', 'focus'
+        ], function (eventName) {
+            bodyElement.bind(eventName, function (e) {
+                cancelTimeOut(e);
+            });
+        });
+
+
+        return factory;
+    }]);
+
+})();
 var serverUrl = 'http://localhost:49931';
 var api = serverUrl + '/api';
 
@@ -1424,12 +1553,12 @@ var api = serverUrl + '/api';
             // TODO: Get User Preference Cookie if it exists
             //       e.g. Language
 
-            // logout of the app, go to home
-            // clear all saved cookies, sessions, rootscope
-            $scope.logout = function () {
-                $sessionStorage.__user = $rootScope.User = undefined;
-                $state.go('home');
-            };
+            //// logout of the app, go to home
+            //// clear all saved cookies, sessions, rootscope
+            //$scope.logout = function () {
+            //    $sessionStorage.__user = $rootScope.User = undefined;
+            //    $state.go('home');
+            //};
 
             $scope.regexUrl = "https?://[a-zA-Z]+.+\\.[a-zA-Z]{2,}"; // e.g. http://test.com or https://test.com
             $scope.regexEmail = "[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\\.[a-zA-Z]{2,}";
@@ -1573,8 +1702,8 @@ var api = serverUrl + '/api';
 
     }]);
 
-    app.controller('loginController', ["$scope", "$http", "$sessionStorage", "$rootScope", "$state", "appFactory",
-        function ($scope, $http, $sessionStorage, $rootScope, $state, appFactory) {
+    app.controller('loginController', ["$scope", "$http", 'sessionTimeoutFactory',"$sessionStorage", "$rootScope", "$state", "appFactory",
+        function ($scope, $http, sessionTimeoutFactory, $sessionStorage, $rootScope, $state, appFactory) {
             $scope.login = {};
             $scope.processing = false;
 
@@ -1596,6 +1725,9 @@ var api = serverUrl + '/api';
                 })
                     .then(function (response) {
                         appFactory.closeLoader();
+
+                        // invoke timeout
+                        sessionTimeoutFactory.timeoutInit();
 
                         // get the user collection and save it in session
                         $sessionStorage.__user = $rootScope.User = response.data;
@@ -3859,7 +3991,7 @@ var api = serverUrl + '/api';
 
         }]);
 
-}());
+})();
 (function () {
     'use strict';
 
@@ -3932,7 +4064,7 @@ var api = serverUrl + '/api';
 
         }]);
 
-}());
+})();
 (function () {
     app.controller('uploadCtrl', ['$http', '$scope', '$rootScope', '$state', '$sessionStorage', 'appFactory', 'Upload', '$timeout', function ($http, $scope, $rootScope, $state, $sessionStorage, appFactory, Upload, $timeout) {
         /**
@@ -4052,7 +4184,7 @@ var api = serverUrl + '/api';
         };
         
     }]);
-}());
+})();
 app.controller('datepickerPopupController', ['$scope', 'uibDateParser', 'datepickerProvider', function ($scope, uibDateParser, datepickerProvider) {
     // initialize the dateOptions
     $scope.dateOptions = datepickerProvider.getDateOptions();
@@ -4172,6 +4304,14 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
     };
 }]);
 (function () {
+
+    app.directive('viewSessionTimeout', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/sessiontimeout.html'
+        };
+    });
 
     app.directive('dirComment', function () {
         return {
@@ -4427,7 +4567,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         return {
             restrict: 'E',
             transclude: true,
-            templateUrl: 'views/directives/dialog_window.html',
+            templateUrl: 'views/directives/dialog_window.html'
             //controller: 'accountAdminCtrl'
         };
     });
@@ -4530,7 +4670,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
                             attrs.i18n = '_AirWayBill_';
                             break;
                         default:
-                            attrs.i18n = '_TruckWayBill_'
+                            attrs.i18n = '_TruckWayBill_';
                             break;
                     }
                 }
@@ -4695,7 +4835,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
-}());
+})();
 (function () {
     app.directive('dirDatepicker', function () {
         return {
@@ -4720,7 +4860,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
-}());
+})();
 //cargoCanalApp.filter('unsafe', function ($sce) {
 //    return function (val) {
 //        return $sce.trustAsHtml(val);
