@@ -1,4 +1,6 @@
-﻿<div class="login-logo">
+﻿<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
+<div class="login-logo">
     <i class="common-sprite cargocanal_text_64"></i>
 </div>
 <form name="form" id="form" ng-submit="saveNewCompany()" novalidate>
@@ -46,7 +48,12 @@
         </h6>
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block btn-lg" ng-disabled="disableButton || form.$invalid || form.Password.$invalid">Register</button>
+        <button type="submit" class="btn btn-primary btn-block btn-lg" ng-show="recaptchaValid" ng-disabled="disableButton || form.$invalid || form.Password.$invalid">Register</button>
+    </div>
+
+    <div class="form-group">
+        <div id="recaptcha" class="g-recaptcha" data-callback="recaptchaVerified" data-sitekey="6Lf06mQUAAAAAHCwTSsMZk4NmmcYo4manuyOvNZC"></div>
+        <h6 id="captcha-error" class="text-danger text-center"></h6>
     </div>
 
     <div class="login-footer">

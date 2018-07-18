@@ -1702,7 +1702,7 @@ var api = serverUrl + '/api';
 
     }]);
 
-    app.controller('loginController', ["$scope", "$http", 'sessionTimeoutFactory',"$sessionStorage", "$rootScope", "$state", "appFactory",
+    app.controller('loginController', ["$scope", "$http", 'sessionTimeoutFactory', "$sessionStorage", "$rootScope", "$state", "appFactory",
         function ($scope, $http, sessionTimeoutFactory, $sessionStorage, $rootScope, $state, appFactory) {
             $scope.login = {};
             $scope.processing = false;
@@ -1927,7 +1927,7 @@ var api = serverUrl + '/api';
                         if (demurrageChart) {
                             demurrageChart.destroy();
                         }
-                        
+
                         // wait a few seconds
                         $timeout(() => {
 
@@ -1965,7 +1965,7 @@ var api = serverUrl + '/api';
                                             }
                                         }
                                     }
-                                    
+
                                     demurrageCanvas = chartjsFactory.setCanvas('canvas2');
                                     demurrageChart = chartjsFactory.createChart('line',
                                         $scope.dashboard.demurrage.data,
@@ -2578,7 +2578,7 @@ var api = serverUrl + '/api';
             // controller to handle status, problem updates for importExport documents
             if (!$rootScope.User || $rootScope.User === null) $state.go('home');
 
-            
+
             $scope.searchImports = function (searchIsNew) {
                 if ($scope.searchText === undefined || $scope.searchText === '') return;
                 if (searchIsNew) {
@@ -3199,8 +3199,8 @@ var api = serverUrl + '/api';
 
         }]);
 
-    app.controller('createCompanyCtrl', ['$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $sessionStorage, $http, $state, appFactory) {
+    app.controller('createCompanyCtrl', ['$timeout', '$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',
+        function ($timeout, $scope, $rootScope, $sessionStorage, $http, $state, appFactory) {
 
             // TODO: set user country by default
             // get user country
@@ -3244,46 +3244,75 @@ var api = serverUrl + '/api';
             // flag to disable a button
             $scope.disableButton = false;
 
+
+            $scope.recaptchaValid = false;
+
+            // Google reCaptcha verification callback function
+            const recaptchaVerified = function () {
+                $('#captcha-error').text('');
+
+                $timeout(() => {
+                    $scope.recaptchaValid = true;
+                }, 0);
+            };
+            // store the function in global property 
+            // so it could be referenced even when minified
+            window['recaptchaVerified'] = recaptchaVerified;
+
+
             // function to save the company
             $scope.saveNewCompany = function () {
+
+                // Google reCaptcha validation
+                let $captcha = $('#recaptcha'), response = grecaptcha.getResponse();
+
+                if (response.length === 0) {
+                    $('#captcha-error').text("reCAPTCHA is mandatory");
+                    return;
+
+                } else {
+                    $('#captcha-error').text('');
+                }
+
+
                 // const CompanyTypeID
                 $scope.newCompany.Company.CompanyTypeID = 6;
                 $scope.disableButton = true; // disable button
                 $http({
-                        method: 'POST',
-                        url: api + '/account/postcompany',
-                        headers: { 'Content-Type': 'application/json' },
-                        data: $scope.newCompany
-                    })
-                    .then(function(response) {
-                            $scope.message = 'Company created successfully.';
-                            appFactory.showDialog('Company created successfully.');
-                            // wait 2s then go to login page.
-                            setTimeout(function() {
-                                    $state.go('login');
-                                },
-                                2000);
+                    method: 'POST',
+                    url: api + '/account/postcompany',
+                    headers: { 'Content-Type': 'application/json' },
+                    data: $scope.newCompany
+                })
+                    .then(function (response) {
+                        $scope.message = 'Company created successfully.';
+                        appFactory.showDialog('Company created successfully.');
+                        // wait 2s then go to login page.
+                        setTimeout(function () {
+                            $state.go('login');
                         },
-                        function(error) {
-                            switch (error.status) {
+                            2000);
+                    },
+                    function (error) {
+                        switch (error.status) {
                             case 409 /* conflict */:
                                 appFactory.showDialog('Company name or TIN already exists.', true);
                                 break;
                             default:
                                 switch (error.data.Message) {
-                                case 'ERROR_EMAIL_CONFLICT':
-                                    appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>',
-                                        true);
-                                    break;
-                                default:
-                                    appFactory.showDialog('Oops! Something went wrong.', true);
-                                    break;
+                                    case 'ERROR_EMAIL_CONFLICT':
+                                        appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>',
+                                            true);
+                                        break;
+                                    default:
+                                        appFactory.showDialog('Oops! Something went wrong.', true);
+                                        break;
                                 }
                                 break;
-                            }
+                        }
 
-                            $scope.disableButton = false; // enable button
-                        });
+                        $scope.disableButton = false; // enable button
+                    });
             }
 
             // get list of countries, company types
