@@ -7,7 +7,7 @@
         let handlerModal;
 
         // initializations 
-        const timeOutValue = 40000; // idle time of 40 seconds
+        const timeOutValue = 600000; // idle time of 10 minutes
         $rootScope.maxSessionCounter = 20;// idle grace period
         $rootScope.displaySessionModal = false;
 
