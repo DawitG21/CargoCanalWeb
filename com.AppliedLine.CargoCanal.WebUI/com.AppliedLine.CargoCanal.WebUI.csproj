@@ -3447,6 +3447,7 @@
     <Content Include="dist\lib\datatables.min.js" />
     <Content Include="dist\lib\jgeez.min.js" />
     <Content Include="dist\lib\jquery.utils.min.js" />
+    <Content Include="dist\robots.txt" />
     <Content Include="dist\templates_quarantined\Account\view-account.html" />
     <Content Include="dist\templates_quarantined\Account\view-account.min.html" />
     <Content Include="dist\templates_quarantined\Account\view-customeraccount.html" />
@@ -3626,11 +3627,13 @@
     <Content Include="dist\views\directives\import_bill_preview.html" />
     <Content Include="dist\views\directives\import_summary.html" />
     <Content Include="dist\views\directives\import_toolbox.html" />
+    <Content Include="dist\views\directives\loader.html" />
     <Content Include="dist\views\directives\loading.html" />
     <Content Include="dist\views\directives\menu_top.html" />
     <Content Include="dist\views\directives\options_more_window.html" />
     <Content Include="dist\views\directives\passwordchange.html" />
     <Content Include="dist\views\directives\problem_update_view.html" />
+    <Content Include="dist\views\directives\sessiontimeout.html" />
     <Content Include="dist\views\directives\status_update_view.html" />
     <Content Include="dist\views\directives\tin_or_lc_data.html" />
     <Content Include="dist\views\errors\404.html" />
@@ -3674,6 +3677,7 @@
     <Content Include="dist\views\reports\transit_time_grouped_by_tin.html" />
     <Content Include="dist\views\terms_of_service.html" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="robots.txt" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-messages.js" />
@@ -5429,6 +5433,7 @@
     <Content Include="views\directives\analytics_shipments.html" />
     <Content Include="views\directives\analytics_top_export_countries.html" />
     <Content Include="views\directives\analytics_top_import_countries.html" />
+    <Content Include="views\directives\loader.html" />
     <Content Include="views\directives\loading.html" />
     <Content Include="views\directives\options_more_window.html" />
     <Content Include="views\directives\export_toolbox.html" />

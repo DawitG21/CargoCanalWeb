@@ -8,6 +8,14 @@
         };
     });
 
+    app.directive('loader', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/loader.html'
+        };
+    });
+
     app.directive('dirComment', function () {
         return {
             restrict: 'E',

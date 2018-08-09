@@ -1641,6 +1641,11 @@ var api = serverUrl + '/api';
                 $state.reload();
             };
 
+
+            // no internet connection
+            $rootScope.noInternet = function () {
+                appFactory.showDialog('No internet connection. Please fix your internet connection and try again.');
+            };
         }]);
 
     app.controller('passwordCtrl', ['$scope', '$state', '$rootScope', '$location', 'passwordFactory', 'appFactory', function ($scope, $state, $rootScope, $location, passwordFactory, appFactory) {
@@ -1682,8 +1687,18 @@ var api = serverUrl + '/api';
 
                 passwordFactory.reset($scope.passwordReset.data)
                     .then(function (response) {
-                        appFactory.showDialog('Check your email for a link to reset your password. If it doesn\'t appear in your inbox within a few minutes, check your spam folder.');
-                        $state.go('home');
+                        // response returned from the server
+                        if (response.status === 200) {
+                            appFactory.showDialog('A reset link will be sent to the email address <b class="text-primary">'
+                                + $scope.passwordReset.data.Username
+                                + '</b> if it exists on CargoCanal.');
+                            $state.go('home');
+
+                        } else if (response.status === -1) {
+                            $rootScope.noInternet();
+                        } else {
+                            appFactory.showDialog('Oops! Something terribly went wrong. Please try again later.');
+                        }
                     });
             },
             changePassword: function () {
@@ -1743,9 +1758,13 @@ var api = serverUrl + '/api';
                         // $rootScope.workerValidateSession();
                     }, function (error) {
                         appFactory.closeLoader();
-
-                        $scope.loginFailed = "Invalid login attempt.";
                         $scope.processing = false;
+
+                        if (error.status === -1) {
+                            $rootScope.noInternet();
+                        } else {
+                            $scope.loginFailed = "Invalid login attempt.";
+                        }
                     });
             };
         }]);
@@ -4339,6 +4358,14 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             restrict: 'E',
             transclude: true,
             templateUrl: 'views/directives/sessiontimeout.html'
+        };
+    });
+
+    app.directive('loader', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/loader.html'
         };
     });
 

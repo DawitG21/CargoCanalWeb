@@ -1,0 +1,16 @@
+﻿# crawler info for SEO
+
+User-agent: *
+Disallow: /dashboard
+Disallow: /*/import/*
+Disallow: /*/export/*
+Disallow: /report/*
+Disallow: /customreport/*
+Noindex: /dashboard
+Noindex: /*/import/*
+Noindex: /*/export/*
+Noindex: /report/*
+Noindex: /customreport/*
+Allow: /home
+Allow: /login
+Allow: /register
