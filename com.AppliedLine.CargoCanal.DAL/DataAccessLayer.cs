@@ -378,7 +378,7 @@ namespace com.AppliedLine.CargoCanal.DAL
                 var pContactName = new SqlParameter("@ContactName", company.ContactName);
                 var pCountryID = new SqlParameter("@CountryID", company.CountryID);
                 var pTIN = new SqlParameter("@TIN", company.TIN);
-                var pEmailRecipient = new SqlParameter("@email_recipient", company.Email);
+                var pEmailRecipient = new SqlParameter("@email_recipient", company.Email.ToLowerInvariant());
                 var pToken = new SqlParameter("@Token", (object)token ?? DBNull.Value);
 
                 pID.Direction = pErrorMessage.Direction = ParameterDirection.Output;

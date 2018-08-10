@@ -3304,13 +3304,12 @@ var api = serverUrl + '/api';
                     data: $scope.newCompany
                 })
                     .then(function (response) {
-                        $scope.message = 'Company created successfully.';
-                        appFactory.showDialog('Company created successfully.');
+                        appFactory.showDialog('Company account created but needs to be verified. Account verification instructions have been sent to your email (<b class="text-primary">'
+                            + $scope.newCompany.Person.Email + '</b>).'); 
                         // wait 2s then go to login page.
                         setTimeout(function () {
                             $state.go('login');
-                        },
-                            2000);
+                        }, 2000);
                     },
                     function (error) {
                         switch (error.status) {
