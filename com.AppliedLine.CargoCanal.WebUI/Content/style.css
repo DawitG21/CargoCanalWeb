@@ -183,6 +183,14 @@ label {
     font-weight: 500;
 }
 
+.report-blank {
+    min-height: 50vh;
+    border-radius: 8px;
+    border: 1px dotted;
+    position: relative;
+    padding: 55px 10px 10px;
+}
+
 .analytics-box {
     overflow: hidden;
     box-sizing: inherit;

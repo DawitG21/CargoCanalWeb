@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" ng-if="report.data">
     <table id="report_table" class="display table table-condensed table-bordered">
         <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
         <thead>
@@ -7,6 +7,7 @@
                 <th class="text-center">Month</th>
                 <th class="text-center">Cargo</th>
                 <th class="text-center">Gross Weight (KG)</th>
+                <th class="text-center">Gross Weight (MT)</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -14,13 +15,15 @@
                 <td>{{d.MonthIndex}}</td>
                 <td>{{d.StatusMonth}}</td>
                 <td>{{d.CargoName}}</td>
-                <td>{{d.TotalWeightKg | number: 2}}</td>
+                <td>{{d.TotalWeightKg | number: 3}}</td>
+                <td>{{d.TotalWeightKg / 1000 | number: 3}}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <th class="text-right" colspan="3">Total Weight (KG)</th>
-                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg') | number:2}} KG</th>
+                <th class="text-right" colspan="3">Total Weight</th>
+                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg') | number:3}} KG</th>
+                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg') / 1000 | number:3}} MT</th>
             </tr>
         </tfoot>
     </table>
@@ -38,23 +41,22 @@
 
 </script>
 <!--buttons: [
-            {
-                extend:    'copyHtml5',
-                text:      '<i class="fa fa-files-o"></i>',
-                titleAttr: 'Copy'
-            },
-            {
-                extend:    'excelHtml5',
-                text:      '<i class="fa fa-file-excel-o"></i>',
-                titleAttr: 'Excel'
-            },
-            {
-                extend:    'pdfHtml5',
-                text:      '<i class="fa fa-file-pdf-o"></i>',
-                titleAttr: 'PDF'
-            }
-        ]-->
-
+            {
+                extend:    'copyHtml5',
+                text:      '<i class="fa fa-files-o"></i>',
+                titleAttr: 'Copy'
+            },
+            {
+                extend:    'excelHtml5',
+                text:      '<i class="fa fa-file-excel-o"></i>',
+                titleAttr: 'Excel'
+            },
+            {
+                extend:    'pdfHtml5',
+                text:      '<i class="fa fa-file-pdf-o"></i>',
+                titleAttr: 'PDF'
+            }
+        ]-->
 <!--<canvas id="reportChart"></canvas>
 <script src="../../Scripts/Chart.bundle.js"></script>
 <script src="../../Scripts/app/script.chart.js"></script>-->

@@ -42,6 +42,48 @@
         gtag('config', 'UA-103034381-2');
     </script>
 
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+        {
+          "@context": "http://schema.org",
+          "@type": "Organization",
+          "name": "Appliedline",
+          "description": "Appliedline is an IT company specialized in software development.",
+          "url": "https://www.appliedline.com",
+          "foundingDate": "2015-03-13",
+          "logo": "https://appliedline.com/assets/global/images/appliedline_logo.png",
+          "duns": "561230395",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+251-90-414-9609",
+            "contactType": "Customer service"
+          },
+          "parentOrganization": {
+            "name": "AA Advanced Information Technology PLC"
+          },
+          "sameAs": [
+            "http://www.linkedin.com/company/appliedline",
+            "http://twitter.com/appliedline"
+          ],
+          "owns": {
+            "@context": "http://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "CargoCanal",
+            "operatingSystem": "ANDROID",
+            "applicationCategory": "http://schema.org/BusinessApplication",
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": "5",
+              "ratingCount": "2"
+            },
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "USD"
+            }
+          }
+        }
+    </script>
 
 </head>
 <body ng-controller="mainCtrl" ng-class="modalOpenClass()">
@@ -53,7 +95,7 @@
 
         <!-- displays the loading window -->
         <loader></loader>
-        
+
     </div>
     <footer>
         <section class="row">

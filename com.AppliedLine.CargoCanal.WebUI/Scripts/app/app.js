@@ -87,6 +87,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/008',
         templateUrl: 'views/reports/transit_time_grouped_by_import.html'
     });
+    $stateProvider.state('report.transit_time_grouped_by_discharge_port_report', {
+        url: '/008-2',
+        templateUrl: 'views/reports/transit_time_grouped_by_discharge_port.html'
+    });
     $stateProvider.state('report.transit_time_grouped_by_country_report', {
         url: '/009',
         templateUrl: 'views/reports/transit_time_grouped_by_country.html'

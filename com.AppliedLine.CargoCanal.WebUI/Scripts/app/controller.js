@@ -106,7 +106,7 @@ var api = serverUrl + '/api';
             };
 
 
-            $scope.isNotFF = true // set this flag to true if you don't want to see the add status button
+            $scope.isNotFF = true; // set this flag to true if you don't want to see the add status button
             $rootScope.refresh = function () {
                 $state.reload();
             };
@@ -272,7 +272,7 @@ var api = serverUrl + '/api';
                                     $scope.dashboard.import.data.PercentPending = 0;
                                     $scope.dashboard.import.data.PercentCompleted = 0;
                                 }
-                            })
+                            });
                     }
                 },
                 export: {
@@ -294,7 +294,7 @@ var api = serverUrl + '/api';
                                     $scope.dashboard.export.data.PercentPending = 0;
                                     $scope.dashboard.export.data.PercentCompleted = 0;
                                 }
-                            })
+                            });
                     }
                 },
                 shipments: {
@@ -339,7 +339,7 @@ var api = serverUrl + '/api';
 
                                     $scope.dashboard.shipments.data.datasets = [];
 
-                                    for (var i in $scope.dashboard.shipments.data.data) {
+                                    for (let i in $scope.dashboard.shipments.data.data) {
                                         $scope.dashboard.shipments.data.datasets.push({
                                             data: angular.copy($scope.dashboard.shipments.data.data[i]),
                                             label: $scope.dashboard.shipments.data.series[i]
@@ -350,11 +350,11 @@ var api = serverUrl + '/api';
                                     $scope.dashboard.shipments.data.series = undefined;
 
                                     // filter the date part of the data labels
-                                    for (var i in $scope.dashboard.shipments.data.labels) {
+                                    for (let i in $scope.dashboard.shipments.data.labels) {
                                         $scope.dashboard.shipments.data.labels[i] = $filter('date')($scope.dashboard.shipments.data.labels[i], 'MMM dd');
                                     }
 
-                                    for (var i in $scope.dashboard.shipments.data.datasets) {
+                                    for (let i in $scope.dashboard.shipments.data.datasets) {
                                         let mod = i % $scope.chartOptions.borderColors.length;
                                         $scope.dashboard.shipments.data.datasets[i].backgroundColor = $scope.chartOptions.backgroundColors[mod];
                                         $scope.dashboard.shipments.data.datasets[i].borderColor = $scope.chartOptions.borderColors[mod];
@@ -431,7 +431,7 @@ var api = serverUrl + '/api';
                                     if (response.data === null || response.data === undefined
                                         || response.data.labels.length === 0) return;
 
-                                    let rgbObj = appFactory.getRgbArray(response.data.datasets.length)
+                                    let rgbObj = appFactory.getRgbArray(response.data.datasets.length);
                                     $scope.dashboard.demurrage.data = response.data;
 
                                     // filter the date part of the data labels
@@ -460,7 +460,7 @@ var api = serverUrl + '/api';
                                         $scope.dashboard.demurrage.data,
                                         {
                                             tooltips: {
-                                                mode: 'label',
+                                                mode: 'label'
                                             },
                                             scales: {
                                                 xAxes: [{
@@ -482,7 +482,7 @@ var api = serverUrl + '/api';
                                                 }]
                                             },
                                             legend: {
-                                                display: false,
+                                                display: false
                                                 //position: 'right',
                                                 //labels: {
                                                 //    fontColor: 'rgb(255, 99, 132)'
@@ -567,7 +567,7 @@ var api = serverUrl + '/api';
             })
                 .then(function (response) {
                     $scope.dashboard.maps.data = response.data;
-                })
+                });
 
         }]);
 
@@ -600,7 +600,7 @@ var api = serverUrl + '/api';
             };
 
             // loads all required values and clean up
-            $scope.startImport()
+            $scope.startImport();
 
             $scope.filterCarrier = function (model) {
                 $scope.motFilter = { 'ModeOfTransportID': $scope.newImport.ModeOfTransportID.toString() };
@@ -710,7 +710,7 @@ var api = serverUrl + '/api';
 
                         file.upload = Upload.upload({
                             url: api + '/importexport/postdocument',
-                            data: { file: file },
+                            data: { file: file }
                         });
 
                         file.upload.then(function (response) {
@@ -739,7 +739,7 @@ var api = serverUrl + '/api';
                 $http({
                     method: 'DELETE',
                     url: api + '/importexport/deletedocument?id=' + file.result
-                })
+                });
 
                 // remove file from collections
                 $scope.files.splice(index, 1);
@@ -811,7 +811,7 @@ var api = serverUrl + '/api';
                     .then(function (data) {
                         if (data !== null) {
                             $scope.imports = data.value;
-                            $scope.groupedImports = $filter('groupByDate')($scope.imports, 'DateInserted')
+                            $scope.groupedImports = $filter('groupByDate')($scope.imports, 'DateInserted');
                             $scope.odataInfo = data.odataInfo;
                             appFactory.prepCards();
                         }
@@ -848,7 +848,7 @@ var api = serverUrl + '/api';
             };
 
             // loads all required values
-            $scope.startExport()
+            $scope.startExport();
 
             $scope.filterCarrier = function (model) {
                 $scope.motFilter = { 'ModeOfTransportID': $scope.newExport.ModeOfTransportID.toString() };
@@ -949,7 +949,7 @@ var api = serverUrl + '/api';
 
                         file.upload = Upload.upload({
                             url: api + '/importexport/postdocument',
-                            data: { file: file },
+                            data: { file: file }
                         });
 
                         file.upload.then(function (response) {
@@ -978,7 +978,7 @@ var api = serverUrl + '/api';
                 $http({
                     method: 'DELETE',
                     url: api + '/importexport/deletedocument?id=' + file.result
-                })
+                });
 
                 // remove file from collections
                 $scope.files.splice(index, 1);
@@ -1050,7 +1050,7 @@ var api = serverUrl + '/api';
                     .then(function (data) {
                         if (data !== null) {
                             $scope.exports = data.value;
-                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted')
+                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
                             $scope.odataInfo = data.odataInfo;
                             appFactory.prepCards();
                         }
@@ -1098,7 +1098,7 @@ var api = serverUrl + '/api';
                         if (data !== null) {
                             $scope.exports = data.value;
                             $scope.odataInfo = data.odataInfo;
-                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted')
+                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
                             appFactory.prepCards();
                         }
                     });
@@ -1300,7 +1300,7 @@ var api = serverUrl + '/api';
                             $scope.problem.showFilters = false;
                             $scope.problem.data = response.data;
                             $scope.problem.importExport.ProblemsUnresolved++;
-                        })
+                        });
                 },
                 showFilters: false
             };
@@ -1364,7 +1364,7 @@ var api = serverUrl + '/api';
                 save: function () {
                     // check if status already in status.data
                     $scope.validStatus = true;
-                    var $status = $scope.status.newStatus.StatusID
+                    var $status = $scope.status.newStatus.StatusID;
                     for (var i in $scope.status.data) {
                         // check the status description does not exist
                         if ($scope.status.data[i].StatusText === $status.Description) {
@@ -1377,7 +1377,7 @@ var api = serverUrl + '/api';
                     // verify last status date is less or equal to the new status date
                     if ($scope.status.data.length > 0 && $scope.validStatus) {
                         var dt1 = new Date($scope.status.data[0].StatusDate).toDateString();
-                        var dt2 = new Date($scope.status.newStatus.StatusDate).toDateString()
+                        var dt2 = new Date($scope.status.newStatus.StatusDate).toDateString();
                         var dtDif = new Date(dt2) - new Date(dt1);
                         if (dtDif < 0) {
                             $scope.status.message = 'Status date cannot be less than "' + dt1 + '"';
@@ -1386,7 +1386,7 @@ var api = serverUrl + '/api';
                     }
 
                     // check the next allowed import status
-                    if ((($scope.status.data.length > 0 && $scope.validStatus) || ($scope.status.data[0] !== undefined && $scope.status.data[0].Abbr === 'CD2'))
+                    if (($scope.status.data.length > 0 && $scope.validStatus || $scope.status.data[0] !== undefined && $scope.status.data[0].Abbr === 'CD2')
                         && $scope.impExpType === 1) {
                         var lastStat = $scope.status.data[0];
 
@@ -1671,7 +1671,7 @@ var api = serverUrl + '/api';
                     return true;
                 }
                 return false;
-            }
+            };
             // get the exchange rates of the day
             if ($rootScope.exRates === undefined) {
                 appFactory.getExRate().done(function () { });
@@ -1775,7 +1775,7 @@ var api = serverUrl + '/api';
                 })
                     .then(function (response) {
                         appFactory.showDialog('Company account created but needs to be verified. Account verification instructions have been sent to your email (<b class="text-primary">'
-                            + $scope.newCompany.Person.Email + '</b>).'); 
+                            + $scope.newCompany.Person.Email + '</b>).');
                         // wait 2s then go to login page.
                         setTimeout(function () {
                             $state.go('login');
@@ -1801,7 +1801,7 @@ var api = serverUrl + '/api';
 
                         $scope.disableButton = false; // enable button
                     });
-            }
+            };
 
             // get list of countries, company types
             appFactory.getCountries();
@@ -1879,7 +1879,7 @@ var api = serverUrl + '/api';
                                 appFactory.showDialog('Password changed successfully.');
                             }, function (error) {
                                 appFactory.showDialog('Failed to change password.', true);
-                            })
+                            });
                     }
                 },
                 profile: {
@@ -2024,7 +2024,7 @@ var api = serverUrl + '/api';
                         })
                             .then(function (response) {
                                 $scope.account.users.data = response.data;
-                            })
+                            });
                     },
                     newUserEnabled: false,
                     // save the new user for your company
@@ -2083,7 +2083,7 @@ var api = serverUrl + '/api';
                         })
                             .then(function (response) {
                                 $scope.account.roles.data = response.data;
-                            })
+                            });
                     },
                     newRoleEnabled: false,
                     save: function () {
@@ -2126,7 +2126,7 @@ var api = serverUrl + '/api';
 
             // prompt for a mandatory password reset
             if ($rootScope.User.Login.LastSeen === null || $rootScope.User.Login.LastPasswordChange === null) {
-                $scope.message = 'To secure your account, kindly change your password.'
+                $scope.message = 'To secure your account, kindly change your password.';
                 $scope.account.password.change();
             }
 
@@ -2149,7 +2149,7 @@ var api = serverUrl + '/api';
                     $scope.perms = response.data;
                     if ($scope.perms.EditUser == false)
                         $state.go('home');
-                })
+                });
         }]);
 
     app.controller('accountAdminCtrl', ['$scope', '$rootScope', '$sessionStorage', '$http', '$state',
@@ -2254,7 +2254,7 @@ var api = serverUrl + '/api';
                         }, function (error) {
                             appFactory.closeLoader();
                             appFactory.setModalOpen(false);
-                        })
+                        });
                 },
                 getTotal: function (o, field) {
                     $scope.total = 0;
@@ -2273,10 +2273,11 @@ var api = serverUrl + '/api';
                     { value: 'problem_grouped_by_tin_unresolved_report', label: 'Problems By Forwarder Unresolved' },
                     { value: 'demurrage_grouped_by_tin_report', label: 'Demurrage By Forwarder' },
                     { value: 'demurrage_grouped_by_tin_active_report', label: 'Demurrage By Forwarder Active' },
-                    { value: 'transit_time_grouped_by_import_report', label: 'Transit Time By Bill Of Lading' },
-                    { value: 'transit_time_grouped_by_country_report', label: 'Transit Time By Country Detailed' },
-                    { value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time By Country Summary' },
-                    { value: 'transit_time_grouped_by_tin_report', label: 'Transit Time By Forwarder' },
+                    { value: 'transit_time_grouped_by_import_report', label: 'Transit Time From Origin By Bill Of Lading' },
+                    { value: 'transit_time_grouped_by_discharge_port_report', label: 'Transit Time From Discharge Port By Port' },
+                    { value: 'transit_time_grouped_by_country_report', label: 'Transit Time From Origin By Country Detailed' },
+                    { value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time From Origin By Country Summary' },
+                    { value: 'transit_time_grouped_by_tin_report', label: 'Transit Time From Origin By Forwarder' }
 
                 ],
                 loadView: function () {
@@ -2288,7 +2289,7 @@ var api = serverUrl + '/api';
                     if (bool) return 'status-icon bg-green';
                     return 'status-icon bg-red';
                 }
-            }
+            };
 
         }]);
 
@@ -2496,7 +2497,7 @@ var api = serverUrl + '/api';
             $scope.hideMapping = function () {
                 appFactory.setModalOpen(false);
                 $scope.mapIsHidden = true;
-            }
+            };
 
             $scope.showMappingView = function () {
                 appFactory.setModalOpen(true); // remove extra scrollbar on <body>

@@ -1,4 +1,4 @@
-﻿<div class="table-responsive">
+﻿<div class="table-responsive" ng-if="report.data">
     <table id="report_table" class="display table table-condensed table-bordered">
         <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
         <thead>
@@ -7,6 +7,7 @@
                 <th class="text-center">Cargo</th>
                 <th class="text-center">Date Initiated</th>
                 <th class="text-center">Gross Weight (KG)</th>
+                <th class="text-center">Gross Weight (MT)</th>
             </tr>
         </thead>
         <tbody class="text-center">
@@ -14,13 +15,15 @@
                 <td>{{d.CompanyName}}</td>
                 <td>{{d.CargoName}}</td>
                 <td>{{d.DateInitiated | date : 'dd MMM yyyy'}}</td>
-                <td>{{d.TotalWeightKg | number: 2}}</td>
+                <td>{{d.TotalWeightKg | number: 3}}</td>
+                <td>{{d.TotalWeightKg/1000 | number: 3}}</td>
             </tr>
         </tbody>
         <tfoot>
             <tr>
-                <th class="text-right" colspan="3">Total Weight (KG)</th>
-                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg')| number:2}} KG</th>
+                <th class="text-right" colspan="3">Total Weight</th>
+                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg')| number:3}} KG</th>
+                <th class="text-center">{{report.getTotal(report.data, 'TotalWeightKg')/1000| number:3}} MT</th>
             </tr>
         </tfoot>
     </table>

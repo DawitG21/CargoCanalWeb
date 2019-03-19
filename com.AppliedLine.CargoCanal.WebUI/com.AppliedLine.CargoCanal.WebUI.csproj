@@ -5428,6 +5428,7 @@
     <Content Include="src\lib\jquery.utils.min.js" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
+    <Content Include="views\directives\report_no_result.html" />
     <Content Include="views\directives\comment.html" />
     <Content Include="views\directives\analytics_demurrage.html" />
     <Content Include="views\directives\analytics_shipments.html" />
@@ -5443,6 +5444,7 @@
     <Content Include="views\directives\passwordchange.html" />
     <Content Include="views\privacy_policy.html" />
     <Content Include="views\reports\filters\rpt_filter_date_bill.html" />
+    <Content Include="views\reports\transit_time_grouped_by_discharge_port.html" />
     <Content Include="views\terms_of_service.html" />
     <Content Include="workers.js" />
     <Content Include="Scripts\app\controller.datetime - Copy.js" />
@@ -5490,12 +5492,12 @@
     </Content>
     <Content Include="Content\_bootstrap.min.css.map" />
     <Content Include="Content\_bootstrap.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-reboot.min.css.map" />
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
@@ -8242,8 +8244,6 @@
     <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="packman.json" />
     <None Include="Properties\PublishProfiles\localIIS.pubxml" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\esm\popper.min.js.map" />
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
@@ -8254,6 +8254,8 @@
     <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
     <Content Include="Scripts\jquery-3.1.1.min.js" />

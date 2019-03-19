@@ -1,24 +1,7 @@
 <section>
-    <div class="col-md-offset-4 col-md-8 text-info">
-        <div class="col-md-4">
-            <h6>B.VOY => Before Voyage</h6>
-            <h6>VOY => On Voyage</h6>
-            <h6>DIC => Cargo Discharged</h6>
-        </div>
-        <div class="col-md-4">
-            <h6>UCC => Under Custom Clearance</h6>
-            <h6>UPC => Under Port Clearance</h6>
-            <h6>RFL => Ready For Loading</h6>
-        </div>
-        <div class="col-md-4">
-            <h6>DIP => Cargo Dispatched</h6>
-            <h6>DRY => At Dry Port</h6>
-            <h6>UCI => Under Custom Inspection</h6>
-        </div>
-    </div>
     <h6 class="text-danger">* asteriks report field values are in days.</h6>
 
-    <div class="table-responsive">
+    <div class="table-responsive" ng-if="report.data">
         <table id="report_table" class="display table table-condensed table-bordered">
             <caption class="caption-report"><i class="common-sprite cargocanal_32 caption-logo"></i> {{report.filter.name.label}}</caption>
             <thead>
@@ -26,17 +9,17 @@
                     <th class="text-center">Company</th>
                     <th class="text-center">Country</th>
                     <!--<th class="text-center">Port</th>-->
-                    <th class="text-center">BoL</th>
+                    <th class="text-center" title="Bill of Lading">BoL</th>
                     <!--<th class="text-center">BoL Date</th>-->
-                    <th class="text-center">*B.VOY</th>
-                    <th class="text-center">*VOY</th>
-                    <th class="text-center">*DIC</th>
-                    <th class="text-center">*UCC</th>
-                    <th class="text-center">*UPC</th>
-                    <th class="text-center">*RFL</th>
-                    <th class="text-center">*DIP</th>
-                    <th class="text-center">*DRY</th>
-                    <th class="text-center">*UCI</th>
+                    <th class="text-center" title="Days Before Voyage">*B.VOY</th>
+                    <th class="text-center" title="Days On Voyage">*VOY</th>
+                    <th class="text-center" title="Days At Discharge Port">*DIC</th>
+                    <th class="text-center" title="Days Under Custom Clearance">*UCC</th>
+                    <th class="text-center" title="Days Under Port Clearance">*UPC</th>
+                    <th class="text-center" title="Days Ready For Loading">*RFL</th>
+                    <th class="text-center" title="Days On Dispatch">*DIP</th>
+                    <th class="text-center" title="Days At Storage Port">*DRY</th>
+                    <th class="text-center" title="Days Under Custom Inspection">*UCI</th>
                     <th class="text-center">*Total</th>
                 </tr>
             </thead>

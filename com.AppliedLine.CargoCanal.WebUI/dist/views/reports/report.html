@@ -23,6 +23,7 @@
         <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_report"></rpt-filter-date-tin>
         <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_active_report"></rpt-filter-date-tin>
         <rpt-filter-date-bill ng-switch-when="transit_time_grouped_by_import_report"></rpt-filter-date-bill>
+        <rpt-filter-date-bill ng-switch-when="transit_time_grouped_by_discharge_port_report"></rpt-filter-date-bill>
         <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_report"></rpt-filter-date-country>
         <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_summary_report"></rpt-filter-date-country>
         <rpt-filter-date-tin ng-switch-when="transit_time_grouped_by_tin_report"></rpt-filter-date-tin>
@@ -35,10 +36,12 @@
         <div class="col-md-12" ng-show="report.data || report.data.length > 0">
             <div class="panel">
                 <div class="panel-heading">
-                    <h4 class="panel-title font-bold">{{report.filter.name.label}}</h4>
+                    <h5 class="panel-title font-bold">{{report.filter.name.label}}</h5>
                 </div>
                 <div class="panel-body">
-                    <div ui-view></div>
+                    <div ui-view>
+                        <report-no-result ng-if="!report.data || report.data.length==0"></report-no-result>
+                    </div>
                 </div>
             </div>
         </div>

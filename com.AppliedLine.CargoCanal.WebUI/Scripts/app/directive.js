@@ -16,6 +16,14 @@
         };
     });
 
+    app.directive('reportNoResult', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/report_no_result.html'
+        };
+    });
+
     app.directive('dirComment', function () {
         return {
             restrict: 'E',
