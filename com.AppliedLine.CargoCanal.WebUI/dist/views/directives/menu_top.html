@@ -1,7 +1,7 @@
 <!--<div class="navbar-header">-->
 <nav class="navbar navbar-expand-lg fixed-top navbar-light navbar-default">
 <div class="container-fluid">
-    <a class="navbar-brand padding-top-0" ui-sref="home">
+    <a class="navbar-brand padding-top-0" ui-sref="home" ng-click="scrollToTop()">
         <img src="assets/images/cargocanal_text_64.png" alt="CargoCanal" class="logo" />
     </a>
 
@@ -62,6 +62,9 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                     <a ui-sref="account" class="nav-link text-capitalize">
                         <span class="oi oi-cog"></span> Account settings
+                    </a>
+                    <a ui-sref="account.support" class="nav-link text-capitalize">
+                        <span class="oi oi-wrench"></span> <span data-i18n="_Support_"></span>
                     </a>
                     <a ui-sref="login" class="nav-link text-capitalize" ng-click="logout()">
                         <span class="oi oi-account-logout"></span> <span data-i18n="_Logout_"></span>

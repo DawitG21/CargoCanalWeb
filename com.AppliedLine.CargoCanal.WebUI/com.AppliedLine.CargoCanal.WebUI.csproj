@@ -1696,6 +1696,7 @@
     <Content Include="Content\bootstrap-switch\bootstrap2\bootstrap-switch.min.css" />
     <Content Include="Content\bootstrap-switch\bootstrap3\bootstrap-switch.css" />
     <Content Include="Content\bootstrap-switch\bootstrap3\bootstrap-switch.min.css" />
+    <Content Include="Content\style.icon.css" />
     <Content Include="Content\_bootstrap.css" />
     <Content Include="Content\_bootstrap.min.css" />
     <Content Include="Content\common-sprite.sprite.css">
@@ -3442,11 +3443,9 @@
     <Content Include="dist\assets\open-iconic\svg\zoom-out.svg" />
     <Content Include="dist\favicon.png" />
     <Content Include="dist\index.html" />
-    <Content Include="dist\lib\angulars_and_chartjs.js" />
     <Content Include="dist\lib\cards.min.js" />
     <Content Include="dist\lib\datatables.min.js" />
     <Content Include="dist\lib\jgeez.min.js" />
-    <Content Include="dist\lib\jquery.utils.min.js" />
     <Content Include="dist\robots.txt" />
     <Content Include="dist\templates_quarantined\Account\view-account.html" />
     <Content Include="dist\templates_quarantined\Account\view-account.min.html" />
@@ -3677,6 +3676,7 @@
     <Content Include="dist\views\reports\transit_time_grouped_by_tin.html" />
     <Content Include="dist\views\terms_of_service.html" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\icomoon.svg" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -3688,6 +3688,10 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app\controller.comment.js" />
+    <Content Include="Scripts\app\controller.dashboard.js" />
+    <Content Include="Scripts\app\controller.login.js" />
+    <Content Include="Scripts\app\controller.report.custom.js" />
+    <Content Include="Scripts\app\controller.support.js" />
     <Content Include="Scripts\app\factory.sessiontimeout.js" />
     <Content Include="Scripts\app\services.comment.js" />
     <Content Include="Scripts\app\services.analytics.js" />
@@ -3699,10 +3703,23 @@
     <Content Include="Scripts\bundles\angulars_and_chartjs.min.js">
       <DependentUpon>angulars_and_chartjs.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\bundles\jquery.utils.js" />
+    <Content Include="Scripts\bundles\jquery.utils.min.js">
+      <DependentUpon>jquery.utils.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.1.1.js" />
+    <Content Include="Scripts\jquery-3.1.1.min.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
     <Content Include="Scripts\jquery.signalR.min.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
@@ -5421,11 +5438,9 @@
     <Content Include="src\assets\open-iconic\svg\yen.svg" />
     <Content Include="src\assets\open-iconic\svg\zoom-in.svg" />
     <Content Include="src\assets\open-iconic\svg\zoom-out.svg" />
-    <Content Include="src\lib\angulars_and_chartjs.js" />
     <Content Include="src\lib\cards.min.js" />
     <Content Include="src\lib\datatables.min.js" />
     <Content Include="src\lib\jgeez.min.js" />
-    <Content Include="src\lib\jquery.utils.min.js" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
     <Content Include="views\directives\report_no_result.html" />
@@ -5444,7 +5459,9 @@
     <Content Include="views\directives\passwordchange.html" />
     <Content Include="views\privacy_policy.html" />
     <Content Include="views\reports\filters\rpt_filter_date_bill.html" />
-    <Content Include="views\reports\transit_time_grouped_by_discharge_port.html" />
+    <Content Include="views\reports\transit_time_after_discharge_grouped_by_discharge_port.html" />
+    <Content Include="views\reports\transit_time_after_discharge_grouped_by_import.html" />
+    <Content Include="views\support.html" />
     <Content Include="views\terms_of_service.html" />
     <Content Include="workers.js" />
     <Content Include="Scripts\app\controller.datetime - Copy.js" />
@@ -5466,10 +5483,6 @@
     <Content Include="Scripts\bootstrap-switch.js" />
     <Content Include="Scripts\bootstrap-switch.min.js" />
     <Content Include="Scripts\bundles\angulars_and_chartjs.js" />
-    <Content Include="Scripts\bundles\jquery.utils.js" />
-    <Content Include="Scripts\bundles\jquery.utils.min.js">
-      <DependentUpon>jquery.utils.js</DependentUpon>
-    </Content>
     <Content Include="Scripts\Chart.bundle.js" />
     <Content Include="Scripts\Chart.bundle.min.js" />
     <Content Include="Scripts\Chart.js" />
@@ -8233,6 +8246,9 @@
     <Content Include="dist\assets\open-iconic\webp\zoom-out-6x.webp" />
     <Content Include="dist\assets\open-iconic\webp\zoom-out-8x.webp" />
     <Content Include="dist\assets\open-iconic\webp\zoom-out.webp" />
+    <Content Include="fonts\icomoon.eot" />
+    <Content Include="fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon.woff" />
     <None Include="manifest.json" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\bootstrap\glyphicons-halflings-regular.ttf" />
@@ -8244,25 +8260,14 @@
     <Content Include="dist\assets\fonts\bootstrap\glyphicons-halflings-regular.woff2" />
     <None Include="packman.json" />
     <None Include="Properties\PublishProfiles\localIIS.pubxml" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
     <Content Include="Scripts\bootstrap.bundle.js.map" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <None Include="Scripts\jquery-3.1.1.intellisense.js" />
-    <Content Include="Scripts\jquery-3.1.1.js" />
-    <Content Include="Scripts\jquery-3.1.1.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.js" />
-    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
-    <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper-utils.min.js.map" />
@@ -8272,6 +8277,8 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.1.1.min.map" />
     <None Include="Scripts\_references.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.js" />
     <Content Include="Scripts\jquery-ui-1.12.1.min.js" />

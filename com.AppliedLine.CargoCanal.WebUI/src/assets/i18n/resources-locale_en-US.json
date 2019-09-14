@@ -1,5 +1,10 @@
 [
   {
+    "key": "_Support_",
+    "value": "Support",
+    "description": "Support"
+  },
+  {
     "key": "_Comments_",
     "value": "Comments",
     "description": "Comment"

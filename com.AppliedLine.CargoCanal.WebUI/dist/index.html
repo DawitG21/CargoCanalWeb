@@ -11,6 +11,7 @@
     <meta name="author" content="Appliedline.com" />
     <meta name="keywords" content="appliedline, ethiopia, africa, maritime, ethiopian maritime, freight, forwarders, cargo, cargo movement, emaa" />
 
+    <meta name="google-site-verification" content="_RwKmqRL48LQ05mdYEYX8zx8gFSVUftURTpn-ghQjOY" />
     <meta name="google-site-verification" content="EjQd7GF5A1fau7sJd1yXDI84Ks9_EDMAVGeJYaOZd2A" />
     <meta property="og:url" content="https://cargocanal.com">
     <meta property="og:site_name" content="CargoCanal">
@@ -28,8 +29,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=2.3.9" />
-    <link href="assets/css/style-bundle.min.css?v=2.3.9" rel="stylesheet" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png?build=2.4.72" />
+    <link href="assets/css/style-bundle.min.css?build=2.4.72" rel="stylesheet" />
     <link href="assets/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet" />
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -42,46 +44,47 @@
         gtag('config', 'UA-103034381-2');
     </script>
 
+
     <!-- JSON-LD -->
     <script type="application/ld+json">
         {
-          "@context": "http://schema.org",
-          "@type": "Organization",
-          "name": "Appliedline",
-          "description": "Appliedline is an IT company specialized in software development.",
-          "url": "https://www.appliedline.com",
-          "foundingDate": "2015-03-13",
-          "logo": "https://appliedline.com/assets/global/images/appliedline_logo.png",
-          "duns": "561230395",
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+251-90-414-9609",
-            "contactType": "Customer service"
-          },
-          "parentOrganization": {
-            "name": "AA Advanced Information Technology PLC"
-          },
-          "sameAs": [
-            "http://www.linkedin.com/company/appliedline",
-            "http://twitter.com/appliedline"
-          ],
-          "owns": {
-            "@context": "http://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "CargoCanal",
-            "operatingSystem": "ANDROID",
-            "applicationCategory": "http://schema.org/BusinessApplication",
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": "5",
-              "ratingCount": "2"
-            },
-            "offers": {
-              "@type": "Offer",
-              "price": "0",
-              "priceCurrency": "USD"
-            }
-          }
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "Appliedline",
+        "description": "Appliedline is an IT company specialized in software development.",
+        "url": "https://appliedline.com",
+        "foundingDate": "2015-03-13",
+        "logo": "https://appliedline.com/assets/global/images/appliedline_logo.png",
+        "duns": "561230395",
+        "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+251-90-414-9609",
+        "contactType": "Customer service"
+        },
+        "parentOrganization": {
+        "name": "AA Advanced Information Technology PLC"
+        },
+        "sameAs": [
+        "http://www.linkedin.com/company/appliedline",
+        "http://twitter.com/appliedline"
+        ],
+        "owns": {
+        "@context": "http://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "CargoCanal",
+        "operatingSystem": "ANDROID",
+        "applicationCategory": "http://schema.org/BusinessApplication",
+        "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "ratingCount": "2"
+        },
+        "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+        }
+        }
         }
     </script>
 
@@ -96,31 +99,114 @@
         <!-- displays the loading window -->
         <loader></loader>
 
+
+        <!-- SUBSCRIPTION NOTICE START -->
+        <div class="modal fade" id="modalSubscriptionAlert" tabindex="-1" role="dialog" aria-labelledby="modalSubscriptionAlertTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalSubscriptionAlertTitle">
+                            {{subscriptionExpiryDays <= 0? 'Subscription Expired' : 'Subscription Expiring Soon'}}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Your <span class="font-bold-600">Free Subscription</span> ({{User.Company.Subscription[0].SubscriptionName}})
+                            <span ng-if="subscriptionExpiryDays>0">ends in {{subscriptionExpiryDays}} days</span><span ng-if="subscriptionExpiryDays <=0">ended {{subscriptionExpiryDays}} days ago</span>
+                            on {{User.Company.Subscription[0].ExpiryDate | date:'MMMM dd, yyyy'}}
+                        </p>
+                        <!--<p><span class="font-bold-600">Free Subscription</span> ends March 31<sup>st</sup> 2019.</p>-->
+
+                        <h3 class="font-bold-600">What does this mean?</h3>
+                        <p>
+                            Starting {{dateIncrement(User.Company.Subscription[0].ExpiryDate, 1) | date:'MMMM dd, yyyy'}}, your company will need to have a <span class="font-bold-600">Paid Subscription</span> to access the service.
+                        </p>
+                        <p>
+                            We understand the notice is short, hence, as a compliment, we would extend your payment due date for the
+                            <span class="font-bold-600">Subscription</span> ({{User.Company.Subscription[0].SubscriptionName}}) for extra 30 days,
+                            giving you extra time until {{dateIncrement(User.Company.Subscription[0].ExpiryDate, 30) | date:'MMMM dd, yyyy'}} to make payment.
+                        </p>
+
+                        <h3 class="font-bold-600">What do I need to do?</h3>
+                        <p>
+                            Proceed to <a>pay for a {{User.Company.Subscription[0].RenewalCycle}} {{User.Company.Subscription[0].SubscriptionName}} subscription</a> to avoid disruption of service.
+                        </p>
+
+                        <h3 class="font-bold-600">How do I pay?</h3>
+                        <p>
+                            To make payments, you need to do the following:
+                        </p>
+                        <ol>
+                            <li>
+                                Go to Cooperative Bank of Oromia and make a deposit into the account below.
+                                <ul>
+                                    <li>Account Name: AA ADVANCED INFORMATION TECHNOLOGY PLC</li>
+                                    <li>Account Number: 1000053563256</li>
+                                    <li>Amount: {{User.Company.Subscription[0].Currency}} {{User.Company.Subscription[0].Cost | number}}</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Next, you could do one of the following:
+                                <ul>
+                                    <li>Send a copy of your proof of payment to info@cargocanal.com and also state your company name and TIN number in the email, OR</li>
+                                    <li>Visit our office with your proof of payment</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Upon receiving your proof of payment, a TAX receipt is generated and issued to you.
+                                If you sent your proof of payment by email, you will need to pick up your TAX receipt at our office.
+                            </li>
+                            <li>
+                                Finally, an administrator at our office will activate your Paid Subscription within 24 hours
+                                and an automated invoice will be sent to your company's email. Please ensure you company profile is updated
+                            </li>
+                        </ol>
+
+                        <p>
+                            <a ui-sref="account.subscriptions" ng-click="closeSubscritpionAlert()">Click here to view your subscriptions.</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIPTION NOTICE ENDS -->
+
     </div>
     <footer>
-        <section class="row">
-            <section class="col-md-12 text-center">
-                <small><a class="pointer" ui-sref="termsofservice">Terms of Service</a></small> |
-                <small><a class="pointer" ui-sref="privacypolicy">Privacy Policy</a></small>
-            </section>
-        </section>
-        <h6 class="text-center"><a href="mailto:support@cargocanal.com?subject=CargoCanal%20Web%20Request">support@cargocanal.com</a></h6>
-        <h6 class="text-center">
-            &copy; 2018 <a href="//appliedline.com" target="_blank" rel="noopener">AAAIT PLC&reg; &amp; Appliedline</a>. All rights reserved.
-        </h6>
+        <div class="row">
+            <div class="col-md">
+                <small>
+                    &copy; 2019 <a href="//appliedline.com" target="_blank" rel="noopener">AA Advanced Information Technology Plc&reg;</a> build=2.4.72
+                </small>
+            </div>
+            
+            <div class="col-md override text-right">
+                <small>
+                    <a href="mailto:info@cargocanal.com?subject=CargoCanal%20Web%20Request">info@cargocanal.com</a>
+                    &bull; <a class="pointer" ui-sref="termsofservice">Terms of Service</a>
+                    &bull; <a class="pointer" ui-sref="privacypolicy">Privacy Policy</a>
+                </small>
+            </div>
+        </div>
     </footer>
 
     <dir-dialog-window></dir-dialog-window>
 
     <view-session-timeout></view-session-timeout>
 
-    <link href="assets/css/style-bundle-defer.min.css?v=2.3.9" rel="stylesheet" />
+    
+    <link href="assets/css/style-bundle-defer.min.css?build=2.4.72" rel="stylesheet" />
+
 
 
     <!-- Amharic libraries : jquery-1.7.2 is required -->
     <!--<script src="lib/jgeez-jquery.min.js"></script>-->
-    <script src="lib/jquery.utils.min.js?v=2.3.9"></script>
-    <script src="lib/angulars_and_chartjs.js?v=2.3.9"></script>
+    <script src="lib/jquery.utils.min.js?build=2.4.72"></script>
+    <script src="lib/angulars_and_chartjs.js?build=2.4.72"></script>
     <!-- format cards dynamically-->
     <script id="cardsjs" src="lib/cards.min.js"></script>
     <!-- format reports with paging -->

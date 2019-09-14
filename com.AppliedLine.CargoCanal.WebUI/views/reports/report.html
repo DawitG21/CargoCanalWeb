@@ -13,20 +13,15 @@
         </div>
     </section>
 
-    <section ng-switch on="report.filter.name.value" class="row margin-top-15">
-        <rpt-filter-date-tin-bill ng-switch-when="bill_statuses_grouped_by_tin_report"></rpt-filter-date-tin-bill>
-        <rpt-filter-date-tin-cargo ng-switch-when="cargo_dispatched_weight_grouped_by_month_report"></rpt-filter-date-tin-cargo>
-        <rpt-filter-date-tin-cargo ng-switch-when="cargo_import_weight_grouped_by_tin_report"></rpt-filter-date-tin-cargo>
-        <rpt-filter-tin-cargo-country ng-switch-when="cargo_on_voyage_only_grouped_by_country_report"></rpt-filter-tin-cargo-country>
-        <rpt-filter-date-tin-problem ng-switch-when="problem_grouped_by_tin_report"></rpt-filter-date-tin-problem>
-        <rpt-filter-tin-problem ng-switch-when="problem_grouped_by_tin_unresolved_report"></rpt-filter-tin-problem>
-        <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_report"></rpt-filter-date-tin>
-        <rpt-filter-date-tin ng-switch-when="demurrage_grouped_by_tin_active_report"></rpt-filter-date-tin>
-        <rpt-filter-date-bill ng-switch-when="transit_time_grouped_by_import_report"></rpt-filter-date-bill>
-        <rpt-filter-date-bill ng-switch-when="transit_time_grouped_by_discharge_port_report"></rpt-filter-date-bill>
-        <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_report"></rpt-filter-date-country>
-        <rpt-filter-date-country ng-switch-when="transit_time_grouped_by_country_summary_report"></rpt-filter-date-country>
-        <rpt-filter-date-tin ng-switch-when="transit_time_grouped_by_tin_report"></rpt-filter-date-tin>
+    <section ng-switch on="report.filter.name.code" class="row margin-top-15">
+        <rpt-filter-date-tin-bill ng-switch-when="012"></rpt-filter-date-tin-bill>
+        <rpt-filter-date-tin-cargo ng-switch-when="001|002" ng-switch-when-separator="|"></rpt-filter-date-tin-cargo>
+        <rpt-filter-tin-cargo-country ng-switch-when="003"></rpt-filter-tin-cargo-country>
+        <rpt-filter-date-tin-problem ng-switch-when="004"></rpt-filter-date-tin-problem>
+        <rpt-filter-tin-problem ng-switch-when="005"></rpt-filter-tin-problem>
+        <rpt-filter-date-tin ng-switch-when="006|007|011" ng-switch-when-separator="|"></rpt-filter-date-tin>
+        <rpt-filter-date-bill ng-switch-when="008|008-1|008-2" ng-switch-when-separator="|"></rpt-filter-date-bill>
+        <rpt-filter-date-country ng-switch-when="009|010" ng-switch-when-separator="|"></rpt-filter-date-country>
     </section>
 </section>
 

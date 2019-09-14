@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCenterSupport">
+    <span class="oi oi-plus"></span> Add
+</button>
+
+<p class="lead">This feature is under development.</p>
+<p>No support ticket available.</p>
+
+<div class="modal fade" id="modalCenterSupport" tabindex="-1" role="dialog" aria-labelledby="modalCenterSupportTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCenterSupportTitle" data-i18n="_Support_"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="formSupport" ng-submit="submitTicket()">
+                    <div class="form-group">
+                        <input type="text" class="form-control form-text" maxlength="50" placeholder="Title" />
+                    </div>
+
+                    <div class="form-group">
+                        <textarea rows="5" class="form-control" placeholder="Describe the issue you are facing with CargoCanal service."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg" data-i18n="_Submit_"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

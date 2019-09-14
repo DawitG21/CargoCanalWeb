@@ -32,7 +32,7 @@ var delCond;
     c = function (id) {
         $('#' + id + ' tr:nth-child(1) ~ tr').toggle();
         $('#' + id).toggleClass('expanded-row');
-    }
+    };
 
     enableAmharicWriting = function (enable) {
         switch (enable) {

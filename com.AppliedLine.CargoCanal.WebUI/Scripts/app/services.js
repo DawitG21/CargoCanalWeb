@@ -130,7 +130,7 @@
         // show the loading animation
         service.showLoader = (message) => {
             $rootScope.loader = true;
-            $rootScope.loaderMessage = (!message) ? 'processing...' : message;
+            $rootScope.loaderMessage = !message ? 'processing...' : message;
         };
 
         // close the loading animation
@@ -152,7 +152,7 @@
         service.xtersLeft = function (maxLength, xterLength) {
             return maxLength - xterLength;
         };
-        
+
         // Service RGB
         service.getRgbArray = function (length) {
             const rgb = [];
@@ -172,7 +172,7 @@
                 'rgb': rgb,
                 'rgbaOpaque': rgbaOpaque
             };
-        }
+        };
 
         // initialize common functions used by multiple controllers
         let _initHelpers = function () {
@@ -662,7 +662,7 @@
             // Also note that you could update this information later 
             // by using the 'Update Consignee Info.' option on an import/export document
             // To register a new consignee, 
-            // 1. visit https://cargocanal2.com
+            // 1. visit https://cargocanal.com
             // 2. Click Register on the menu bar
             // 3. Enter all information requested. Make sure you have an active email account 
             //    as we would send your account activation information to the email provided.
@@ -722,6 +722,22 @@
                 .then(function (response) {
                     return response;
                 }, function (error) { return null; });
+        };
+
+        // get company subscription alert
+        service.showSubscriptionAlert = () => {
+            if ($rootScope.User.Company.Subscription) {
+                let today = (new Date()).getTime();
+
+                let subscriptionExpiryDate = $rootScope.User.Company.Subscription[0].ExpiryDate;
+                let subscriptionExpiryDays = Math.floor(((new Date(subscriptionExpiryDate)).getTime() - today) / (24 * 3600 * 1000));
+
+                $rootScope.subscriptionExpiryDays = subscriptionExpiryDays;
+
+                if (subscriptionExpiryDays <= 30) {
+                    $('#modalSubscriptionAlert').modal('show');
+                }
+            }
         };
 
         // get if the Company TIN is valid

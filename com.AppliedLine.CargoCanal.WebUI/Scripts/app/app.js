@@ -20,7 +20,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/home.html',
         controller: 'mainCtrl'
     });
-    
+
     $stateProvider.state('passwordreset', {
         url: '/account/reset-password',
         templateUrl: 'views/admin/passwordreset.html',
@@ -87,9 +87,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/008',
         templateUrl: 'views/reports/transit_time_grouped_by_import.html'
     });
-    $stateProvider.state('report.transit_time_grouped_by_discharge_port_report', {
+    $stateProvider.state('report.transit_time_after_discharge_grouped_by_import_report', {
+        url: '/008-1',
+        templateUrl: 'views/reports/transit_time_after_discharge_grouped_by_import.html'
+    });
+    $stateProvider.state('report.transit_time_after_discharge_grouped_by_discharge_port_report', {
         url: '/008-2',
-        templateUrl: 'views/reports/transit_time_grouped_by_discharge_port.html'
+        templateUrl: 'views/reports/transit_time_after_discharge_grouped_by_discharge_port.html'
     });
     $stateProvider.state('report.transit_time_grouped_by_country_report', {
         url: '/009',
@@ -117,6 +121,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/account',
         templateUrl: 'views/account.html',
         controller: 'accountCtrl'
+    });
+    $stateProvider.state('account.support', {
+        url: '/support',
+        templateUrl: 'views/support.html',
+        controller: 'supportCtrl'
     });
     $stateProvider.state('account.uploadprofileimage', {
         url: '/upi',

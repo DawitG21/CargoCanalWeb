@@ -3,15 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.Models", "com.AppliedLine.CargoCanal.Models\com.AppliedLine.CargoCanal.Models.csproj", "{6766B460-6B7A-420A-AEA0-6F2007FDA745}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.WebAPI", "com.AppliedLine.CargoCanal.WebAPI\com.AppliedLine.CargoCanal.WebAPI.csproj", "{3A0CC4F7-6268-4B92-BDCF-2A71499C4076}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.WebAPI.Tests", "com.AppliedLine.CargoCanal.WebAPI.Tests\com.AppliedLine.CargoCanal.WebAPI.Tests.csproj", "{653B2808-3124-416B-ABFC-80F5A1648988}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.WebUI", "com.AppliedLine.CargoCanal.WebUI\com.AppliedLine.CargoCanal.WebUI.csproj", "{BF29B9AB-7351-43D9-9421-BFF93AC6E1DA}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.DAL", "com.AppliedLine.CargoCanal.DAL\com.AppliedLine.CargoCanal.DAL.csproj", "{48C1A583-67E9-403B-B208-94E9F618BCE0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.AppliedLine.CargoCanal.WebUIAdmin", "com.AppliedLine.CargoCanal.WebUIAdmin\com.AppliedLine.CargoCanal.WebUIAdmin.csproj", "{835501C3-6BF3-4408-A2D6-FC385B114BF3}"
 EndProject
@@ -21,26 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6766B460-6B7A-420A-AEA0-6F2007FDA745}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6766B460-6B7A-420A-AEA0-6F2007FDA745}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6766B460-6B7A-420A-AEA0-6F2007FDA745}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6766B460-6B7A-420A-AEA0-6F2007FDA745}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3A0CC4F7-6268-4B92-BDCF-2A71499C4076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3A0CC4F7-6268-4B92-BDCF-2A71499C4076}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3A0CC4F7-6268-4B92-BDCF-2A71499C4076}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3A0CC4F7-6268-4B92-BDCF-2A71499C4076}.Release|Any CPU.Build.0 = Release|Any CPU
-		{653B2808-3124-416B-ABFC-80F5A1648988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{653B2808-3124-416B-ABFC-80F5A1648988}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{653B2808-3124-416B-ABFC-80F5A1648988}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{653B2808-3124-416B-ABFC-80F5A1648988}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BF29B9AB-7351-43D9-9421-BFF93AC6E1DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BF29B9AB-7351-43D9-9421-BFF93AC6E1DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF29B9AB-7351-43D9-9421-BFF93AC6E1DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF29B9AB-7351-43D9-9421-BFF93AC6E1DA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{48C1A583-67E9-403B-B208-94E9F618BCE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{48C1A583-67E9-403B-B208-94E9F618BCE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{48C1A583-67E9-403B-B208-94E9F618BCE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{48C1A583-67E9-403B-B208-94E9F618BCE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{835501C3-6BF3-4408-A2D6-FC385B114BF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{835501C3-6BF3-4408-A2D6-FC385B114BF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{835501C3-6BF3-4408-A2D6-FC385B114BF3}.Release|Any CPU.ActiveCfg = Release|Any CPU

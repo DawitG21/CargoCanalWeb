@@ -4,7 +4,7 @@
     font-family: 'Segoe UI Condensed','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif !important;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    background-color: #fdfdfd;
+    background-color: #ffffff; /*#fdfdfd;*/
 }
 
     body::selection, div::selection, p::selection, th::selection, td::selection, caption::selection,
@@ -128,7 +128,7 @@ footer {
     left: 0;
     background-color: #3b3b3b;
     color: white;
-    padding: 15px 100px;
+    padding: 15px;
     width: 100% !important;
     margin-top: 10px;
 }
@@ -478,11 +478,12 @@ i.loader-box-4 {
 }
 
 /* session timeout styles */
-.modal {
+/*.modal {
     border: 2px solid #800000;
     display: block;
     background-color: rgba(0, 0, 0, .6);
-}
+    overflow-y: auto;
+}*/
 
 
 .modal-content {
@@ -1032,8 +1033,8 @@ progress[value] {
     position: relative;
     border-radius: 2px;
     float: left;
-    width: 20%;
-    height: 230px;
+    width: 33.333%;
+    height: 260px;
     padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
@@ -1073,6 +1074,7 @@ progress[value] {
     white-space: nowrap;
     overflow: hidden;
     font-weight: 500;
+    margin-top: 20px;
 }
 
 .line-edged {
@@ -1542,8 +1544,8 @@ form .progress {
 
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-    footer {
-        padding: 15px;
+    footer .override.text-right {
+        text-align: left;
     }
 
     .buttons-group .buttons {

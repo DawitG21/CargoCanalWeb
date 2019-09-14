@@ -3,21 +3,28 @@ const gulp = require("gulp");
 const image = require('gulp-image');
 const replace = require("gulp-replace");
 const htmlmin = require('gulp-htmlmin');
+const log = require('fancy-log');
 
-var filesToMove = {
+
+const versionRegEx = /build=([0-9]*.[0-9]*.[0-9]*)/g;
+const headRef = /^<!--head-refs-start-->(.*)<!--head-refs-end-->$/;
+const bodyRef = /^<!--body-refs-start-->(.*)<!--body-refs-end-->$/;
+
+
+let filesToMove = {
     'css': ['content/style-bundle.min.css', 'content/style-bundle-defer.min.css', 'content/datatables.min.css', 'content/common-sprite.sprite.*'],
     'datatable_img': ['bower_components/datatables/media/images/*.*'],
     'fonts': ['fonts/**/*.*'],
     'open_iconic': ['content/open-iconic/**/*.*'],
     'image': ['content/images/**/*.*'],
     'content': ['content/themes/**/*.*'],
-    'lib': ['scripts/bundles/*.min.js',
-        'scripts/bundles/angulars_and_chartjs.js',
+    'lib': ['scripts/bundles/*.js',
         'scripts/app/cards.min.js',
         'scripts/geez/jgeez.min.js'
     ],
     'root_clean': ['favicon.png'],
     'root': ['views/**/*.*', 'templates_quarantined/**/*.*', 'index.html', 'manifest.json', 'robots.txt'],
+    'index': 'index.html',
     'webconfig': ['Web.config']
 };
 
@@ -72,7 +79,7 @@ gulp.task('dist_clean', ['movelib'], function () {
 gulp.task('dist', ['dist_clean'], function () {
     gulp.src(['src/**/*.js', 'src/**/*.css', '!src/assets/images/**/*.*'], { base: 'src/' })
         .pipe(replace('src/', ''))
-        .pipe(replace('http://localhost:49931', 'https://appliedline.com/cargocanalapi'))
+        .pipe(replace('http://localhost:52931', 'https://appliedline.com/cargocanalapi'))
         .pipe(gulp.dest('dist'));
 });
 
@@ -88,8 +95,38 @@ gulp.task('web_config', ['root_clean'], function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build', ['web_config'], function () {
+function appVersionPart(text) {
+    return text.substring(text.indexOf('.') + 1);
+}
+
+gulp.task('increase_build_version', ['web_config'], function () {
+    let appVersion = {
+        'major': 0,
+        'minor': 0,
+        'build': 0
+    };
+
+    gulp.src(filesToMove.index, { base: './' })
+        .pipe(replace(versionRegEx, (match, p1) => {
+            appVersion.major = parseInt(p1.substring(0, p1.indexOf('.')));
+
+            let text = appVersionPart(p1);
+            appVersion.minor = parseInt(text.substring(0, text.indexOf('.')));
+
+            text = appVersionPart(text);
+            appVersion.build = parseInt(text);
+
+            return `build=${appVersion.major}.${appVersion.minor}.${appVersion.build + 1}`;
+        }))
+        //.on('end', () => { console.log('Here loging leke'); })
+        .pipe(gulp.dest('./'))
+        .pipe(replace('src/', ''))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('build', ['increase_build_version'], function () {
     gulp.src(filesToMove.root, { base: './' })
+
         .pipe(replace('src/', ''))
         //.pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('dist'));

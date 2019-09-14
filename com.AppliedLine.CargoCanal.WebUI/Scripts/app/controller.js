@@ -1,4 +1,4 @@
-﻿var serverUrl = 'http://localhost:49931';
+﻿var serverUrl = 'http://localhost:52931';
 var api = serverUrl + '/api';
 
 (function () {
@@ -9,8 +9,19 @@ var api = serverUrl + '/api';
             //fixes angular refresh page (all local variables lose data) issue
             refresher.refreshApp();
 
+            // hide subscription alert modal
+            $rootScope.closeSubscritpionAlert = () => {
+                $('#modalSubscriptionAlert').modal('hide');
+            };
+
             $rootScope.googleApiKey = 'AIzaSyCwTw8Tyx3_bPBoZ43MXVDhY7TRnPvXl7Y';
             $rootScope.host = api.substring(0, api.lastIndexOf('/'));
+
+            $scope.dateIncrement = function (date, days) {
+                let newDate = new Date(date);
+                newDate.setDate(newDate.getDate() + days);
+                return newDate;
+            };
 
             $rootScope.days = [
                 { label: '7 DAYS', value: 7 },
@@ -187,395 +198,11 @@ var api = serverUrl + '/api';
 
     }]);
 
-    app.controller('loginController', ["$scope", "$http", 'sessionTimeoutFactory', "$sessionStorage", "$rootScope", "$state", "appFactory",
-        function ($scope, $http, sessionTimeoutFactory, $sessionStorage, $rootScope, $state, appFactory) {
-            $scope.login = {};
-            $scope.processing = false;
-
-            $scope.forgotPassword = function () {
-                $state.go('passwordreset');
-            };
-
-            $scope.signIn = function () {
-                $scope.loginFailed = '';
-                $scope.processing = true;
-
-                appFactory.showLoader('verifying credentials...');
-
-                $http({
-                    method: 'POST',
-                    url: api + '/account/postlogin',
-                    data: $scope.login,
-                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                })
-                    .then(function (response) {
-                        appFactory.closeLoader();
-
-                        // invoke timeout
-                        sessionTimeoutFactory.timeoutInit();
-
-                        // get the user collection and save it in session
-                        $sessionStorage.__user = $rootScope.User = response.data;
-
-                        // set user profile and company profile pictures to base64
-                        appFactory.setDataImage();
-                        if ($rootScope.User.Login.LastSeen === null) {
-                            $state.go('account');
-                        }
-                        else $state.go('dashboard');
-
-                        // activate session validation
-                        // $rootScope.workerValidateSession();
-                    }, function (error) {
-                        appFactory.closeLoader();
-                        $scope.processing = false;
-
-                        if (error.status === -1) {
-                            $rootScope.noInternet();
-                        } else {
-                            $scope.loginFailed = "Invalid login attempt.";
-                        }
-                    });
-            };
-        }]);
-
-    app.controller('dashboardController', ['$scope', '$filter', '$http', '$state', '$rootScope', '$sessionStorage', '$timeout', 'chartjsFactory', 'appFactory', 'appAnalytics',
-        function ($scope, $filter, $http, $state, $rootScope, $sessionStorage, $timeout, chartjsFactory, appFactory, appAnalytics) {
-            // go to home, if the user is not logged in
-            if (!$rootScope.User || $rootScope.User == null) $state.go('home');
-
-            var shipmentCanvas, shipmentChart;
-            var demurrageChart, demurrageCanvas;
-            const suggestedMax = 5; // maximum step size
-
-            $scope.daysOfShipmentActivity = $rootScope.days[2].value;
-            $scope.daysOfDemurrageActivity = $rootScope.days[2].value;
-
-
-            $scope.dashboard = {
-                import: {
-                    data: {},
-                    // get the dashboard import summary for the company
-                    get: function () {
-                        // send user token which the server would use to process dashboard data
-                        $http({
-                            method: 'POST',
-                            url: api + '/importexport/dashboardimportsummary',
-                            data: $rootScope.User.Login,
-                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                        })
-                            .then(function (response) {
-                                $scope.dashboard.import.data = response.data;
-                                if (response.data === null) {
-                                    $scope.dashboard.import.data = {};
-                                    $scope.dashboard.import.data.Total = 0;
-                                    $scope.dashboard.import.data.PercentPending = 0;
-                                    $scope.dashboard.import.data.PercentCompleted = 0;
-                                }
-                            });
-                    }
-                },
-                export: {
-                    data: {},
-                    // get the dashboard export summary for the company
-                    get: function () {
-                        // send user token which the server would use to process dashboard data
-                        $http({
-                            method: 'POST',
-                            url: api + '/importexport/dashboardexportsummary',
-                            data: $rootScope.User.Login,
-                            headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                        })
-                            .then(function (response) {
-                                $scope.dashboard.export.data = response.data;
-                                if (response.data === null) {
-                                    $scope.dashboard.export.data = {};
-                                    $scope.dashboard.export.data.Total = 0;
-                                    $scope.dashboard.export.data.PercentPending = 0;
-                                    $scope.dashboard.export.data.PercentCompleted = 0;
-                                }
-                            });
-                    }
-                },
-                shipments: {
-                    data: {},
-                    get: function (data) {
-                        // TODO: fetch only once script is done loading
-                        // send user token which the server would use to process dashboard data
-                        let max = 0;
-                        $scope.daysOfShipmentActivity = data || $scope.daysOfShipmentActivity;
-                        $scope.loadingShipments = true;
-
-                        // clear the existing chart
-                        if (shipmentChart) {
-                            shipmentChart.destroy();
-                        }
-
-                        // wait a few seconds
-                        $timeout(() => {
-
-                            $http({
-                                method: 'POST',
-                                url: api + '/importexport/dashboardshipmentsanalytics',
-                                data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfShipmentActivity },
-                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                            })
-                                .then(function (response) {
-                                    // no data to draw Chart
-                                    if (response.data === null || response.data === undefined
-                                        || response.data.labels.length === 0) return;
-
-                                    $scope.dashboard.shipments.data = response.data;
-                                    $scope.chartOptions = {
-                                        backgroundColors: [
-                                            'rgba(62, 84, 121, 0.1)',
-                                            'rgba(255, 10, 182, 0.1)'
-                                        ],
-                                        borderColors: [
-                                            'rgba(62, 84, 121, 1)',
-                                            'rgba(255, 10, 182, 1)'
-                                        ]
-                                    };
-
-                                    $scope.dashboard.shipments.data.datasets = [];
-
-                                    for (let i in $scope.dashboard.shipments.data.data) {
-                                        $scope.dashboard.shipments.data.datasets.push({
-                                            data: angular.copy($scope.dashboard.shipments.data.data[i]),
-                                            label: $scope.dashboard.shipments.data.series[i]
-                                        });
-                                    }
-
-                                    $scope.dashboard.shipments.data.data = undefined;
-                                    $scope.dashboard.shipments.data.series = undefined;
-
-                                    // filter the date part of the data labels
-                                    for (let i in $scope.dashboard.shipments.data.labels) {
-                                        $scope.dashboard.shipments.data.labels[i] = $filter('date')($scope.dashboard.shipments.data.labels[i], 'MMM dd');
-                                    }
-
-                                    for (let i in $scope.dashboard.shipments.data.datasets) {
-                                        let mod = i % $scope.chartOptions.borderColors.length;
-                                        $scope.dashboard.shipments.data.datasets[i].backgroundColor = $scope.chartOptions.backgroundColors[mod];
-                                        $scope.dashboard.shipments.data.datasets[i].borderColor = $scope.chartOptions.borderColors[mod];
-                                        $scope.dashboard.shipments.data.datasets[i].lineTension = 0;
-
-                                        let o = $scope.dashboard.shipments.data.datasets[i].data;
-                                        for (let j in o) {
-                                            if (o[j] !== null && o[j] > max) {
-                                                max = o[j];
-                                            }
-                                        }
-                                    }
-
-                                    // clear the existing chart
-                                    if (shipmentChart) {
-                                        shipmentChart.destroy();
-                                    }
-
-                                    shipmentCanvas = chartjsFactory.setCanvas('canvas1');
-                                    shipmentChart = chartjsFactory.createChart('line',
-                                        $scope.dashboard.shipments.data,
-                                        {
-                                            scales: {
-                                                xAxes: [{
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: 'Date Inserted'
-                                                    }
-                                                }],
-                                                yAxes: [{
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: 'No. of Cargo'
-                                                    },
-                                                    ticks: {
-                                                        beginAtZero: true,
-                                                        stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
-                                                        suggestedMax: suggestedMax
-                                                    }
-                                                }]
-                                            }
-                                        });
-                                    $scope.loadingShipments = false;
-                                }, (error) => { $scope.loadingShipments = false; });
-
-                        }, 5000);
-                    }
-                },
-                demurrage: {
-                    data: {},
-                    get: function (data) {
-                        // TODO: fetch only once script is done loading
-                        // send user token which the server would use to process dashboard data
-                        let max = 0;
-                        $scope.daysOfDemurrageActivity = data || $scope.daysOfDemurrageActivity;
-                        $scope.loadingDemurrage = true;
-
-                        // clear the existing chart
-                        if (demurrageChart) {
-                            demurrageChart.destroy();
-                        }
-
-                        // wait a few seconds
-                        $timeout(() => {
-
-                            $http({
-                                method: 'POST',
-                                url: api + '/importexport/dashboarddemurrageanalytics',
-                                data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfDemurrageActivity },
-                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                            })
-                                .then(function (response) {
-                                    // no data to draw Chart
-                                    if (response.data === null || response.data === undefined
-                                        || response.data.labels.length === 0) return;
-
-                                    let rgbObj = appFactory.getRgbArray(response.data.datasets.length);
-                                    $scope.dashboard.demurrage.data = response.data;
-
-                                    // filter the date part of the data labels
-                                    for (let i in $scope.dashboard.demurrage.data.labels) {
-                                        $scope.dashboard.demurrage.data.labels[i] = $filter('date')($scope.dashboard.demurrage.data.labels[i], 'MMM dd');
-                                    }
-                                    for (let i in $scope.dashboard.demurrage.data.datasets) {
-                                        $scope.dashboard.demurrage.data.datasets[i].backgroundColor = rgbObj.rgbaOpaque[i]; //'transparent';
-                                        $scope.dashboard.demurrage.data.datasets[i].borderColor = rgbObj.rgb[i];
-                                        $scope.dashboard.demurrage.data.datasets[i].lineTension = 0;
-                                        $scope.dashboard.demurrage.data.datasets[i].pointRadius = $scope.dashboard.demurrage.data.datasets[i].pointHoverRadius = 10;
-                                        //$scope.dashboard.demurrage.data.datasets[i].spanGaps = false;
-
-                                        // get the maximum days gathered
-                                        let o = $scope.dashboard.demurrage.data.datasets[i].data;
-                                        for (let j in o) {
-                                            if (o[j] !== null && o[j] > max) {
-                                                max = o[j];
-                                                break;
-                                            }
-                                        }
-                                    }
-
-                                    demurrageCanvas = chartjsFactory.setCanvas('canvas2');
-                                    demurrageChart = chartjsFactory.createChart('line',
-                                        $scope.dashboard.demurrage.data,
-                                        {
-                                            tooltips: {
-                                                mode: 'label'
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: 'Cargo Dispatched (Date)'
-                                                    }
-                                                }],
-                                                yAxes: [{
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: 'Demurrage (Days)'
-                                                    },
-                                                    ticks: {
-                                                        beginAtZero: true,
-                                                        stepSize: max > suggestedMax ? Math.ceil(max / suggestedMax) : 1,
-                                                        suggestedMax: suggestedMax
-                                                    }
-                                                }]
-                                            },
-                                            legend: {
-                                                display: false
-                                                //position: 'right',
-                                                //labels: {
-                                                //    fontColor: 'rgb(255, 99, 132)'
-                                                //}
-                                            }
-                                        });
-                                    $scope.loadingDemurrage = false;
-                                }, (error) => { $scope.loadingDemurrage = false; });
-                        }, 5000);
-                    }
-                },
-                maps: {
-                    data: {}
-                }
-            };
-
-            //Chart.defaults.global.elements.line.backgroundColor = 'transparent';
-
-            // load dashboard import data
-            $scope.dashboard.import.get();
-            // load dashboard export data
-            $scope.dashboard.export.get();
-            // load dashboard shipment analysis
-
-
-            // Analytics: loading variables
-            $scope.loadingShipments = true;
-            $scope.loadingDemurrage = true;
-            $scope.loadingTopImport = true;
-            $scope.loadingTopExport = true;
-
-
-            // Analytics: Shipments - wait for DOM
-            $timeout(() => {
-                $scope.dashboard.shipments.get();
-            });
-
-
-            // Analytics: Demurrage - wait for DOM
-            $timeout(() => {
-                $scope.dashboard.demurrage.get();
-            });
-
-
-            // Analytics: Top Import Countries
-            $timeout(() => {
-                appAnalytics.topImportCountries()
-                    .then(function (data) {
-                        // data returned
-                        $scope.topImportCountries = data;
-                        $scope.loadingTopImport = false;
-                    },
-                    (error) => {
-                        // error occurred
-                        $scope.loadingTopImport = false;
-                    });
-            }, 4000);
-
-
-
-            // Analytics: Top Export Countries
-            $timeout(() => {
-                appAnalytics.topExportCountries()
-                    .then(function (data) {
-                        // data returned
-                        $scope.topExportCountries = data;
-                        $scope.loadingTopExport = false;
-                    },
-                    (error) => {
-                        // error occurred
-                        $scope.loadingTopExport = false;
-                    });
-            }, 4000);
-
-
-
-            // TODO: Google Maps get Latitude and Longitude Information
-            $http({
-                method: 'GET',
-                url: 'https://maps.googleapis.com/maps/api/geocode/json?address=ethiopia&key=' + $rootScope.googleApiKey,
-                headers: { 'Content-Type': 'application/json; charset=utf-8' }
-            })
-                .then(function (response) {
-                    $scope.dashboard.maps.data = response.data;
-                });
-
-        }]);
-
     app.controller('importController', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
         function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
             // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
             // go to home, if the user is not logged in
-            if (!$rootScope.User || $rootScope.User === null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
             //$scope.retainDesc = function () {
             //    if ($('#Description').length !== 0) {
@@ -681,13 +308,13 @@ var api = serverUrl + '/api';
 
                 // for container = 1 and vehicle = 4, 
                 // user must enter item detail for quantity 20 and below
-                if (($scope.newItem.CargoID == 1 || $scope.newItem.CargoID == 4)
+                if ($scope.newItem.CargoID.toString() === "1" | "4"
                     && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
                     $scope.disableAddToItems = true;
                     $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
                     return;
                 }
-                else if (($scope.newItem.CargoID == 1 || $scope.newItem.CargoID == 4)
+                else if ($scope.newItem.CargoID.toString() === "1" | "4"
                     && $scope.newItem.Quantity > 20 && $scope.newImport.Documents.length === 0) {
                     // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
                     $scope.disableAddToItems = true;
@@ -706,7 +333,7 @@ var api = serverUrl + '/api';
                 $scope.errFiles = errFiles;
 
                 angular.forEach(files, function (file) {
-                    if ($scope.existDocCount == 0) {
+                    if ($scope.existDocCount === 0) {
 
                         file.upload = Upload.upload({
                             url: api + '/importexport/postdocument',
@@ -826,7 +453,7 @@ var api = serverUrl + '/api';
         function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
             // go to home, if the user is not logged in
             // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
-            if (!$rootScope.User || $rootScope.User === null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
 
             // hides the destination select box when adding items
@@ -921,13 +548,13 @@ var api = serverUrl + '/api';
 
                 // for container = 1 and vehicle = 4, 
                 // user must enter item detail for quantity 20 and below
-                if (($scope.newItem.CargoID == 1 || $scope.newItem.CargoID == 4)
+                if ($scope.newItem.CargoID.toString() === "1" | "4"
                     && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
                     $scope.disableAddToItems = true;
                     $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
                     return;
                 }
-                else if (($scope.newItem.CargoID == 1 || $scope.newItem.CargoID == 4)
+                else if ($scope.newItem.CargoID.toString() === "1" | "4"
                     && $scope.newItem.Quantity > 20 && $scope.newImport.Documents.length === 0) {
                     // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
                     $scope.disableAddToItems = true;
@@ -945,7 +572,7 @@ var api = serverUrl + '/api';
                 $scope.errFiles = errFiles;
 
                 angular.forEach(files, function (file) {
-                    if ($scope.existDocCount == 0) {
+                    if ($scope.existDocCount === 0) {
 
                         file.upload = Upload.upload({
                             url: api + '/importexport/postdocument',
@@ -1065,7 +692,7 @@ var api = serverUrl + '/api';
     app.controller('importExportCtrl', ['$scope', '$rootScope', '$http', '$state', '$filter', 'appFactory',
         function ($scope, $rootScope, $http, $state, $filter, appFactory) {
             // controller to handle status, problem updates for importExport documents
-            if (!$rootScope.User || $rootScope.User === null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
 
             $scope.searchImports = function (searchIsNew) {
@@ -1392,50 +1019,50 @@ var api = serverUrl + '/api';
 
                         switch (lastStat.Abbr) {
                             case 'CLD' /*cargo loaded*/:
-                                if ($status.Abbr != 'VOY') {
+                                if ($status.Abbr !== 'VOY') {
                                     $scope.status.message = 'Status "On Voyage" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'VOY' /*on voyage*/:
-                                if ($status.Abbr != 'CDC') {
+                                if ($status.Abbr !== 'CDC') {
                                     $scope.status.message = 'Status "Cargo Discharged" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'CDC' /*cargo discharged*/:
-                                if ($status.Abbr != 'UCC') {
+                                if ($status.Abbr !== 'UCC') {
                                     $scope.status.message = 'Status "Under Custom Clearance" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'UCC' /*under custom clearance*/:
-                                if ($status.Abbr != 'UPC') {
+                                if ($status.Abbr !== 'UPC') {
                                     $scope.status.message = 'Status "Under Port Clearance" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'UPC' /*under port clearance*/:
-                                if ($status.Abbr != 'CRL') {
+                                if ($status.Abbr !== 'CRL') {
                                     $scope.status.message = 'Status "Cargo Ready for Loading" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'CRL' /*cargo ready for loading*/:
-                                if ($status.Abbr != 'CD1') {
+                                if ($status.Abbr !== 'CD1') {
                                     $scope.status.message = 'Status "Cargo Dispatched" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'CD1' /*cargo dispatched*/:
-                                if ($status.Abbr == 'CD2') break;
-                                if ($status.Abbr != 'DRY') {
+                                if ($status.Abbr === 'CD2') break;
+                                if ($status.Abbr !== 'DRY') {
                                     $scope.status.message = 'Status "At Dry Port" or "Cargo Delivered" is required.';
                                     $scope.validStatus = false;
                                 }
@@ -1447,14 +1074,14 @@ var api = serverUrl + '/api';
                                 break;
 
                             case 'DRY' /*at dry port*/:
-                                if ($status.Abbr != 'UC1') {
+                                if ($status.Abbr !== 'UC1') {
                                     $scope.status.message = 'Status "Under Custom Inspection" is required.';
                                     $scope.validStatus = false;
                                 }
                                 break;
 
                             case 'UC1' /*under custom inspection*/:
-                                if ($status.Abbr != 'CD2') {
+                                if ($status.Abbr !== 'CD2') {
                                     $scope.status.message = 'Status "Cargo Delivered" is required.';
                                     $scope.validStatus = false;
                                 }
@@ -1613,7 +1240,7 @@ var api = serverUrl + '/api';
 
                     appFactory.saveCostInfo($scope.costInfo.data.Cost)
                         .then(function (data) {
-                            if (data == null) {
+                            if (data === null | undefined) {
                                 $scope.costInfo.message = 'Oops! failed to update';
                                 return;
                             }
@@ -1648,7 +1275,7 @@ var api = serverUrl + '/api';
                     }
                     for (let i in $scope.originalData) {
                         if ($scope.originalData.hasOwnProperty(i)) {
-                            if ($scope.originalData[i].ID == d.ID) {
+                            if ($scope.originalData[i].ID === d.ID) {
                                 $scope.originalIndex = i;
                                 break;
                             }
@@ -1820,7 +1447,7 @@ var api = serverUrl + '/api';
     app.controller('accountCtrl', ['$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',
         function ($scope, $rootScope, $sessionStorage, $http, $state, appFactory) {
             // go to home, if the user is not logged in
-            if (!$rootScope.User || $rootScope.User == null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
             $scope.getIsActiveIcon = function (bool) {
                 return appFactory.getActiveIcon(bool);
@@ -1837,14 +1464,14 @@ var api = serverUrl + '/api';
                 return false;
             };
 
-            /**
-             * <parameter>
-             *      photoType: number
-             * </parameter>
-             * The photoType parameter accepts the following numbers and represent the following
-             * 0 = USER_PROFILE_IMAGE
-             * 1 = COMPANY_LOGO
-             */
+            // 
+            // <parameter>
+            //      photoType: number
+            // </parameter>
+            // The photoType parameter accepts the following numbers and represent the following
+            // 0 = USER_PROFILE_IMAGE
+            // 1 = COMPANY_LOGO
+            // 
             $scope.setPhotoType = function (photoType) {
                 $rootScope.photoType = photoType;
             };
@@ -2137,7 +1764,7 @@ var api = serverUrl + '/api';
             // pass user token to Web API
             // go to home, if the user is not logged in or does not have edit user privilege
             // just incase the user paste in the url for manage users
-            if (!$rootScope.User || $rootScope.User == null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
             $http({
                 method: 'POST',
@@ -2147,7 +1774,7 @@ var api = serverUrl + '/api';
             })
                 .then(function (response) {
                     $scope.perms = response.data;
-                    if ($scope.perms.EditUser == false)
+                    if ($scope.perms.EditUser === false)
                         $state.go('home');
                 });
         }]);
@@ -2219,7 +1846,7 @@ var api = serverUrl + '/api';
     app.controller('reportController', ['$scope', '$rootScope', '$sessionStorage', '$http', '$state', '$filter', 'groupByFactory', 'appFactory',
         function ($scope, $rootScope, $sessionStorage, $http, $state, $filter, groupByFactory, appFactory) {
             // TODO: Take care of users that should have access to this controller
-            if (!$rootScope.User || $rootScope.User == null) $state.go('home');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
 
             $scope.report = {
@@ -2265,19 +1892,20 @@ var api = serverUrl + '/api';
                     return $scope.total;
                 },
                 list: [
-                    { value: 'bill_statuses_grouped_by_tin_report', label: 'Bill Statuses By Forwarder' },
-                    { value: 'cargo_dispatched_weight_grouped_by_month_report', label: 'Cargo Dispatched Weight By Months' },
-                    { value: 'cargo_import_weight_grouped_by_tin_report', label: 'Cargo Import Weight By Forwarder' },
-                    { value: 'cargo_on_voyage_only_grouped_by_country_report', label: 'Cargo On Voyage Only By Country' },
-                    { value: 'problem_grouped_by_tin_report', label: 'Problems By Forwarder' },
-                    { value: 'problem_grouped_by_tin_unresolved_report', label: 'Problems By Forwarder Unresolved' },
-                    { value: 'demurrage_grouped_by_tin_report', label: 'Demurrage By Forwarder' },
-                    { value: 'demurrage_grouped_by_tin_active_report', label: 'Demurrage By Forwarder Active' },
-                    { value: 'transit_time_grouped_by_import_report', label: 'Transit Time From Origin By Bill Of Lading' },
-                    { value: 'transit_time_grouped_by_discharge_port_report', label: 'Transit Time From Discharge Port By Port' },
-                    { value: 'transit_time_grouped_by_country_report', label: 'Transit Time From Origin By Country Detailed' },
-                    { value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time From Origin By Country Summary' },
-                    { value: 'transit_time_grouped_by_tin_report', label: 'Transit Time From Origin By Forwarder' }
+                    { code:'012', value: 'bill_statuses_grouped_by_tin_report', label: 'Bill Statuses By Forwarder' },
+                    { code:'001', value: 'cargo_dispatched_weight_grouped_by_month_report', label: 'Cargo Dispatched Weight By Months' },
+                    { code:'002', value: 'cargo_import_weight_grouped_by_tin_report', label: 'Cargo Import Weight By Forwarder' },
+                    { code:'003', value: 'cargo_on_voyage_only_grouped_by_country_report', label: 'Cargo On Voyage Only By Country' },
+                    { code:'004', value: 'problem_grouped_by_tin_report', label: 'Problems By Forwarder' },
+                    { code:'005', value: 'problem_grouped_by_tin_unresolved_report', label: 'Problems By Forwarder Unresolved' },
+                    { code:'006', value: 'demurrage_grouped_by_tin_report', label: 'Demurrage By Forwarder' },
+                    { code:'007', value: 'demurrage_grouped_by_tin_active_report', label: 'Demurrage By Forwarder Active' },
+                    { code:'008', value: 'transit_time_grouped_by_import_report', label: 'Transit Time From Origin By Bill Of Lading' },
+                    { code:'008-1', value: 'transit_time_after_discharge_grouped_by_import_report', label: 'Transit Time After Discharge By Bill' },
+                    { code:'008-2', value: 'transit_time_after_discharge_grouped_by_discharge_port_report', label: 'Transit Time After Discharge By Port' },
+                    { code:'009', value: 'transit_time_grouped_by_country_report', label: 'Transit Time From Origin By Country Detailed' },
+                    { code:'010', value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time From Origin By Country Summary' },
+                    { code:'011', value: 'transit_time_grouped_by_tin_report', label: 'Transit Time From Origin By Forwarder' }
 
                 ],
                 loadView: function () {
@@ -2293,220 +1921,5 @@ var api = serverUrl + '/api';
 
         }]);
 
-
-    // TODO: Remove Custom Reports on go live until it's remodeled in the future
-    /*
-     * CUSTOM REPORTS FROM OLD MARILOG PROJECT
-     * This should be remodeled in the future as it is not guaranteed against SQL Injections
-     * plus the records returned are not accurate due to impossibility of
-     * accomodating all JOIN scenarios in a single SQL Statement.
-    */
-    app.controller('reportCustomCtrl', ['$scope', '$rootScope', '$http', '$state', '$sessionStorage', 'appFactory',
-        function ($scope, $rootScope, $http, $state, $sessionStorage, appFactory) {
-            if ($rootScope.User == undefined) { $state.go("login"); }
-
-            // $scope.formData { ReportName:'', CompanyID: '', Queries: [] }
-            // this is an angular model that holds information about 
-            // the report name, the kind of user based on CompanyID and sql queries which are sent to the Web API
-            $scope.formData = {
-                'ReportName': '',
-                'CompanyID': $rootScope.User.Company.ID,
-                'Queries': [],
-                'ConfigStatsTimes': $sessionStorage.configStatsTimes
-            };
-            $scope.message = '';
-
-
-
-            // ------------------------------- START OF DIRECTIVE -------
-
-            //------------------------------------- M A P P I N G   O F   C O L U M N S ---------------
-            // CUSTOM REPORTS SECTION
-            $scope.dbTables = null;
-            $scope.tableColumns = [];
-            $scope.column = {};
-
-            // hide or show the mapping settings page in customs report 
-            $scope.mapIsHidden = true;
-            $scope.controlHidden = true;
-
-            $scope.isFirstClause = true;
-            $scope.reportQuery = null;
-            $scope.customReport = [];
-            $scope.customReportHeaders = [];
-            $scope.currentColumnMapping = {};
-            $scope.initCustomReportQuery = function () {
-                $scope.customReportQuery = {
-                    'Queries': [],
-                    'CompanyTypeID': $rootScope.User.Company.CompanyTypeID,
-                    'CompanyID': $rootScope.User.Company.ID
-                };
-            };
-
-            // gets all possible column headers for custom reports
-            $scope.getCustomReportHeaders = function () {
-                $http({
-                    method: 'GET',
-                    url: api + '/reports' + '/ColumnHeaders',
-                    headers: { 'Content-Type': 'application/json' }
-                })
-                    .then(function (response) {
-                        $scope.customReportHeaders = response.data;
-                    });
-            };
-
-            $scope.initCustomReportQuery();
-            $scope.getCustomReportHeaders();
-
-            $scope.refillColumns = function () {
-                // set ColumnHeaders
-                if ($scope.customReportHeaders.length === 0) {
-                    $scope.getCustomReportHeaders();
-                }
-
-                if ($scope.currentColumnMapping === null
-                    || $scope.currentColumnMapping === undefined
-                    || $scope.currentColumnMapping.MappingModelParams === undefined) return;
-
-                // refill the colums for each model params table
-                $scope.tableColumns = [];
-                for (var i = 0; i < $scope.currentColumnMapping.MappingModelParams.length; i++) {
-                    $scope.getTableColumns($scope.currentColumnMapping.MappingModelParams[i].TableName, i);
-                }
-            };
-
-            $scope.getTableColumns = function (t, index) {
-                $http({
-                    method: 'GET', url: api + '/reports' + '/Columns?tableName=' + t, headers: { 'Content-Type': 'application/json' }
-                })
-                    .then(function (response) {
-                        $scope.tableColumns[index] = response.data;
-                    });
-            };
-
-            $scope.getDBTables = function (currentMap) {
-                // clear current report
-                $scope.customReport = [];
-
-                if (currentMap === null || currentMap === undefined || currentMap.Name === undefined) {
-                    $scope.currentColumnMapping = {
-                        'ColumnMappings': [],
-                        'MappingModelParams': []
-                    };
-
-                    // initialize the first 5 column mappings as true
-                    // set the rest as false
-                    for (var i in $scope.customReportHeaders) {
-                        if (i < 5) {
-                            $scope.currentColumnMapping.ColumnMappings.push(true);
-                            continue;
-                        }
-                        $scope.currentColumnMapping.ColumnMappings.push(false);
-                    }
-
-                }
-                else {
-                    $scope.currentColumnMapping = currentMap;
-                }
-
-                if ($scope.dbTables === null) {
-                    $http({
-                        method: 'GET', url: api + '/reports' + '/Tables', headers: { 'Content-Type': 'application/json' }
-                    })
-                        .then(function (response) {
-                            $scope.dbTables = response.data;
-
-                            // Then load Columns of the tables in $scope.currentColumnMapping.MappingModelParams[]
-                            $scope.refillColumns();
-                        });
-                }
-                else {
-                    $scope.refillColumns();
-                }
-            };
-
-
-            // push a new object to currentColumnMapping.MappingModelParams[]
-            // and load dbTables
-            $scope.addNewQuery = function () {
-                if ($scope.currentColumnMapping === null
-                    || $scope.currentColumnMapping === undefined
-                    || $scope.currentColumnMapping.MappingModelParams === undefined) {
-                    $scope.getDBTables($scope.currentColumnMapping);
-                }
-
-                $scope.currentColumnMapping.MappingModelParams.push({});
-            };
-
-
-            $scope.rptQueryBuilder = function (lOp, tbl, col, op, v) {
-                if ($scope.reportQuery != null) $scope.isFirstClause = false;
-                if (lOp == undefined) lOp = "";
-                if (v == undefined) v = "";
-
-                if (op == "LIKE") {
-                    $scope.reportQuery = " " + lOp + " " + tbl + "." + col + " " + op + " '%" + v + "%'";
-                }
-                else {
-                    $scope.reportQuery = " " + lOp + " " + tbl + "." + col + " " + op + " '" + v + "'";
-                }
-
-                return $scope.reportQuery;
-            };
-
-
-            // Reset all models used to build query including currentMappingParams
-            $scope.resetQuery = function () {
-                $scope.isFirstClause = true;
-                $scope.reportQuery = null;
-                $scope.mappingStatusMessage = undefined;
-                $scope.initCustomReportQuery();
-            };
-
-            $scope.resetAllQuery = function () {
-                $scope.currentColumnMapping = null;
-                $scope.resetQuery();
-            };
-
-            $scope.submitQuery = function () {
-                $scope.mappingStatusMessage = undefined;
-                // build all conditions from $scope.currentColumnMapping.MappingModelParams
-                var o = $scope.currentColumnMapping.MappingModelParams;
-                for (var i = 0; i < o.length; i++) {
-                    $scope.customReportQuery.Queries.push($scope.rptQueryBuilder(o[i].Lop, o[i].TableName, o[i].ColumnName, o[i].Op, o[i].Val));
-                }
-
-                // send queries to the server
-                $http({
-                    method: 'POST',
-                    url: api + '/reports' + '/Custom',
-                    data: $scope.customReportQuery,
-                    cache: false,
-                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                })
-                    .then(function (response) {
-                        $scope.customReport = response.data;
-                    }, function () {
-                        $scope.customReport = [];
-                    });
-
-                // reset query
-                $scope.resetQuery();
-            };
-
-            $scope.hideMapping = function () {
-                appFactory.setModalOpen(false);
-                $scope.mapIsHidden = true;
-            };
-
-            $scope.showMappingView = function () {
-                appFactory.setModalOpen(true); // remove extra scrollbar on <body>
-                $scope.controlHidden = false;
-                $scope.mapIsHidden = !$scope.mapIsHidden;
-
-                $scope.getDBTables($scope.currentColumnMapping);
-            };
-
-        }]);
 
 })();
