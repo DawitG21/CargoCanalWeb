@@ -555,7 +555,7 @@ var api = serverUrl + '/api';
                     return;
                 }
                 else if ($scope.newItem.CargoID.toString() === "1" | "4"
-                    && $scope.newItem.Quantity > 20 && $scope.newImport.Documents.length === 0) {
+                    && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
                     // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
                     $scope.disableAddToItems = true;
                     $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details, otherwise, attach supporting documents.';
