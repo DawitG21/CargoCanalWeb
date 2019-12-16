@@ -308,13 +308,13 @@ var api = serverUrl + '/api';
 
                 // for container = 1 and vehicle = 4, 
                 // user must enter item detail for quantity 20 and below
-                if ($scope.newItem.CargoID.toString() === "1" | "4"
+                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
                     && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
                     $scope.disableAddToItems = true;
                     $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
                     return;
                 }
-                else if ($scope.newItem.CargoID.toString() === "1" | "4"
+                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
                     && $scope.newItem.Quantity > 20 && $scope.newImport.Documents.length === 0) {
                     // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
                     $scope.disableAddToItems = true;
@@ -548,13 +548,13 @@ var api = serverUrl + '/api';
 
                 // for container = 1 and vehicle = 4, 
                 // user must enter item detail for quantity 20 and below
-                if ($scope.newItem.CargoID.toString() === "1" | "4"
+                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
                     && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
                     $scope.disableAddToItems = true;
                     $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
                     return;
                 }
-                else if ($scope.newItem.CargoID.toString() === "1" | "4"
+                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
                     && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
                     // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
                     $scope.disableAddToItems = true;
