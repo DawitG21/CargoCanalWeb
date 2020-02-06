@@ -11,11 +11,13 @@
             appFactory.showSubscriptionAlert();
 
             var shipmentCanvas, shipmentChart;
+            var forwarderActivityCanvas, forwarderActivityChart;
             var demurrageChart, demurrageCanvas;
             const suggestedMax = 5; // maximum step size
 
             $scope.daysOfShipmentActivity = $rootScope.days[2].value;
             $scope.daysOfDemurrageActivity = $rootScope.days[2].value;
+            $scope.daysOfForwarderActivity = $rootScope.days[2].value;
 
 
             $scope.dashboard = {
@@ -169,6 +171,84 @@
                         }, 5000);
                     }
                 },
+                forwarderActivity: {
+                    data: {},
+                    get: function (data) {
+                        // TODO: fetch only once script is done loading
+                        // send user token which the server would use to process dashboard data
+                        let max = 0;
+                        $scope.daysOfForwarderActivity = data || $scope.daysOfForwarderActivity;
+                        $scope.loadingForwarderActivity = true;
+
+                        // clear the existing chart
+                        if (forwarderActivityChart) {
+                            forwarderActivityChart.destroy();
+                        }
+
+                        // wait a few seconds
+                        $timeout(() => {
+
+                            $http({
+                                method: 'POST',
+                                url: api + '/importexport/dashboardforwardersactivityanalytics',
+                                data: { Token: $rootScope.User.Login.Token, Days: $scope.daysOfForwarderActivity },
+                                headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                            })
+                                .then(function (response) {
+                                    console.log('forwarders analytics', response.data);
+                                    // no data to draw Chart
+                                    if (response.data === null | undefined
+                                        || response.data.labels.length === 0) return;
+
+                                    $scope.dashboard.forwarderActivity.data = response.data;
+                                    $scope.chartOptions = {
+                                        backgroundColors: [
+                                            'rgba(0, 255, 0, 1)',
+                                            'rgba(255, 10, 182, 1)'
+                                        ],
+                                        borderColors: [
+                                            'rgba(62, 84, 121, 1)',
+                                            'rgba(255, 10, 182, 1)'
+                                        ]
+                                    };
+
+                                    $scope.dashboard.forwarderActivity.data.datasets = [{ data: [], backgroundColor: []}];
+
+                                    for (let i in $scope.dashboard.forwarderActivity.data.data) {
+                                        $scope.dashboard.forwarderActivity.data.datasets[0].data.push(
+                                            $scope.dashboard.forwarderActivity.data.data[i].length,
+                                            //label: $scope.dashboard.forwarderActivity.data.series[i]
+                                        );
+
+                                        let mod = i % $scope.chartOptions.borderColors.length;
+                                        $scope.dashboard.forwarderActivity.data.datasets[0].backgroundColor.push($scope.chartOptions.backgroundColors[i]);
+                                    }
+
+
+                                    // clear the existing chart
+                                    if (forwarderActivityChart) {
+                                        forwarderActivityChart.destroy();
+                                    }
+
+                                    forwarderActivityCanvas = chartjsFactory.setCanvas('canvas_forwarder_activity');
+                                    forwarderActivityChart = chartjsFactory.createChart('doughnut',
+                                        $scope.dashboard.forwarderActivity.data,
+                                        {
+                                            //layout: {
+                                            //    padding: {
+                                            //        left: 150,
+                                            //        right: 150,
+                                            //        top: 0,
+                                            //        bottom: 0
+                                            //    }
+                                            //}
+                                        });
+                                    $scope.loadingForwarderActivity = false;
+                                }, (error) => { $scope.loadingForwarderActivity = false; });
+
+                        }, 5000);
+                    }
+                },
                 demurrage: {
                     data: {},
                     get: function (data) {
@@ -277,8 +357,28 @@
             // Analytics: loading variables
             $scope.loadingShipments = true;
             $scope.loadingDemurrage = true;
+            $scope.loadingForwarderActivity = true;
             $scope.loadingTopImport = true;
             $scope.loadingTopExport = true;
+
+            $scope.showActiveForwarder = false;
+            $scope.showInactiveForwarder = false;
+
+            $scope.toggleActiveForwarder = function () {
+                if ($scope.showActiveForwarder) {
+                    $scope.showActiveForwarder = false;
+                } else {
+                    $scope.showActiveForwarder = true;
+                }
+            };
+
+            $scope.toggleInactiveForwarder = function () {
+                if ($scope.showInactiveForwarder) {
+                    $scope.showInactiveForwarder = false;
+                } else {
+                    $scope.showInactiveForwarder = true;
+                }
+            };
 
 
             // Analytics: Shipments - wait for DOM
@@ -290,6 +390,11 @@
             // Analytics: Demurrage - wait for DOM
             $timeout(() => {
                 $scope.dashboard.demurrage.get();
+            });
+
+            // Analytics: Forwarders Activity - wait for DOM
+            $timeout(() => {
+                $scope.dashboard.forwarderActivity.get();
             });
 
 

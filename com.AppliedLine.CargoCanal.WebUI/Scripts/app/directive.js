@@ -48,6 +48,14 @@
             templateUrl: 'views/directives/analytics_shipments.html'
         };
     });
+    
+    app.directive('dirAnalyticsForwardersActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/analytics_forwarder_activity.html'
+        };
+    });
 
     app.directive('dirAnalyticsDemurrage', function () {
         return {

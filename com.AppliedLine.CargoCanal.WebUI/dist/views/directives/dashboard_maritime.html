@@ -41,6 +41,23 @@
         <dir-loading ng-show="loadingDemurrage" class="loading"></dir-loading>
     </div>
 </div>
+<div class="row margin-0">
+    <div class="col-md-8">
+        <dir-analytics-forwarders-activity></dir-analytics-forwarders-activity>
+        <dir-loading ng-show="loadingForwarderActivity" class="loading"></dir-loading>
+    </div>
+    <div class="col-md-4 border-left">
+        <h6 class="mb-3"><i class="fa fa-caret-right pointer" ng-click="toggleActiveForwarder()"></i> {{dashboard.forwarderActivity.data.data[0].length}} Active Companies</h6>
+        <div ng-show="showActiveForwarder">
+            <p class="small text-capitalize text-truncate" title="{{c.company}}" ng-repeat="c in dashboard.forwarderActivity.data.data[0]">{{c.company}} &bull; {{c.lastActivity | date: "dd MMM yyyy 'at' h:mma"}}</p>
+        </div>
+
+        <h6 class="mb-3"><i class="fa fa-caret-right pointer" ng-click="toggleInactiveForwarder()"></i> {{dashboard.forwarderActivity.data.data[1].length}} Inactive Companies</h6>
+        <div ng-show="showInactiveForwarder">
+            <p class="small text-capitalize text-truncate" title="{{c.company}}" ng-repeat="c in dashboard.forwarderActivity.data.data[1]">{{c.company}} &bull; {{c.lastActivity}}</p>
+        </div>
+    </div>
+</div>
 <!--<div class="row margin-0">
     <div class="col-md-6">
         <div class="analytics-box">
