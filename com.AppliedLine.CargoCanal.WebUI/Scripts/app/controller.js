@@ -28,8 +28,7 @@ var api = serverUrl + '/api';
                 { label: '30 DAYS', value: 30 },
                 { label: '90 DAYS', value: 90 },
                 { label: '180 DAYS', value: 180 },
-                { label: '365 DAYS', value: 365 },
-                { label: '500 DAYS', value: 500 }
+                { label: '365 DAYS', value: 365 }
             ];
 
             // TODO: Get User Preference Cookie if it exists

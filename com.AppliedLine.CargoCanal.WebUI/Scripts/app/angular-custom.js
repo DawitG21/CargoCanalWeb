@@ -1587,8 +1587,7 @@ var api = serverUrl + '/api';
                 { label: '30 DAYS', value: 30 },
                 { label: '90 DAYS', value: 90 },
                 { label: '180 DAYS', value: 180 },
-                { label: '365 DAYS', value: 365 },
-                { label: '500 DAYS', value: 500 }
+                { label: '365 DAYS', value: 365 }
             ];
 
             // TODO: Get User Preference Cookie if it exists
@@ -3747,7 +3746,6 @@ var api = serverUrl + '/api';
                                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
                             })
                                 .then(function (response) {
-                                    console.log('forwarders analytics', response.data);
                                     // no data to draw Chart
                                     if (response.data === null | undefined
                                         || response.data.labels.length === 0) return;
@@ -3768,8 +3766,7 @@ var api = serverUrl + '/api';
 
                                     for (let i in $scope.dashboard.forwarderActivity.data.data) {
                                         $scope.dashboard.forwarderActivity.data.datasets[0].data.push(
-                                            $scope.dashboard.forwarderActivity.data.data[i].length,
-                                            //label: $scope.dashboard.forwarderActivity.data.series[i]
+                                            $scope.dashboard.forwarderActivity.data.data[i].length
                                         );
 
                                         let mod = i % $scope.chartOptions.borderColors.length;

@@ -195,7 +195,6 @@
                                 headers: { 'Content-Type': 'application/json; charset=utf-8' }
                             })
                                 .then(function (response) {
-                                    console.log('forwarders analytics', response.data);
                                     // no data to draw Chart
                                     if (response.data === null | undefined
                                         || response.data.labels.length === 0) return;
@@ -216,8 +215,7 @@
 
                                     for (let i in $scope.dashboard.forwarderActivity.data.data) {
                                         $scope.dashboard.forwarderActivity.data.datasets[0].data.push(
-                                            $scope.dashboard.forwarderActivity.data.data[i].length,
-                                            //label: $scope.dashboard.forwarderActivity.data.series[i]
+                                            $scope.dashboard.forwarderActivity.data.data[i].length
                                         );
 
                                         let mod = i % $scope.chartOptions.borderColors.length;

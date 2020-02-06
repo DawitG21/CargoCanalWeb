@@ -2,7 +2,7 @@
     <select ng-model="daysOfForwarderActivity" class="select-right"
             ng-options="d.value as d.label for d in days"
             ng-change="dashboard.forwarderActivity.get(daysOfForwarderActivity)"></select>
-    <h3 class="font-bold-600"><span class="fa fa-bar-chart color-theme"></span> Forwarders Activity Analytics</h3>
+    <h3 class="font-bold-600"><span class="fa fa-bar-chart color-theme"></span> Forwarders Summary</h3>
     <h6>Last {{daysOfForwarderActivity}} days of activity</h6>
     <hr />
     <canvas id="canvas_forwarder_activity" width="300" height="200"></canvas>

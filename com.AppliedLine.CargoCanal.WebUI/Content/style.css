@@ -490,6 +490,12 @@ i.loader-box-4 {
     padding: 20px;
 }
 
+.pre-scrollable-480 {
+    max-height: 480px;
+    overflow-y: scroll;
+    overflow: auto;
+}
+
 progress[value] {
     /* Reset the default appearance */
     -webkit-appearance: none;
