@@ -1,4 +1,5 @@
-﻿var serverUrl = 'http://localhost:52931';
+﻿//var serverUrl = 'http://localhost:52931';
+var serverUrl = 'https://appliedline.com/cargocanalapi';
 var api = serverUrl + '/api';
 
 (function () {
@@ -424,10 +425,10 @@ var api = serverUrl + '/api';
                         appFactory.showDialog('Import submitted successfully.');
                         $state.go('import');
                     },
-                    function (error) {
-                        $scope.disableButton = false; // enable the send button
-                        appFactory.showDialog('Import was not submitted.', true);
-                    });
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Import was not submitted.', true);
+                        });
             };
 
             // init import then load existing import collection
@@ -662,10 +663,10 @@ var api = serverUrl + '/api';
                         appFactory.showDialog('Export submitted successfully.');
                         $state.go('export');
                     },
-                    function (error) {
-                        $scope.disableButton = false; // enable the send button
-                        appFactory.showDialog('Export was not submitted.', true);
-                    });
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Export was not submitted.', true);
+                        });
             };
 
 
@@ -911,9 +912,9 @@ var api = serverUrl + '/api';
                             }
                             appFactory.showDialog('Problem <b>' + o.ProblemName + '</b> deleted successfully');
                         },
-                        function (error) {
-                            appFactory.showDialog('Unable to delete problem.', true);
-                        });
+                            function (error) {
+                                appFactory.showDialog('Unable to delete problem.', true);
+                            });
                 },
                 save: function () {
                     $http({
@@ -984,9 +985,9 @@ var api = serverUrl + '/api';
                             $scope.status.data.splice(0, 1);
                             appFactory.showDialog('Status deleted successfully');
                         },
-                        function (error) {
-                            appFactory.showDialog('Unable to delete status.', true);
-                        });
+                            function (error) {
+                                appFactory.showDialog('Unable to delete status.', true);
+                            });
                 },
                 save: function () {
                     // check if status already in status.data
@@ -1317,7 +1318,6 @@ var api = serverUrl + '/api';
 
     app.controller('createCompanyCtrl', ['$timeout', '$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',
         function ($timeout, $scope, $rootScope, $sessionStorage, $http, $state, appFactory) {
-
             // TODO: set user country by default
             // get user country
             //if (navigator.geolocation) {
@@ -1408,26 +1408,26 @@ var api = serverUrl + '/api';
                             $state.go('login');
                         }, 2000);
                     },
-                    function (error) {
-                        switch (error.status) {
-                            case 409 /* conflict */:
-                                appFactory.showDialog('Company name or TIN already exists.', true);
-                                break;
-                            default:
-                                switch (error.data.Message) {
-                                    case 'ERROR_EMAIL_CONFLICT':
-                                        appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>',
-                                            true);
-                                        break;
-                                    default:
-                                        appFactory.showDialog('Oops! Something went wrong.', true);
-                                        break;
-                                }
-                                break;
-                        }
+                        function (error) {
+                            switch (error.status) {
+                                case 409 /* conflict */:
+                                    appFactory.showDialog('Company name or TIN already exists.', true);
+                                    break;
+                                default:
+                                    switch (error.data.Message) {
+                                        case 'ERROR_EMAIL_CONFLICT':
+                                            appFactory.showDialog('Company not registered.<br><br><b>Email already exists.</b>',
+                                                true);
+                                            break;
+                                        default:
+                                            appFactory.showDialog('Oops! Something went wrong.', true);
+                                            break;
+                                    }
+                                    break;
+                            }
 
-                        $scope.disableButton = false; // enable button
-                    });
+                            $scope.disableButton = false; // enable button
+                        });
             };
 
             // get list of countries, company types
@@ -1892,20 +1892,20 @@ var api = serverUrl + '/api';
                     return $scope.total;
                 },
                 list: [
-                    { code:'012', value: 'bill_statuses_grouped_by_tin_report', label: 'Bill Statuses By Forwarder' },
-                    { code:'001', value: 'cargo_dispatched_weight_grouped_by_month_report', label: 'Cargo Dispatched Weight By Months' },
-                    { code:'002', value: 'cargo_import_weight_grouped_by_tin_report', label: 'Cargo Import Weight By Forwarder' },
-                    { code:'003', value: 'cargo_on_voyage_only_grouped_by_country_report', label: 'Cargo On Voyage Only By Country' },
-                    { code:'004', value: 'problem_grouped_by_tin_report', label: 'Problems By Forwarder' },
-                    { code:'005', value: 'problem_grouped_by_tin_unresolved_report', label: 'Problems By Forwarder Unresolved' },
-                    { code:'006', value: 'demurrage_grouped_by_tin_report', label: 'Demurrage By Forwarder' },
-                    { code:'007', value: 'demurrage_grouped_by_tin_active_report', label: 'Demurrage By Forwarder Active' },
-                    { code:'008', value: 'transit_time_grouped_by_import_report', label: 'Transit Time From Origin By Bill Of Lading' },
-                    { code:'008-1', value: 'transit_time_after_discharge_grouped_by_import_report', label: 'Transit Time After Discharge By Bill' },
-                    { code:'008-2', value: 'transit_time_after_discharge_grouped_by_discharge_port_report', label: 'Transit Time After Discharge By Port' },
-                    { code:'009', value: 'transit_time_grouped_by_country_report', label: 'Transit Time From Origin By Country Detailed' },
-                    { code:'010', value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time From Origin By Country Summary' },
-                    { code:'011', value: 'transit_time_grouped_by_tin_report', label: 'Transit Time From Origin By Forwarder' }
+                    { code: '012', value: 'bill_statuses_grouped_by_tin_report', label: 'Bill Statuses By Forwarder' },
+                    { code: '001', value: 'cargo_dispatched_weight_grouped_by_month_report', label: 'Cargo Dispatched Weight By Months' },
+                    { code: '002', value: 'cargo_import_weight_grouped_by_tin_report', label: 'Cargo Import Weight By Forwarder' },
+                    { code: '003', value: 'cargo_on_voyage_only_grouped_by_country_report', label: 'Cargo On Voyage Only By Country' },
+                    { code: '004', value: 'problem_grouped_by_tin_report', label: 'Problems By Forwarder' },
+                    { code: '005', value: 'problem_grouped_by_tin_unresolved_report', label: 'Problems By Forwarder Unresolved' },
+                    { code: '006', value: 'demurrage_grouped_by_tin_report', label: 'Demurrage By Forwarder' },
+                    { code: '007', value: 'demurrage_grouped_by_tin_active_report', label: 'Demurrage By Forwarder Active' },
+                    { code: '008', value: 'transit_time_grouped_by_import_report', label: 'Transit Time From Origin By Bill Of Lading' },
+                    { code: '008-1', value: 'transit_time_after_discharge_grouped_by_import_report', label: 'Transit Time After Discharge By Bill' },
+                    { code: '008-2', value: 'transit_time_after_discharge_grouped_by_discharge_port_report', label: 'Transit Time After Discharge By Port' },
+                    { code: '009', value: 'transit_time_grouped_by_country_report', label: 'Transit Time From Origin By Country Detailed' },
+                    { code: '010', value: 'transit_time_grouped_by_country_summary_report', label: 'Transit Time From Origin By Country Summary' },
+                    { code: '011', value: 'transit_time_grouped_by_tin_report', label: 'Transit Time From Origin By Forwarder' }
 
                 ],
                 loadView: function () {

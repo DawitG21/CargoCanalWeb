@@ -16,9 +16,6 @@ npm -v
 ```
 This project requires Gulp and only works with version 3.x. Installing a version 4.x will not work.
 
-This project requires Web Essentials extensions(by Mads Kristensen)  and only works with Visual Studio version 2016 |2017
-Installing a version greater than 2017 will not work as Web Essentials is not available in the later versions.
-
 # Build and Test
 TODO: Describe and show how to build your code and run the tests. 
 
