@@ -1,0 +1,76 @@
+﻿<div class="fullscreen" ng-show="preview.breakBulk.openWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="preview.breakBulk.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="text-uppercase modal-heading text">break bulk preview</h3>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <p>Date Initiated: {{preview.breakBulk.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+                            <article>
+                                <p>SHIP FROM</p>
+                                <p>{{preview.breakBulk.data.PortOfLoading}}</p>
+                            </article>                            
+                        </section>
+                        <section class="col">
+                            <p>Ref: {{preview.breakBulk.data.ImpExpTypeID}}</p>
+                            <article>
+                                <P>Date Inserted: {{preview.breakBulk.data.DateInserted | date: 'dd/MM/yyyy'}}</P>
+                                <p>Date Changed: {{preview.breakBulk.data.DateChanged | date: 'dd/MM/yyyy'}}</p>
+                                <p>Created By: {{preview.breakBulk.data.CreatedBy}}</p>
+                                <p>Changed By: {{preview.breakBulk.data.ChangedBy}}</p>
+                            </article>
+
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Break Bulk Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">MetricTon Transported</th>
+                                            <th class="text-nowrap">No of Vehicles</th>
+                                            <th class="text-nowrap">MetricTon Stored</th>
+                                            <th class="text-nowrap">Days at Port</th>                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.breakBulk.data.TransportedToCountryMetricTon}}</td>
+                                            <td>{{preview.breakBulk.data.NoOfVehicle}}</td>
+                                            <td>{{preview.breakBulk.data.StoredMetalMetricTon}}</td>
+                                            <td>{{preview.breakBulk.data.DaysAtPort}}</td>                                            
+                                        </tr>                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                   
+                    
+                    <div class="row">
+                        <section class="col">
+                            <p>REMARK: {{preview.breakBulk.data.Remark}}</p>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="attachment-wr">
+                                <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.breakBulk.data.Documents" ng-bind="f.DocumentName"></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

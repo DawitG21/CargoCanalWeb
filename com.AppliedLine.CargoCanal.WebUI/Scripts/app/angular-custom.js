@@ -6,14 +6,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $locationProvider.html5Mode(true); // pretty url with web.config set
     // catch all route
     // send users to the home page
-    $urlRouterProvider.otherwise('/home');
-
-    // TODO: for testing delete later
-    //$stateProvider.state('datepicker', {
-    //    url: '/dt',
-    //    templateUrl: 'scripts/angular-ui/datepicker-popup-demo.html',
-    //    controller: 'datepickerPopupController'
-    //});
+    $urlRouterProvider.otherwise('/home');  
 
     $stateProvider.state('home', {
         url: '/home',
@@ -59,54 +52,67 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         url: '/001',
         templateUrl: 'views/reports/cargo_dispatched_weight_grouped_by_month.html'
     });
+
     $stateProvider.state('report.cargo_import_weight_grouped_by_tin_report', {
         url: '/002',
         templateUrl: 'views/reports/cargo_import_weight_grouped_by_tin.html'
     });
+
     $stateProvider.state('report.cargo_on_voyage_only_grouped_by_country_report', {
         url: '/003',
         templateUrl: 'views/reports/cargo_on_voyage_only_grouped_by_country.html'
     });
+
     $stateProvider.state('report.problem_grouped_by_tin_report', {
         url: '/004',
         templateUrl: 'views/reports/problem_grouped_by_tin.html'
     });
+
     $stateProvider.state('report.problem_grouped_by_tin_unresolved_report', {
         url: '/005',
         templateUrl: 'views/reports/problem_grouped_by_tin_unresolved.html'
     });
+
     $stateProvider.state('report.demurrage_grouped_by_tin_report', {
         url: '/006',
         templateUrl: 'views/reports/demurrage_grouped_by_tin.html'
     });
+
     $stateProvider.state('report.demurrage_grouped_by_tin_active_report', {
         url: '/007',
         templateUrl: 'views/reports/demurrage_grouped_by_tin_active.html'
     });
+
     $stateProvider.state('report.transit_time_grouped_by_import_report', {
         url: '/008',
         templateUrl: 'views/reports/transit_time_grouped_by_import.html'
     });
+
     $stateProvider.state('report.transit_time_after_discharge_grouped_by_import_report', {
         url: '/008-1',
         templateUrl: 'views/reports/transit_time_after_discharge_grouped_by_import.html'
     });
+
     $stateProvider.state('report.transit_time_after_discharge_grouped_by_discharge_port_report', {
         url: '/008-2',
         templateUrl: 'views/reports/transit_time_after_discharge_grouped_by_discharge_port.html'
     });
+
     $stateProvider.state('report.transit_time_grouped_by_country_report', {
         url: '/009',
         templateUrl: 'views/reports/transit_time_grouped_by_country.html'
     });
+
     $stateProvider.state('report.transit_time_grouped_by_country_summary_report', {
         url: '/010',
         templateUrl: 'views/reports/transit_time_grouped_by_country_summary.html'
     });
+
     $stateProvider.state('report.transit_time_grouped_by_tin_report', {
         url: '/011',
         templateUrl: 'views/reports/transit_time_grouped_by_tin.html'
     });
+
     $stateProvider.state('report.bill_statuses_grouped_by_tin_report', {
         url: '/012',
         templateUrl: 'views/reports/bill_statuses_grouped_by_tin.html'
@@ -117,63 +123,76 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/dashboard.html',
         controller: 'dashboardController'
     });
+
     $stateProvider.state('account', {
         url: '/account',
         templateUrl: 'views/account.html',
         controller: 'accountCtrl'
     });
+
     $stateProvider.state('account.support', {
         url: '/support',
         templateUrl: 'views/support.html',
         controller: 'supportCtrl'
     });
+
     $stateProvider.state('account.uploadprofileimage', {
         url: '/upi',
         templateUrl: 'views/account_upload_profile_image.html'
     });
+
     $stateProvider.state('account.subscriptions', {
         url: '/subscriptions',
         templateUrl: 'views/account_subscriptions.html'
     });
+
     $stateProvider.state('account.users', {
         url: '/users',
         templateUrl: 'views/account_users.html',
         controller: 'adminCtrl'
     });
+
     $stateProvider.state('account.company', {
         url: '/company',
         templateUrl: 'views/account_company.html',
         controller: 'adminCtrl'
     });
+
     $stateProvider.state('account.company.uploadcompanylogo', {
         url: '/uclogo',
         templateUrl: 'views/account_upload_profile_image.html'
     });
+
     $stateProvider.state('login', {
         url: '/login',
         templateUrl: 'views/login.html',
         controller: 'loginController'
     });
+
     $stateProvider.state('register', {
         url: '/register',
         templateUrl: 'views/admin/create_company.html',
         controller: 'createConsigneeCtrl'
     });
+
     $stateProvider.state('maritime', {
         url: '/mt',
         templateUrl: 'views/admin/maritime.html',
         controller: 'maritimeController'
     });
+
     $stateProvider.state('maritime.import', {
         url: '/import',
         templateUrl: 'views/import/import_maritime.html',
         controller: 'importController'
     });
+
     $stateProvider.state('maritime.export', {
         url: '/export',
         templateUrl: 'views/export/export_maritime.html',
         controller: 'exportController'
     });
+
     $stateProvider.state('maritime.createcompany', {
         url: '/create/company',
         templateUrl: 'views/admin/create_company.html'
@@ -184,18 +203,22 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/import/import.html',
         controller: 'importController'
     });
+
     $stateProvider.state('import.add', {
         url: '/a',
         templateUrl: 'views/import/add_consignee.html'
     });
+
     $stateProvider.state('import.add.bill', {
         url: '/bill',
         templateUrl: 'views/import/add_bill.html'
     });
+
     $stateProvider.state('import.add.items', {
         url: '/items',
         templateUrl: 'views/import/add_items.html'
     });
+
     $stateProvider.state('import.add.carrier', {
         url: '/carrier',
         templateUrl: 'views/import/add_carrier.html'
@@ -206,25 +229,164 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         templateUrl: 'views/export/export.html',
         controller: 'exportController'
     });
+
     $stateProvider.state('export.add', {
         url: '/a',
         templateUrl: 'views/export/add_consignee.html'
     });
+
     $stateProvider.state('export.add.bill', {
         url: '/bill',
         templateUrl: 'views/export/add_bill.html'
     });
+
     $stateProvider.state('export.add.bill2', {
         url: '/stuffloc',
         templateUrl: 'views/export/add_bill2.html'
     });
+
     $stateProvider.state('export.add.items', {
         url: '/items',
         templateUrl: 'views/export/add_items.html'
     });
+
     $stateProvider.state('export.add.carrier', {
         url: '/carrier',
         templateUrl: 'views/export/add_carrier.html'
+    });
+
+    // Maritime Daily Activity Specific Functions
+ 
+    $stateProvider.state('breakbulk', {
+        url: '/breakbulk',
+        templateUrl: 'views/activitybreakbulk/break_bulk_activity.html',
+        controller: 'indexBreakBulkCtrl'
+    });
+
+    $stateProvider.state('breakbulk.create', {
+        url: '/create',
+        templateUrl: 'views/activitybreakbulk/create_breakbulk.html',
+        controller: 'indexBreakBulkCtrl'
+    });
+
+    $stateProvider.state('breakbulk.edit', {
+        url: '/edit',
+        templateUrl: 'views/activitybreakbulk/edit_breakbulk.html',
+        controller: 'indexBreakBulkCtrl'
+    });
+
+    ///
+    $stateProvider.state('multimodal', {
+        url: '/multimodal',
+        templateUrl: 'views/activitymultimodal/multi_modal_activity.html',
+        controller: 'indexmultiModalCtrl'
+    });
+
+    $stateProvider.state('multimodal.create', {
+        url: '/create',
+        templateUrl: 'views/activitymultimodal/create_multimodal.html',
+        controller: 'createMultiModalCtrl'
+    });
+
+    $stateProvider.state('multimodal.edit', {
+        url: '/edit',
+        templateUrl: 'views/activitymultimodal/edit_multimodal.html',
+        controller: 'editMultiModalCtrl'
+    });
+
+    ///
+    $stateProvider.state('unimodal', {
+        url: '/unimodal',
+        templateUrl: 'views/activityunimodal/uni_modal_activity.html',
+        controller: 'indexuniModalCtrl'
+    });
+
+    $stateProvider.state('unimodal.create', {
+        url: '/createl',
+        templateUrl: 'views/activityunimodal/create_unimodal.html',
+        controller: 'createUniModalCtrl'
+    });
+
+    $stateProvider.state('unimodal.edit', {
+        url: '/edit',
+        templateUrl: 'views/activityunimodal/edit_unimodal.html',
+        controller: 'editUniModalCtrl'
+    });
+
+    ///
+    $stateProvider.state('djiboutifreezone', {
+        url: '/djiboutifreezone',
+        templateUrl: 'views/activityfreezone/free_zone_activity.html',
+        controller: 'indexfreeZoneCtrl'
+    });
+
+    $stateProvider.state('djiboutifreezone.create', {
+        url: '/create',
+        templateUrl: 'views/activityfreezone/create_freezone.html',
+        controller: 'createFreeZoneCtrl'
+    });
+
+    $stateProvider.state('djiboutifreezone.edit', {
+        url: '/edit',
+        templateUrl: 'views/activityfreezone/edit_freezone.html',
+        controller: 'editFreeZoneCtrl'
+    });
+
+    ///
+    $stateProvider.state('drynonepacked', {
+        url: '/drynonepacked',
+        templateUrl: 'views/activitynonepacked/none_packed_activity.html',
+        controller: 'indexnonePackedCtrl'
+    });
+
+    $stateProvider.state('drynonepacked.create', {
+        url: '/create',
+        templateUrl: 'views/activitynonepacked/create_nonepacked.html',
+        controller: 'createNonePackedCtrl'
+    });
+
+    $stateProvider.state('drynonepacked.edit', {
+        url: '/edit',
+        templateUrl: 'views/activitynonepacked/edit_nonepacked.html',
+        controller: 'editNonePackedCtrl'
+    });
+
+    ///
+    $stateProvider.state('oiltransport', {
+        url: '/oiltransport',
+        templateUrl: 'views/activityoiltransport/oil_transport_activity.html',
+        controller: 'indexoilTransportCtrl'
+    });
+
+    $stateProvider.state('oiltransport.create', {
+        url: '/create',
+        templateUrl: 'views/activityoiltransport/create_oiltransport.html',
+        controller: 'createOilTransportCtrl'
+    });
+
+    $stateProvider.state('oiltransport.edit', {
+        url: '/edit',
+        templateUrl: 'views/activityoiltransport/edit_oiltransport.html',
+        controller: 'editOilTransportCtrl'
+    });
+
+    ///
+    $stateProvider.state('djiboutitajura', {
+        url: '/djiboutitajura',
+        templateUrl: 'views/admin/djibouti_tajura_activity.html',
+        controller: 'indexDjiboutiTajuraCtrl'
+    });
+
+    $stateProvider.state('djiboutitajura.create', {
+        url: '/create',
+        templateUrl: 'views/activitydjiboutitajura/create_djibouti_tajura.html',
+        controller: 'createDjiboutiTajuraCtrl'
+    });
+
+    $stateProvider.state('djiboutitajura.edit', {
+        url: '/edit',
+        templateUrl: 'views/activitydjiboutitajura/edit_djibouti_tajura.html',
+        controller: 'editDjiboutiTajuraCtrl'
     });
 }]);
 (function () {
@@ -351,7 +513,8 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         var _isTinValid = true;
         var service = {};
         var odataUrl = api.substring(0, api.indexOf('/api')) + '/odata';
-
+        var date = new Date();
+        
         service.setModalOpen = function (bool) {
             $rootScope.modalOpen = bool;
         };
@@ -450,6 +613,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 })
                     .then(function (response) {
                         $rootScope.pols = response.data;
+                        // console.log('Ports service', $rootScope.pols[0]);
                     });
             };
 
@@ -620,8 +784,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 //        })
                 //},
             };
-
-
 
             // preview function helpers
             $rootScope.preview = {
@@ -1262,6 +1424,54 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
 
         };
 
+        // get breakBulkActivities       
+        service.getBreakBulkActivities = function (skip, breakBulkActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';                
+                //fromDate = date | 'yyyy-MM-dd';
+                //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeBreakBulk(' + $rootScope.User.Company.ID + ')/SearchDailyBreakBulk' + odataParams;
+                   // console.log(fullUrl);
+                    dataParams = { 'skip': skip };
+                    //dataParams = { 'skip': skip, 'searchText': searchText, 'fromDate': fromDate, 'toDate': toDate };
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeBreakBulk(' + $rootScope.User.Company.ID + ')/SearchDailyBreakBulk' + odataParams;
+                  //  console.log(fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };
+                   // dataParams = { 'skip': skip, 'searchText': searchText, 'fromDate': fromDate, 'toDate': toDate, 'token': $rootScope.User.Login.Token };
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {                 
+                  // console.log('response',response.data.value);
+                    return {
+                        value: breakBulkActivities.concat(response.data.value),                       
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }                         
+                    };                   
+                },
+                function (error) {
+                    console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
         _initHelpers();
         return service;
     }]);
@@ -1310,7 +1520,6 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
         };
 
     }]);
-
 
     // initialize the defaults
     app.config(['datepickerProviderProvider', function (datepickerProviderProvider) {
@@ -1673,6 +1882,8 @@ var api = serverUrl + '/api';
                     case 'rail': return 'common-sprite railway-32';
                     case 'sea': return 'common-sprite ship-32';
                     case 'truck': return 'common-sprite truck-32';
+                    default:
+                        return 'common-sprite container-32';
                 }
             };
 
@@ -1763,18 +1974,9 @@ var api = serverUrl + '/api';
             // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
-
-            //$scope.retainDesc = function () {
-            //    if ($('#Description').length !== 0) {
-            //        // get the description value with jquery and assign it manually
-            //        var desc = $('#Description').val();
-            //        $scope.newImport.Items[0].Description = desc;
-            //    }
-            //}
-
+        
             // this determines what status is available for selection
             $scope.impExpType = 1;
-
 
             // this method is called when add import is clicked
             // it gets few of the value data required in the forms
@@ -1803,7 +2005,6 @@ var api = serverUrl + '/api';
 
                 $scope.hideCarrier = false;
             };
-
 
             // show the window to add item with details info
             // create a blank item object
@@ -2004,248 +2205,7 @@ var api = serverUrl + '/api';
                         }
                     });
             };
-
             $scope.getImports();
-
-        }]);
-
-    app.controller('exportController', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
-        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
-            // go to home, if the user is not logged in
-            // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
-            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
-
-
-            // hides the destination select box when adding items
-            $scope.exportmode = true;
-
-            // this determines what status is available for selection
-            $scope.impExpType = 2;
-
-
-            // this method is called when add import is clicked
-            // it gets few of the value data required in the forms
-            $scope.startExport = function () {
-                appFactory.getCarriers();
-                appFactory.getCountries();
-                appFactory.getImportExportReasons();
-                appFactory.getIncoTerms();
-                appFactory.getMots();
-                appFactory.getLocations($rootScope.User.Company.CountryID);
-            };
-
-            // loads all required values
-            $scope.startExport();
-
-            $scope.filterCarrier = function (model) {
-                $scope.motFilter = { 'ModeOfTransportID': $scope.newExport.ModeOfTransportID.toString() };
-
-                // remove Carrier and Vessel from model if pipe 4, truck 3
-                if (model.ModeOfTransportID === '4' || model.ModeOfTransportID === '3') {
-                    $scope.hideCarrier = true;
-                    //model.VesselID = undefined; // auto-complete implementaion for vessel
-                    model.Vessel = undefined;
-                    model.CarrierID = undefined;
-                    return;
-                }
-
-                $scope.hideCarrier = false;
-            };
-
-
-            // show the window to add item with details info
-            // create a blank item object
-            $scope.addNewItem = function () {
-                $scope.disableAddToItems = false;
-                $rootScope.showWindow = true;
-                appFactory.setModalOpen(true);
-                $scope.newItem = {
-                    ItemDetails: []
-                };
-
-                // get all cargos, units, stuffmodes and destination
-                appFactory.getCargos();
-                appFactory.getUnits();
-                appFactory.getStuffModes();
-            };
-
-            // adds the new item to the items collection
-            $scope.addNewItemToItems = function () {
-                $scope.validateItemDetails(); // checks item details exists as required
-                if ($scope.disableAddToItems) return;
-                $scope.newExport.Items.push($scope.newItem);
-                $rootScope.closeWindow();
-            };
-
-            // adds blank itemDetail object for creating
-            $scope.initItemDetail = function () {
-                $scope.newItemDetail = {};
-                $scope.showItemDetailEntry = true;
-            };
-
-            // adds itemDetail object to item.ItemDetails
-            $scope.addItemDetailToItem = function () {
-                // check for duplicate
-                for (var i in $scope.newItem.ItemDetails) {
-                    if ($scope.newItem.ItemDetails[i].ItemNumber.toLowerCase() === $scope.newItemDetail.ItemNumber.toLowerCase()) {
-                        $scope.itemDetailsMsg = 'Item detail already contain packing number "' + $scope.newItemDetail.ItemNumber + '".';
-                        $scope.disableAddToItems = true;
-                        return;
-                    }
-                }
-                $scope.newItem.ItemDetails.push($scope.newItemDetail);
-                $scope.showItemDetailEntry = false;
-                if ($scope.disableAddToItems) $scope.disableAddToItems = false;
-            };
-
-            // validate item.ItemDetails has atleast 1 count
-            $scope.validateItemDetails = function () {
-                if ($scope.newItem.ItemDetails.length === 0) {
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'Item detail information is required.';
-                    return;
-                }
-
-                // for container = 1 and vehicle = 4, 
-                // user must enter item detail for quantity 20 and below
-                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
-                    && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
-                    return;
-                }
-                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
-                    && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
-                    // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details, otherwise, attach supporting documents.';
-                    return;
-                }
-                $scope.disableAddToItems = false;
-            };
-
-
-            // attach file to import/export
-            $scope.uploadFiles = function (files, errFiles) {
-                $scope.existDocCount = $scope.newExport.Documents.length;
-                $scope.files = files;
-                $scope.errFiles = errFiles;
-
-                angular.forEach(files, function (file) {
-                    if ($scope.existDocCount === 0) {
-
-                        file.upload = Upload.upload({
-                            url: api + '/importexport/postdocument',
-                            data: { file: file }
-                        });
-
-                        file.upload.then(function (response) {
-                            $timeout(function () {
-                                // returns the document ID
-                                file.result = response.data;
-                                // attach new importExportDoc
-                                $scope.newExport.Documents.push({ DocumentID: file.result });
-
-                            });
-                        }, function (response) {
-                            if (response.status > 0)
-                                $scope.errorMsg = response.status + ': ' + response.data;
-                        }, function (evt) {
-                            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                        });
-                    }
-                    else $scope.existDocCount -= 1;
-                });
-            };
-
-            // removes attachment from UI and server
-            $scope.removeAttachment = function (index) {
-                var file = $scope.files[index];
-                // delete file from server using document id -> file.result
-                $http({
-                    method: 'DELETE',
-                    url: api + '/importexport/deletedocument?id=' + file.result
-                });
-
-                // remove file from collections
-                $scope.files.splice(index, 1);
-                $scope.newExport.Documents.splice(index, 1);
-            };
-
-            // removes itemDetail object from item.ItemDetails
-            $scope.removeItemDetail = function (index) {
-                $scope.newItem.ItemDetails.splice(index, 1);
-            };
-
-            // hide the itemDetail entry 
-            $scope.hideItemDetailEntry = function () {
-                $scope.showItemDetailEntry = false;
-            };
-
-            // remove an item from the items collection
-            $scope.removeItem = function (index) {
-                $scope.newExport.Items.splice(index, 1);
-            };
-
-            // init variables for add export
-            $scope.initExport = function () {
-                appFactory.setIsTinValid(true);
-                $scope.disableButton = false; // enable the send button
-
-                // Create new export object
-                $scope.newExport = {
-                    CompanyID: $rootScope.User.Person.CompanyID,
-                    CreatedBy: $rootScope.User.Person.ID,
-                    CountryID: $rootScope.User.Company.CountryID,
-                    Export: {},
-                    Items: [],
-                    LC: {},
-                    Documents: []
-                };
-
-                // attachment model
-                $scope.files = undefined;
-            };
-
-            // send the new Export collection
-            $scope.sendExport = function () {
-                $scope.disableButton = true; // disable the send button
-
-                $http({
-                    method: 'POST',
-                    url: api + '/importexport/postexport',
-                    data: $scope.newExport,
-                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                })
-                    .then(function (response) {
-                        // go to the import list page and refresh the list
-                        appFactory.showDialog('Export submitted successfully.');
-                        $state.go('export');
-                    },
-                        function (error) {
-                            $scope.disableButton = false; // enable the send button
-                            appFactory.showDialog('Export was not submitted.', true);
-                        });
-            };
-
-
-            // init export then load existing export collection
-            $scope.exports = [];
-            $scope.getExports = function () {
-                var skip = $scope.exports.length;
-                appFactory.getExports($scope.exports.length, $scope.exports)
-                    .then(function (data) {
-                        if (data !== null) {
-                            $scope.exports = data.value;
-                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
-                            $scope.odataInfo = data.odataInfo;
-                            appFactory.prepCards();
-                        }
-                    });
-            };
-
-            // get most recent exports for company
-            $scope.getExports();
 
         }]);
 
@@ -2866,6 +2826,246 @@ var api = serverUrl + '/api';
 
         }]);
 
+    app.controller('exportController', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
+            // go to home, if the user is not logged in
+            // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+
+            // hides the destination select box when adding items
+            $scope.exportmode = true;
+
+            // this determines what status is available for selection
+            $scope.impExpType = 2;
+
+
+            // this method is called when add import is clicked
+            // it gets few of the value data required in the forms
+            $scope.startExport = function () {
+                appFactory.getCarriers();
+                appFactory.getCountries();
+                appFactory.getImportExportReasons();
+                appFactory.getIncoTerms();
+                appFactory.getMots();
+                appFactory.getLocations($rootScope.User.Company.CountryID);
+            };
+
+            // loads all required values
+            $scope.startExport();
+
+            $scope.filterCarrier = function (model) {
+                $scope.motFilter = { 'ModeOfTransportID': $scope.newExport.ModeOfTransportID.toString() };
+
+                // remove Carrier and Vessel from model if pipe 4, truck 3
+                if (model.ModeOfTransportID === '4' || model.ModeOfTransportID === '3') {
+                    $scope.hideCarrier = true;
+                    //model.VesselID = undefined; // auto-complete implementaion for vessel
+                    model.Vessel = undefined;
+                    model.CarrierID = undefined;
+                    return;
+                }
+
+                $scope.hideCarrier = false;
+            };
+
+
+            // show the window to add item with details info
+            // create a blank item object
+            $scope.addNewItem = function () {
+                $scope.disableAddToItems = false;
+                $rootScope.showWindow = true;
+                appFactory.setModalOpen(true);
+                $scope.newItem = {
+                    ItemDetails: []
+                };
+
+                // get all cargos, units, stuffmodes and destination
+                appFactory.getCargos();
+                appFactory.getUnits();
+                appFactory.getStuffModes();
+            };
+
+            // adds the new item to the items collection
+            $scope.addNewItemToItems = function () {
+                $scope.validateItemDetails(); // checks item details exists as required
+                if ($scope.disableAddToItems) return;
+                $scope.newExport.Items.push($scope.newItem);
+                $rootScope.closeWindow();
+            };
+
+            // adds blank itemDetail object for creating
+            $scope.initItemDetail = function () {
+                $scope.newItemDetail = {};
+                $scope.showItemDetailEntry = true;
+            };
+
+            // adds itemDetail object to item.ItemDetails
+            $scope.addItemDetailToItem = function () {
+                // check for duplicate
+                for (var i in $scope.newItem.ItemDetails) {
+                    if ($scope.newItem.ItemDetails[i].ItemNumber.toLowerCase() === $scope.newItemDetail.ItemNumber.toLowerCase()) {
+                        $scope.itemDetailsMsg = 'Item detail already contain packing number "' + $scope.newItemDetail.ItemNumber + '".';
+                        $scope.disableAddToItems = true;
+                        return;
+                    }
+                }
+                $scope.newItem.ItemDetails.push($scope.newItemDetail);
+                $scope.showItemDetailEntry = false;
+                if ($scope.disableAddToItems) $scope.disableAddToItems = false;
+            };
+
+            // validate item.ItemDetails has atleast 1 count
+            $scope.validateItemDetails = function () {
+                if ($scope.newItem.ItemDetails.length === 0) {
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'Item detail information is required.';
+                    return;
+                }
+
+                // for container = 1 and vehicle = 4, 
+                // user must enter item detail for quantity 20 and below
+                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
+                    && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
+                    return;
+                }
+                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
+                    && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
+                    // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details, otherwise, attach supporting documents.';
+                    return;
+                }
+                $scope.disableAddToItems = false;
+            };
+
+
+            // attach file to import/export
+            $scope.uploadFiles = function (files, errFiles) {
+                $scope.existDocCount = $scope.newExport.Documents.length;
+                $scope.files = files;
+                $scope.errFiles = errFiles;
+
+                angular.forEach(files, function (file) {
+                    if ($scope.existDocCount === 0) {
+
+                        file.upload = Upload.upload({
+                            url: api + '/importexport/postdocument',
+                            data: { file: file }
+                        });
+
+                        file.upload.then(function (response) {
+                            $timeout(function () {
+                                // returns the document ID
+                                file.result = response.data;
+                                // attach new importExportDoc
+                                $scope.newExport.Documents.push({ DocumentID: file.result });
+
+                            });
+                        }, function (response) {
+                            if (response.status > 0)
+                                $scope.errorMsg = response.status + ': ' + response.data;
+                        }, function (evt) {
+                            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                        });
+                    }
+                    else $scope.existDocCount -= 1;
+                });
+            };
+
+            // removes attachment from UI and server
+            $scope.removeAttachment = function (index) {
+                var file = $scope.files[index];
+                // delete file from server using document id -> file.result
+                $http({
+                    method: 'DELETE',
+                    url: api + '/importexport/deletedocument?id=' + file.result
+                });
+
+                // remove file from collections
+                $scope.files.splice(index, 1);
+                $scope.newExport.Documents.splice(index, 1);
+            };
+
+            // removes itemDetail object from item.ItemDetails
+            $scope.removeItemDetail = function (index) {
+                $scope.newItem.ItemDetails.splice(index, 1);
+            };
+
+            // hide the itemDetail entry 
+            $scope.hideItemDetailEntry = function () {
+                $scope.showItemDetailEntry = false;
+            };
+
+            // remove an item from the items collection
+            $scope.removeItem = function (index) {
+                $scope.newExport.Items.splice(index, 1);
+            };
+
+            // init variables for add export
+            $scope.initExport = function () {
+                appFactory.setIsTinValid(true);
+                $scope.disableButton = false; // enable the send button
+
+                // Create new export object
+                $scope.newExport = {
+                    CompanyID: $rootScope.User.Person.CompanyID,
+                    CreatedBy: $rootScope.User.Person.ID,
+                    CountryID: $rootScope.User.Company.CountryID,
+                    Export: {},
+                    Items: [],
+                    LC: {},
+                    Documents: []
+                };
+
+                // attachment model
+                $scope.files = undefined;
+            };
+
+            // send the new Export collection
+            $scope.sendExport = function () {
+                $scope.disableButton = true; // disable the send button
+
+                $http({
+                    method: 'POST',
+                    url: api + '/importexport/postexport',
+                    data: $scope.newExport,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the import list page and refresh the list
+                        appFactory.showDialog('Export submitted successfully.');
+                        $state.go('export');
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Export was not submitted.', true);
+                        });
+            };
+
+
+            // init export then load existing export collection
+            $scope.exports = [];
+            $scope.getExports = function () {
+                var skip = $scope.exports.length;
+                appFactory.getExports($scope.exports.length, $scope.exports)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.exports = data.value;
+                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            // get most recent exports for company
+            $scope.getExports();
+
+        }]);
+
     app.controller('maritimeController', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
         function ($scope, $rootScope, $http, $state, appFactory) {
             // Maritime Specific Functions
@@ -3479,7 +3679,6 @@ var api = serverUrl + '/api';
             };
 
         }]);
-
 
 })();
 (function () {
@@ -4420,6 +4619,446 @@ var api = serverUrl + '/api';
         }]);
 
 })();
+(function () {
+    'use strict';
+
+    app.controller('activityController', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+            function confirmActivityDelete(d, pindex, cindex, model, message, fnc) {
+                $scope.confirmed = false;
+                if (!d && model) {
+                    d = model.d;
+                    $scope.confirmed = true;
+                    $rootScope.closeDialog(); // close the confirm dialog
+                }
+
+                // d should exist by now
+                //if (!d || $scope.invalidOperation(d)) {
+                //    return undefined;
+                //}
+
+                // show confirm dialog before recycle
+                if (!$scope.confirmed) {
+                    appFactory.showDialog(message.replace('#BREAKBULK#', d.ID), null, true, fnc);
+                    model = {
+                        d: d,
+                        pindex: pindex,
+                        cindex: cindex
+                    };
+                }
+
+                return model;
+            }
+
+            $scope.deleteActivity = function (d, pindex, cindex) {
+                $scope.recycleData = confirmActivityDelete(d,
+                    pindex,
+                    cindex,
+                    $scope.recycleData,
+                    'You will no longer have access to this activity (#BREAKBULK#). Do you want to continue',
+                    $scope.deleteActivity);
+
+                if (!$scope.confirmed) return false;
+
+                $http({
+                    method: 'DELETE',
+                    url: api + '/maritime/DeleteDailyBreakBulk/' + $scope.recycleData.d.ID,
+                    data: { ID: $scope.recycleData.d.ID, Token: $rootScope.User.Login.Token },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        if ($scope.breakBulkActivities === undefined)
+                            $scope.groupedBreakBulks[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true;
+
+                        appFactory.showDialog('Activity has been recycled.');
+                        $rootScope.refresh();
+                    },
+                        function (error) {
+                            appFactory.showDialog('Unable to delete activity.', true);
+                        });
+            };
+
+            $scope.preview = {
+                'breakBulk': {
+                    openWindow: false,
+                    data: {},
+                    show: function (o) {
+                        $scope.preview.breakBulk.data = o;
+                        $scope.preview.breakBulk.openWindow = true;
+                        appFactory.setModalOpen(true);
+                    },
+                    closeWindow: function () {
+                        $scope.preview.breakBulk.data = {};
+                        $scope.preview.breakBulk.openWindow = false;
+                        appFactory.setModalOpen(false);
+                    }
+                }
+            };
+        }]);
+
+    app.controller('indexBreakBulkCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
+
+            // console.log('this page is reached');
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $scope.searchBreakBulk = function (searchIsNew) {
+                if ($scope.searchText === undefined) $scope.searchText = '';
+
+                if (searchIsNew) {
+                    $scope.breakBulkActivities = [];
+                    $scope.groupedBreakBulks = [];
+                }
+
+                appFactory.getBreakBulkActivities($scope.breakBulkActivities.length, $scope.breakBulkActivities, $scope.searchText)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.breakBulkActivities = data.value;
+                            $scope.groupedBreakBulks = $filter('groupByDate')($scope.breakBulkActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+
+                        }
+                    });
+            };
+
+            // this determines what status is available for selection
+            $scope.impExpTypeId = 1;
+
+            // this method is called when add break bulk is clicked
+            // it gets few of the value data required in the forms
+            $scope.initUISelections = function () {
+                appFactory.getCountries();
+            };
+
+            // loads all required values and clean up
+            $scope.initUISelections();
+
+            // init variables for add/edit break bulk
+            $scope.initBreakBulk = function () {
+
+                // Create a new break bulk object
+                $scope.newBreakBulk = {
+                    companyID: $rootScope.User.Person.CompanyID,
+                    impExpTypeId: 1,
+                    createdBy: $rootScope.User.Person.ID,
+                };
+            };
+
+            // save the new break bulk object
+            $scope.createBreakBulk = function () {
+                // disable the send button
+                //$scope.disableButton = true;
+
+                $http({
+                    method: 'POST',
+                    url: api + '/maritime/PostDailyBreakBulk',
+                    data: $scope.newBreakBulk,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the break bulk list page and refresh the list
+                        appFactory.showDialog('Break bulk submitted successfully.');
+                        //$rootScope.refresh();                     
+                        //$state.go('breakbulk');                     
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Break bulk was not submitted.', true);
+                          
+                        });
+            };
+
+            //
+            // init variables for update break bulk
+            $scope.editActivity = function (d) {                      
+                // init break bulk object
+                $scope.editBreakBulk = {
+                    id: d.ID,
+                    companyID: d.CompanyID,
+                    impExpTypeId: d.ImpExpTypeID,
+                    createdBy: d.CreatedBy,
+                    changedBy: $rootScope.User.Person.ID,                    
+                    daysAtPort: d.DaysAtPort,
+                    noOfVehicle: d.NoOfVehicle,
+                    storedMetalMetricTon: d.StoredMetalMetricTon,
+                    transportedToCountryMetricTon: d.TransportedToCountryMetricTon,
+                    dateInitiated: d.DateInitiated,
+                    remark: d.Remark,                  
+                };
+                $state.go('breakbulk.edit')
+            };
+
+            // save the updated break bulk object
+            $scope.updateBreakBulk = function () {
+
+                $http({
+                    method: 'PUT',
+                    url: api + '/maritime/PutDailyBreakBulk',
+                    data: $scope.editBreakBulk,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the break bulk list page and refresh the list
+                        // disable the save button
+                        $scope.disableButton = true;
+                        appFactory.showDialog('Break bulk updated successfully.');
+                      //  console.log('responseUpdate', response);
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false;
+                            appFactory.showDialog('Break bulk was not updated.', true);
+                          //  console.log('responseUpdateErr', error);
+                        });
+            };   
+
+            // init breakbulk then load existing breakbulk collection
+            $scope.breakBulkActivities = [];
+            $scope.getBreakBulkActivities = function () {
+                // get ongoing breakbulk activities for company
+                appFactory.getBreakBulkActivities($scope.breakBulkActivities.length, $scope.breakBulkActivities)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.breakBulkActivities = data.value;
+                            $scope.groupedBreakBulks = $filter('groupByDate')($scope.breakBulkActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            $scope.getBreakBulkActivities();
+
+        }]);   
+
+    ///
+    app.controller('indexmultiModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createMultiModalCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editMultiModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    ///
+    app.controller('indexuniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createUniModalCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editUniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    ///
+    app.controller('indexfreeZoneCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createFreeZoneCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editFreeZoneCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    ///
+    app.controller('indexnonePackedCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createNonePackedCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editNonePackedCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    ///
+    app.controller('indexoilTransportCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createOilTransportCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editOilTransportCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    ///
+    app.controller('indexDjiboutiTajuraCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+
+    app.controller('createDjiboutiTajuraCtrl', ['$scope', '$rootScope', '$http', '$state',
+        function ($scope, $rootScope, $http, $state) {
+            // pass user token to Web API
+            // go to home, if the user is not logged in or does not have edit user privilege
+            // just incase the user paste in the url for manage users
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+            $http({
+                method: 'POST',
+                url: api + '/maritime/PostDailyBreakBulk',
+                data: $rootScope.User.Login,
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(function (response) {
+                    $scope.perms = response.data;
+                    if ($scope.perms.EditUser === false)
+                        $state.go('home');
+                });
+        }]);
+
+    app.controller('editDjiboutiTajuraCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
+        function ($scope, $rootScope, $http, $state, appFactory) {
+            if ($rootScope.User === undefined ||
+                $rootScope.User.Company === undefined ||
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+
+        }]);
+})();
 app.controller('datepickerPopupController', ['$scope', 'uibDateParser', 'datepickerProvider', function ($scope, uibDateParser, datepickerProvider) {
     // initialize the dateOptions
     $scope.dateOptions = datepickerProvider.getDateOptions();
@@ -4662,14 +5301,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             transclude: true,
             templateUrl: 'views/directives/tin_or_lc_data.html'
         };
-    });
-    app.directive('dirOptionsMoreWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_more_window.html'
-        };
-    });
+    });    
     app.directive('dirExportSummary', function () {
         return {
             restrict: 'E',
@@ -4893,6 +5525,48 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             }
         };
     }]);
+
+    app.directive('dirOptionsMobileWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_more_window.html'
+        };
+    });
+
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
+
+    app.directive('dirDailyActivity', function () {
+        return {         
+            restrict: 'E',
+            transclude: true,            
+            templateUrl: 'views/directives/activity/dailyactivity.html'
+        };
+    });
+
+    app.directive('dirOptionsMobileActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_activity.html'
+        };
+    });
+
+    app.directive('dirBreakBulk', function () {
+        return {
+            require: 'indexBreakBulkCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/break_bulk.html'
+        };
+    });
 
     app.directive('stringToNumber', function () {
         return {

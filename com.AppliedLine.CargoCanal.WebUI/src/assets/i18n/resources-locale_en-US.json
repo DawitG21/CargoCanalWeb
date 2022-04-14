@@ -1345,6 +1345,11 @@
     "description": "Done text"
   },
   {
+    "key": "_Edit_",
+    "value": "Edit",
+    "description": "Edit text"
+  },
+  {
     "key": "_RegSuccess_",
     "value": "Registration Successful",
     "description": "Registration Successful text"
@@ -1358,5 +1363,15 @@
     "key": "_ClickLoginButton_",
     "value": "Click the login button to access your account.",
     "description": "Click the login button to access your account text"
+  },
+  {
+    "key": "_Maritime_",
+    "value": "Maritime Activity",
+    "description": "Maritime Activity text"
+  },
+  {
+    "key": "_DaysAtPort_",
+    "value": "Days At Port",
+    "description": "Days At Port text"
   }
 ]

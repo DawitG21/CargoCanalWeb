@@ -24,6 +24,7 @@
     "value": "አሁን ምንም ዶክመት የለም",
     "description": "No Document right now text"
   },
+
   {
     "key": "_Success_",
     "value": "ተሳክቷል",
@@ -1345,6 +1346,11 @@
     "description": "Done text"
   },
   {
+    "key": "_Edit_",
+    "value": "ተከናውኗል",
+    "description": "Edit text"
+  },
+  {
     "key": "_RegSuccess_",
     "value": "ምዝገባዉ ተሳክቷል",
     "description": "Registration Successful text"
@@ -1358,5 +1364,15 @@
     "key": "_ClickLoginButton_",
     "value": "የሚለዉን በመጫን አካዉንተዎን ይጠቀሙ",
     "description": "Click the login button to access your account text"
+  },
+  {
+    "key": "_Maritime_",
+    "value": "ዕለታዊ እንቅስቃሴ",
+    "description": "Maritime Activity text"
+  },
+  {
+    "key": "_DaysAtPort_",
+    "value": "አሁን ምንም ዶክመት የለም",
+    "description": "Days At Port text"
   }
 ]

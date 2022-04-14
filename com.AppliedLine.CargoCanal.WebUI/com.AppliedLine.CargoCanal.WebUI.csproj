@@ -3687,6 +3687,7 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\app\controller.portactivity.js" />
     <Content Include="Scripts\app\controller.comment.js" />
     <Content Include="Scripts\app\controller.dashboard.js" />
     <Content Include="Scripts\app\controller.login.js" />
@@ -5441,9 +5442,40 @@
     <Content Include="src\lib\cards.min.js" />
     <Content Include="src\lib\datatables.min.js" />
     <Content Include="src\lib\jgeez.min.js" />
+    <Content Include="views\activitydjiboutitajura\djibouti_tajura.html" />
+    <Content Include="views\activitydjiboutitajura\djibouti_tajura_activity.html" />
+    <Content Include="views\activitydjiboutitajura\create_djibouti_tajura.html" />
+    <Content Include="views\activitydjiboutitajura\edit_djibouti_tajura.html" />
+    <Content Include="views\activityunimodal\uni_modal.html" />
+    <Content Include="views\activityunimodal\uni_modal_activity.html" />
+    <Content Include="views\activityunimodal\create_unimodal.html" />
+    <Content Include="views\activityunimodal\edit_unimodal.html" />
+    <Content Include="views\activityfreezone\free_zone.html" />
+    <Content Include="views\activityfreezone\free_zone_activity.html" />
+    <Content Include="views\activityfreezone\create_freezone.html" />
+    <Content Include="views\activityfreezone\edit_freezone.html" />
+    <Content Include="views\activitynonepacked\none_packed.html" />
+    <Content Include="views\activitynonepacked\none_packed_activity.html" />
+    <Content Include="views\activitynonepacked\create_nonepacked.html" />
+    <Content Include="views\activitynonepacked\edit_nonepacked.html" />
+    <Content Include="views\activityoiltransport\oil_transport.html" />
+    <Content Include="views\activityoiltransport\oil_transport_activity.html" />
+    <Content Include="views\activityoiltransport\create_oiltransport.html" />
+    <Content Include="views\activityoiltransport\edit_oiltransport.html" />
+    <Content Include="views\activitymultimodal\multi_modal.html" />
+    <Content Include="views\activitymultimodal\multi_modal_activity.html" />
+    <Content Include="views\activitymultimodal\create_multimodal.html" />
+    <Content Include="views\activitymultimodal\edit_multimodal.html" />
+    <Content Include="views\activitybreakbulk\break_bulk_activity.html" />
+    <Content Include="views\activitybreakbulk\create_breakbulk.html" />
+    <Content Include="views\activitybreakbulk\edit_breakbulk.html" />
+    <Content Include="views\directives\activity\dailyactivity.html" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
     <Content Include="views\directives\analytics_forwarder_activity.html" />
+    <Content Include="views\directives\activity\break_bulk.html" />
+    <Content Include="views\directives\break_bulk_preview.html" />
+    <Content Include="views\directives\options_mobile_activity.html" />
     <Content Include="views\directives\report_no_result.html" />
     <Content Include="views\directives\comment.html" />
     <Content Include="views\directives\analytics_demurrage.html" />
@@ -9900,6 +9932,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

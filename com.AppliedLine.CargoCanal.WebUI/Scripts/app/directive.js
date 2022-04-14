@@ -122,14 +122,7 @@
             transclude: true,
             templateUrl: 'views/directives/tin_or_lc_data.html'
         };
-    });
-    app.directive('dirOptionsMoreWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_more_window.html'
-        };
-    });
+    });    
     app.directive('dirExportSummary', function () {
         return {
             restrict: 'E',
@@ -353,6 +346,48 @@
             }
         };
     }]);
+
+    app.directive('dirOptionsMobileWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_more_window.html'
+        };
+    });
+
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
+
+    app.directive('dirDailyActivity', function () {
+        return {         
+            restrict: 'E',
+            transclude: true,            
+            templateUrl: 'views/directives/activity/dailyactivity.html'
+        };
+    });
+
+    app.directive('dirOptionsMobileActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_activity.html'
+        };
+    });
+
+    app.directive('dirBreakBulk', function () {
+        return {
+            require: 'indexBreakBulkCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/break_bulk.html'
+        };
+    });
 
     app.directive('stringToNumber', function () {
         return {

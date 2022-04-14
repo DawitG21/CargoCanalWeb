@@ -1,0 +1,15 @@
+﻿<div ui-view>
+    <div class="toolbox">
+        <div class="form-inline">
+            <form class="form-group" ng-submit="searchBreakBulk(true)">
+                <div class="control-group">
+                    <input class="control-group-textbox" type="search" placeholder="Search" ng-model="searchText" />
+                    <i class="control-group-button" ng-click="searchBreakBulk(true)"><span class="oi oi-magnifying-glass"></span></i>
+                </div>
+            </form>
+            <a ui-sref="breakbulk.create"  ng-click="initBreakBulk()"><span class="oi oi-plus"></span> Add Break Bulk</a>
+            <a href="" ng-click="refresh()"><span class="oi oi-reload"></span> Refresh</a>
+        </div>
+    </div>
+    <dir-break-bulk></dir-break-bulk>
+</div>

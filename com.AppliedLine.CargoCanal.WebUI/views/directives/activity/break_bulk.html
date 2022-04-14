@@ -1,0 +1,77 @@
+﻿<div class="overflow-auto margin-bottom-15">
+    <p class="pull-left">Showing {{breakBulkActivities.length}} records</p>
+    <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getBreakBulkActivities()">More Records &raquo;</button>
+    <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchBreakBulk()">More Records &raquo;</button>
+</div>
+
+<div ng-repeat="gbBulk in groupedBreakBulks">
+    <div class="list-group-item-heading">
+        <h3>{{gbBulk.key | date:'fullDate'}}</h3>
+    </div>
+
+    <div class="card slide-up" ng-repeat="d in gbBulk.value">
+        <section class="card-options">
+            <aside class="card-options-btn"></aside>
+            <article class="card-options-content">
+                <div class="card-options-more-btn common-sprite fullscreen_black_24" ng-click="optionsMore.show(d, $parent.$index, $index)"></div>
+
+                <div class="square-wrapper" ng-click="preview.breakBulk.show(d)">
+                    <div class="square-img-wr">
+                        <span class="card-option icon">
+                            <span class="common-sprite container-32"></span>
+                            <i class="badge icon-data">{{d.ID}}</i>
+                        </span>
+                    </div>
+                    <p class="square-text" data-i18n="_Preview_">Preview</p>
+                </div>
+
+                <div ui-sref="breakbulk.edit" class="square-wrapper" ng-click="editActivity(d)">
+                    <div class="square-img-wr">
+                        <span class="card-option icon">
+                            <span class="common-sprite done-32"></span>
+                        </span>
+                    </div>
+                    <p class="square-text" data-i18n="_Edit_"></p>
+                </div>
+
+                <div class="square-wrapper" ng-click="deleteActivity(d, $parent.$index, $index)">
+                <!--<div class="square-wrapper" ng-click="deleteActivity(d)">-->
+                    <div class="square-img-wr">
+                        <span class="card-option icon">
+                            <span class="common-sprite trash-32"></span>
+                        </span>
+                    </div>
+                    <p class="square-text" data-i18n="_Recycle_">Recycle</p>
+                </div>
+
+            </article>
+        </section>
+
+        <aside class="card-logo" ng-class="{iecompleted: true, ieterminated: false}">
+            <div class="logo" ng-class="getMotIcon('')"></div>
+        </aside>
+        <article class="row card-content">
+            <div class="col-sm-5">
+                <h3 ng-bind="d.ID" class="font-bold-600"></h3>
+                <h6>{{d.DateInserted | date: 'MMMM dd, yyyy'}}</h6>
+            </div>
+            <div class="col-sm-7">
+                <h5 class="font-bold text-ellipsis">{{d.DateInitiated | date: 'yyyy-MM-dd'}}</h5>
+                <h5 class="font-bold text-ellipsis"></h5>
+                <h6 class="font-bold text-ellipsis text-uppercase" ng-if='d.DaysAtPort > 1'>{{d.StoredMetalMetricTon}} mt <span class="oi oi-arrow-thick-left"></span> {{d.DaysAtPort}} days@port <span class="oi oi-arrow-thick-left"></span> {{d.PortOfLoading}}</h6>
+                <h6 class="font-bold text-ellipsis text-uppercase" ng-if='d.DaysAtPort <= 1'>{{d.StoredMetalMetricTon}} mt <span class="oi oi-arrow-thick-left"></span> {{d.DaysAtPort}} day@port <span class="oi oi-arrow-thick-left"></span> {{d.PortOfLoading}}</h6>
+            </div>
+        </article>
+    </div>
+</div>
+
+<div class="overflow-auto margin-top-15" ng-hide="breakBulkActivities.length == 0">
+    <p class="pull-left">Showing {{breakBulkActivities.length}} records</p>
+    <button type="button" class="btn btn-primary pull-right" ng-hide="searchText && searchText.length > 0" ng-click="getBreakBulkActivities()">More Records &raquo;</button>
+    <button type="button" class="btn btn-primary pull-right" ng-show="searchText && searchText.length > 0" ng-click="searchBreakBulk()">More Records &raquo;</button>
+</div>
+
+
+<dir-options-mobile-activity></dir-options-mobile-activity>
+
+<dir-break-bulk-window></dir-break-bulk-window>

@@ -1,0 +1,76 @@
+﻿<form name="form" id="form" ng-submit="createBreakBulk()" novalidate>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+                <dir-datepicker dt="newBreakBulk.DateInitiated" required></dir-datepicker>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="CountryLoading" data-i18n="_CountryOfLoading_"></label>
+                <select id="CountryLoading" name="CountryLoading" class="form-control margin-bottom-15"
+                        ng-model="newBreakBulk.colID"
+                        ng-change="getPols(newBreakBulk.colID, newBreakBulk)">
+                    <option ng-repeat="c in countries" value="{{c.ID}}">{{c.Name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="portOfLoadingID">Port of Loading</label>
+                <select id="portOfLoadingID" class="form-control" ng-model="newBreakBulk.PortOfLoadingID" required>
+                    <option ng-repeat="p in pols" value="{{p.ID}}">{{ p.PortName }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="noOfVehicle">No.of vehicle</label>
+                <input type="number" min=1 class="form-control text-uppercase" id="noOfVehicle" ng-model="newBreakBulk.noOfVehicle" required/>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="DaysAtPort" data-i18n="_DaysAtPort_"></label>
+                <input type="number" min=1 class="form-control text-uppercase" id="daysAtPort" ng-model="newBreakBulk.daysAtPort" required/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="storedMetalMetricTon">Stored Metal (mTon)</label>
+                <input type="number" min=1 class="form-control text-uppercase" id="storedMetalMetricTon" ng-model="newBreakBulk.storedMetalMetricTon" required/>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="transportedToCountryMetricTon">Transported to Country (mTon)</label>
+                <input type="number" min=1 class="form-control text-uppercase" id="transportedToCountryMetricTon" ng-model="newBreakBulk.transportedToCountryMetricTon" required/>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="remark">Remark</label>
+        <textarea class="form-control text-uppercase" name="Description" ng-model="newBreakBulk.remark" required />
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <button class="btn btn-primary" ng-disabled="disableButton">
+                    <span class="oi oi-share"></span> <span data-i18n="_Submit_"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

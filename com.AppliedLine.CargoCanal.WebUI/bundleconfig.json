@@ -15,6 +15,7 @@
       "Scripts/app/controller.support.js",
       "Scripts/app/controller.upload.js",
       "Scripts/app/controller.report.custom.js",
+      "Scripts/app/controller.portactivity.js",
       "Scripts/app/controller.datetime.js",
       "Scripts/app/directive.js",
       "Scripts/app/directive.datetime.js",

@@ -122,7 +122,8 @@
         var _isTinValid = true;
         var service = {};
         var odataUrl = api.substring(0, api.indexOf('/api')) + '/odata';
-
+        var date = new Date();
+        
         service.setModalOpen = function (bool) {
             $rootScope.modalOpen = bool;
         };
@@ -221,6 +222,7 @@
                 })
                     .then(function (response) {
                         $rootScope.pols = response.data;
+                        // console.log('Ports service', $rootScope.pols[0]);
                     });
             };
 
@@ -391,8 +393,6 @@
                 //        })
                 //},
             };
-
-
 
             // preview function helpers
             $rootScope.preview = {
@@ -1033,6 +1033,54 @@
 
         };
 
+        // get breakBulkActivities       
+        service.getBreakBulkActivities = function (skip, breakBulkActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';                
+                //fromDate = date | 'yyyy-MM-dd';
+                //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeBreakBulk(' + $rootScope.User.Company.ID + ')/SearchDailyBreakBulk' + odataParams;
+                   // console.log(fullUrl);
+                    dataParams = { 'skip': skip };
+                    //dataParams = { 'skip': skip, 'searchText': searchText, 'fromDate': fromDate, 'toDate': toDate };
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeBreakBulk(' + $rootScope.User.Company.ID + ')/SearchDailyBreakBulk' + odataParams;
+                  //  console.log(fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };
+                   // dataParams = { 'skip': skip, 'searchText': searchText, 'fromDate': fromDate, 'toDate': toDate, 'token': $rootScope.User.Login.Token };
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {                 
+                  // console.log('response',response.data.value);
+                    return {
+                        value: breakBulkActivities.concat(response.data.value),                       
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }                         
+                    };                   
+                },
+                function (error) {
+                    console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
         _initHelpers();
         return service;
     }]);
@@ -1081,7 +1129,6 @@
         };
 
     }]);
-
 
     // initialize the defaults
     app.config(['datepickerProviderProvider', function (datepickerProviderProvider) {

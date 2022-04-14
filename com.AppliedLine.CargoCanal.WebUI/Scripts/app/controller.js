@@ -114,6 +114,8 @@ var api = serverUrl + '/api';
                     case 'rail': return 'common-sprite railway-32';
                     case 'sea': return 'common-sprite ship-32';
                     case 'truck': return 'common-sprite truck-32';
+                    default:
+                        return 'common-sprite container-32';
                 }
             };
 
@@ -204,18 +206,9 @@ var api = serverUrl + '/api';
             // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
             // go to home, if the user is not logged in
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
-
-            //$scope.retainDesc = function () {
-            //    if ($('#Description').length !== 0) {
-            //        // get the description value with jquery and assign it manually
-            //        var desc = $('#Description').val();
-            //        $scope.newImport.Items[0].Description = desc;
-            //    }
-            //}
-
+        
             // this determines what status is available for selection
             $scope.impExpType = 1;
-
 
             // this method is called when add import is clicked
             // it gets few of the value data required in the forms
@@ -244,7 +237,6 @@ var api = serverUrl + '/api';
 
                 $scope.hideCarrier = false;
             };
-
 
             // show the window to add item with details info
             // create a blank item object
@@ -445,248 +437,7 @@ var api = serverUrl + '/api';
                         }
                     });
             };
-
             $scope.getImports();
-
-        }]);
-
-    app.controller('exportController', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
-        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
-            // go to home, if the user is not logged in
-            // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
-            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
-
-
-            // hides the destination select box when adding items
-            $scope.exportmode = true;
-
-            // this determines what status is available for selection
-            $scope.impExpType = 2;
-
-
-            // this method is called when add import is clicked
-            // it gets few of the value data required in the forms
-            $scope.startExport = function () {
-                appFactory.getCarriers();
-                appFactory.getCountries();
-                appFactory.getImportExportReasons();
-                appFactory.getIncoTerms();
-                appFactory.getMots();
-                appFactory.getLocations($rootScope.User.Company.CountryID);
-            };
-
-            // loads all required values
-            $scope.startExport();
-
-            $scope.filterCarrier = function (model) {
-                $scope.motFilter = { 'ModeOfTransportID': $scope.newExport.ModeOfTransportID.toString() };
-
-                // remove Carrier and Vessel from model if pipe 4, truck 3
-                if (model.ModeOfTransportID === '4' || model.ModeOfTransportID === '3') {
-                    $scope.hideCarrier = true;
-                    //model.VesselID = undefined; // auto-complete implementaion for vessel
-                    model.Vessel = undefined;
-                    model.CarrierID = undefined;
-                    return;
-                }
-
-                $scope.hideCarrier = false;
-            };
-
-
-            // show the window to add item with details info
-            // create a blank item object
-            $scope.addNewItem = function () {
-                $scope.disableAddToItems = false;
-                $rootScope.showWindow = true;
-                appFactory.setModalOpen(true);
-                $scope.newItem = {
-                    ItemDetails: []
-                };
-
-                // get all cargos, units, stuffmodes and destination
-                appFactory.getCargos();
-                appFactory.getUnits();
-                appFactory.getStuffModes();
-            };
-
-            // adds the new item to the items collection
-            $scope.addNewItemToItems = function () {
-                $scope.validateItemDetails(); // checks item details exists as required
-                if ($scope.disableAddToItems) return;
-                $scope.newExport.Items.push($scope.newItem);
-                $rootScope.closeWindow();
-            };
-
-            // adds blank itemDetail object for creating
-            $scope.initItemDetail = function () {
-                $scope.newItemDetail = {};
-                $scope.showItemDetailEntry = true;
-            };
-
-            // adds itemDetail object to item.ItemDetails
-            $scope.addItemDetailToItem = function () {
-                // check for duplicate
-                for (var i in $scope.newItem.ItemDetails) {
-                    if ($scope.newItem.ItemDetails[i].ItemNumber.toLowerCase() === $scope.newItemDetail.ItemNumber.toLowerCase()) {
-                        $scope.itemDetailsMsg = 'Item detail already contain packing number "' + $scope.newItemDetail.ItemNumber + '".';
-                        $scope.disableAddToItems = true;
-                        return;
-                    }
-                }
-                $scope.newItem.ItemDetails.push($scope.newItemDetail);
-                $scope.showItemDetailEntry = false;
-                if ($scope.disableAddToItems) $scope.disableAddToItems = false;
-            };
-
-            // validate item.ItemDetails has atleast 1 count
-            $scope.validateItemDetails = function () {
-                if ($scope.newItem.ItemDetails.length === 0) {
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'Item detail information is required.';
-                    return;
-                }
-
-                // for container = 1 and vehicle = 4, 
-                // user must enter item detail for quantity 20 and below
-                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
-                    && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
-                    return;
-                }
-                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
-                    && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
-                    // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
-                    $scope.disableAddToItems = true;
-                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details, otherwise, attach supporting documents.';
-                    return;
-                }
-                $scope.disableAddToItems = false;
-            };
-
-
-            // attach file to import/export
-            $scope.uploadFiles = function (files, errFiles) {
-                $scope.existDocCount = $scope.newExport.Documents.length;
-                $scope.files = files;
-                $scope.errFiles = errFiles;
-
-                angular.forEach(files, function (file) {
-                    if ($scope.existDocCount === 0) {
-
-                        file.upload = Upload.upload({
-                            url: api + '/importexport/postdocument',
-                            data: { file: file }
-                        });
-
-                        file.upload.then(function (response) {
-                            $timeout(function () {
-                                // returns the document ID
-                                file.result = response.data;
-                                // attach new importExportDoc
-                                $scope.newExport.Documents.push({ DocumentID: file.result });
-
-                            });
-                        }, function (response) {
-                            if (response.status > 0)
-                                $scope.errorMsg = response.status + ': ' + response.data;
-                        }, function (evt) {
-                            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-                        });
-                    }
-                    else $scope.existDocCount -= 1;
-                });
-            };
-
-            // removes attachment from UI and server
-            $scope.removeAttachment = function (index) {
-                var file = $scope.files[index];
-                // delete file from server using document id -> file.result
-                $http({
-                    method: 'DELETE',
-                    url: api + '/importexport/deletedocument?id=' + file.result
-                });
-
-                // remove file from collections
-                $scope.files.splice(index, 1);
-                $scope.newExport.Documents.splice(index, 1);
-            };
-
-            // removes itemDetail object from item.ItemDetails
-            $scope.removeItemDetail = function (index) {
-                $scope.newItem.ItemDetails.splice(index, 1);
-            };
-
-            // hide the itemDetail entry 
-            $scope.hideItemDetailEntry = function () {
-                $scope.showItemDetailEntry = false;
-            };
-
-            // remove an item from the items collection
-            $scope.removeItem = function (index) {
-                $scope.newExport.Items.splice(index, 1);
-            };
-
-            // init variables for add export
-            $scope.initExport = function () {
-                appFactory.setIsTinValid(true);
-                $scope.disableButton = false; // enable the send button
-
-                // Create new export object
-                $scope.newExport = {
-                    CompanyID: $rootScope.User.Person.CompanyID,
-                    CreatedBy: $rootScope.User.Person.ID,
-                    CountryID: $rootScope.User.Company.CountryID,
-                    Export: {},
-                    Items: [],
-                    LC: {},
-                    Documents: []
-                };
-
-                // attachment model
-                $scope.files = undefined;
-            };
-
-            // send the new Export collection
-            $scope.sendExport = function () {
-                $scope.disableButton = true; // disable the send button
-
-                $http({
-                    method: 'POST',
-                    url: api + '/importexport/postexport',
-                    data: $scope.newExport,
-                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
-                })
-                    .then(function (response) {
-                        // go to the import list page and refresh the list
-                        appFactory.showDialog('Export submitted successfully.');
-                        $state.go('export');
-                    },
-                        function (error) {
-                            $scope.disableButton = false; // enable the send button
-                            appFactory.showDialog('Export was not submitted.', true);
-                        });
-            };
-
-
-            // init export then load existing export collection
-            $scope.exports = [];
-            $scope.getExports = function () {
-                var skip = $scope.exports.length;
-                appFactory.getExports($scope.exports.length, $scope.exports)
-                    .then(function (data) {
-                        if (data !== null) {
-                            $scope.exports = data.value;
-                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
-                            $scope.odataInfo = data.odataInfo;
-                            appFactory.prepCards();
-                        }
-                    });
-            };
-
-            // get most recent exports for company
-            $scope.getExports();
 
         }]);
 
@@ -1307,6 +1058,246 @@ var api = serverUrl + '/api';
 
         }]);
 
+    app.controller('exportController', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
+            // go to home, if the user is not logged in
+            // TODO: go home if the user does not need to see this e.g. bank, gov, cc, consignee
+            if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+
+
+            // hides the destination select box when adding items
+            $scope.exportmode = true;
+
+            // this determines what status is available for selection
+            $scope.impExpType = 2;
+
+
+            // this method is called when add import is clicked
+            // it gets few of the value data required in the forms
+            $scope.startExport = function () {
+                appFactory.getCarriers();
+                appFactory.getCountries();
+                appFactory.getImportExportReasons();
+                appFactory.getIncoTerms();
+                appFactory.getMots();
+                appFactory.getLocations($rootScope.User.Company.CountryID);
+            };
+
+            // loads all required values
+            $scope.startExport();
+
+            $scope.filterCarrier = function (model) {
+                $scope.motFilter = { 'ModeOfTransportID': $scope.newExport.ModeOfTransportID.toString() };
+
+                // remove Carrier and Vessel from model if pipe 4, truck 3
+                if (model.ModeOfTransportID === '4' || model.ModeOfTransportID === '3') {
+                    $scope.hideCarrier = true;
+                    //model.VesselID = undefined; // auto-complete implementaion for vessel
+                    model.Vessel = undefined;
+                    model.CarrierID = undefined;
+                    return;
+                }
+
+                $scope.hideCarrier = false;
+            };
+
+
+            // show the window to add item with details info
+            // create a blank item object
+            $scope.addNewItem = function () {
+                $scope.disableAddToItems = false;
+                $rootScope.showWindow = true;
+                appFactory.setModalOpen(true);
+                $scope.newItem = {
+                    ItemDetails: []
+                };
+
+                // get all cargos, units, stuffmodes and destination
+                appFactory.getCargos();
+                appFactory.getUnits();
+                appFactory.getStuffModes();
+            };
+
+            // adds the new item to the items collection
+            $scope.addNewItemToItems = function () {
+                $scope.validateItemDetails(); // checks item details exists as required
+                if ($scope.disableAddToItems) return;
+                $scope.newExport.Items.push($scope.newItem);
+                $rootScope.closeWindow();
+            };
+
+            // adds blank itemDetail object for creating
+            $scope.initItemDetail = function () {
+                $scope.newItemDetail = {};
+                $scope.showItemDetailEntry = true;
+            };
+
+            // adds itemDetail object to item.ItemDetails
+            $scope.addItemDetailToItem = function () {
+                // check for duplicate
+                for (var i in $scope.newItem.ItemDetails) {
+                    if ($scope.newItem.ItemDetails[i].ItemNumber.toLowerCase() === $scope.newItemDetail.ItemNumber.toLowerCase()) {
+                        $scope.itemDetailsMsg = 'Item detail already contain packing number "' + $scope.newItemDetail.ItemNumber + '".';
+                        $scope.disableAddToItems = true;
+                        return;
+                    }
+                }
+                $scope.newItem.ItemDetails.push($scope.newItemDetail);
+                $scope.showItemDetailEntry = false;
+                if ($scope.disableAddToItems) $scope.disableAddToItems = false;
+            };
+
+            // validate item.ItemDetails has atleast 1 count
+            $scope.validateItemDetails = function () {
+                if ($scope.newItem.ItemDetails.length === 0) {
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'Item detail information is required.';
+                    return;
+                }
+
+                // for container = 1 and vehicle = 4, 
+                // user must enter item detail for quantity 20 and below
+                if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
+                    && $scope.newItem.Quantity < 21 && $scope.newItem.Quantity !== $scope.newItem.ItemDetails.length) {
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details.';
+                    return;
+                }
+                else if (($scope.newItem.CargoID.toString() === "1" || $scope.newItem.CargoID.toString() === "4")
+                    && $scope.newItem.Quantity > 20 && $scope.newExport.Documents.length === 0) {
+                    // verify an attachment exists for container = 1 and vehicle = 4, where quantity > 20
+                    $scope.disableAddToItems = true;
+                    $scope.itemDetailsMsg = 'You need to enter ' + $scope.newItem.Quantity + ' cargo details, otherwise, attach supporting documents.';
+                    return;
+                }
+                $scope.disableAddToItems = false;
+            };
+
+
+            // attach file to import/export
+            $scope.uploadFiles = function (files, errFiles) {
+                $scope.existDocCount = $scope.newExport.Documents.length;
+                $scope.files = files;
+                $scope.errFiles = errFiles;
+
+                angular.forEach(files, function (file) {
+                    if ($scope.existDocCount === 0) {
+
+                        file.upload = Upload.upload({
+                            url: api + '/importexport/postdocument',
+                            data: { file: file }
+                        });
+
+                        file.upload.then(function (response) {
+                            $timeout(function () {
+                                // returns the document ID
+                                file.result = response.data;
+                                // attach new importExportDoc
+                                $scope.newExport.Documents.push({ DocumentID: file.result });
+
+                            });
+                        }, function (response) {
+                            if (response.status > 0)
+                                $scope.errorMsg = response.status + ': ' + response.data;
+                        }, function (evt) {
+                            file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                        });
+                    }
+                    else $scope.existDocCount -= 1;
+                });
+            };
+
+            // removes attachment from UI and server
+            $scope.removeAttachment = function (index) {
+                var file = $scope.files[index];
+                // delete file from server using document id -> file.result
+                $http({
+                    method: 'DELETE',
+                    url: api + '/importexport/deletedocument?id=' + file.result
+                });
+
+                // remove file from collections
+                $scope.files.splice(index, 1);
+                $scope.newExport.Documents.splice(index, 1);
+            };
+
+            // removes itemDetail object from item.ItemDetails
+            $scope.removeItemDetail = function (index) {
+                $scope.newItem.ItemDetails.splice(index, 1);
+            };
+
+            // hide the itemDetail entry 
+            $scope.hideItemDetailEntry = function () {
+                $scope.showItemDetailEntry = false;
+            };
+
+            // remove an item from the items collection
+            $scope.removeItem = function (index) {
+                $scope.newExport.Items.splice(index, 1);
+            };
+
+            // init variables for add export
+            $scope.initExport = function () {
+                appFactory.setIsTinValid(true);
+                $scope.disableButton = false; // enable the send button
+
+                // Create new export object
+                $scope.newExport = {
+                    CompanyID: $rootScope.User.Person.CompanyID,
+                    CreatedBy: $rootScope.User.Person.ID,
+                    CountryID: $rootScope.User.Company.CountryID,
+                    Export: {},
+                    Items: [],
+                    LC: {},
+                    Documents: []
+                };
+
+                // attachment model
+                $scope.files = undefined;
+            };
+
+            // send the new Export collection
+            $scope.sendExport = function () {
+                $scope.disableButton = true; // disable the send button
+
+                $http({
+                    method: 'POST',
+                    url: api + '/importexport/postexport',
+                    data: $scope.newExport,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the import list page and refresh the list
+                        appFactory.showDialog('Export submitted successfully.');
+                        $state.go('export');
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Export was not submitted.', true);
+                        });
+            };
+
+
+            // init export then load existing export collection
+            $scope.exports = [];
+            $scope.getExports = function () {
+                var skip = $scope.exports.length;
+                appFactory.getExports($scope.exports.length, $scope.exports)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.exports = data.value;
+                            $scope.groupedExports = $filter('groupByDate')($scope.exports, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            // get most recent exports for company
+            $scope.getExports();
+
+        }]);
+
     app.controller('maritimeController', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
         function ($scope, $rootScope, $http, $state, appFactory) {
             // Maritime Specific Functions
@@ -1920,6 +1911,5 @@ var api = serverUrl + '/api';
             };
 
         }]);
-
 
 })();
