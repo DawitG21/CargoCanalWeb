@@ -3822,6 +3822,7 @@
     <Content Include="src\assets\images\icons\user_24.png" />
     <Content Include="src\assets\images\icons\user_32.png" />
     <Content Include="src\assets\images\icons\user_64.png" />
+    <Content Include="src\assets\images\image.png" />
     <Content Include="src\assets\images\people.png" />
     <Content Include="src\assets\images\people_720.png" />
     <Content Include="src\assets\images\themes\base\accordion.css" />
