@@ -279,19 +279,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('multimodal', {
         url: '/multimodal',
         templateUrl: 'views/activitymultimodal/multi_modal_activity.html',
-        controller: 'indexmultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     $stateProvider.state('multimodal.create', {
         url: '/create',
         templateUrl: 'views/activitymultimodal/create_multimodal.html',
-        controller: 'createMultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     $stateProvider.state('multimodal.edit', {
         url: '/edit',
         templateUrl: 'views/activitymultimodal/edit_multimodal.html',
-        controller: 'editMultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     ///
@@ -302,7 +302,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
     $stateProvider.state('unimodal.create', {
-        url: '/createl',
+        url: '/create',
         templateUrl: 'views/activityunimodal/create_unimodal.html',
         controller: 'createUniModalCtrl'
     });

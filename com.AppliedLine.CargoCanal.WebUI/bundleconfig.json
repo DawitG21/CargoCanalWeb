@@ -105,5 +105,11 @@
     "inputFiles": [
       "Scripts/app/cards.js"
     ]
+  },
+  {
+    "outputFileName": "views/directives/activity/multi_modal.min.html",
+    "inputFiles": [
+      "views/directives/activity/multi_modal.html"
+    ]
   }
 ]

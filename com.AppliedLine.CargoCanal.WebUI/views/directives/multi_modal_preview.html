@@ -1,0 +1,121 @@
+﻿<div class="fullscreen" ng-show="preview.multiModal.openWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="preview.multiModal.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="text-uppercase modal-heading text">multi modal preview</h3>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <p>Date Initiated: {{preview.multiModal.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+                            <article>
+                                <P>Date Inserted: {{preview.multiModal.data.DateInserted | date: 'dd/MM/yyyy'}}</P>
+                                <p>Date Changed: {{preview.multiModal.data.DateChanged | date: 'dd/MM/yyyy'}}</p>
+                            </article>
+                        </section>
+                        <section class="col">
+                            <p>Ref: {{preview.multiModal.data.ImpExpTypeID}}</p>
+                            <article>
+                                <p>Created By: {{preview.multiModal.data.CreatedBy}}</p>
+                                <p>Changed By: {{preview.multiModal.data.ChangedBy}}</p>
+                            </article>
+
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Container Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">20 ft Container</th>
+                                            <th class="text-nowrap">40 ft Container</th>
+                                            <th class="text-nowrap">20 ft Container at Port</th>
+                                            <th class="text-nowrap">40 ft Container at Port</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.multiModal.data.Container20Ft}}</td>
+                                            <td>{{preview.multiModal.data.Container40Ft}}</td>
+                                            <td>{{preview.multiModal.data.ContainerAtPort20Ft}}</td>
+                                            <td>{{preview.multiModal.data.ContainerAtPort40Ft}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Multimodal Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">TEU</th>
+                                            <th class="text-nowrap">Ro/Ro</th>
+                                            <th class="text-nowrap">TEU at Port</th>
+                                            <th class="text-nowrap">Average Container Stay</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.multiModal.data.TEU}}</td>
+                                            <td>{{preview.multiModal.data.RoRo}}</td>
+                                            <td>{{preview.multiModal.data.TEUAtPort}}</td>
+                                            <td>{{preview.multiModal.data.AverageContainerStay}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Carrier Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">Vehicle</th>
+                                            <th class="text-nowrap">Train/Wagon</th>                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.multiModal.data.VehicleTransport}}</td>
+                                            <td>{{preview.multiModal.data.TrainTransport}}</td>                                       
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <p>REMARK: {{preview.multiModal.data.Remark}}</p>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="attachment-wr">
+                                <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.multiModal.data.Documents" ng-bind="f.DocumentName"></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

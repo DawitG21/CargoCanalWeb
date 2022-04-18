@@ -16,14 +16,14 @@
                             <article>
                                 <p>SHIP FROM</p>
                                 <p>{{preview.breakBulk.data.PortOfLoading}}</p>
-                            </article>                            
+                            </article>  
+                            <p>Created By: {{preview.breakBulk.data.CreatedBy}}</p>
                         </section>
                         <section class="col">
                             <p>Ref: {{preview.breakBulk.data.ImpExpTypeID}}</p>
                             <article>
                                 <P>Date Inserted: {{preview.breakBulk.data.DateInserted | date: 'dd/MM/yyyy'}}</P>
-                                <p>Date Changed: {{preview.breakBulk.data.DateChanged | date: 'dd/MM/yyyy'}}</p>
-                                <p>Created By: {{preview.breakBulk.data.CreatedBy}}</p>
+                                <p>Date Changed: {{preview.breakBulk.data.DateChanged | date: 'dd/MM/yyyy'}}</p>                                
                                 <p>Changed By: {{preview.breakBulk.data.ChangedBy}}</p>
                             </article>
 

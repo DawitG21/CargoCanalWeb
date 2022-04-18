@@ -1,9 +1,101 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title>edit_breakbulk</title>
-</head>
-<body>
-    
-</body>
-</html>
+﻿<form name="form" id="form" ng-submit="updateMultiModal()" novalidate>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+                <dir-datepicker dt="editMultiModal.DateInitiated"></dir-datepicker>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="container20Ft">20 ft Containers</label>
+                <input min=1 class="form-control text-uppercase" id="container20Ft" ng-model="editMultiModal.container20Ft" required />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="container40Ft">40 ft Containers</label>
+                <input min=1 class="form-control text-uppercase" id="container40Ft" ng-model="editMultiModal.container40Ft" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="tEU">TEU</label>
+                <input min=1 class="form-control text-uppercase" id="tEU" ng-model="editMultiModal.tEU" required />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="roRo">Ro/Ro</label>
+                <input min=1 class="form-control text-uppercase" id="roRo" ng-model="editMultiModal.roRo" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="vehicleTransport">Vehicle Transport</label>
+                <input min=1 class="form-control text-uppercase" id="vehicleTransport" ng-model="editMultiModal.vehicleTransport" required />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="trainTransport">Train Transport</label>
+                <input min=1 class="form-control text-uppercase" id="trainTransport" ng-model="editMultiModal.trainTransport" required />
+            </div>
+        </div>
+    </div>
+
+    <label for="remainingatport">Remaining at Port</label>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="containerAtPort20Ft">20 ft Containers</label>
+                <input min=1 class="form-control text-uppercase" id="containerAtPort20Ft" ng-model="editMultiModal.containerAtPort20Ft" required />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="containerAtPort40Ft">40 ft Containers</label>
+                <input min=1 class="form-control text-uppercase" id="containerAtPort40Ft" ng-model="editMultiModal.containerAtPort40Ft" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="tEUAtPort">TEU</label>
+                <input min=1 class="form-control text-uppercase" id="tEUAtPort" ng-model="editMultiModal.tEUAtPort" required />
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="averageContainerStay">Average Container Dwell Time</label>
+                <input min=1 class="form-control text-uppercase" id="averageContainerStay" ng-model="editMultiModal.averageContainerStay" required />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="remark">Remark</label>
+        <textarea class="form-control text-uppercase" name="Description" ng-model="editMultiModal.remark"/>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <button class="btn btn-primary" ng-disabled="disableButton">
+                    <span class="oi oi-share"></span> <span data-i18n="_Submit_"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

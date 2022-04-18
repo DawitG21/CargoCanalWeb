@@ -1,15 +1,15 @@
-﻿<section ui-view>
-    <div class="banner-company">
-        <h4>Multi Modal Transport</h4>
-        <h5>{{User.Company.CompanyName}}</h5>
-        <h6 class="font-bold">Manage the daily multi-modal transport activity</h6>
-    </div>
-
-
-
-    <section class="margin-bottom-30">
-        <div class="col-sm-12 toolbox">
-            <a class="pointer" ng-click="account.users.add()"><span class="oi oi-plus"></span> Add Multi Modal Transport</a>
+﻿<div ui-view>
+    <div class="toolbox">
+        <div class="form-inline">
+            <form class="form-group" ng-submit="searchMultiModal(true)">
+                <div class="control-group">
+                    <input class="control-group-textbox" type="search" placeholder="Search" ng-model="searchText" />
+                    <i class="control-group-button" ng-click="searchMultiModal(true)"><span class="oi oi-magnifying-glass"></span></i>
+                </div>
+            </form>
+            <a ui-sref="multimodal.create" ng-click="initMultiModal()"><span class="oi oi-plus"></span> Add Multi Modal</a>
+            <a href="" ng-click="refresh()"><span class="oi oi-reload"></span> Refresh</a>
         </div>
-    </section>
-</section>
+    </div>
+    <dir-multi-modal></dir-multi-modal> <!--create in directive-->
+</div>

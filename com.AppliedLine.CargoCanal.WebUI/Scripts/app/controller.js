@@ -1305,6 +1305,43 @@ var api = serverUrl + '/api';
                 $rootScope.User.Company === undefined ||
                 $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
 
+            $scope.activitylist = [
+                {
+                    "id": "breakbulk",
+                    "name": "break bulk"
+                },
+                {
+                    "id": "multimodal",
+                    "name": "multi modal"
+                },
+                {
+                    "id": "unimodal",
+                    "name": "uni modal"
+                },
+                //{
+                //    "id": "djiboutifreezone",
+                //    "name": "djibouti freezone"
+                //},
+                //{
+                //    "id": "drynonepacked",
+                //    "name": "dry (none packed) transport"
+                //},
+                //{
+                //    "id": "djiboutitajura",
+                //    "name": "djibouti & tajura import corridor"
+                //},
+                //{
+                //    "id": "oiltransport",
+                //    "name": "oil transport"
+                //},
+            ];
+
+
+            $scope.goToState = function (selectedActivity) {
+                if (!selectedActivity) return;
+                $state.go(selectedActivity);
+            };
+
         }]);
 
     app.controller('createCompanyCtrl', ['$timeout', '$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',

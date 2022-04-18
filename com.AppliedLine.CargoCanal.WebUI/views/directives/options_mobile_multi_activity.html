@@ -1,0 +1,56 @@
+﻿<div class="fullscreen" ng-show="optionsMore.openWindow">
+    <div class="fullscreen-dialog-sm fullscreen-small-top">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="optionsMore.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="">
+                                <div class="card-sm" ng-click="preview.multiModal.show(record)" ng-hide="multiModalActivities == undefined">
+                                    <aside class="card-logo no-background">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite container-32"></span>
+                                            <i class="badge icon-data">{{record.ID}}</i>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4 data-i18n="_Preview_"></h4>
+                                    </article>
+                                </div>
+                            </a>
+                            <!--<a href="">-->
+                            <div ui-sref="multimodal.edit" class="card-sm" ng-click="editMultiModalActivity(record)">
+                                <aside class="card-logo no-background">
+                                    <span class="card-option icon">
+                                        <span class="common-sprite done-32"></span>
+                                    </span>
+                                </aside>
+                                <article class="card-content">
+                                    <h4 data-i18n="_Edit_"></h4>
+                                </article>
+                            </div>
+                            <!--</a>-->
+                            <a href="">
+                                <div class="card-sm" ng-click="deleteMultiModal(record, recordIndex, recordChildIndex)">
+                                    <aside class="card-logo no-background">
+                                        <span class="card-option icon">
+                                            <span class="common-sprite trash-32"></span>
+                                        </span>
+                                    </aside>
+                                    <article class="card-content">
+                                        <h4 data-i18n="_Recycle_"></h4>
+                                    </article>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

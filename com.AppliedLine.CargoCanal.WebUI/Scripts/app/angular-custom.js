@@ -279,19 +279,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('multimodal', {
         url: '/multimodal',
         templateUrl: 'views/activitymultimodal/multi_modal_activity.html',
-        controller: 'indexmultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     $stateProvider.state('multimodal.create', {
         url: '/create',
         templateUrl: 'views/activitymultimodal/create_multimodal.html',
-        controller: 'createMultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     $stateProvider.state('multimodal.edit', {
         url: '/edit',
         templateUrl: 'views/activitymultimodal/edit_multimodal.html',
-        controller: 'editMultiModalCtrl'
+        controller: 'indexMultiModalCtrl'
     });
 
     ///
@@ -302,7 +302,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     });
 
     $stateProvider.state('unimodal.create', {
-        url: '/createl',
+        url: '/create',
         templateUrl: 'views/activityunimodal/create_unimodal.html',
         controller: 'createUniModalCtrl'
     });
@@ -1468,6 +1468,52 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                 },
                 function (error) {
                     console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
+        // get multiModalActivities       
+        service.getMultiModalActivities = function (skip, multiModalActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';
+            //fromDate = date | 'yyyy-MM-dd';
+            //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeMultiModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyMultiModalTransport' + odataParams;
+                   // console.log('url:', fullUrl);
+                    dataParams = { 'skip': skip };                  
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeMultiModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyMultiModalTransport' + odataParams;
+                   // console.log('url_:', fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };                    
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {
+                   // console.log('response',response.data.value);
+                    return {
+                        value: multiModalActivities.concat(response.data.value),
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }
+                    };
+                },
+                    function (error) {
+                        console.log('ERROR', error);
                         return null;
                     });
         };
@@ -3073,6 +3119,43 @@ var api = serverUrl + '/api';
                 $rootScope.User.Company === undefined ||
                 $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
 
+            $scope.activitylist = [
+                {
+                    "id": "breakbulk",
+                    "name": "break bulk"
+                },
+                {
+                    "id": "multimodal",
+                    "name": "multi modal"
+                },
+                {
+                    "id": "unimodal",
+                    "name": "uni modal"
+                },
+                //{
+                //    "id": "djiboutifreezone",
+                //    "name": "djibouti freezone"
+                //},
+                //{
+                //    "id": "drynonepacked",
+                //    "name": "dry (none packed) transport"
+                //},
+                //{
+                //    "id": "djiboutitajura",
+                //    "name": "djibouti & tajura import corridor"
+                //},
+                //{
+                //    "id": "oiltransport",
+                //    "name": "oil transport"
+                //},
+            ];
+
+
+            $scope.goToState = function (selectedActivity) {
+                if (!selectedActivity) return;
+                $state.go(selectedActivity);
+            };
+
         }]);
 
     app.controller('createCompanyCtrl', ['$timeout', '$scope', '$rootScope', '$sessionStorage', '$http', '$state', 'appFactory',
@@ -4626,24 +4709,19 @@ var api = serverUrl + '/api';
         function ($scope, $rootScope, $http, $state, appFactory) {
             if ($rootScope.User === undefined ||
                 $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');        
 
             function confirmActivityDelete(d, pindex, cindex, model, message, fnc) {
                 $scope.confirmed = false;
                 if (!d && model) {
                     d = model.d;
                     $scope.confirmed = true;
-                    $rootScope.closeDialog(); // close the confirm dialog
-                }
-
-                // d should exist by now
-                //if (!d || $scope.invalidOperation(d)) {
-                //    return undefined;
-                //}
+                    $rootScope.closeDialog(); 
+                }               
 
                 // show confirm dialog before recycle
                 if (!$scope.confirmed) {
-                    appFactory.showDialog(message.replace('#BREAKBULK#', d.ID), null, true, fnc);
+                    appFactory.showDialog(message.replace('#ACTIVITY#', d.ID), null, true, fnc);
                     model = {
                         d: d,
                         pindex: pindex,
@@ -4682,6 +4760,34 @@ var api = serverUrl + '/api';
                         });
             };
 
+            $scope.deleteMultiModal = function (d, pindex, cindex) {
+                $scope.recycleData = confirmActivityDelete(d,
+                    pindex,
+                    cindex,
+                    $scope.recycleData,
+                    'You will no longer have access to this activity (#MULTIMODAL#). Do you want to continue',
+                    $scope.deleteMultiModal);
+
+                if (!$scope.confirmed) return false;
+
+                $http({
+                    method: 'DELETE',
+                    url: api + '/maritime/DeleteDailyMultiModalTransport/' + $scope.recycleData.d.ID,
+                    data: { ID: $scope.recycleData.d.ID, Token: $rootScope.User.Login.Token },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        if ($scope.multiModalActivities === undefined)
+                            $scope.groupedMultiModal[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true;
+
+                        appFactory.showDialog('Activity has been recycled.');
+                        $rootScope.refresh();
+                    },
+                        function (error) {
+                            appFactory.showDialog('Unable to delete activity.', true);
+                        });
+            };
+
             $scope.preview = {
                 'breakBulk': {
                     openWindow: false,
@@ -4694,6 +4800,20 @@ var api = serverUrl + '/api';
                     closeWindow: function () {
                         $scope.preview.breakBulk.data = {};
                         $scope.preview.breakBulk.openWindow = false;
+                        appFactory.setModalOpen(false);
+                    }
+                },
+                'multiModal': {
+                    openWindow: false,
+                    data: {},
+                    show: function (o) {
+                        $scope.preview.multiModal.data = o;
+                        $scope.preview.multiModal.openWindow = true;
+                        appFactory.setModalOpen(true);
+                    },
+                    closeWindow: function () {
+                        $scope.preview.multiModal.data = {};
+                        $scope.preview.multiModal.openWindow = false;
                         appFactory.setModalOpen(false);
                     }
                 }
@@ -4838,39 +4958,145 @@ var api = serverUrl + '/api';
         }]);   
 
     ///
-    app.controller('indexmultiModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+    app.controller('indexMultiModalCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
 
-        }]);
-
-    app.controller('createMultiModalCtrl', ['$scope', '$rootScope', '$http', '$state',
-        function ($scope, $rootScope, $http, $state) {
-            // pass user token to Web API
-            // go to home, if the user is not logged in or does not have edit user privilege
-            // just incase the user paste in the url for manage users
+            // console.log('this page is reached');
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
 
-            $http({
-                method: 'POST',
-                url: api + '/maritime/PostDailyBreakBulk',
-                data: $rootScope.User.Login,
-                headers: { 'Content-Type': 'application/json' }
-            })
-                .then(function (response) {
-                    $scope.perms = response.data;
-                    if ($scope.perms.EditUser === false)
-                        $state.go('home');
-                });
-        }]);
+            $scope.searchMultiModal = function (searchIsNew) {
+                if ($scope.searchText === undefined) $scope.searchText = '';
 
-    app.controller('editMultiModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+                if (searchIsNew) {
+                    $scope.multiModalActivities = [];
+                    $scope.groupedMultiModal = [];
+                }
+
+                appFactory.getMultiModalActivities($scope.multiModalActivities.length, $scope.multiModalActivities, $scope.searchText)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.multiModalActivities = data.value;
+                            $scope.groupedMultiModal = $filter('groupByDate')($scope.multiModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+
+                        }
+                    });
+            };
+
+            // this determines what status is available for selection
+            $scope.impExpTypeId = 1;
+
+            // this method is called when add multi modal is clicked
+            // it gets few of the value data required in the forms
+            $scope.initUISelections = function () {
+                appFactory.getCountries();
+            };
+
+            // loads all required values and clean up
+            $scope.initUISelections();
+
+            // init variables for add/edit break bulk
+            $scope.initMultiModal = function () {
+
+                // Create a new break bulk object
+                $scope.newMultiModal = {
+                    companyID: $rootScope.User.Person.CompanyID,
+                    impExpTypeId: 1,
+                    createdBy: $rootScope.User.Person.ID,
+                };
+            };
+
+            // save the new multi modal object
+            $scope.createMultiModal = function () {
+                // disable the send button
+                //$scope.disableButton = true;
+
+                $http({
+                    method: 'POST',
+                    url: api + '/maritime/PostDailyMultiModalTransport',
+                    data: $scope.newMultiModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the multi modal list page and refresh the list
+                        appFactory.showDialog('Multi Modal submitted successfully.');
+                        // $rootScope.refresh();                     
+                        // $state.go('multimodal');                     
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Multi Modal was not submitted.', true);
+
+                        });
+            };
+                       
+            // init variables for update multi modal
+            $scope.editMultiModalActivity = function (d) {
+                // init break bulk object
+                $scope.editMultiModal = {
+                    id: d.ID,
+                    companyID: d.CompanyID,
+                    impExpTypeId: d.ImpExpTypeID,                    
+                    changedBy: $rootScope.User.Person.ID,
+                    container20Ft: d.Container20Ft,
+                    container40Ft: d.Container40Ft,
+                    tEU: d.TEU,
+                    roRo: d.RoRo,
+                    vehicleTransport: d.VehicleTransport,
+                    trainTransport: d.TrainTransport,
+                    containerAtPort20Ft: d.ContainerAtPort20Ft,
+                    containerAtPort40Ft: d.ContainerAtPort40Ft,
+                    tEUAtPort: d.TEUAtPort,
+                    averageContainerStay: d.AverageContainerStay,
+                    dateInitiated: d.DateInitiated,
+                    remark: d.Remark,
+                };
+                $state.go('multimodal.edit')
+            };
+
+            // save the updated multi mo object
+            $scope.updateMultiModal = function () {
+
+                $http({
+                    method: 'PUT',
+                    url: api + '/maritime/PutDailyMultiModalTransport',
+                    data: $scope.editMultiModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the multi modal list page and refresh the list
+                        // disable the save button
+                        $scope.disableButton = true;
+                        appFactory.showDialog('Multi Modal updated successfully.');
+                       console.log('responseUpdate', response);
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false;
+                            appFactory.showDialog('Multi Modal was not updated.', true);
+                           console.log('responseUpdateErr', error);
+                        });
+            };
+
+            // init multimodal then load existing breakbulk collection
+            $scope.multiModalActivities = [];
+            $scope.getMultiModalActivities = function () {
+                // get ongoing multimodal activities for company
+                appFactory.getMultiModalActivities($scope.multiModalActivities.length, $scope.multiModalActivities)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.multiModalActivities = data.value;
+                            $scope.groupedMultiModal = $filter('groupByDate')($scope.multiModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            $scope.getMultiModalActivities();
+
 
         }]);
 
@@ -5186,7 +5412,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/sessiontimeout.html'
         };
     });
-
     app.directive('loader', function () {
         return {
             restrict: 'E',
@@ -5194,7 +5419,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/loader.html'
         };
     });
-
     app.directive('reportNoResult', function () {
         return {
             restrict: 'E',
@@ -5202,7 +5426,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/report_no_result.html'
         };
     });
-
     app.directive('dirComment', function () {
         return {
             restrict: 'E',
@@ -5211,7 +5434,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             controller: 'commentCtrl'
         };
     });
-
     app.directive('dirLoading', function () {
         return {
             restrict: 'E',
@@ -5226,8 +5448,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             transclude: true,
             templateUrl: 'views/directives/analytics_shipments.html'
         };
-    });
-    
+    });    
     app.directive('dirAnalyticsForwardersActivity', function () {
         return {
             restrict: 'E',
@@ -5235,7 +5456,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/analytics_forwarder_activity.html'
         };
     });
-
     app.directive('dirAnalyticsDemurrage', function () {
         return {
             restrict: 'E',
@@ -5243,7 +5463,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/analytics_demurrage.html'
         };
     });
-
     app.directive('dirAnalyticsTopImportCountries', function () {
         return {
             restrict: 'E',
@@ -5258,6 +5477,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/analytics_top_export_countries.html'
         };
     });
+
     app.directive('dirMenuTop', function () {
         return {
             restrict: 'E',
@@ -5301,21 +5521,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             transclude: true,
             templateUrl: 'views/directives/tin_or_lc_data.html'
         };
-    });    
-    app.directive('dirExportSummary', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/export_summary.html'
-        };
-    });
-    app.directive('dirImportSummary', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/import_summary.html'
-        };
-    });
+    });  
     app.directive('dirCreateCompany', function () {
         return {
             restrict: 'E',
@@ -5326,6 +5532,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             //},
         };
     });
+
     app.directive('dirForwarderUpdateConsigneeView', function () {
         return {
             restrict: 'E',
@@ -5342,6 +5549,22 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/importexport_update_cost_view.html'
         };
     });
+
+    app.directive('dirExportSummary', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/export_summary.html'
+        };
+    });
+    app.directive('dirImportSummary', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/import_summary.html'
+        };
+    });
+
     app.directive('dirImportView', function () {
         return {
             require: 'importController',
@@ -5365,6 +5588,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/import_bill_preview.html'
         };
     });
+
     app.directive('dirExportView', function () {
         return {
             require: 'exportController',
@@ -5390,6 +5614,15 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/export_bill_preview.html'
         };
     });
+
+    app.directive('dirOptionsMobileWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_more_window.html'
+        };
+    });
+
     app.directive('dirStatusUpdateView', function () {
         return {
             restrict: 'E',
@@ -5526,22 +5759,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     }]);
 
-    app.directive('dirOptionsMobileWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_more_window.html'
-        };
-    });
-
-    app.directive('dirBreakBulkWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/break_bulk_preview.html'
-        };
-    });
-
+    // dailyActivities dir index
     app.directive('dirDailyActivity', function () {
         return {         
             restrict: 'E',
@@ -5550,6 +5768,23 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
+    // breakbulk dir
+    app.directive('dirBreakBulk', function () {
+        return {
+            require: 'indexBreakBulkCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/break_bulk.html'
+        };
+    });
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
     app.directive('dirOptionsMobileActivity', function () {
         return {
             restrict: 'E',
@@ -5558,13 +5793,28 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
-    app.directive('dirBreakBulk', function () {
+    // multimodal dir
+    app.directive('dirMultiModal', function () {
         return {
-            require: 'indexBreakBulkCtrl',
+            require: 'indexMultiModalCtrl',
             restrict: 'E',
             transclude: true,
             controller: 'activityController',
-            templateUrl: 'views/directives/activity/break_bulk.html'
+            templateUrl: 'views/directives/activity/multi_modal.html'
+        };
+    });
+    app.directive('dirMultiModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/multi_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileMultiActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_multi_activity.html'
         };
     });
 
@@ -5581,7 +5831,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             }
         };
     });
-
     app.directive('renderNameFor', ['$rootScope', function ($rootScope) {
         return {
             restrict: 'A',
@@ -5607,6 +5856,26 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
                             break;
                     }
                 }
+            }
+        };
+    }]);
+    app.directive('autoComplete', ['$parse', 'autoCompleteDataService', function ($parse, autoCompleteDataService) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs, ctrl) {
+                $(element).autocomplete({
+                    source: autoCompleteDataService.getSource(attrs.source, attrs.extraparams), // from service                    
+                    minLength: 2,
+                    delay: 500,
+                    classes: {
+                        "ui-autocomplete": "highlight"
+                    },
+                    select: function (event, selectedItem) {
+                        scope.$apply(function () {
+                            $parse(attrs.ngModel).assign(scope, selectedItem.item.value);
+                        });
+                    }
+                });
             }
         };
     }]);
@@ -5688,27 +5957,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
 
                     return date;
                 }
-            }
-        };
-    }]);
-
-    app.directive('autoComplete', ['$parse', 'autoCompleteDataService', function ($parse, autoCompleteDataService) {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs, ctrl) {
-                $(element).autocomplete({
-                    source: autoCompleteDataService.getSource(attrs.source, attrs.extraparams), // from service                    
-                    minLength: 2,
-                    delay: 500,
-                    classes: {
-                        "ui-autocomplete": "highlight"
-                    },
-                    select: function (event, selectedItem) {
-                        scope.$apply(function () {
-                            $parse(attrs.ngModel).assign(scope, selectedItem.item.value);
-                        });
-                    }
-                });
             }
         };
     }]);

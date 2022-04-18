@@ -5463,7 +5463,7 @@
     <Content Include="views\activityoiltransport\oil_transport_activity.html" />
     <Content Include="views\activityoiltransport\create_oiltransport.html" />
     <Content Include="views\activityoiltransport\edit_oiltransport.html" />
-    <Content Include="views\activitymultimodal\multi_modal.html" />
+    <Content Include="views\directives\activity\multi_modal.html" />
     <Content Include="views\activitymultimodal\multi_modal_activity.html" />
     <Content Include="views\activitymultimodal\create_multimodal.html" />
     <Content Include="views\activitymultimodal\edit_multimodal.html" />
@@ -5473,9 +5473,14 @@
     <Content Include="views\directives\activity\dailyactivity.html" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
+    <Content Include="views\directives\activity\multi_modal.min.html">
+      <DependentUpon>multi_modal.html</DependentUpon>
+    </Content>
     <Content Include="views\directives\analytics_forwarder_activity.html" />
     <Content Include="views\directives\activity\break_bulk.html" />
+    <Content Include="views\directives\multi_modal_preview.html" />
     <Content Include="views\directives\break_bulk_preview.html" />
+    <Content Include="views\directives\options_mobile_multi_activity.html" />
     <Content Include="views\directives\options_mobile_activity.html" />
     <Content Include="views\directives\report_no_result.html" />
     <Content Include="views\directives\comment.html" />

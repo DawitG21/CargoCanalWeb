@@ -7,7 +7,6 @@
             templateUrl: 'views/directives/sessiontimeout.html'
         };
     });
-
     app.directive('loader', function () {
         return {
             restrict: 'E',
@@ -15,7 +14,6 @@
             templateUrl: 'views/directives/loader.html'
         };
     });
-
     app.directive('reportNoResult', function () {
         return {
             restrict: 'E',
@@ -23,7 +21,6 @@
             templateUrl: 'views/directives/report_no_result.html'
         };
     });
-
     app.directive('dirComment', function () {
         return {
             restrict: 'E',
@@ -32,7 +29,6 @@
             controller: 'commentCtrl'
         };
     });
-
     app.directive('dirLoading', function () {
         return {
             restrict: 'E',
@@ -47,8 +43,7 @@
             transclude: true,
             templateUrl: 'views/directives/analytics_shipments.html'
         };
-    });
-    
+    });    
     app.directive('dirAnalyticsForwardersActivity', function () {
         return {
             restrict: 'E',
@@ -56,7 +51,6 @@
             templateUrl: 'views/directives/analytics_forwarder_activity.html'
         };
     });
-
     app.directive('dirAnalyticsDemurrage', function () {
         return {
             restrict: 'E',
@@ -64,7 +58,6 @@
             templateUrl: 'views/directives/analytics_demurrage.html'
         };
     });
-
     app.directive('dirAnalyticsTopImportCountries', function () {
         return {
             restrict: 'E',
@@ -79,6 +72,7 @@
             templateUrl: 'views/directives/analytics_top_export_countries.html'
         };
     });
+
     app.directive('dirMenuTop', function () {
         return {
             restrict: 'E',
@@ -122,21 +116,7 @@
             transclude: true,
             templateUrl: 'views/directives/tin_or_lc_data.html'
         };
-    });    
-    app.directive('dirExportSummary', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/export_summary.html'
-        };
-    });
-    app.directive('dirImportSummary', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/import_summary.html'
-        };
-    });
+    });  
     app.directive('dirCreateCompany', function () {
         return {
             restrict: 'E',
@@ -147,6 +127,7 @@
             //},
         };
     });
+
     app.directive('dirForwarderUpdateConsigneeView', function () {
         return {
             restrict: 'E',
@@ -163,6 +144,22 @@
             templateUrl: 'views/directives/importexport_update_cost_view.html'
         };
     });
+
+    app.directive('dirExportSummary', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/export_summary.html'
+        };
+    });
+    app.directive('dirImportSummary', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/import_summary.html'
+        };
+    });
+
     app.directive('dirImportView', function () {
         return {
             require: 'importController',
@@ -186,6 +183,7 @@
             templateUrl: 'views/directives/import_bill_preview.html'
         };
     });
+
     app.directive('dirExportView', function () {
         return {
             require: 'exportController',
@@ -211,6 +209,15 @@
             templateUrl: 'views/directives/export_bill_preview.html'
         };
     });
+
+    app.directive('dirOptionsMobileWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_more_window.html'
+        };
+    });
+
     app.directive('dirStatusUpdateView', function () {
         return {
             restrict: 'E',
@@ -347,22 +354,7 @@
         };
     }]);
 
-    app.directive('dirOptionsMobileWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_more_window.html'
-        };
-    });
-
-    app.directive('dirBreakBulkWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/break_bulk_preview.html'
-        };
-    });
-
+    // dailyActivities dir index
     app.directive('dirDailyActivity', function () {
         return {         
             restrict: 'E',
@@ -371,6 +363,23 @@
         };
     });
 
+    // breakbulk dir
+    app.directive('dirBreakBulk', function () {
+        return {
+            require: 'indexBreakBulkCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/break_bulk.html'
+        };
+    });
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
     app.directive('dirOptionsMobileActivity', function () {
         return {
             restrict: 'E',
@@ -379,13 +388,28 @@
         };
     });
 
-    app.directive('dirBreakBulk', function () {
+    // multimodal dir
+    app.directive('dirMultiModal', function () {
         return {
-            require: 'indexBreakBulkCtrl',
+            require: 'indexMultiModalCtrl',
             restrict: 'E',
             transclude: true,
             controller: 'activityController',
-            templateUrl: 'views/directives/activity/break_bulk.html'
+            templateUrl: 'views/directives/activity/multi_modal.html'
+        };
+    });
+    app.directive('dirMultiModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/multi_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileMultiActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_multi_activity.html'
         };
     });
 
@@ -402,7 +426,6 @@
             }
         };
     });
-
     app.directive('renderNameFor', ['$rootScope', function ($rootScope) {
         return {
             restrict: 'A',
@@ -428,6 +451,26 @@
                             break;
                     }
                 }
+            }
+        };
+    }]);
+    app.directive('autoComplete', ['$parse', 'autoCompleteDataService', function ($parse, autoCompleteDataService) {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs, ctrl) {
+                $(element).autocomplete({
+                    source: autoCompleteDataService.getSource(attrs.source, attrs.extraparams), // from service                    
+                    minLength: 2,
+                    delay: 500,
+                    classes: {
+                        "ui-autocomplete": "highlight"
+                    },
+                    select: function (event, selectedItem) {
+                        scope.$apply(function () {
+                            $parse(attrs.ngModel).assign(scope, selectedItem.item.value);
+                        });
+                    }
+                });
             }
         };
     }]);
@@ -509,27 +552,6 @@
 
                     return date;
                 }
-            }
-        };
-    }]);
-
-    app.directive('autoComplete', ['$parse', 'autoCompleteDataService', function ($parse, autoCompleteDataService) {
-        return {
-            restrict: 'A',
-            link: function (scope, element, attrs, ctrl) {
-                $(element).autocomplete({
-                    source: autoCompleteDataService.getSource(attrs.source, attrs.extraparams), // from service                    
-                    minLength: 2,
-                    delay: 500,
-                    classes: {
-                        "ui-autocomplete": "highlight"
-                    },
-                    select: function (event, selectedItem) {
-                        scope.$apply(function () {
-                            $parse(attrs.ngModel).assign(scope, selectedItem.item.value);
-                        });
-                    }
-                });
             }
         };
     }]);

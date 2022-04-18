@@ -1,67 +1,11 @@
 ﻿<section>
     <div class="row margin-0 margin-bottom-15">
-        <div class="col-xs-6 col-md-2">
-            <div class="dashboard-pad pad-blue pointer" ui-sref="breakbulk">
-                <h4>BREAK BULK</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
-
         <div class="col-xs-6 col-md-auto">
-            <div class="dashboard-pad pad-red pointer" ui-sref="multimodal">
-                <h4>MULTI MODAL TRANSPORT</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
+            <select id="select" class="select-custom text-uppercase" ng-model="selectedActivity">
+                <option class="text-uppercase" value="">{{'select activity'}}</option>
+                <option class="text-uppercase" ng-repeat="activity in activitylist" value="{{activity.id}}">{{activity.name}}</option>
+            </select>
         </div>
-
-        <div class="col-xs-6 col-md-auto">
-            <div class="dashboard-pad pad-grey pointer" ui-sref="unimodal">
-                <h4>UNI MODAL TRANSPORT</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
-
-        <div class="col-xs-1 col-md-auto">
-            <div class="dashboard-pad pad-blue pointer" ui-sref="djiboutifreezone">
-                <h4>DJIBOUTI FREE ZONE</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
-
-        <div class="col-xs-6 col-md-auto">
-            <div class="dashboard-pad pad-grey pointer" ui-sref="drynonepacked">
-                <h4>DRY (NONE PACKED) TRANSPORT</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
-
-
-        <div class="col-xs-6 col-md-auto">
-            <div class="dashboard-pad pad-blue pointer" ui-sref="oiltransport">
-                <h4>OIL TRANSPORT</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
-
-        <div class="col-xs-6 col-md-auto">
-            <div class="dashboard-pad pad-red pointer" ui-sref="djiboutitajura">
-                <h4>DJIBOUTI & TAJURA IMPORT CORRIDOR</h4>
-                <h5 class="dashboard-caption">
-                    <span class="pull-right font-bold-600 pointer" title="Click to view"><i class="fa fa-eye" aria-hidden="true"></i></span>
-                </h5>
-            </div>
-        </div>
+        <button class="select-custom" ng-click="goToState(selectedActivity)">GO</button>
     </div>
 </section>
