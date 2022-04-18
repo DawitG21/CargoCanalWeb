@@ -5447,7 +5447,6 @@
     <Content Include="views\activitydjiboutitajura\djibouti_tajura_activity.html" />
     <Content Include="views\activitydjiboutitajura\create_djibouti_tajura.html" />
     <Content Include="views\activitydjiboutitajura\edit_djibouti_tajura.html" />
-    <Content Include="views\activityunimodal\uni_modal.html" />
     <Content Include="views\activityunimodal\uni_modal_activity.html" />
     <Content Include="views\activityunimodal\create_unimodal.html" />
     <Content Include="views\activityunimodal\edit_unimodal.html" />
@@ -5470,11 +5469,14 @@
     <Content Include="views\activitybreakbulk\break_bulk_activity.html" />
     <Content Include="views\activitybreakbulk\create_breakbulk.html" />
     <Content Include="views\activitybreakbulk\edit_breakbulk.html" />
+    <Content Include="views\directives\activity\uni_modal.html" />
     <Content Include="views\directives\activity\dailyactivity.html" />
     <Content Include="views\admin\passwordreset_changepassword.html" />
     <Content Include="views\admin\passwordreset.html" />
     <Content Include="views\directives\analytics_forwarder_activity.html" />
     <Content Include="views\directives\activity\break_bulk.html" />
+    <Content Include="views\directives\uni_modal_preview.html" />
+    <Content Include="views\directives\options_mobile_uni_activity.html" />
     <Content Include="views\directives\break_bulk_preview.html" />
     <Content Include="views\directives\options_mobile_activity.html" />
     <Content Include="views\directives\report_no_result.html" />

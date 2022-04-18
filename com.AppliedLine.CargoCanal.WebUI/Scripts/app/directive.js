@@ -355,14 +355,6 @@
         };
     });
 
-    app.directive('dirBreakBulkWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/break_bulk_preview.html'
-        };
-    });
-
     app.directive('dirDailyActivity', function () {
         return {         
             restrict: 'E',
@@ -371,14 +363,7 @@
         };
     });
 
-    app.directive('dirOptionsMobileActivity', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_mobile_activity.html'
-        };
-    });
-
+    //directive for breakbulk
     app.directive('dirBreakBulk', function () {
         return {
             require: 'indexBreakBulkCtrl',
@@ -388,6 +373,48 @@
             templateUrl: 'views/directives/activity/break_bulk.html'
         };
     });
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_activity.html'
+        };
+    });
+
+    //directive for unimodal
+    app.directive('dirUniModal', function () {
+        return {
+            require: 'indexUniModalCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/uni_modal.html'
+        };
+    });
+    app.directive('dirUniModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/uni_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileUniActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_uni_activity.html'
+        };
+    });
+
+
+
 
     app.directive('stringToNumber', function () {
         return {

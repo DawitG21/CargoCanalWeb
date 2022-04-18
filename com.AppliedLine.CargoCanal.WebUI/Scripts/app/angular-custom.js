@@ -298,19 +298,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('unimodal', {
         url: '/unimodal',
         templateUrl: 'views/activityunimodal/uni_modal_activity.html',
-        controller: 'indexuniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.create', {
-        url: '/createl',
+        url: '/create',
         templateUrl: 'views/activityunimodal/create_unimodal.html',
-        controller: 'createUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.edit', {
         url: '/edit',
         templateUrl: 'views/activityunimodal/edit_unimodal.html',
-        controller: 'editUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     ///
@@ -1472,6 +1472,54 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                     });
         };
 
+        // get UNIMOdalActivities       
+        service.getUniModalActivities = function (skip, uniModalActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';
+            //fromDate = date | 'yyyy-MM-dd';
+            //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                   //console.log(fullUrl);
+                    dataParams = { 'skip': skip };
+                  
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                    //  console.log(fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };
+                   
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {
+                   //console.log('response',response.data.value);
+                    return {
+                        value: uniModalActivities.concat(response.data.value),
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }
+                    };
+                },
+                    function (error) {
+                     //   console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
         _initHelpers();
         return service;
     }]);
@@ -1817,7 +1865,7 @@ var api = serverUrl + '/api';
             $scope.regexTin = /^\d{10}$/;
 
 
-
+            
             $scope.prepCards = appFactory.prepCards;
 
             // used to validate the consignee tin on import / export entry
@@ -4682,6 +4730,34 @@ var api = serverUrl + '/api';
                         });
             };
 
+            $scope.deleteUniModalActivity = function (d, pindex, cindex) {
+                $scope.recycleData = confirmActivityDelete(d,
+                    pindex,
+                    cindex,
+                    $scope.recycleData,
+                    'You will no longer have access to this activity (#UNIMODAL#). Do you want to continue',
+                    $scope.deleteUniModalActivity);
+
+                if (!$scope.confirmed) return false;
+
+                $http({
+                    method: 'DELETE',
+                    url: api + '/maritime/DeleteDailyUniModalTransport/' + $scope.recycleData.d.ID,
+                    data: { ID: $scope.recycleData.d.ID, Token: $rootScope.User.Login.Token },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        if ($scope.uniModalActivities === undefined)
+                            $scope.groupedUniModal[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true;
+
+                        appFactory.showDialog('Activity has been recycled.');
+                        $rootScope.refresh();
+                    },
+                        function (error) {
+                            appFactory.showDialog('Unable to delete activity.', true);
+                        });
+            };
+
             $scope.preview = {
                 'breakBulk': {
                     openWindow: false,
@@ -4694,6 +4770,21 @@ var api = serverUrl + '/api';
                     closeWindow: function () {
                         $scope.preview.breakBulk.data = {};
                         $scope.preview.breakBulk.openWindow = false;
+                        appFactory.setModalOpen(false);
+                    }
+                },
+                'uniModal': {
+                    openWindow: false,
+                    data: {},
+                    show: function (o) {
+                      //  console.log('yay');
+                        $scope.preview.uniModal.data = o;
+                        $scope.preview.uniModal.openWindow = true;
+                        appFactory.setModalOpen(true);
+                    },
+                    closeWindow: function () {
+                        $scope.preview.uniModal.data = {};
+                        $scope.preview.uniModal.openWindow = false;
                         appFactory.setModalOpen(false);
                     }
                 }
@@ -4875,41 +4966,146 @@ var api = serverUrl + '/api';
         }]);
 
     ///
-    app.controller('indexuniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
-
-        }]);
-
-    app.controller('createUniModalCtrl', ['$scope', '$rootScope', '$http', '$state',
-        function ($scope, $rootScope, $http, $state) {
-            // pass user token to Web API
-            // go to home, if the user is not logged in or does not have edit user privilege
-            // just incase the user paste in the url for manage users
+    app.controller('indexUniModalCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
+            // console.log('this page is reached');
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+            $scope.searchUniModal = function (searchIsNew) {
+                if ($scope.searchText === undefined) $scope.searchText = '';
 
-            $http({
-                method: 'POST',
-                url: api + '/maritime/PostDailyBreakBulk',
-                data: $rootScope.User.Login,
-                headers: { 'Content-Type': 'application/json' }
-            })
-                .then(function (response) {
-                    $scope.perms = response.data;
-                    if ($scope.perms.EditUser === false)
-                        $state.go('home');
-                });
-        }]);
+                if (searchIsNew) {
+                    $scope.uniModalActivities = [];
+                    $scope.groupedUniModal = [];
+                }
 
-    app.controller('editUniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+                appFactory.getUniModalActivities($scope.uniModalActivities.length, $scope.uniModalActivities, $scope.searchText)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.uniModalActivities = data.value;
+                            $scope.groupedUniModal = $filter('groupByDate')($scope.uniModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
 
-        }]);
+                        }
+                    });
+            };
+
+            // this determines what status is available for selection
+            $scope.impExpTypeId = 1;
+
+            // this method is called when add break bulk is clicked
+            // it gets few of the value data required in the forms
+            $scope.initUISelections = function () {
+                appFactory.getCountries();
+            };
+
+            // loads all required values and clean up
+            $scope.initUISelections();
+
+            // init variables for add/edit break bulk
+            $scope.initUniModal = function () {
+
+                // Create a new break bulk object
+                $scope.newUniModal = {
+                    companyID: $rootScope.User.Person.CompanyID,
+                    impExpTypeId: 1,
+                    createdBy: $rootScope.User.Person.ID,
+                };
+            };
+
+            // save the new break bulk object
+            $scope.createUniModal = function () {
+                // disable the send button
+                //$scope.disableButton = true;
+
+                $http({
+                    method: 'POST',
+                    url: api + '/maritime/PostDailyUniModalTransport',
+                    data: $scope.newUniModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the break bulk list page and refresh the list
+                        appFactory.showDialog('Multi-modal submitted successfully.');
+                        //$rootScope.refresh();                     
+                        //$state.go('breakbulk');                     
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Multi-modal was not submitted.', true);
+
+                        });
+            };
+
+            //
+            // init variables for update break bulk
+            $scope.editUniModalActivity = function (d) {
+                // init break bulk object
+                $scope.editUniModal = {
+                    id: d.ID,
+                    companyID: d.CompanyID,
+                    changedBy: d.ChangedBy,
+                    box: d.Box,                    
+                    tEU: d.TEU,
+                    roRo: d.RoRo,
+                    vehicleTransport: d.VehicleTransport,
+                    trainTransport: d.TrainTransport,
+                    dctContainerAtPort20Ft: d.DctContainerAtPort20Ft,
+                    dctContainerAtPort40Ft: d.DctContainerAtPort40Ft,
+                    dmpContainerAtPort20Ft: d.DmpContainerAtPort20Ft,
+                    dmpContainerAtPort40Ft: d.DmpContainerAtPort40Ft,
+                    tEUAtPort: d.TEUAtPort,
+                    dctAverageContainerStay: d.DctAverageContainerStay,
+                    dmpAverageContainerStay: d.DmpAverageContainerStay,
+                    dateInitiated: d.DateInitiated,
+                    remark: d.Remark,
+                };
+                $state.go('unimodal.edit')
+            };
+
+            // save the updated break bulk object
+            $scope.updateUniModal = function () {
+
+                $http({
+                    method: 'PUT',
+                    url: api + '/maritime/PutDailyUniModalTransport',
+                    data: $scope.editUniModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the break bulk list page and refresh the list
+                        // disable the save button
+                        $scope.disableButton = true;
+                        appFactory.showDialog('Uni-modal updated successfully.');
+                        //  console.log('responseUpdate', response);
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false;
+                            appFactory.showDialog('Uni-modal was not updated.', true);
+                            //  console.log('responseUpdateErr', error);
+                        });
+            };
+
+            // init breakbulk then load existing breakbulk collection
+            $scope.uniModalActivities = [];
+            $scope.getUniModalActivities = function () {
+                // get ongoing breakbulk activities for company
+                appFactory.getUniModalActivities($scope.uniModalActivities.length, $scope.uniModalActivities)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.uniModalActivities = data.value;
+                            $scope.groupedUniModal = $filter('groupByDate')($scope.uniModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            $scope.getUniModalActivities();
+
+        }]);  
 
     ///
     app.controller('indexfreeZoneCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
@@ -5534,14 +5730,6 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
-    app.directive('dirBreakBulkWindow', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/break_bulk_preview.html'
-        };
-    });
-
     app.directive('dirDailyActivity', function () {
         return {         
             restrict: 'E',
@@ -5550,14 +5738,7 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
         };
     });
 
-    app.directive('dirOptionsMobileActivity', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            templateUrl: 'views/directives/options_mobile_activity.html'
-        };
-    });
-
+    //directive for breakbulk
     app.directive('dirBreakBulk', function () {
         return {
             require: 'indexBreakBulkCtrl',
@@ -5567,6 +5748,48 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             templateUrl: 'views/directives/activity/break_bulk.html'
         };
     });
+    app.directive('dirBreakBulkWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/break_bulk_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_activity.html'
+        };
+    });
+
+    //directive for unimodal
+    app.directive('dirUniModal', function () {
+        return {
+            require: 'indexUniModalCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/uni_modal.html'
+        };
+    });
+    app.directive('dirUniModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/uni_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileUniActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_uni_activity.html'
+        };
+    });
+
+
+
 
     app.directive('stringToNumber', function () {
         return {

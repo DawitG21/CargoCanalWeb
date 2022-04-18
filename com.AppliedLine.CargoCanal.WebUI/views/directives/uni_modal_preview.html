@@ -1,0 +1,145 @@
+﻿<div class="fullscreen" ng-show="preview.uniModal.openWindow">
+    <div class="fullscreen-dialog">
+        <div class="fullscreen-content">
+            <div class="fullscreen-body">
+                <section>
+                    <div class="modal-heading">
+                        <button type="button" class="modal-heading close" aria-label="Close" ng-click="preview.uniModal.closeWindow()">
+                            <span class="h1" aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="text-uppercase modal-heading text">uni modal preview</h3>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <p>Date Initiated: {{preview.uniModal.data.DateInitiated | date: 'dd/MM/yyyy'}}</p>
+                            <article>
+                                <p>Date Inserted: {{preview.uniModal.data.DateInserted | date: 'dd/MM/yyyy'}}</p>
+                                <p>Date Changed: {{preview.uniModal.data.DateChanged | date: 'dd/MM/yyyy'}}</p>
+                            </article>
+                        </section>
+                        <section class="col">
+                            <p>Ref: {{preview.uniModal.data.ImpExpTypeID}}</p>
+                            <article>
+                                <p>Created By: {{preview.uniModal.data.CreatedBy}}</p>
+                                <p>Changed By: {{preview.uniModal.data.ChangedBy}}</p>
+                            </article>
+
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Number of Container Transported</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">Box</th>
+                                            <th class="text-nowrap">TEU</th>
+                                            <th class="text-nowrap">RO/RO</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.uniModal.data.Box}}</td>
+                                            <td>{{preview.uniModal.data.TEU}}</td>
+                                            <td>{{preview.uniModal.data.RoRo}}</td>
+                                            <td>{{preview.uniModal.data.DaysAtPort}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Carrier Information</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">Vehicle</th>
+                                            <th class="text-nowrap">Train/Wagon</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.uniModal.data.VehicleTransport}}</td>
+                                            <td>{{preview.uniModal.data.TrainTransport}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Types and Number of Container at Port</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">DCT 20ft Container</th>
+                                            <th class="text-nowrap">DCT 40ft Container</th>
+                                            <th class="text-nowrap">DMP 20ft Container at Port</th>
+                                            <th class="text-nowrap">DMP 40ft Container at Port</th>
+                                            <th class="text-nowrap">TEU</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.uniModal.data.DctContainerAtPort20Ft}}</td>
+                                            <td>{{preview.uniModal.data.DctContainerAtPort40Ft}}</td>
+                                            <td>{{preview.uniModal.data.DmpContainerAtPort20Ft}}</td>
+                                            <td>{{preview.uniModal.data.DmpContainerAtPort40Ft}}</td>
+                                            <td>{{preview.uniModal.data.TEUAtPort}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+
+
+                    <div class="row">
+                        <section class="col">
+                            <div class="table-responsive">
+                                <table class="table table-condensed">
+                                    <caption>Average Stay of Container</caption>
+                                    <thead>
+                                        <tr>
+                                            <th class="text-nowrap">DCT</th>
+                                            <th class="text-nowrap">DMT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{preview.uniModal.data.DctAverageContainerStay}}</td>
+                                            <td>{{preview.uniModal.data.DmpAverageContainerStay}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col">
+                            <p>REMARK: {{preview.uniModal.data.Remark}}</p>
+                        </section>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="attachment-wr">
+                                <a class="attachment" href="{{host}}/{{f.Filepath}}" target="_blank" ng-repeat="f in preview.uniModal.data.Documents" ng-bind="f.DocumentName"></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

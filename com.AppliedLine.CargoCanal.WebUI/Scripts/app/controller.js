@@ -49,7 +49,7 @@ var api = serverUrl + '/api';
             $scope.regexTin = /^\d{10}$/;
 
 
-
+            
             $scope.prepCards = appFactory.prepCards;
 
             // used to validate the consignee tin on import / export entry
