@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+                <label for="DateInitiated" data-i18n="_DateInitiated_" class="font-weight-bold"></label>
                 <!--<dir-datepicker dt="editMultiModal.DateInitiated"></dir-datepicker>-->
                 <p class="input-group" ng-show="showInput">
                     <input readonly class="form-control bg-white" uib-datepicker-popup="{{format}}" ng-model="editMultiModal.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" ng-required="required" close-text="Close" alt-input-formats="altInputFormats" />
@@ -22,6 +22,8 @@
         </div>
     </div>
 
+
+    <label for="dispackedquanityanddate" class="font-weight-bold">Types and Quantity of Container Imported </label>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
@@ -52,22 +54,23 @@
         </div>
     </div>
 
+    <label for="dispackedquanityanddate" class="font-weight-bold">Type of Transport </label>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="vehicleTransport">Vehicle Transport</label>
+                <label for="vehicleTransport">Vehicle </label>
                 <input min=1 class="form-control text-uppercase" id="vehicleTransport" ng-model="editMultiModal.vehicleTransport" required />
             </div>
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="trainTransport">Train Transport</label>
+                <label for="trainTransport">Train </label>
                 <input min=1 class="form-control text-uppercase" id="trainTransport" ng-model="editMultiModal.trainTransport" required />
             </div>
         </div>
     </div>
 
-    <label for="remainingatport">Remaining at Port</label>
+    <label for="remainingatport" class="font-weight-bold">Types and Number of Container at the Port</label>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
@@ -83,6 +86,7 @@
         </div>
     </div>
 
+    <label for="averageContainerStay" class="font-weight-bold">Average Container Stay</label>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
@@ -92,15 +96,15 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="averageContainerStay">Average Container Dwell Time</label>
+                <label for="dMPAtPort">TEU</label>
                 <input min=1 class="form-control text-uppercase" id="averageContainerStay" ng-model="editMultiModal.averageContainerStay" required />
             </div>
         </div>
     </div>
 
     <div class="form-group">
-        <label for="remark">Remark</label>
-        <textarea class="form-control text-uppercase" name="Description" ng-model="editMultiModal.remark"/>
+        <label for="remark" class="font-weight-bold">Remark</label>
+        <textarea class="form-control text-uppercase" name="Description" ng-model="editMultiModal.remark" />
     </div>
 
     <div class="row">

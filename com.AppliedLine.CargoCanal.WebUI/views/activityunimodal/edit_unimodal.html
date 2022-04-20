@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+                <label for="DateInitiated" data-i18n="_DateInitiated_" class="font-weight-bold"></label>
                 <!--<dir-datepicker dt="editUniModal.dateInitiated" ></dir-datepicker>-->
                 <p class="input-group" ng-show="showInput">
                     <input readonly class="form-control bg-white" uib-datepicker-popup="{{format}}" ng-model="editUniModal.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" ng-required="required" close-text="Close" alt-input-formats="altInputFormats" />
@@ -22,62 +22,62 @@
         </div>
     </div>
 
-    <label for="dispackedquanityanddate">Dispached Quanity and Type</label>
+    <label for="dispackedquanityanddate" class="font-weight-bold">Types and Number of Container Transported </label>
     <div class="row">
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="box">BOX</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.box" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.box" required />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="teu">TEU</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.tEU" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.tEU" required />
             </div>
         </div>
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="teu">RO/RO</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.roRo" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.roRo" required />
             </div>
         </div>
     </div>
-
+    <label for="typeoftransport" class="font-weight-bold">Type of Transportation </label>
     <div class="row">
 
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="box">Vehicle</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.vehicleTransport" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.vehicleTransport" required />
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="teu">Train</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.trainTransport" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.trainTransport" required />
             </div>
         </div>
     </div>
 
 
-    <label for="remainatport">Remaining at Port </label>
+    <label for="remainatport" class="font-weight-bold">Types and Number of Container at the Port </label>
     <div class="row">
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="boxft">DCT (20 Feet)</label>
+                <label for="boxft">DCT (20 Feet) Containers</label>
                 <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dctContainerAtPort20Ft" required />
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="dctft"> DCT (40 Feet) </label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dctContainerAtPort40Ft" required />
+                <label for="dctft"> DCT (40 Feet) Containers </label>
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dctContainerAtPort40Ft" required />
             </div>
         </div>
 
@@ -87,22 +87,22 @@
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="boxftdmp">DMP (20 Feet)</label>
+                <label for="boxftdmp">DMP (20 Feet) Containers </label>
                 <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dmpContainerAtPort20Ft" required />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="dctftdmp"> DMP (40 Feet) </label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dmpContainerAtPort40Ft" required />
+                <label for="dctftdmp"> DMP (40 Feet) Containers </label>
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dmpContainerAtPort40Ft" required />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="teu">TEU</label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.tEUAtPort" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.tEUAtPort" required />
             </div>
         </div>
     </div>
@@ -112,13 +112,13 @@
 
 
 
-    <label for="remainatport">Average Container Dwell Time </label>
+    <label for="remainatport" class="font-weight-bold">Average Stay of Container</label>
     <div class="row">
 
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="dcttime">DCT </label>
-                <input  min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dctAverageContainerStay" required />
+                <input min=1 class="form-control text-uppercase" id="box" ng-model="editUniModal.dctAverageContainerStay" required />
             </div>
         </div>
 
@@ -132,8 +132,8 @@
 
 
     <div class="form-group">
-        <label for="remark">Remark</label>
-        <textarea class="form-control text-uppercase" name="Description" ng-model="editUniModal.remark"/>
+        <label for="remark" class="font-weight-bold">Remark</label>
+        <textarea class="form-control text-uppercase" name="Description" ng-model="editUniModal.remark" />
     </div>
 
     <div class="row">

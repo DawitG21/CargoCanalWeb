@@ -3,13 +3,13 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
+                <label for="DateInitiated" data-i18n="_DateInitiated_" class="font-weight-bold"></label>
                 <dir-datepicker dt="newUniModal.DateInitiated" required></dir-datepicker>
             </div>
         </div>
     </div>
 
-    <label for="dispackedquanityanddate">Dispached Quanity and Type</label>
+    <label for="dispackedquanityanddate" class="font-weight-bold">Types and Number of Container Transported</label>
     <div class="row">
 
         <div class="col-sm-4">
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-
+    <label for="typeoftransport" class="font-weight-bold">Type of Transportation </label>
     <div class="row">
 
         <div class="col-sm-6">
@@ -52,37 +52,37 @@
     </div>
 
 
-    <label for="remainatport">Remaining at Port </label>
+    <label for="remainatport" class="font-weight-bold">Types and Number of Container at the Port </label>
     <div class="row">
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="boxft">DCT (20 Feet)</label>
+                <label for="boxft">DCT (20 Feet)Containers</label>
                 <input type="number" min=1 class="form-control text-uppercase" id="box" ng-model="newUniModal.dctContainerAtPort20Ft" required />
             </div>
         </div>
 
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="dctft"> DCT (40 Feet) </label>
+                <label for="dctft"> DCT (40 Feet)Containers </label>
                 <input type="number" min=1 class="form-control text-uppercase" id="box" ng-model="newUniModal.dctContainerAtPort40Ft" required />
             </div>
         </div>
-               
+
     </div>
 
     <div class="row">
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="boxftdmp">DMP (20 Feet)</label>
+                <label for="boxftdmp">DMP (20 Feet)Containers</label>
                 <input type="number" min=1 class="form-control text-uppercase" id="box" ng-model="newUniModal.dmpContainerAtPort20Ft" required />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="dctftdmp"> DMP (40 Feet) </label>
+                <label for="dctftdmp"> DMP (40 Feet) Containers</label>
                 <input type="number" min=1 class="form-control text-uppercase" id="box" ng-model="newUniModal.dmpContainerAtPort40Ft" required />
             </div>
         </div>
@@ -100,7 +100,7 @@
 
 
 
-    <label for="remainatport">Average Container Dwell Time </label>
+    <label for="remainatport" class="font-weight-bold">Average Stay of Container</label>
     <div class="row">
 
         <div class="col-sm-6">
@@ -120,8 +120,8 @@
 
 
     <div class="form-group">
-        <label for="remark">Remark</label>
-        <textarea class="form-control text-uppercase" name="Description" ng-model="newUniModal.remark"/>
+        <label for="remark" class="font-weight-bold">Remark</label>
+        <textarea class="form-control text-uppercase" name="Description" ng-model="newUniModal.remark" />
     </div>
 
     <div class="row">
