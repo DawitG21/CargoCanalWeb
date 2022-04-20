@@ -298,19 +298,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('unimodal', {
         url: '/unimodal',
         templateUrl: 'views/activityunimodal/uni_modal_activity.html',
-        controller: 'indexuniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.create', {
         url: '/create',
         templateUrl: 'views/activityunimodal/create_unimodal.html',
-        controller: 'createUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.edit', {
         url: '/edit',
         templateUrl: 'views/activityunimodal/edit_unimodal.html',
-        controller: 'editUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     ///

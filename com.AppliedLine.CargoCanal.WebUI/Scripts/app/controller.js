@@ -5,10 +5,94 @@ var api = serverUrl + '/api';
 (function () {
     'use strict';
 
-    app.controller('mainCtrl', ['$scope', '$rootScope', '$state', '$http', '$sessionStorage', 'localize', 'refresher', 'appFactory', 'passwordFactory', 'signalRHubProxy',
-        function ($scope, $rootScope, $state, $http, $sessionStorage, localize, refresher, appFactory, passwordFactory, signalRHubProxy) {
+    app.controller('mainCtrl', ['$scope', '$rootScope', '$state', '$http', '$sessionStorage', 'localize', 'refresher', 'appFactory', 'passwordFactory', 'signalRHubProxy', 'datepickerProvider',
+        function ($scope, $rootScope, $state, $http, $sessionStorage, localize, refresher, appFactory, passwordFactory, signalRHubProxy, datepickerProvider) {
             //fixes angular refresh page (all local variables lose data) issue
             refresher.refreshApp();
+
+            // initialize the dateOptions
+            $scope.dateOptions = datepickerProvider.getDateOptions();
+
+            $scope.required = false;
+            $scope.showInput = false;
+            $scope.visible = true;
+
+            $scope.today = function () {
+                $scope.dt = new Date();
+            };
+
+            // clears the date
+            $scope.clear = function () {
+                $scope.dt = null;
+            };
+
+            // dateOptions with a class illustration
+            $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+            };
+
+            $scope.toggleMin = function () {
+                $scope.inlineOptions.minDate = !$scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+            };
+
+            $scope.openDt = function () {
+                $scope.popupDt.opened = true;
+                $scope.showInput = true;
+                $scope.visible = false;
+            };
+
+            $scope.popupDt = {
+                opened: false
+            };
+
+            $scope.setDate = function (year, month, day) {
+                $scope.dt = new Date(year, month, day);
+            };
+
+            // takes string date to set $scope.dt and returns the value
+            $scope.setDate2 = function (dt) {
+                return $scope.dt = new Date(dt);
+            };
+
+            $scope.formats = datepickerProvider.getFormats();
+            $scope.format = $scope.formats[0];
+            $scope.altInputFormats = datepickerProvider.getFormats();
+
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var afterTomorrow = new Date();
+            afterTomorrow.setDate(tomorrow.getDate() + 1);
+            $scope.events = [
+                {
+                    date: tomorrow,
+                    status: 'full'
+                },
+                {
+                    date: afterTomorrow,
+                    status: 'partially'
+                }
+            ];
+
+            function getDayClass(data) {
+                var date = data.date,
+                    mode = data.mode;
+                if (mode === 'day') {
+                    var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                    for (var i = 0; i < $scope.events.length; i++) {
+                        var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                        if (dayToCheck === currentDay) {
+                            return $scope.events[i].status;
+                        }
+                    }
+                }
+
+                return '';
+            }
 
             // hide subscription alert modal
             $rootScope.closeSubscritpionAlert = () => {

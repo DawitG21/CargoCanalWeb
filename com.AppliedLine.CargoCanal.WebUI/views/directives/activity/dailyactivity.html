@@ -1,11 +1,11 @@
 ﻿<section>
-    <div class="row margin-0 margin-bottom-15">
-        <div class="col-xs-6 col-md-auto">
-            <select id="select" class="select-custom text-uppercase" ng-model="selectedActivity">
-                <option class="text-uppercase" value="">{{'select activity'}}</option>
-                <option class="text-uppercase" ng-repeat="activity in activitylist" value="{{activity.id}}">{{activity.name}}</option>
-            </select>
+    <div class="input-group col-sm-6">
+        <select class="custom-select text-uppercase" ng-model="selectedActivity">
+            <option class="text-uppercase" value="">{{'select activity'}}</option>
+            <option class="text-uppercase" ng-repeat="activity in activitylist" value="{{activity.id}}"> {{activity.name}}</option>
+        </select>
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" style="background-color: #57428c;color:white;" type="button" ng-click="goToState(selectedActivity)">Go</button>
         </div>
-        <button class="select-custom" ng-click="goToState(selectedActivity)">GO</button>
     </div>
 </section>

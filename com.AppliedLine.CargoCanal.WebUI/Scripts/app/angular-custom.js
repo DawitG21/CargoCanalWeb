@@ -298,19 +298,19 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
     $stateProvider.state('unimodal', {
         url: '/unimodal',
         templateUrl: 'views/activityunimodal/uni_modal_activity.html',
-        controller: 'indexuniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.create', {
         url: '/create',
         templateUrl: 'views/activityunimodal/create_unimodal.html',
-        controller: 'createUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     $stateProvider.state('unimodal.edit', {
         url: '/edit',
         templateUrl: 'views/activityunimodal/edit_unimodal.html',
-        controller: 'editUniModalCtrl'
+        controller: 'indexUniModalCtrl'
     });
 
     ///
@@ -1518,6 +1518,54 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', functio
                     });
         };
 
+        // get uniModalActivities       
+        service.getUniModalActivities = function (skip, uniModalActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';
+            //fromDate = date | 'yyyy-MM-dd';
+            //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                    //console.log(fullUrl);
+                    dataParams = { 'skip': skip };
+
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                    //  console.log(fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };
+
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {
+                    //console.log('response',response.data.value);
+                    return {
+                        value: uniModalActivities.concat(response.data.value),
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }
+                    };
+                },
+                    function (error) {
+                        //   console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
         _initHelpers();
         return service;
     }]);
@@ -1819,10 +1867,94 @@ var api = serverUrl + '/api';
 (function () {
     'use strict';
 
-    app.controller('mainCtrl', ['$scope', '$rootScope', '$state', '$http', '$sessionStorage', 'localize', 'refresher', 'appFactory', 'passwordFactory', 'signalRHubProxy',
-        function ($scope, $rootScope, $state, $http, $sessionStorage, localize, refresher, appFactory, passwordFactory, signalRHubProxy) {
+    app.controller('mainCtrl', ['$scope', '$rootScope', '$state', '$http', '$sessionStorage', 'localize', 'refresher', 'appFactory', 'passwordFactory', 'signalRHubProxy', 'datepickerProvider',
+        function ($scope, $rootScope, $state, $http, $sessionStorage, localize, refresher, appFactory, passwordFactory, signalRHubProxy, datepickerProvider) {
             //fixes angular refresh page (all local variables lose data) issue
             refresher.refreshApp();
+
+            // initialize the dateOptions
+            $scope.dateOptions = datepickerProvider.getDateOptions();
+
+            $scope.required = false;
+            $scope.showInput = false;
+            $scope.visible = true;
+
+            $scope.today = function () {
+                $scope.dt = new Date();
+            };
+
+            // clears the date
+            $scope.clear = function () {
+                $scope.dt = null;
+            };
+
+            // dateOptions with a class illustration
+            $scope.inlineOptions = {
+                customClass: getDayClass,
+                minDate: new Date(),
+                showWeeks: true
+            };
+
+            $scope.toggleMin = function () {
+                $scope.inlineOptions.minDate = !$scope.inlineOptions.minDate ? null : new Date();
+                $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+            };
+
+            $scope.openDt = function () {
+                $scope.popupDt.opened = true;
+                $scope.showInput = true;
+                $scope.visible = false;
+            };
+
+            $scope.popupDt = {
+                opened: false
+            };
+
+            $scope.setDate = function (year, month, day) {
+                $scope.dt = new Date(year, month, day);
+            };
+
+            // takes string date to set $scope.dt and returns the value
+            $scope.setDate2 = function (dt) {
+                return $scope.dt = new Date(dt);
+            };
+
+            $scope.formats = datepickerProvider.getFormats();
+            $scope.format = $scope.formats[0];
+            $scope.altInputFormats = datepickerProvider.getFormats();
+
+            var tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            var afterTomorrow = new Date();
+            afterTomorrow.setDate(tomorrow.getDate() + 1);
+            $scope.events = [
+                {
+                    date: tomorrow,
+                    status: 'full'
+                },
+                {
+                    date: afterTomorrow,
+                    status: 'partially'
+                }
+            ];
+
+            function getDayClass(data) {
+                var date = data.date,
+                    mode = data.mode;
+                if (mode === 'day') {
+                    var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+
+                    for (var i = 0; i < $scope.events.length; i++) {
+                        var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
+
+                        if (dayToCheck === currentDay) {
+                            return $scope.events[i].status;
+                        }
+                    }
+                }
+
+                return '';
+            }
 
             // hide subscription alert modal
             $rootScope.closeSubscritpionAlert = () => {
@@ -4788,6 +4920,34 @@ var api = serverUrl + '/api';
                         });
             };
 
+            $scope.deleteUniModalActivity = function (d, pindex, cindex) {
+                $scope.recycleData = confirmActivityDelete(d,
+                    pindex,
+                    cindex,
+                    $scope.recycleData,
+                    'You will no longer have access to this activity (#UNIMODAL#). Do you want to continue',
+                    $scope.deleteUniModalActivity);
+
+                if (!$scope.confirmed) return false;
+
+                $http({
+                    method: 'DELETE',
+                    url: api + '/maritime/DeleteDailyUniModalTransport/' + $scope.recycleData.d.ID,
+                    data: { ID: $scope.recycleData.d.ID, Token: $rootScope.User.Login.Token },
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        if ($scope.uniModalActivities === undefined)
+                            $scope.groupedUniModal[$scope.recycleData.pindex].value[$scope.recycleData.cindex].Terminated = true;
+
+                        appFactory.showDialog('Activity has been recycled.');
+                        $rootScope.refresh();
+                    },
+                        function (error) {
+                            appFactory.showDialog('Unable to delete activity.', true);
+                        });
+            };
+
             $scope.preview = {
                 'breakBulk': {
                     openWindow: false,
@@ -4816,16 +4976,32 @@ var api = serverUrl + '/api';
                         $scope.preview.multiModal.openWindow = false;
                         appFactory.setModalOpen(false);
                     }
+                },
+                'uniModal': {
+                    openWindow: false,
+                    data: {},
+                    show: function (o) {
+                        //  console.log('yay');
+                        $scope.preview.uniModal.data = o;
+                        $scope.preview.uniModal.openWindow = true;
+                        appFactory.setModalOpen(true);
+                    },
+                    closeWindow: function () {
+                        $scope.preview.uniModal.data = {};
+                        $scope.preview.uniModal.openWindow = false;
+                        appFactory.setModalOpen(false);
+                    }
                 }
             };
         }]);
 
-    app.controller('indexBreakBulkCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+    app.controller('indexBreakBulkCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter', 'datepickerProvider',
         function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
 
             // console.log('this page is reached');
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
-
+           
+            /////////////////////////////////////////////
             $scope.searchBreakBulk = function (searchIsNew) {
                 if ($scope.searchText === undefined) $scope.searchText = '';
 
@@ -4900,15 +5076,15 @@ var api = serverUrl + '/api';
                 // init break bulk object
                 $scope.editBreakBulk = {
                     id: d.ID,
-                    companyID: d.CompanyID,
-                    impExpTypeId: d.ImpExpTypeID,
-                    createdBy: d.CreatedBy,
-                    changedBy: $rootScope.User.Person.ID,                    
+                    companyId: d.CompanyID,
+                    impExpTypeId: d.ImpExpTypeID,   
+                    portOfLoadingID: d.PortOfLoading,
                     daysAtPort: d.DaysAtPort,
                     noOfVehicle: d.NoOfVehicle,
                     storedMetalMetricTon: d.StoredMetalMetricTon,
                     transportedToCountryMetricTon: d.TransportedToCountryMetricTon,
-                    dateInitiated: d.DateInitiated,
+                    dateInitiated: d.DateInitiated,                   
+                    changedBy: $rootScope.User.Person.ID,                    
                     remark: d.Remark,                  
                 };
                 $state.go('breakbulk.edit')
@@ -5101,42 +5277,147 @@ var api = serverUrl + '/api';
         }]);
 
     ///
-    app.controller('indexuniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
-
-        }]);
-
-    app.controller('createUniModalCtrl', ['$scope', '$rootScope', '$http', '$state',
-        function ($scope, $rootScope, $http, $state) {
-            // pass user token to Web API
-            // go to home, if the user is not logged in or does not have edit user privilege
-            // just incase the user paste in the url for manage users
+    app.controller('indexUniModalCtrl', ['$scope', '$rootScope', '$http', '$sessionStorage', '$state', 'appFactory', 'Upload', '$timeout', '$filter',
+        function ($scope, $rootScope, $http, $sessionStorage, $state, appFactory, Upload, $timeout, $filter) {
+            // console.log('this page is reached');
             if (!$rootScope.User || $rootScope.User === null | undefined) $state.go('home');
+            $scope.searchUniModal = function (searchIsNew) {
+                if ($scope.searchText === undefined) $scope.searchText = '';
 
-            $http({
-                method: 'POST',
-                url: api + '/maritime/PostDailyBreakBulk',
-                data: $rootScope.User.Login,
-                headers: { 'Content-Type': 'application/json' }
-            })
-                .then(function (response) {
-                    $scope.perms = response.data;
-                    if ($scope.perms.EditUser === false)
-                        $state.go('home');
-                });
-        }]);
+                if (searchIsNew) {
+                    $scope.uniModalActivities = [];
+                    $scope.groupedUniModal = [];
+                }
 
-    app.controller('editUniModalCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
-        function ($scope, $rootScope, $http, $state, appFactory) {
-            if ($rootScope.User === undefined ||
-                $rootScope.User.Company === undefined ||
-                $rootScope.User.Company.CompanyTypeID !== 99) $state.go('home');
+                appFactory.getUniModalActivities($scope.uniModalActivities.length, $scope.uniModalActivities, $scope.searchText)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.uniModalActivities = data.value;
+                            $scope.groupedUniModal = $filter('groupByDate')($scope.uniModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
 
-        }]);
+                        }
+                    });
+            };
 
+            // this determines what status is available for selection
+            $scope.impExpTypeId = 1;
+
+            // this method is called when add unimodal is clicked
+            // it gets few of the value data required in the forms
+            $scope.initUISelections = function () {
+                appFactory.getCountries();
+            };
+
+            // loads all required values and clean up
+            $scope.initUISelections();
+
+            // init variables for add/edit unimodal
+            $scope.initUniModal = function () {
+
+                // Create a new unimodal object
+                $scope.newUniModal = {
+                    companyID: $rootScope.User.Person.CompanyID,
+                    impExpTypeId: 1,
+                    createdBy: $rootScope.User.Person.ID,
+                };
+            };
+
+            // save the new unimodal object
+            $scope.createUniModal = function () {
+                // disable the send button
+                //$scope.disableButton = true;
+
+                $http({
+                    method: 'POST',
+                    url: api + '/maritime/PostDailyUniModalTransport',
+                    data: $scope.newUniModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the unimodal list page and refresh the list
+                        appFactory.showDialog('Multi-modal submitted successfully.');                                          
+                        //$state.go('unimodal');
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false; // enable the send button
+                            appFactory.showDialog('Multi-modal was not submitted.', true);
+
+                        });
+            };
+
+            //
+            // init variables for update unimodal
+            $scope.editUniModalActivity = function (d) {
+                // init unimodal object
+                $scope.editUniModal = {
+                    id: d.ID,
+                    companyId: $rootScope.User.Person.CompanyID,
+                    changedBy: $rootScope.User.Person.ID,
+                    impExpTypeId: 1,
+                    box: d.Box,
+                    tEU: d.TEU,
+                    roRo: d.RoRo,
+                    vehicleTransport: d.VehicleTransport,
+                    trainTransport: d.TrainTransport,
+                    dctContainerAtPort20Ft: d.DctContainerAtPort20Ft,
+                    dctContainerAtPort40Ft: d.DctContainerAtPort40Ft,
+                    dmpContainerAtPort20Ft: d.DmpContainerAtPort20Ft,
+                    dmpContainerAtPort40Ft: d.DmpContainerAtPort40Ft,
+                    tEUAtPort: d.TEUAtPort,
+                    dctAverageContainerStay: d.DctAverageContainerStay,
+                    dmpAverageContainerStay: d.DmpAverageContainerStay,
+                    dateInitiated: d.DateInitiated,
+                    remark: d.Remark,
+                };
+                $state.go('unimodal.edit')
+            };
+
+            // save the updated unimodal object
+            $scope.updateUniModal = function () {
+
+                $http({
+                    method: 'PUT',
+                    url: api + '/maritime/PutDailyUniModalTransport',
+                    data: $scope.editUniModal,
+                    headers: { 'Content-Type': 'application/json; charset=utf-8' }
+                })
+                    .then(function (response) {
+                        // go to the unimodal list page and refresh the list
+                        // disable the save button
+                        $scope.disableButton = true;
+                        appFactory.showDialog('Uni-modal updated successfully.');
+                        //  console.log('responseUpdate', response);
+
+                    },
+                        function (error) {
+                            $scope.disableButton = false;
+                            appFactory.showDialog('Uni-modal was not updated.', true);
+                            //  console.log('responseUpdateErr', error);
+                        });
+            };
+
+            // init unimodal then load existing breakbulk collection
+            $scope.uniModalActivities = [];
+            $scope.getUniModalActivities = function () {
+                // get  unimodal activities
+                appFactory.getUniModalActivities($scope.uniModalActivities.length, $scope.uniModalActivities)
+                    .then(function (data) {
+                        if (data !== null) {
+                            $scope.uniModalActivities = data.value;
+                            $scope.groupedUniModal = $filter('groupByDate')($scope.uniModalActivities, 'DateInserted');
+                            $scope.odataInfo = data.odataInfo;
+                            appFactory.prepCards();
+                        }
+                    });
+            };
+
+            $scope.getUniModalActivities();
+
+        }]);  
+ 
     ///
     app.controller('indexfreeZoneCtrl', ['$scope', '$rootScope', '$http', '$state', 'appFactory',
         function ($scope, $rootScope, $http, $state, appFactory) {
@@ -5815,6 +6096,31 @@ app.controller('timepickerController', ['$scope', '$log', function ($scope, $log
             restrict: 'E',
             transclude: true,
             templateUrl: 'views/directives/options_mobile_multi_activity.html'
+        };
+    });
+
+    // unimodal dir
+    app.directive('dirUniModal', function () {
+        return {
+            require: 'indexUniModalCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/uni_modal.html'
+        };
+    });
+    app.directive('dirUniModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/uni_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileUniActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_uni_activity.html'
         };
     });
 

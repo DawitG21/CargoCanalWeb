@@ -1,9 +1,23 @@
-﻿<form name="form" id="form" ng-submit="updateBreakBulk()" novalidate>
+﻿<a ui-sref="breakbulk" class="btn btn-dark margin-bottom-15" style="background-color: #57428c;color:white;"> <i class="fa fa-angle-left"></i> Back</a>
+<form name="form" id="form" ng-submit="updateBreakBulk()" novalidate>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
-                <dir-datepicker dt="editBreakBulk.DateInitiated"></dir-datepicker>
+                <!--<dir-datepicker dt="editBreakBulk.DateInitiated"></dir-datepicker>-->                             
+                <p class="input-group" ng-show="showInput">
+                    <input readonly class="form-control bg-white" uib-datepicker-popup="{{format}}" ng-model="editBreakBulk.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" ng-required="required" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDt()"><i class="oi oi-calendar"></i></button>
+                    </span>
+                </p>
+
+                <p class="input-group" ng-show="visible">
+                   <input readonly class="form-control bg-white" ng-model="editBreakBulk.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDt()"><i class="oi oi-calendar"></i></button>
+                    </span>
+                </p>
             </div>
         </div>
     </div>
@@ -22,7 +36,7 @@
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="portOfLoadingID">Port of Loading</label>
-                <select id="portOfLoadingID" class="form-control" ng-model="editBreakBulk.portOfLoadingID" required>
+                <select id="portOfLoadingID" class="form-control" ng-model="editBreakBulk.portOfLoadingID" ng-required="required">
                     <option ng-repeat="p in pols" value="{{p.ID}}">{{ p.PortName }}</option>
                 </select>
             </div>

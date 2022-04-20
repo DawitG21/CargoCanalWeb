@@ -1,9 +1,23 @@
-﻿<form name="form" id="form" ng-submit="updateMultiModal()" novalidate>
+﻿<a ui-sref="multimodal" class="btn btn-dark margin-bottom-15" style="background-color: #57428c;color:white;"> <i class="fa fa-angle-left"></i> Back</a>
+<form name="form" id="form" ng-submit="updateMultiModal()" novalidate>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
                 <label for="DateInitiated" data-i18n="_DateInitiated_"></label>
-                <dir-datepicker dt="editMultiModal.DateInitiated"></dir-datepicker>
+                <!--<dir-datepicker dt="editMultiModal.DateInitiated"></dir-datepicker>-->
+                <p class="input-group" ng-show="showInput">
+                    <input readonly class="form-control bg-white" uib-datepicker-popup="{{format}}" ng-model="editMultiModal.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" ng-required="required" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDt()"><i class="oi oi-calendar"></i></button>
+                    </span>
+                </p>
+
+                <p class="input-group" ng-show="visible">
+                    <input readonly class="form-control bg-white" ng-model="editMultiModal.dateInitiated" is-open="popupDt.opened" datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="openDt()"><i class="oi oi-calendar"></i></button>
+                    </span>
+                </p>
             </div>
         </div>
     </div>

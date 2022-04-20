@@ -1127,6 +1127,54 @@
                     });
         };
 
+        // get uniModalActivities       
+        service.getUniModalActivities = function (skip, uniModalActivities, searchText, odataParams) {
+            if (odataParams === undefined || odataParams === null || odataParams === '')
+                odataParams = '?$orderby=ID desc&$inlinecount=allpages';
+            //fromDate = date | 'yyyy-MM-dd';
+            //toDate = fromDate;
+
+            let fullUrl = '';
+            let dataParams = {};
+
+            switch (searchText) {
+                case undefined: case '':
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                    //console.log(fullUrl);
+                    dataParams = { 'skip': skip };
+
+                    break;
+                default:
+                    fullUrl = odataUrl + '/ODataMaritimeUniModalTransport(' + $rootScope.User.Company.ID + ')/SearchDailyUniModalTransport' + odataParams;
+                    //  console.log(fullUrl);
+                    dataParams = { 'skip': skip, 'searchText': searchText, 'token': $rootScope.User.Login.Token };
+
+                    break;
+            }
+
+            return $http({
+                method: 'POST',
+                url: fullUrl,
+                headers: { 'Content-Type': 'application/json; charset=utf-8' },
+                data: dataParams
+            })
+                .then(function (response) {
+                    //console.log('response',response.data.value);
+                    return {
+                        value: uniModalActivities.concat(response.data.value),
+                        odataInfo: {
+                            'odata.metadata': response.data['odata.metadata'],
+                            'odata.count': response.data['odata.count'],
+                            'odata.nextLink': response.data['odata.nextLink']
+                        }
+                    };
+                },
+                    function (error) {
+                        //   console.log('ERROR', error);
+                        return null;
+                    });
+        };
+
         _initHelpers();
         return service;
     }]);

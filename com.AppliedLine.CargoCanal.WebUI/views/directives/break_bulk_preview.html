@@ -20,10 +20,11 @@
                             <p>Created By: {{preview.breakBulk.data.CreatedBy}}</p>
                         </section>
                         <section class="col">
-                            <p>Ref: {{preview.breakBulk.data.ImpExpTypeID}}</p>
+                            <p ng-if="preview.breakBulk.data.ImpExpTypeID==1">Type: Import</p>
+                            <p ng-if="preview.breakBulk.data.ImpExpTypeID==2">Type: Export</p>
                             <article>
                                 <P>Date Inserted: {{preview.breakBulk.data.DateInserted | date: 'dd/MM/yyyy'}}</P>
-                                <p>Date Changed: {{preview.breakBulk.data.DateChanged | date: 'dd/MM/yyyy'}}</p>                                
+                                <p>Date Changed: {{preview.breakBulk.data.DateChanged | date: 'dd/MM/yyyy'}}</p>
                                 <p>Changed By: {{preview.breakBulk.data.ChangedBy}}</p>
                             </article>
 

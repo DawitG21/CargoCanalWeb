@@ -413,6 +413,31 @@
         };
     });
 
+    // unimodal dir
+    app.directive('dirUniModal', function () {
+        return {
+            require: 'indexUniModalCtrl',
+            restrict: 'E',
+            transclude: true,
+            controller: 'activityController',
+            templateUrl: 'views/directives/activity/uni_modal.html'
+        };
+    });
+    app.directive('dirUniModalWindow', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/uni_modal_preview.html'
+        };
+    });
+    app.directive('dirOptionsMobileUniActivity', function () {
+        return {
+            restrict: 'E',
+            transclude: true,
+            templateUrl: 'views/directives/options_mobile_uni_activity.html'
+        };
+    });
+
     app.directive('stringToNumber', function () {
         return {
             require: 'ngModel',

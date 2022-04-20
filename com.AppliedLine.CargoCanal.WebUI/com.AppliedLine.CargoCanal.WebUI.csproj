@@ -3775,12 +3775,17 @@
     <Content Include="src\assets\css\style-bundle.min.css" />
     <Content Include="src\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="src\assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="src\assets\images\app_store_badge_US_h60.png" />
     <Content Include="src\assets\images\cargocanal-feature-graphic-web.png" />
+    <Content Include="src\assets\images\cargocanal_700_x_700.gif" />
+    <Content Include="src\assets\images\cargocanal_logo_1080_transparent.png" />
     <Content Include="src\assets\images\cargocanal_text_128.png" />
     <Content Include="src\assets\images\cargocanal_text_32.png" />
     <Content Include="src\assets\images\cargocanal_text_64.png" />
     <Content Include="src\assets\images\comment_maxi.png" />
     <Content Include="src\assets\images\ellipsis_4s_64px.gif" />
+    <Content Include="src\assets\images\face-mask.png" />
+    <Content Include="src\assets\images\gear.svg" />
     <Content Include="src\assets\images\google-play-badge-h60.png" />
     <Content Include="src\assets\images\google-play-badge.png" />
     <Content Include="src\assets\images\icons\airplane-24.png" />
@@ -5447,7 +5452,6 @@
     <Content Include="views\activitydjiboutitajura\djibouti_tajura_activity.html" />
     <Content Include="views\activitydjiboutitajura\create_djibouti_tajura.html" />
     <Content Include="views\activitydjiboutitajura\edit_djibouti_tajura.html" />
-    <Content Include="views\activityunimodal\uni_modal.html" />
     <Content Include="views\activityunimodal\uni_modal_activity.html" />
     <Content Include="views\activityunimodal\create_unimodal.html" />
     <Content Include="views\activityunimodal\edit_unimodal.html" />
@@ -5476,12 +5480,14 @@
     <Content Include="views\directives\activity\multi_modal.min.html">
       <DependentUpon>multi_modal.html</DependentUpon>
     </Content>
+    <Content Include="views\directives\activity\uni_modal.html" />
     <Content Include="views\directives\analytics_forwarder_activity.html" />
     <Content Include="views\directives\activity\break_bulk.html" />
     <Content Include="views\directives\multi_modal_preview.html" />
     <Content Include="views\directives\break_bulk_preview.html" />
     <Content Include="views\directives\options_mobile_multi_activity.html" />
     <Content Include="views\directives\options_mobile_activity.html" />
+    <Content Include="views\directives\options_mobile_uni_activity.html" />
     <Content Include="views\directives\report_no_result.html" />
     <Content Include="views\directives\comment.html" />
     <Content Include="views\directives\analytics_demurrage.html" />
@@ -5494,6 +5500,7 @@
     <Content Include="views\directives\export_toolbox.html" />
     <Content Include="views\directives\import_toolbox.html" />
     <Content Include="views\directives\sessiontimeout.html" />
+    <Content Include="views\directives\uni_modal_preview.html" />
     <Content Include="views\errors\404.html" />
     <Content Include="views\directives\passwordchange.html" />
     <Content Include="views\privacy_policy.html" />

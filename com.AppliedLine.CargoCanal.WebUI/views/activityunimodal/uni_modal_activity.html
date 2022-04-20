@@ -1,15 +1,15 @@
-﻿<section ui-view>
-    <div class="banner-company">
-        <h4>Uni Modal Transport</h4>
-        <h5>{{User.Company.CompanyName}}</h5>
-        <h6 class="font-bold">Manage the daily uni-modal transport activity</h6>
-    </div>
-
-
-
-    <section class="margin-bottom-30">
-        <div class="col-sm-12 toolbox">
-            <a class="pointer" ng-click="account.users.add()"><span class="oi oi-plus"></span> Add Uni Modal Transport</a>
+﻿<div ui-view>
+    <div class="toolbox">
+        <div class="form-inline">
+            <form class="form-group" ng-submit="searchUniModal(true)">
+                <div class="control-group">
+                    <input class="control-group-textbox" type="search" placeholder="Search" ng-model="searchText" />
+                    <i class="control-group-button" ng-click="searchUniModal(true)"><span class="oi oi-magnifying-glass"></span></i>
+                </div>
+            </form>
+            <a ui-sref="unimodal.create" ng-click="initUniModal()"><span class="oi oi-plus"></span> Add Uni Modal</a>
+            <a href="" ng-click="refresh()"><span class="oi oi-reload"></span> Refresh</a>
         </div>
-    </section>
-</section>
+    </div>
+    <dir-uni-modal></dir-uni-modal>
+</div>

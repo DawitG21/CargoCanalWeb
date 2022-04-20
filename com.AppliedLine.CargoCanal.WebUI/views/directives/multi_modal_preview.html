@@ -19,7 +19,8 @@
                             </article>
                         </section>
                         <section class="col">
-                            <p>Ref: {{preview.multiModal.data.ImpExpTypeID}}</p>
+                            <p ng-if="preview.multiModal.data.ImpExpTypeID==1">Type: Import</p>
+                            <p ng-if="preview.multiModal.data.ImpExpTypeID==2">Type: Export</p>
                             <article>
                                 <p>Created By: {{preview.multiModal.data.CreatedBy}}</p>
                                 <p>Changed By: {{preview.multiModal.data.ChangedBy}}</p>
